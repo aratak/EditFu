@@ -12,6 +12,7 @@ class Site < ActiveRecord::Base
   end
 
   def mkdir
+    FileUtils.rm_rf dirname
     FileUtils.mkdir_p dirname
   end
 
