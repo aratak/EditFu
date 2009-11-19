@@ -2,6 +2,10 @@ class Site < ActiveRecord::Base
   SITES_DIR = 'tmp/sites'
   has_many :pages
 
+  validates_presence_of :name, :server, :site_root, :login, :password
+  validates_uniqueness_of :name
+  validates_uniqueness_of :server
+
   def init
     FtpClient.download self
     create_pages

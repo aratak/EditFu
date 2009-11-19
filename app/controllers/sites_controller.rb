@@ -1,7 +1,19 @@
 class SitesController < ApplicationController
   def show
-    @sites = Site.all
     @site = Site.find params[:id]
-    @page = nil
+  end
+
+  def new
+    @site = Site.new
+  end
+
+  def create
+    @site = Site.new params[:site]
+    if @site.save
+      #@site.init
+      redirect_to site_path(@site)
+    else
+      render :action => :new
+    end
   end
 end
