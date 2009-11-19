@@ -1,0 +1,6 @@
+- @sites.each do |site|
+  .site{ site_attributes(site) }
+    %a{ :href=>site_path(site) }= site.name
+    - if site == @site
+      - site.pages.each do |page|
+        %a.page{ page_attributes(page), :href=>page_path(page) }= page.path

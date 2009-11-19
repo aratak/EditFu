@@ -1,0 +1,15 @@
+= content_for :sourceBar do
+  = render :partial => 'shared/sites_source_bar'
+
+%h2=@site.name
+
+%table.card
+  %tr
+    %th Server:
+    %td= h @site.server
+  %tr
+    %th Site Root:
+    %td= h @site.site_root
+  %tr
+    %th Login:
+    %td= h @site.login

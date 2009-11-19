@@ -1,10 +1,5 @@
 = content_for :sourceBar do
-  - @sites.each do |site|
-    .site{ site_attributes(site) }
-      = site.name
-      - if site == @site
-        - site.pages.each do |page|
-          %a.page{ page_attributes(page), :href=>page_path(page)}= page.path
+  = render :partial => 'shared/sites_source_bar'
 
 %h2=@page.path
 #actions
