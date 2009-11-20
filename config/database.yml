@@ -24,6 +24,6 @@ production:
   reconnect: false
   database: edit-fu_production
   pool: 5
-  username: root
-  password: 
-  socket: /tmp/mysql.sock
+  username: edit-fu
+  password: edit-fu
+  socket: /var/run/mysqld/mysqld.sock
