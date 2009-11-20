@@ -10,7 +10,7 @@ class SitesController < ApplicationController
   def create
     @site = Site.new params[:site]
     if @site.save
-      #@site.init
+      @site.init
       redirect_to site_path(@site)
     else
       render :action => :new

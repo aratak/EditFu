@@ -4,9 +4,9 @@ class Site < ActiveRecord::Base
 
   validates_presence_of :name, :server, :site_root, :login, :password
   validates_uniqueness_of :name
-  validates_uniqueness_of :server
 
   def init
+    mkdir
     FtpClient.download self
     create_pages
   end
