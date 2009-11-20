@@ -5,12 +5,6 @@ class Site < ActiveRecord::Base
   validates_presence_of :name, :server, :site_root, :login, :password
   validates_uniqueness_of :name
 
-  def init
-    mkdir
-    FtpClient.download self
-    create_pages
-  end
-
   def dirname
     File.join SITES_DIR, name
   end
@@ -18,6 +12,19 @@ class Site < ActiveRecord::Base
   def mkdir
     FileUtils.rm_rf dirname
     FileUtils.mkdir_p dirname
+  end
+
+  def validate_on_create
+    mkdir
+    begin
+      FtpClient.download self
+    rescue
+      errors.add_to_base "Can't download files from specified server."
+    end
+  end
+
+  def after_create
+    create_pages
   end
 
   private

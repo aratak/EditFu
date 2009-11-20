@@ -7,8 +7,8 @@ describe Site do
       :login => 'user', :password => 'securekey'
   end
 
-  describe 'init' do
-    it "should download content and create page records on init" do
+  describe 'save' do
+    it "should download content and create page records" do
       FileUtils.rm_rf @site.dirname
 
       FtpClient.should_receive(:download).with(@site).and_return do
@@ -17,8 +17,14 @@ describe Site do
         end
       end
 
-      @site.init
+      @site.save
       @site.pages.first.path.should == 'home.html'
+    end
+
+    it "should fail if there are problems in FTP" do
+      FtpClient.should_receive(:download).and_raise('error')
+      
+      @site.save.should be_false
     end
   end
 

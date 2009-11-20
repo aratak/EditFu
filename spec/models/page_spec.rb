@@ -3,9 +3,9 @@ require 'spec_helper'
 describe Page do
   it "should expose section from file" do
     site = Site.new :name => 'mysite'
+    site.mkdir
     page = Page.new :site => site, :path => 'home.html'
 
-    FileUtils.mkdir_p site.dirname
     page.open 'w+' do |file|
       file.write <<-EOF
         <html>
