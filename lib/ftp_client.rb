@@ -25,7 +25,9 @@ class FtpClient
         Dir.mkdir file_local
         cp_r ftp, file_remote, file_local
       else
-        ftp.get file_remote, file_local
+        if name.match(/\.html?$/)
+          ftp.get file_remote, file_local
+        end
       end
     end
   end
