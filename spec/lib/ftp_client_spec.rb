@@ -15,7 +15,7 @@ describe FtpClient do
       @ftp.should_receive(:passive=).with(true)
       @ftp.should_receive(:chdir).with(@site.site_root)
       @ftp.should_receive(:ls).and_return(
-        ['-rw-r--r-- 1 root root Nov 18 2009 home.html']
+        ['-rw-r--r-- 1 root root 1024 Nov 18 2009 home.html']
       )
       @ftp.should_receive(:get).with('home.html', "#{@site.dirname}/home.html")
       @ftp.should_receive(:close)
@@ -37,7 +37,7 @@ describe FtpClient do
     it "should download a remote folder" do
       FtpClient.stub(:open).and_yield(@ftp)
       @ftp.should_receive(:ls).with().and_return(
-        ['drw-r--r-- 1 root root Nov 18 2009 home']
+        ['drw-r--r-- 1 root root 1024 Nov 18 2009 home']
       )
       @ftp.should_receive(:ls).with('home').and_return []
 
@@ -48,10 +48,10 @@ describe FtpClient do
     it "should download recursively" do
       FtpClient.stub(:open).and_yield(@ftp)
       @ftp.should_receive(:ls).with().and_return(
-        ['drw-r--r-- 1 root root Nov 18 2009 home']
+        ['drw-r--r-- 1 root root 1024 Nov 18 2009 home']
       )
       @ftp.should_receive(:ls).with('home').and_return(
-        ['-rw-r--r-- 1 root root Nov 18 2009 index.html']
+        ['-rw-r--r-- 1 root root 1024 Nov 18 2009 index.html']
       )
       @ftp.should_receive(:get).with(
         'home/index.html', "#{@site.dirname}/home/index.html"
@@ -64,13 +64,23 @@ describe FtpClient do
       FtpClient.stub(:open).and_yield(@ftp)
       @ftp.should_receive(:ls).and_return(
         [
-          '-rw-r--r-- 1 root root Nov 18 2009 index.html',
-          '-rw-r--r-- 1 root root Nov 18 2009 index.htm',
-          '-rw-r--r-- 1 root root Nov 18 2009 index.php'
+          '-rw-r--r-- 1 root root 1024 Nov 18 2009 index.html',
+          '-rw-r--r-- 1 root root 1024 Nov 18 2009 index.htm',
+          '-rw-r--r-- 1 root root 1024 Nov 18 2009 index.php'
         ]
       )
       @ftp.should_receive(:get).with('index.html', anything)
       @ftp.should_receive(:get).with('index.htm', anything)
+
+      FtpClient.download(@site)
+    end
+
+    it "should handle filename with spaces" do
+      FtpClient.stub(:open).and_yield(@ftp)
+      @ftp.should_receive(:ls).and_return(
+        ['-rw-r--r-- 1 root root 1024 Nov 18 2009 my index.html']
+      )
+      @ftp.should_receive(:get).with('my index.html', anything)
 
       FtpClient.download(@site)
     end

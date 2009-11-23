@@ -14,9 +14,8 @@ class FtpClient
     ls_args << remote if remote
 
     ftp.ls(*ls_args).each do |file|
-      opts = file.split(/\s+/)
-      mode = opts.first
-      name = opts.last
+      mode = file.match(/\S+/)[0]
+      name = file.match(/(\S+\s+){8}(.*)/)[2]
 
       file_local = File.join(local, name)
       file_remote = remote ? File.join(remote, name) : name
