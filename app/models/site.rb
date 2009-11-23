@@ -30,17 +30,22 @@ class Site < ActiveRecord::Base
   private
 
   def create_pages(path=dirname)
+    result = true
     Dir.new(path).each do |filename|
       unless filename == '.' or filename == '..'
         filepath = File.join(path, filename)
         if File.directory?(filepath)
-          create_pages filepath
+          empty_file = create_pages filepath
         else
           relpath = filepath[dirname.length + 1, filepath.length]
           page = Page.new(:site => self, :path => relpath)
-          pages << page unless page.sections.empty?
+          empty_file = page.sections.empty?
+          pages << page unless empty_file
         end
+        FileUtils.rm_rf filepath if empty_file
+        result &&= empty_file
       end
     end
+    result
   end
 end

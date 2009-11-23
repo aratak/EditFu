@@ -60,5 +60,22 @@ describe Site do
       @site.send :create_pages
       @site.pages.should be_empty
     end
+
+    it "should remove downloaded file without sections" do
+      @site.mkdir
+      File.open "#{@site.dirname}/home.html", 'w+' do |file|
+        file.write "<html><body></body></html>"
+      end
+
+      @site.send :create_pages
+      File.exists?("#{@site.dirname}/home.html").should be_false
+    end
+
+    it "should remove empty directories" do
+      FileUtils.mkdir_p "#{@site.dirname}/empty_dir"
+
+      @site.send :create_pages
+      File.exists?("#{@site.dirname}/empty_dir").should be_false
+    end
   end
 end
