@@ -85,5 +85,22 @@ describe FtpClient do
       FtpClient.download(@site)
     end
   end
+
+  describe "put_page" do
+    before :each do
+      @page = Page.new :site => @site, :path => 'home.html'
+    end
+
+    it "should put new content to remote server" do
+      Net::FTP.should_receive(:open).with(@site.server).and_return(@ftp)
+      @ftp.should_receive(:login).with(@site.login, @site.password)
+      @ftp.should_receive(:passive=).with(true)
+      @ftp.should_receive(:chdir).with(@site.site_root)
+      @ftp.should_receive(:put).with(@page.local_name, 'home.html')
+      @ftp.should_receive(:close)
+
+      FtpClient.put_page(@page)
+    end
+  end
 end
 

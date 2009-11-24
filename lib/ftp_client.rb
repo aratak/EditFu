@@ -7,6 +7,12 @@ class FtpClient
     end
   end
 
+  def self.put_page(page)
+    open page.site do |f|
+      f.put page.local_name, page.path
+    end
+  end
+
   private
 
   def self.cp_r(ftp, remote, local)
