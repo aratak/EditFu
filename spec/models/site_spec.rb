@@ -13,7 +13,7 @@ describe Site do
 
       FtpClient.should_receive(:download).with(@site).and_return do
         File.open File.join(@site.dirname, 'home.html'), 'w+' do |file|
-          file.write "<html><body class='edit-fu'></body></html>"
+          file.write "<html><body class='editfu'></body></html>"
         end
       end
 
@@ -45,7 +45,7 @@ describe Site do
     it "should recursively traverse directories for pages" do
       FileUtils.mkdir_p File.join(@site.dirname, 'home')
       File.open File.join(@site.dirname, 'home/peter.html'), 'w+' do |file|
-        file.write "<html><body class='edit-fu'></body></html>"
+        file.write "<html><body class='editfu'></body></html>"
       end
 
       @site.send :create_pages

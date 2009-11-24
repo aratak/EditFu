@@ -10,7 +10,7 @@ class Page < ActiveRecord::Base
 
   def sections
     open do |file|
-      (Hpricot(file) / '.edit-fu').map { |element| element.inner_html }
+      (Hpricot(file) / '.editfu').map { |element| element.inner_html }
     end
   end
 end

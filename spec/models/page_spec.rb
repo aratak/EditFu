@@ -10,7 +10,7 @@ describe Page do
       file.write <<-EOF
         <html>
           <body>
-            <h1 class='edit-fu'>Hello, <b>World</b>!</h1>
+            <h1 class='editfu'>Hello, <b>World</b>!</h1>
           </body>
         </html>
       EOF
