@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(:version => 20091117095720) do
   create_table "pages", :force => true do |t|
     t.integer "site_id", :null => false
     t.string  "path",    :null => false
+    t.text    "content"
   end
 
   create_table "sites", :force => true do |t|

@@ -1,6 +1,27 @@
 require 'net/ftp'
 
 class FtpClient
+  def self.noop(site)
+    open site do
+    end
+  end
+
+  def self.get_file(page)
+    open page.site do |f|
+      page.content = ""
+      f.retrbinary "RETR #{page.path}", Net::FTP::DEFAULT_BLOCKSIZE do |data|
+        page.content << data
+      end
+    end
+  end
+
+  def self.put_file(page)
+    open page.site do |f|
+      f.storbinary "STOR #{page.path}", 
+        StringIO.new(page.content), Net::FTP::DEFAULT_BLOCKSIZE
+    end
+  end
+
   def self.download(site)
     open site do |f| 
       cp_r f, nil, site.dirname
@@ -37,7 +58,7 @@ class FtpClient
     end
   end
 
-  def self.open(site, &block)
+  def self.open(site)
     f = Net::FTP.open site.server
     begin
       f.login site.login, site.password

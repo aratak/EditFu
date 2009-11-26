@@ -13,17 +13,18 @@ class Site < ActiveRecord::Base
     FileUtils.mkdir_p dirname
   end
 
-  def validate_on_create
+  def download
     mkdir
-    begin
-      FtpClient.download self
-    rescue
-      errors.add_to_base "Can't download files from specified server."
-    end
+    FtpClient.download self
+    create_pages
   end
 
-  def after_create
-    create_pages
+  def validate_on_create
+    begin
+      FtpClient.noop(self)
+    rescue Exception => e
+      errors.add_to_base "Can't connect to FTP server."
+    end
   end
 
   private

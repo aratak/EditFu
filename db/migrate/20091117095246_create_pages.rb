@@ -3,6 +3,7 @@ class CreatePages < ActiveRecord::Migration
     create_table :pages do |t|
       t.references :site, :null => false
       t.string :path, :null => false
+      t.text :content
     end
   end
 

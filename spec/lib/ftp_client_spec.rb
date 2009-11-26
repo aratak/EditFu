@@ -5,6 +5,8 @@ describe FtpClient do
     @site = Site.new :name => 'mysite', :server => 'ftp.edit-fu.com', 
       :site_root => '/var/ftp/mysite', :login => 'user', :password => 'securekey'
     @site.mkdir
+
+    @page = Page.new :site => @site, :path => 'home.html'
     @ftp = mock('ftp')
   end
 
@@ -100,6 +102,53 @@ describe FtpClient do
       @ftp.should_receive(:close)
 
       FtpClient.put_page(@page)
+    end
+  end
+
+  describe "get_file" do
+    it "should download a remote file" do
+      Net::FTP.should_receive(:open).with(@site.server).and_return(@ftp)
+      @ftp.should_receive(:login).with(@site.login, @site.password)
+      @ftp.should_receive(:passive=).with(true)
+      @ftp.should_receive(:chdir).with(@site.site_root)
+      @ftp.should_receive(:retrbinary).
+        with("RETR #{@page.path}", Net::FTP::DEFAULT_BLOCKSIZE).
+        and_yield('first...').and_yield('and second')
+      @ftp.should_receive(:close)
+
+      FtpClient.get_file(@page)
+      @page.content.should == 'first...and second'
+    end
+  end
+
+  describe "put_file" do
+    it "should upload content to remote file" do
+      Net::FTP.should_receive(:open).with(@site.server).and_return(@ftp)
+      @ftp.should_receive(:login).with(@site.login, @site.password)
+      @ftp.should_receive(:passive=).with(true)
+      @ftp.should_receive(:chdir).with(@site.site_root)
+      @ftp.should_receive(:storbinary).with(
+        'STOR home.html', an_instance_of(StringIO), Net::FTP::DEFAULT_BLOCKSIZE
+      ).and_return do |cmd, file, blocksize|
+        file.string.should == @page.content
+      end
+      @ftp.should_receive(:close)
+
+      @page.content = 'some html text'
+      FtpClient.put_file(@page)
+    end
+  end
+
+  describe "open" do
+    it "should close connection on error" do
+      Net::FTP.should_receive(:open).and_return(@ftp)
+      @ftp.should_receive(:login).and_raise 'login error'
+      @ftp.should_receive(:close)
+
+      begin
+        FtpClient.send :open, @site
+      rescue
+      end
     end
   end
 end

@@ -3,6 +3,26 @@ require 'hpricot'
 class Page < ActiveRecord::Base
   belongs_to :site
 
+  def sections2
+    FtpClient.get_file(self)
+
+    (Hpricot(content) / '.editfu').map do |element|
+      element.inner_html
+    end
+  end
+
+  def sections2=(sections)
+    i = 0
+    document = Hpricot(content) 
+    (document / '.editfu').map do |element|
+      element.inner_html = sections[i]
+      i = i + 1
+    end
+    self.content = document.to_html
+
+    FtpClient.put_file(self)
+  end
+
   def local_name
     File.join site.dirname, path
   end
