@@ -3,23 +3,12 @@ require 'spec_helper'
 describe Page do
   before :each do
     @site = Site.new :name => 'mysite'
-    @site.mkdir
     @page = Page.new :site => @site, :path => 'home.html'
-
-    @page.open 'w+' do |file|
-      file.write <<-EOF
-        <html>
-          <body>
-            <h1 class='editfu'>Hello, <b>World</b>!</h1>
-          </body>
-        </html>
-      EOF
-    end
   end
 
   describe "sections" do
     it "should get page content from remote server and cache it" do
-      FtpClient.should_receive(:get_file).with(@page).and_return do
+      FtpClient.should_receive(:get).with(@page).and_return do
         @page.content = <<-EOS
           <html>
             <body>
@@ -29,7 +18,7 @@ describe Page do
         EOS
       end
 
-      sections = @page.sections2
+      sections = @page.sections
       sections.first.should == 'Hello, <b>World</b>!'
       sections.size.should == 1
     end
@@ -44,9 +33,9 @@ describe Page do
           </body>
         </html>
       EOS
-      FtpClient.should_receive(:put_file).with(@page)
+      FtpClient.should_receive(:put).with(@page)
 
-      @page.sections2 = ['Good-by, blue sky...']
+      @page.sections = ['Good-by, blue sky...']
       @page.content.should == <<-EOS
         <html>
           <body>
@@ -54,23 +43,6 @@ describe Page do
           </body>
         </html>
       EOS
-    end
-  end
-
-  describe "sections" do
-    it "should expose section from file" do
-      @page.sections.first.should == 'Hello, <b>World</b>!'
-      @page.sections.size.should == 1
-    end
-  end
-
-  describe "sections=" do
-    it "should update local cache and remote file" do
-      FtpClient.should_receive(:put_page).with(@page)
-      new_section = 'Good-by, blue sky...'
-
-      @page.sections = [new_section]
-      @page.sections.first.should == new_section
     end
   end
 end

@@ -4,142 +4,54 @@ describe FtpClient do
   before :each do
     @site = Site.new :name => 'mysite', :server => 'ftp.edit-fu.com', 
       :site_root => '/var/ftp/mysite', :login => 'user', :password => 'securekey'
-    @site.mkdir
-
     @page = Page.new :site => @site, :path => 'home.html'
     @ftp = mock('ftp')
   end
 
-  describe 'download' do
-    it "should download a remote file" do
-      Net::FTP.should_receive(:open).with(@site.server).and_return(@ftp)
-      @ftp.should_receive(:login).with(@site.login, @site.password)
-      @ftp.should_receive(:passive=).with(true)
-      @ftp.should_receive(:chdir).with(@site.site_root)
-      @ftp.should_receive(:ls).and_return(
-        ['-rw-r--r-- 1 root root 1024 Nov 18 2009 home.html']
-      )
-      @ftp.should_receive(:get).with('home.html', "#{@site.dirname}/home.html")
-      @ftp.should_receive(:close)
-
-      FtpClient.download(@site)
-    end
-
-    it "should close connection on error" do
-      Net::FTP.should_receive(:open).and_return(@ftp)
-      @ftp.should_receive(:login).and_raise 'login error'
-      @ftp.should_receive(:close)
-
-      begin
-        FtpClient.send :open, @site
-      rescue
-      end
-    end
-
-    it "should download a remote folder" do
-      FtpClient.stub(:open).and_yield(@ftp)
-      @ftp.should_receive(:ls).with().and_return(
-        ['drw-r--r-- 1 root root 1024 Nov 18 2009 home']
-      )
-      @ftp.should_receive(:ls).with('home').and_return []
-
-      FtpClient.download(@site)
-      File.directory?("#{@site.dirname}/home").should be_true
-    end
-
-    it "should download recursively" do
-      FtpClient.stub(:open).and_yield(@ftp)
-      @ftp.should_receive(:ls).with().and_return(
-        ['drw-r--r-- 1 root root 1024 Nov 18 2009 home']
-      )
-      @ftp.should_receive(:ls).with('home').and_return(
-        ['-rw-r--r-- 1 root root 1024 Nov 18 2009 index.html']
-      )
-      @ftp.should_receive(:get).with(
-        'home/index.html', "#{@site.dirname}/home/index.html"
-      )
-
-      FtpClient.download(@site)
-    end
-
-    it "should download only html files" do
-      FtpClient.stub(:open).and_yield(@ftp)
-      @ftp.should_receive(:ls).and_return(
-        [
-          '-rw-r--r-- 1 root root 1024 Nov 18 2009 index.html',
-          '-rw-r--r-- 1 root root 1024 Nov 18 2009 index.htm',
-          '-rw-r--r-- 1 root root 1024 Nov 18 2009 index.php'
-        ]
-      )
-      @ftp.should_receive(:get).with('index.html', anything)
-      @ftp.should_receive(:get).with('index.htm', anything)
-
-      FtpClient.download(@site)
-    end
-
-    it "should handle filename with spaces" do
-      FtpClient.stub(:open).and_yield(@ftp)
-      @ftp.should_receive(:ls).and_return(
-        ['-rw-r--r-- 1 root root 1024 Nov 18 2009 my index.html']
-      )
-      @ftp.should_receive(:get).with('my index.html', anything)
-
-      FtpClient.download(@site)
+  describe "noop" do
+    it "should call open for testing FTP connection" do
+      FtpClient.should_receive(:open).with(@site).and_yield(@ftp)
+      FtpClient.noop(@site)
     end
   end
 
-  describe "put_page" do
-    before :each do
-      @page = Page.new :site => @site, :path => 'home.html'
-    end
-
-    it "should put new content to remote server" do
-      Net::FTP.should_receive(:open).with(@site.server).and_return(@ftp)
-      @ftp.should_receive(:login).with(@site.login, @site.password)
-      @ftp.should_receive(:passive=).with(true)
-      @ftp.should_receive(:chdir).with(@site.site_root)
-      @ftp.should_receive(:put).with(@page.local_name, 'home.html')
-      @ftp.should_receive(:close)
-
-      FtpClient.put_page(@page)
-    end
-  end
-
-  describe "get_file" do
+  describe "get" do
     it "should download a remote file" do
-      Net::FTP.should_receive(:open).with(@site.server).and_return(@ftp)
-      @ftp.should_receive(:login).with(@site.login, @site.password)
-      @ftp.should_receive(:passive=).with(true)
-      @ftp.should_receive(:chdir).with(@site.site_root)
+      FtpClient.should_receive(:open).with(@site).and_yield(@ftp)
       @ftp.should_receive(:retrbinary).
         with("RETR #{@page.path}", Net::FTP::DEFAULT_BLOCKSIZE).
         and_yield('first...').and_yield('and second')
-      @ftp.should_receive(:close)
 
-      FtpClient.get_file(@page)
+      FtpClient.get(@page)
       @page.content.should == 'first...and second'
     end
   end
 
-  describe "put_file" do
+  describe "put" do
     it "should upload content to remote file" do
-      Net::FTP.should_receive(:open).with(@site.server).and_return(@ftp)
-      @ftp.should_receive(:login).with(@site.login, @site.password)
-      @ftp.should_receive(:passive=).with(true)
-      @ftp.should_receive(:chdir).with(@site.site_root)
+      FtpClient.should_receive(:open).with(@site).and_yield(@ftp)
       @ftp.should_receive(:storbinary).with(
         'STOR home.html', an_instance_of(StringIO), Net::FTP::DEFAULT_BLOCKSIZE
       ).and_return do |cmd, file, blocksize|
         file.string.should == @page.content
       end
-      @ftp.should_receive(:close)
 
       @page.content = 'some html text'
-      FtpClient.put_file(@page)
+      FtpClient.put(@page)
     end
   end
 
   describe "open" do
+    it "should issue all required commands" do
+      Net::FTP.should_receive(:open).with(@site.server).and_return(@ftp)
+      @ftp.should_receive(:login).with(@site.login, @site.password)
+      @ftp.should_receive(:passive=).with(true)
+      @ftp.should_receive(:chdir).with(@site.site_root)
+      @ftp.should_receive(:close)
+
+      FtpClient.send :open, @site
+    end
+
     it "should close connection on error" do
       Net::FTP.should_receive(:open).and_return(@ftp)
       @ftp.should_receive(:login).and_raise 'login error'
