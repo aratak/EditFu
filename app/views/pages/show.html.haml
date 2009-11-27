@@ -7,7 +7,7 @@
   %a(href='#') Settings
   %a(href='#') Remove Page
 
-- form_tag update_sections_page_path(@page) do
+- form_tag update_sections_site_page_path(@site, @page) do
   - @page.sections.each_with_index do |section, index|
     .section{:id=>"section_#{index}"}
       = text_area_tag 'sections[]', section

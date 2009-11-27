@@ -1,14 +1,14 @@
 class PagesController < ApplicationController
   def show
-    @page = Page.find params[:id]
-    @site = @page.site
+    @site = Site.find params[:site_id]
+    @page = @site.pages.find params[:id]
     render
     @page.save
   end
 
   def update_sections
-    @page = Page.find params[:id]
-    @site = @page.site
+    @site = Site.find params[:site_id]
+    @page = @site.pages.find params[:id]
     
     @page.sections = params[:sections]
     @page.save
