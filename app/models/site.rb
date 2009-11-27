@@ -7,8 +7,8 @@ class Site < ActiveRecord::Base
   def validate_on_create
     begin
       FtpClient.noop(self)
-    rescue Exception => e
-      errors.add_to_base "Can't connect to FTP server."
+    rescue FtpClientError => e
+      errors.add_to_base e.message
     end
   end
 end

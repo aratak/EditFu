@@ -30,7 +30,7 @@ class FtpClient
   def self.open(site)
     begin
       f = Net::FTP.open site.server
-    rescue SocketError
+    rescue 
       raise FtpClientError, "Can't connect to FTP server - check domain name."
     end
 
