@@ -6,6 +6,7 @@ class PagesController < ApplicationController
 
     begin
       @sections = @page.sections
+      @error = "Page hasn't editable content" if @sections.blank?
       @page.save
     rescue FtpClientError => e
       @error = e.message
