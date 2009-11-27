@@ -2,6 +2,8 @@
   = render :partial => 'shared/sites_source_bar'
 
 %h2=@site.name
+#actions
+  = link_to 'Add Page', new_site_page_path(@site)
 
 %table.card
   %tr

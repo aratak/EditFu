@@ -2,6 +2,8 @@ require 'hpricot'
 
 class Page < ActiveRecord::Base
   belongs_to :site
+  validates_presence_of :path
+  validates_uniqueness_of :path, :scope => :site_id
 
   def sections
     FtpClient.get(self)
