@@ -7,8 +7,11 @@
   %a(href='#') Settings
   %a(href='#') Remove Page
 
-- form_tag update_sections_site_page_path(@site, @page) do
-  - @page.sections.each_with_index do |section, index|
-    .section{:id=>"section_#{index}"}
-      = text_area_tag 'sections[]', section
-  = submit_tag :update
+- if @error
+  .error= @error
+- else
+  - form_tag update_sections_site_page_path(@site, @page) do
+    - @sections.each_with_index do |section, index|
+      .section{:id=>"section_#{index}"}
+        = text_area_tag 'sections[]', section
+    = submit_tag :update

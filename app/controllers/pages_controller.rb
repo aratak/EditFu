@@ -3,8 +3,13 @@ class PagesController < ApplicationController
 
   def show
     @page = @site.pages.find params[:id]
-    render
-    @page.save
+
+    begin
+      @sections = @page.sections
+      @page.save
+    rescue FtpClientError => e
+      @error = e.message
+    end
   end
 
   def new

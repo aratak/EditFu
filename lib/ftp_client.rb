@@ -1,5 +1,8 @@
 require 'net/ftp'
 
+class FtpClientError < RuntimeError
+end
+
 class FtpClient
   def self.noop(site)
     open site do
@@ -25,15 +28,28 @@ class FtpClient
   private
 
   def self.open(site)
-    f = Net::FTP.open site.server
+    begin
+      f = Net::FTP.open site.server
+    rescue SocketError
+      raise FtpClientError, "Can't connect to FTP server - check domain name."
+    end
+
     begin
       f.login site.login, site.password
       f.passive = true
       f.chdir site.site_root
 
       yield f if block_given?
+    rescue Net::FTPError => e
+      raise translate_ftp_error(e)
     ensure
       f.close
     end
+  end
+
+  def self.translate_ftp_error(e)
+    code = e.message[0, 3]
+    message = e.message[4, e.message.length]
+    FtpClientError.new(message)
   end
 end

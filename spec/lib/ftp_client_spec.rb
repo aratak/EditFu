@@ -62,6 +62,26 @@ describe FtpClient do
       rescue
       end
     end
+
+    it "should cut off codes from ftp error messages" do
+      Net::FTP.should_receive(:open).and_return(@ftp)
+      @ftp.should_receive(:login).and_raise(
+        Net::FTPError.new('530 Login incorrect.')
+      )
+      @ftp.should_receive(:close)
+
+      lambda do
+        FtpClient.send :open, @site
+      end.should raise_error(FtpClientError, 'Login incorrect.')
+    end
+
+    it "should translate open socket error message" do
+      Net::FTP.should_receive(:open).and_raise(SocketError.new)
+
+      lambda do
+        FtpClient.send :open, @site
+      end.should raise_error(FtpClientError, "Can't connect to FTP server - check domain name.")
+    end
   end
 end
 
