@@ -25,6 +25,12 @@ class PagesController < ApplicationController
     end
   end
 
+  def destroy
+    @page = @site.pages.find params[:id]
+    @page.destroy
+    redirect_to site_path(@site)
+  end
+
   def update_sections
     @page = @site.pages.find params[:id]
     

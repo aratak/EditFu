@@ -5,7 +5,8 @@
 #actions
   %a(href='#') View
   %a(href='#') Settings
-  %a(href='#') Remove Page
+  = link_to 'Remove Page', [@site, @page], |
+    :method => :delete, :confirm => 'Are you sure?' |
 
 - if @error
   .error= @error

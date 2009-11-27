@@ -1,5 +1,5 @@
 class Site < ActiveRecord::Base
-  has_many :pages
+  has_many :pages, :dependent => :delete_all
 
   validates_presence_of :name, :server, :site_root, :login, :password
   validates_uniqueness_of :name

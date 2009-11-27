@@ -18,4 +18,10 @@ class SitesController < ApplicationController
       render :action => :new
     end
   end
+
+  def destroy
+    @site = Site.find params[:id]
+    @site.destroy
+    redirect_to sites_path
+  end
 end
