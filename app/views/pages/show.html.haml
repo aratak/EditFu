@@ -1,9 +1,5 @@
 = javascript_include_tag 'tiny_mce/tiny_mce.js'
-:javascript
-  tinyMCE.init({
-    mode : "textareas",
-    theme : "simple"
-  });
+= javascript_include_tag 'page.js'
 
 = content_for :sourceBar do
   = render :partial => 'shared/sites_source_bar'
@@ -15,11 +11,13 @@
   = link_to 'Remove Page', [@site, @page], |
     :method => :delete, :confirm => 'Are you sure?' |
 
+#saveNotice{:style => 'display: none'} Saving page content...
 - if @error
   .error= @error
 - else
-  - form_tag update_sections_site_page_path(@site, @page) do
+  - form_tag update_sections_site_page_path(@site, @page),  |
+    :id => 'update_form', :onsubmit => 'return savePageSections();' do |
     - @sections.each_with_index do |section, index|
       .section{:id=>"section_#{index}"}
-        = text_area_tag 'sections[]', section
+        = text_area_tag 'sections[]', section, :id => nil
     = submit_tag :update

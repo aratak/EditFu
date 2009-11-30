@@ -34,10 +34,10 @@ class PagesController < ApplicationController
 
   def update_sections
     @page = @site.pages.find params[:id]
-    
     @page.sections = params[:sections]
     @page.save
-    redirect_to :action => :show
+
+    render :json => { :status => "ok" }
   end
 
   private
