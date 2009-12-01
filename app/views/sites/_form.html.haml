@@ -1,0 +1,19 @@
+- form_for @site do |form|
+  = form.error_messages
+  %table.card
+    %tr
+      %th= form.label :name
+      %td= form.text_field :name
+    %tr
+      %th= form.label :server
+      %td= form.text_field :server
+    %tr
+      %th= form.label :site_root
+      %td= form.text_field :site_root
+    %tr
+      %th= form.label :login
+      %td= form.text_field :login
+    %tr
+      %th= form.label :password
+      %td= form.password_field :password
+  = submit_tag :submit

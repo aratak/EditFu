@@ -1,4 +1,6 @@
 class SitesController < ApplicationController
+  layout 'sites'
+
   def index
   end
 
@@ -16,6 +18,20 @@ class SitesController < ApplicationController
       redirect_to site_path(@site)
     else
       render :action => :new
+    end
+  end
+
+  def edit
+    @site = Site.find params[:id]
+  end
+
+  def update
+    @site = Site.find params[:id]
+    @site.update_attributes params[:site]
+    if @site.save
+      redirect_to site_path(@site)
+    else
+      render :action => :edit
     end
   end
 

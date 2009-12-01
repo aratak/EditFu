@@ -1,4 +1,5 @@
 class PagesController < ApplicationController
+  layout 'sites'
   before_filter :find_site
 
   def show

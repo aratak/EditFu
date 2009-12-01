@@ -1,9 +1,7 @@
-= content_for :sourceBar do
-  = render :partial => 'shared/sites_source_bar'
-
 %h2=@site.name
 #actions
   = link_to 'Add Page', new_site_page_path(@site)
+  = link_to 'Edit Site', edit_site_path(@site)
   = link_to 'Remove Site', @site, :method => :delete, :confirm => 'Are you sure?'
 
 %table.card

@@ -1,9 +1,6 @@
 = javascript_include_tag 'tiny_mce/tiny_mce.js'
 = javascript_include_tag 'page.js'
 
-= content_for :sourceBar do
-  = render :partial => 'shared/sites_source_bar'
-
 %h2=@page.path
 #actions
   %a(href='#') View

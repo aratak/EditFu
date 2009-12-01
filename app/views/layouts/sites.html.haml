@@ -1,0 +1,11 @@
+= content_for :sourceBar do
+  - Site.all.each do |site|
+    .site{ site_attributes(site) }
+      %a{ :href=>site_path(site) }= site.name
+      - site.pages.each do |page|
+        %a.page{ page_attributes(page), :href=>site_page_path(site, page) }= page.path
+
+= content_for :actionBar do
+  %a{:href=>new_site_path} New
+
+= render :file => 'layouts/application'
