@@ -14,7 +14,7 @@ describe Site do
     end
 
     it "should fail if there are problems in FTP" do
-      FtpClient.should_receive(:noop).and_raise('error')
+      FtpClient.should_receive(:noop).and_raise(FtpClientError.new)
       @site.save.should be_false
     end
   end

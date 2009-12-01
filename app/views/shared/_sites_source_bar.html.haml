@@ -1,9 +1,8 @@
 - Site.all.each do |site|
   .site{ site_attributes(site) }
     %a{ :href=>site_path(site) }= site.name
-    - if site == @site
-      - site.pages.each do |page|
-        %a.page{ page_attributes(page), :href=>site_page_path(site, page) }= page.path
+    - site.pages.each do |page|
+      %a.page{ page_attributes(page), :href=>site_page_path(site, page) }= page.path
 
 = content_for :actionBar do
   %a{:href=>new_site_path} New
