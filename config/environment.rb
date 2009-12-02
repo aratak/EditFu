@@ -7,8 +7,10 @@ RAILS_GEM_VERSION = '2.3.3' unless defined? RAILS_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
-  config.gem 'hpricot', :source => 'http://rubyforge.org/projects/hobix'
-  config.gem 'haml', :source => 'http://rubyforge.org/projects/haml'
+  config.gem 'hpricot'
+  config.gem 'haml'
+  config.gem 'warden'
+  config.gem 'devise'
 
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
@@ -41,6 +43,4 @@ Rails::Initializer.run do |config|
   # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
-
-  SITES_DIR = 'tmp/sites' unless defined? SITES_DIR
 end

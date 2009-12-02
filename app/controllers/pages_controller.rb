@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
   layout 'sites'
   before_filter :find_site
+  before_filter :authenticate_user!
 
   def show
     @page = @site.pages.find params[:id]

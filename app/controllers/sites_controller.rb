@@ -1,5 +1,6 @@
 class SitesController < ApplicationController
   layout 'sites'
+  before_filter :authenticate_user!
 
   def index
   end

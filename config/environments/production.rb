@@ -27,4 +27,4 @@ config.action_view.cache_template_loading            = true
 # Enable threaded mode
 # config.threadsafe!
 
-SITES_DIR = '/var/edit-fu/sites'
+config.action_mailer.default_url_options = { :host => '174.143.144.69' }
