@@ -29,7 +29,11 @@ config.action_view.cache_template_loading            = true
 
 ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.smtp_settings = {
-  :address => "174.143.144.69",
-  :port => 25
+  :address => "smtp.gmail.com",
+  :port => 587,
+  :domain => "localhost",
+  :authentication => :plain,
+  :user_name => "edit.fu.cms",
+  :password => "ipDomAwckIporr5"
 }
 config.action_mailer.default_url_options = { :host => '174.143.144.69' }
