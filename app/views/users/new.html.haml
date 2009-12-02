@@ -1,0 +1,15 @@
+%h2 Signup
+
+- form_for @user do |f|
+  = f.error_messages
+  %table.card
+    %tr
+      %th= f.label :email
+      %td= f.text_field :email
+    %tr
+      %th= f.label :password
+      %td= f.password_field :password
+    %tr
+      %th= f.label :password_confirmation
+      %td= f.password_field :password_confirmation
+  = submit_tag :submit

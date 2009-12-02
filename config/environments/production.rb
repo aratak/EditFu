@@ -27,4 +27,9 @@ config.action_view.cache_template_loading            = true
 # Enable threaded mode
 # config.threadsafe!
 
+ActionMailer::Base.delivery_method = :smtp
+ActionMailer::Base.smtp_settings = {
+  :address => "174.143.144.69",
+  :port => 25
+}
 config.action_mailer.default_url_options = { :host => '174.143.144.69' }
