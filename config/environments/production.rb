@@ -29,6 +29,7 @@ config.action_view.cache_template_loading            = true
 
 ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.smtp_settings = {
+  :tls => true,
   :address => "smtp.gmail.com",
   :port => 587,
   :domain => "localhost",
