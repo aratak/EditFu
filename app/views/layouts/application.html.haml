@@ -10,6 +10,9 @@
   %body
     #systemBar
       - if user_signed_in?
+        Logged in as: 
+        %strong= current_user.email
+        |
         = link_to 'Logout', destroy_user_session_path
     #sourceBar
       = yield :sourceBar
