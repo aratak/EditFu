@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 
   has_many :sites, :foreign_key => 'owner_id'
 
-  # Setup accessible (or protected) attributes for your model
+  validates_presence_of :username
+  validates_uniqueness_of :username
   attr_accessible :email, :password, :password_confirmation
 end
