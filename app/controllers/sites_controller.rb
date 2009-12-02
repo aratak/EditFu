@@ -10,7 +10,7 @@ class SitesController < ApplicationController
   end
 
   def new
-    @site = current_user.sites.build
+    @site = Site.new
   end
 
   def create

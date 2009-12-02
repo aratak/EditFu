@@ -14,7 +14,7 @@ class PagesController < ApplicationController
   end
 
   def new
-    @page = @site.pages.new 
+    @page = Page.new 
   end
 
   def create
