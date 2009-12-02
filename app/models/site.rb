@@ -1,4 +1,5 @@
 class Site < ActiveRecord::Base
+  belongs_to :owner, :class_name => 'User'
   has_many :pages, :dependent => :delete_all
 
   validates_presence_of :name, :server, :site_root, :login, :password

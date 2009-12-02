@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091201145041) do
+ActiveRecord::Schema.define(:version => 20091202081737) do
 
   create_table "pages", :force => true do |t|
     t.integer "site_id", :null => false
@@ -18,11 +18,12 @@ ActiveRecord::Schema.define(:version => 20091201145041) do
   end
 
   create_table "sites", :force => true do |t|
-    t.string "name",      :null => false
-    t.string "server",    :null => false
-    t.string "site_root", :null => false
-    t.string "login"
-    t.string "password"
+    t.string  "name",      :null => false
+    t.string  "server",    :null => false
+    t.string  "site_root", :null => false
+    t.string  "login"
+    t.string  "password"
+    t.integer "owner_id"
   end
 
   create_table "users", :force => true do |t|

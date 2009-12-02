@@ -6,15 +6,15 @@ class SitesController < ApplicationController
   end
 
   def show
-    @site = Site.find params[:id]
+    find_site
   end
 
   def new
-    @site = Site.new
+    @site = current_user.sites.build
   end
 
   def create
-    @site = Site.new params[:site]
+    @site = current_user.sites.build params[:site]
     if @site.save
       redirect_to site_path(@site)
     else
@@ -23,12 +23,11 @@ class SitesController < ApplicationController
   end
 
   def edit
-    @site = Site.find params[:id]
+    find_site
   end
 
   def update
-    @site = Site.find params[:id]
-    @site.update_attributes params[:site]
+    find_site.update_attributes params[:site]
     if @site.save
       redirect_to site_path(@site)
     else
@@ -37,8 +36,13 @@ class SitesController < ApplicationController
   end
 
   def destroy
-    @site = Site.find params[:id]
-    @site.destroy
+    find_site.destroy
     redirect_to sites_path
+  end
+
+  private
+
+  def find_site
+    @site = current_user.sites.find params[:id]
   end
 end

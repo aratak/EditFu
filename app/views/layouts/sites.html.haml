@@ -1,5 +1,5 @@
 = content_for :sourceBar do
-  - Site.all.each do |site|
+  - current_user.sites.each do |site|
     .site{ site_attributes(site) }
       %a{ :href=>site_path(site) }= site.name
       - site.pages.each do |page|

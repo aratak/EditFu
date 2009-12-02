@@ -4,10 +4,8 @@ class PagesController < ApplicationController
   before_filter :authenticate_user!
 
   def show
-    @page = @site.pages.find params[:id]
-
     begin
-      @sections = @page.sections
+      @sections = find_page.sections
       @error = "Page hasn't editable content" if @sections.blank?
       @page.save
     rescue FtpClientError => e
@@ -29,14 +27,12 @@ class PagesController < ApplicationController
   end
 
   def destroy
-    @page = @site.pages.find params[:id]
-    @page.destroy
+    find_page.destroy
     redirect_to site_path(@site)
   end
 
   def update_sections
-    @page = @site.pages.find params[:id]
-    @page.sections = params[:sections]
+    find_page.sections = params[:sections]
     @page.save
 
     render :json => { :status => "ok" }
@@ -45,6 +41,10 @@ class PagesController < ApplicationController
   private
 
   def find_site
-    @site = Site.find params[:site_id]
+    @site = current_user.sites.find params[:site_id]
+  end
+
+  def find_page
+    @page = @site.pages.find params[:id]
   end
 end
