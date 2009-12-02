@@ -18,7 +18,9 @@ class PagesController < ApplicationController
   end
 
   def create
-    @page = @site.pages.new params[:page]
+    @page = Page.new params[:page]
+    @page.site = @site
+
     if @page.save
       redirect_to site_page_path(@site, @page)
     else
