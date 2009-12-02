@@ -3,7 +3,7 @@ class Site < ActiveRecord::Base
   has_many :pages, :dependent => :delete_all
 
   validates_presence_of :name, :server, :site_root, :login, :password
-  validates_uniqueness_of :name
+  validates_uniqueness_of :name, :scope => :owner_id
 
   def validate_on_create
     begin
