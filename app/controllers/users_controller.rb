@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create params[:user]
+    @user = User.new params[:user]
     if @user.save
       flash[:notice] = t('devise.confirmations.send_instructions')
       redirect_to root_path
