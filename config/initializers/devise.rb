@@ -39,7 +39,7 @@ Devise.setup do |config|
   # config.timeout_in = 10.minutes
 
   # Configure the e-mail address which will be shown in DeviseMailer.
-  config.mailer_sender = "noreply@174.143.144.69"
+  config.mailer_sender = "edit.fu.cms@gmail.com"
 
   # Configure the ORM. Supports :active_record, :data_mapper and :mongo_mapper.
   # config.orm = :active_record
