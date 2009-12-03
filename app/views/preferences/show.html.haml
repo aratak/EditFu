@@ -1,0 +1,11 @@
+%h2 Preferences
+#actions
+  = link_to 'Edit', edit_preferences_path
+
+%table.card
+  %tr
+    %th Username
+    %td= @preferences.username
+  %tr
+    %th Email
+    %td= @preferences.email

@@ -9,7 +9,7 @@ class UsersController < ApplicationController
       flash[:notice] = t('devise.confirmations.send_instructions')
       redirect_to root_path
     else
-      render :action => :new
+      render :new
     end
   end
 end

@@ -9,6 +9,10 @@
   %body
     #systemBar
       - if user_signed_in?
+        = link_to 'Sites', sites_path  
+        = link_to 'Preferences', preferences_path
+        |
+
         Logged in as: 
         %strong= current_user.username
         |
