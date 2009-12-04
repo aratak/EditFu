@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
 
   has_many :sites, :foreign_key => 'owner_id'
 
-  validates_presence_of :username
-  validates_uniqueness_of :username
-  attr_accessible :username, :email, :password, :password_confirmation
+  validates_presence_of :name
+
+  attr_accessible :name, :email, :password, :password_confirmation
 end
