@@ -19,9 +19,13 @@ class User < ActiveRecord::Base
     !!owner
   end
 
+  def require_password
+    @password_required = true
+  end
+
   protected
 
   def password_required?
-    !editor? && new_record? || !password.nil? || !password_confirmation.nil?
+    @password_required
   end
 end

@@ -1,0 +1,15 @@
+%h2 Editor Signup
+
+- form_for @user do |f|
+  = f.error_messages
+  %table.card
+    %tr
+      %th= f.label :name
+      %td= f.text_field :name
+    %tr
+      %th= f.label :password
+      %td= f.password_field :password
+    %tr
+      %th= f.label :password_confirmation
+      %td= f.password_field :password_confirmation
+  = submit_tag :submit

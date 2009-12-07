@@ -7,4 +7,19 @@ class ApplicationController < ActionController::Base
 
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
+
+  ConfirmationsController.class_eval do
+    before_filter :redirect_editors, :only => [:create, :show]
+
+    private
+
+    def redirect_editors
+      user = User.find_by_confirmation_token(params[:confirmation_token])
+      if user && user.editor?
+        redirect_to edit_editor_confirmation_path(
+          :confirmation_token => params[:confirmation_token]
+        )
+      end
+    end
+  end
 end
