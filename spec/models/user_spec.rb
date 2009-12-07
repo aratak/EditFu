@@ -20,7 +20,7 @@ describe User do
       ActionMailer::Base.deliveries.should_not be_empty
       email = ActionMailer::Base.deliveries.first
       email.to.first.should == editor.email
-      email.body.should match(/invited/)
+      email.body.should match(/invited by #{owner.email}/)
     end
   end
 end
