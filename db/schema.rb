@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091204120845) do
+ActiveRecord::Schema.define(:version => 20091204123927) do
 
   create_table "pages", :force => true do |t|
     t.integer "site_id", :null => false
@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(:version => 20091204120845) do
 
   create_table "users", :force => true do |t|
     t.string   "email",                :limit => 100, :null => false
-    t.string   "encrypted_password",   :limit => 40,  :null => false
-    t.string   "password_salt",        :limit => 20,  :null => false
+    t.string   "encrypted_password",   :limit => 40
+    t.string   "password_salt",        :limit => 20
     t.string   "confirmation_token",   :limit => 20
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(:version => 20091204120845) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
+    t.integer  "owner_id"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
