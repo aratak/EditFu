@@ -1,9 +1,0 @@
-Welcome #{@resource.email}!
-
-- if @resource.editor?
-    You have been invited by #{@resource.owner.email} to edit his sites.
-
-You can confirm your account through the link below:
-
-= link_to 'Confirm my account', |
-  confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) |
