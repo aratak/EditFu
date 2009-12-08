@@ -5,14 +5,14 @@ class EditorConfirmationsController < ApplicationController
   end
 
   def create
-    @user.require_password
+    @editor.require_password
     [:name, :password, :password_confirmation].each do |attribute|
-      @user.update_attribute attribute, params[:user][attribute]
+      @editor.update_attribute attribute, params[:editor][attribute]
     end
 
-    if @user.valid?
-      @user.confirm!
-      sign_in_and_redirect @user
+    if @editor.valid?
+      @editor.confirm!
+      sign_in_and_redirect @editor
     else
       render :edit
     end
@@ -21,8 +21,8 @@ class EditorConfirmationsController < ApplicationController
   private
 
   def find_editor
-    @user = User.find_by_confirmation_token params[:confirmation_token]
-    if !@user || !@user.editor?
+    @editor = Editor.find_by_confirmation_token params[:confirmation_token]
+    unless @editor 
       flash[:notice] = 'Invalid confirmation token.'
       redirect_to root_path
     end

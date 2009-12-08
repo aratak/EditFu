@@ -4,7 +4,7 @@ describe EditorConfirmationsController do
   include Devise::TestHelpers
 
   before :each do
-    @owner = User.new :name => 'owner', :email => 'owner@malinator.com',
+    @owner = Owner.new :name => 'owner', :email => 'owner@malinator.com',
       :password => '123456', :confirmed_password => '123456'
     @owner.save!
 
@@ -14,7 +14,7 @@ describe EditorConfirmationsController do
   describe "create" do
     it "should work" do
       post :create, :confirmation_token => @editor.confirmation_token, 
-        :user => {
+        :editor => {
           :name => 'Sergey', 
           :password => '123456', :password_confirmation => '123456'
         }
@@ -27,21 +27,20 @@ describe EditorConfirmationsController do
       post :create, @owner.attributes
 
       response.should redirect_to(root_path)
-      assigns(:user).errors.should be_empty
-      assigns(:user).confirmed?.should be_false
+      assigns(:editor).should be_nil
     end
 
     it "should run password validations" do
       post :create, :confirmation_token => @editor.confirmation_token, 
-        :user => { :name => 'Sergey' }
+        :editor => { :name => 'Sergey' }
 
-      assigns(:user).confirmed?.should be_false
+      assigns(:editor).confirmed?.should be_false
       response.should render_template(:edit)
     end
 
     it "should not allow to change email" do
       post :create, :confirmation_token => @editor.confirmation_token, 
-        :user => {
+        :editor => {
           :name => 'Sergey', :email => 'new_email@malinator.com',
           :password => '123456', :password_confirmation => '123456'
         }
