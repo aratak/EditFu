@@ -3,4 +3,4 @@ Welcome #{@owner.email}!
 You can confirm your account through the link below:
 
 = link_to 'Confirm my account', |
-  owner_confirmation_url(@owner, :confirmation_token => @owner.confirmation_token) |
+  owner_confirmation_url(:confirmation_token => @owner.confirmation_token) |

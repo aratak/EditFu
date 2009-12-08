@@ -4,5 +4,4 @@ You have been invited by #{@editor.owner.email} to edit his sites.
 You can confirm your account through the link below:
 
 = link_to 'Confirm my account', |
-  editor_confirmation_url(@editor, |
-    :confirmation_token => @editor.confirmation_token) |
+  edit_editor_confirmation_url(:confirmation_token => @editor.confirmation_token) |

@@ -1,6 +1,8 @@
 %h2 Editor Signup
 
-- form_for @editor do |f|
+- form_for @editor, :html => { :method => :put }, :url => { :action => "update", |
+    :confirmation_token => @editor.confirmation_token } do |f| |
+    
   = f.error_messages
   %table.card
     %tr

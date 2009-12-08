@@ -11,9 +11,9 @@ describe EditorConfirmationsController do
     @editor = @owner.add_editor('editor@malinator.com')
   end
 
-  describe "create" do
+  describe "update" do
     it "should work" do
-      post :create, :confirmation_token => @editor.confirmation_token, 
+      post :update, :confirmation_token => @editor.confirmation_token, 
         :editor => {
           :name => 'Sergey', 
           :password => '123456', :password_confirmation => '123456'
@@ -24,14 +24,14 @@ describe EditorConfirmationsController do
     end
 
     it "should reject site owners" do
-      post :create, @owner.attributes
+      post :update, @owner.attributes
 
       response.should redirect_to(root_path)
       assigns(:editor).should be_nil
     end
 
     it "should run password validations" do
-      post :create, :confirmation_token => @editor.confirmation_token, 
+      post :update, :confirmation_token => @editor.confirmation_token, 
         :editor => { :name => 'Sergey' }
 
       assigns(:editor).confirmed?.should be_false
@@ -39,7 +39,7 @@ describe EditorConfirmationsController do
     end
 
     it "should not allow to change email" do
-      post :create, :confirmation_token => @editor.confirmation_token, 
+      post :update, :confirmation_token => @editor.confirmation_token, 
         :editor => {
           :name => 'Sergey', :email => 'new_email@malinator.com',
           :password => '123456', :password_confirmation => '123456'
