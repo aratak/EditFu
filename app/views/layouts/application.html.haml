@@ -27,5 +27,5 @@
           = flash[:notice]
       = yield
     #actionBar
-      - if current_user.owner?
+      - if user_signed_in? && current_user.owner?
         = yield :actionBar
