@@ -1,0 +1,9 @@
+%h2 New Editor
+
+- form_for @editor do |form|
+  = form.error_messages
+  %table.card
+    %tr
+      %th= form.label :email
+      %td= form.text_field :email
+  = submit_tag :submit

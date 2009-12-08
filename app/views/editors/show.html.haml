@@ -1,0 +1,14 @@
+%h2=@editor.name
+#actions
+  = link_to 'Remove', @editor, :method => :delete, :confirm => 'Are you sure?'
+
+%table.card
+  %tr
+    %th Name:
+    %td= h @editor.name
+  %tr
+    %th Email:
+    %td= h @editor.email
+  %tr
+    %th Confirmed:
+    %td= h @editor.confirmed?

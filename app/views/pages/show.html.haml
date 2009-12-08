@@ -2,11 +2,12 @@
 = javascript_include_tag 'page.js'
 
 %h2=@page.path
-#actions
-  %a(href='#') View
-  %a(href='#') Settings
-  = link_to 'Remove Page', [@site, @page], |
-    :method => :delete, :confirm => 'Are you sure?' |
+- if current_user.owner?
+  #actions
+    %a(href='#') View
+    %a(href='#') Settings
+    = link_to 'Remove Page', [@site, @page], |
+      :method => :delete, :confirm => 'Are you sure?' |
 
 #saveNotice{:style => 'display: none'} Saving page content...
 - if @error

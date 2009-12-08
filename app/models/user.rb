@@ -10,6 +10,10 @@ class User < ActiveRecord::Base
     @password_required = true
   end
 
+  def owner?
+    self.kind_of? Owner
+  end
+
   protected
 
   def password_required?

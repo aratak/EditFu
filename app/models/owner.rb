@@ -4,7 +4,10 @@ class Owner < User
 
   def add_editor(email)
     name = email[0, email.index('@')]
-    editors.create! :name => name, :email => email, :owner => self
+    editor = Editor.new :name => name, :email => email
+    editor.owner = self
+    editor.save
+    editor
   end
 
   def send_confirmation_instructions

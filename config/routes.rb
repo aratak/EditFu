@@ -11,5 +11,7 @@ ActionController::Routing::Routes.draw do |map|
     site.resources :pages, :member => { :update_sections => :post }
   end
 
+  map.resources :editors
+
   map.root :controller => 'sites'
 end

@@ -1,0 +1,9 @@
+= content_for :sourceBar do
+  - current_user.editors.each do |editor|
+    .editor
+      %a{ :href=>editor_path(editor) }= editor.name
+
+= content_for :actionBar do
+  %a{:href=>new_editor_path} New
+
+= render :file => 'layouts/application'
