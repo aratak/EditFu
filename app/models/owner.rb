@@ -10,8 +10,4 @@ class Owner < User
   def send_confirmation_instructions
     Mailer.deliver_owner_confirmation_instructions(self)
   end
-  
-  def editor?
-    false
-  end
 end

@@ -6,10 +6,6 @@ class User < ActiveRecord::Base
 
   attr_accessible :name, :email, :password, :password_confirmation
 
-  def editor?
-    true
-  end
-
   def require_password
     @password_required = true
   end
