@@ -11,7 +11,9 @@ class ApplicationController < ActionController::Base
   protected
 
   def authenticate_owner!
-    if authenticate_user! && !current_user.kind_of?(Owner)
+    authenticate_user!
+
+    if user_signed_in? && !current_user.kind_of?(Owner)
       redirect_to root_path
     end
   end

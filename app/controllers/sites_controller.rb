@@ -18,7 +18,8 @@ class SitesController < ApplicationController
     @site = Site.new params[:site]
     @site.owner = current_user
 
-    if @site.save
+    if @site.valid? && @site.check_connection
+      @site.save(false)
       redirect_to site_path(@site)
     else
       render :action => :new

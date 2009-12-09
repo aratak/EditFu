@@ -2,20 +2,22 @@ require 'spec_helper'
 
 describe Site do
   before :each do
-    @site = Site.new :name => 'mysite', 
-      :server => 'ftp.edit-fu.com', :site_root => '/var/ftp/mysite',
-      :login => 'user', :password => 'securekey'
+    @site = Factory.create(:site)
   end
 
-  describe 'save' do
+  describe 'check_connection' do
     it "should check FTP connection" do
       FtpClient.should_receive(:noop).with(@site)
-      @site.save
+
+      @site.check_connection.should be_true
+      @site.errors.should be_empty
     end
 
     it "should fail if there are problems in FTP" do
       FtpClient.should_receive(:noop).and_raise(FtpClientError.new)
-      @site.save.should be_false
+
+      @site.check_connection.should be_false
+      @site.errors.should_not be_empty
     end
   end
 end

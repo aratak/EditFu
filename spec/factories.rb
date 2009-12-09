@@ -16,10 +16,11 @@ end
 
 Factory.define :site do |s|
   s.sequence(:name) { |s| "site#{s}" }
-  s.server { |s| "www.#{s.name}.com" }
+  s.server { |s| "ftp.#{s.name}.com" }
   s.site_root { |s| "/var/www/#{s.name}" }
   s.login { |s| s.name }
   s.password { |s| s.login }
+  s.owner { |s| s.association(:owner) }
 end
 
 Factory.define :page do |p|
