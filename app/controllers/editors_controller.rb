@@ -22,6 +22,14 @@ class EditorsController < ApplicationController
     find_editor
   end
 
+  def edit
+    find_editor
+  end
+
+  def update
+    find_editor.sites
+  end
+
   def destroy
     find_editor.destroy
     redirect_to editors_path

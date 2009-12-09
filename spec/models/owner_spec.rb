@@ -2,8 +2,7 @@ require 'spec_helper'
 
 describe Owner do
   before :each do
-    @owner = Owner.new :name => 'owner', :email => 'owner@malinator.com',
-      :password => '123456', :confirmed_password => '123456'
+    @owner = Factory.build(:owner)
   end
 
   describe 'save' do

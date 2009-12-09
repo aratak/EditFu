@@ -4,10 +4,7 @@ describe EditorConfirmationsController do
   include Devise::TestHelpers
 
   before :each do
-    @owner = Owner.new :name => 'owner', :email => 'owner@malinator.com',
-      :password => '123456', :confirmed_password => '123456'
-    @owner.save!
-
+    @owner = Factory.create(:owner)
     @editor = @owner.add_editor('editor@malinator.com')
   end
 
@@ -39,13 +36,14 @@ describe EditorConfirmationsController do
     end
 
     it "should not allow to change email" do
+      old_email = @editor.email
       post :update, :confirmation_token => @editor.confirmation_token, 
         :editor => {
           :name => 'Sergey', :email => 'new_email@malinator.com',
           :password => '123456', :password_confirmation => '123456'
         }
 
-      @editor.reload.email.should == 'editor@malinator.com'
+      @editor.reload.email.should == old_email
     end
   end
 end

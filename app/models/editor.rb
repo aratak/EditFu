@@ -1,8 +1,9 @@
 class Editor < User
   belongs_to :owner
+  has_and_belongs_to_many :pages
 
   def sites
-    owner.sites
+    pages.map { |p| p.site }.uniq
   end
 
   def send_confirmation_instructions

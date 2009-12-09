@@ -12,3 +12,9 @@
   %tr
     %th Confirmed:
     %td= h @editor.confirmed?
+
+-# form_for @editor do |form|
+  %table#permissions.card
+    - current_user.sites.each do |site|
+      %tr.site_perm
+        %td= site.name

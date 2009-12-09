@@ -4,9 +4,7 @@ describe OwnerConfirmationsController do
   include Devise::TestHelpers
 
   before :each do
-    @owner = Owner.new :name => 'owner', :email => 'owner@malinator.com',
-      :password => '123456', :confirmed_password => '123456'
-    @owner.save!
+    @owner = Factory.create(:owner)
   end
 
   describe "show" do
@@ -26,7 +24,7 @@ describe OwnerConfirmationsController do
     end
     
     it "should not confirm editor" do
-      editor = @owner.add_editor('editor@malinator.com')
+      editor = Factory.create(:editor)
 
       get :show, :confirmation_token => editor.confirmation_token
 
