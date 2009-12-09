@@ -2,8 +2,7 @@ require 'spec_helper'
 
 describe Page do
   before :each do
-    @site = Site.new :name => 'mysite'
-    @page = Page.new :site => @site, :path => 'home.html'
+    @page = Factory.create(:page)
   end
 
   describe "sections" do

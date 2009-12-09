@@ -25,4 +25,5 @@ end
 
 Factory.define :page do |p|
   p.sequence(:path) { |p| "#{p}.html" }
+  p.site { |p| p.association(:site) }
 end

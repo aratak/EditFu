@@ -2,9 +2,8 @@ require 'spec_helper'
 
 describe FtpClient do
   before :each do
-    @site = Site.new :name => 'mysite', :server => 'ftp.edit-fu.com', 
-      :site_root => '/var/ftp/mysite', :login => 'user', :password => 'securekey'
-    @page = Page.new :site => @site, :path => 'home.html'
+    @site = Factory.create(:site)
+    @page = Factory.create(:page, :site => @site)
     @ftp = mock('ftp')
   end
 
@@ -31,7 +30,7 @@ describe FtpClient do
     it "should upload content to remote file" do
       FtpClient.should_receive(:open).with(@site).and_yield(@ftp)
       @ftp.should_receive(:storbinary).with(
-        'STOR home.html', an_instance_of(StringIO), Net::FTP::DEFAULT_BLOCKSIZE
+        "STOR #{@page.path}", an_instance_of(StringIO), Net::FTP::DEFAULT_BLOCKSIZE
       ).and_return do |cmd, file, blocksize|
         file.string.should == @page.content
       end
