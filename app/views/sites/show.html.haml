@@ -1,5 +1,5 @@
 %h2=@site.name
-- if current_user.owner?
+- owner? do
   #actions
     = link_to 'Add Page', new_site_page_path(@site)
     = link_to 'Edit Site', edit_site_path(@site)

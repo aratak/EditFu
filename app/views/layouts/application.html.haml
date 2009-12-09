@@ -10,7 +10,7 @@
     #systemBar
       - if user_signed_in?
         = link_to 'Sites', sites_path  
-        - if current_user.owner?
+        - owner? do
           = link_to 'Editors', editors_path  
           = link_to 'Preferences', preferences_path
         |
@@ -27,5 +27,5 @@
           = flash[:notice]
       = yield
     #actionBar
-      - if user_signed_in? && current_user.owner?
+      - owner? do
         = yield :actionBar

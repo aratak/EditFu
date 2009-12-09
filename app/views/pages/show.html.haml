@@ -2,7 +2,7 @@
 = javascript_include_tag 'page.js'
 
 %h2=@page.path
-- if current_user.owner?
+- owner? do
   #actions
     %a(href='#') View
     %a(href='#') Settings
