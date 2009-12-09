@@ -1,7 +1,8 @@
 class PagesController < ApplicationController
   layout 'sites'
+  before_filter :authenticate_user!, :only => [:show, :update_sections]
+  before_filter :authenticate_owner!, :except => [:show, :update_sections]
   before_filter :find_site
-  before_filter :authenticate_user!
 
   def show
     begin

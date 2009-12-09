@@ -1,6 +1,6 @@
 class EditorsController < ApplicationController
   layout 'editors'
-  before_filter :authenticate_user!
+  before_filter :authenticate_owner!
 
   def index
   end

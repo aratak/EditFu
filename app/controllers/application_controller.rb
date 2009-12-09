@@ -7,4 +7,12 @@ class ApplicationController < ActionController::Base
 
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
+
+  protected
+
+  def authenticate_owner!
+    if authenticate_user! && !current_user.kind_of?(Owner)
+      redirect_to root_path
+    end
+  end
 end
