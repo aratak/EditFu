@@ -18,8 +18,7 @@ class SitesController < ApplicationController
     @site = Site.new params[:site]
     @site.owner = current_user
 
-    if @site.valid? && @site.check_connection
-      @site.save(false)
+    if @site.validate_and_save
       redirect_to site_path(@site)
     else
       render :action => :new
@@ -31,8 +30,8 @@ class SitesController < ApplicationController
   end
 
   def update
-    find_site.update_attributes params[:site]
-    if @site.save
+    find_site.attributes= params[:site]
+    if @site.validate_and_save
       redirect_to site_path(@site)
     else
       render :action => :edit

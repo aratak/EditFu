@@ -5,6 +5,12 @@ class Site < ActiveRecord::Base
   validates_presence_of :name, :server, :site_root, :login, :password
   validates_uniqueness_of :name, :scope => :owner_id
 
+  def validate_and_save
+    if valid? && check_connection
+      save(false)
+    end
+  end
+
   def check_connection
     begin
       FtpClient.noop(self)

@@ -21,12 +21,23 @@ describe SitesController do
     end
 
     it "should complain if there are connection problem" do
-      message = 'some message'
-      FtpClient.should_receive(:noop).and_raise(FtpClientError.new(message))
+      FtpClient.should_receive(:noop).and_raise(FtpClientError.new)
       post :create, :site => Factory.attributes_for(:site, :owner => nil)
 
       assigns(:site).new_record?.should be_true
       response.should render_template(:new)
+    end
+  end
+
+  describe "update" do
+    it "should complain if there are connection problem" do
+      site = Factory.create(:site, :login => 'valid', :owner => @owner)
+
+      FtpClient.should_receive(:noop).and_raise(FtpClientError.new)
+      put :update, :id => site.id, :site => { :login => 'invalid' }
+
+      site.reload.login.should == 'valid'
+      response.should render_template(:edit)
     end
   end
 end
