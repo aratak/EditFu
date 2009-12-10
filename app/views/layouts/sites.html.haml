@@ -2,7 +2,7 @@
   - current_user.sites.each do |site|
     .site{ site_attributes(site) }
       %a{ :href=>site_path(site) }= site.name
-      - site.pages.each do |page|
+      - current_user.site_pages(site).each do |page|
         %a.page{ page_attributes(page), :href=>site_page_path(site, page) }= page.path
 
 = content_for :actionBar do

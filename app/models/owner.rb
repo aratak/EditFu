@@ -2,6 +2,10 @@ class Owner < User
   has_many :sites, :dependent => :destroy
   has_many :editors, :dependent => :destroy
 
+  def site_pages(site)
+    site.pages
+  end
+
   def add_editor(email)
     name = email[0, email.index('@')]
     editor = Editor.new :name => name, :email => email

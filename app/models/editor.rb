@@ -6,6 +6,10 @@ class Editor < User
     pages.map { |p| p.site }.uniq
   end
 
+  def site_pages(site)
+    site.pages & pages
+  end
+
   def set_page_ids(ids)
     int_ids = ids.map { |id| id.to_i }
     owner_pages = owner.sites.map { |s| s.page_ids }.flatten
