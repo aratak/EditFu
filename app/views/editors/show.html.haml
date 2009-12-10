@@ -13,6 +13,8 @@
     %th Confirmed:
     %td= h @editor.confirmed?
 
+= javascript_include_tag 'editor', :cache => true
+
 - form_for @editor do |form|
   %table#permissions
     %tr
@@ -26,7 +28,7 @@
         %tr.page_perm
           %td
             = check_box_tag 'pages[]', page.id, @editor.pages.include?(page), |
-              :id => "pages_#{page.id}" |
+              :id => "pages_#{page.id}", :class => "sites_#{site.id}" |
             = label_tag "pages_#{page.id}", page.path
     %tr
       %td= submit_tag
