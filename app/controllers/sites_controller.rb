@@ -47,6 +47,6 @@ class SitesController < ApplicationController
   private
 
   def find_site
-    @site = current_user.sites.find params[:id]
+    @site = current_user.find_site(params[:id])
   end
 end

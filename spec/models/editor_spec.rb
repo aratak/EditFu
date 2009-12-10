@@ -16,6 +16,18 @@ describe Editor do
     end
   end
 
+  describe 'set_page_ids' do
+    it "should assign only pages from owner sites" do
+      editor = Factory.create(:editor)
+      site = Factory.create(:site, :owner => editor.owner)
+      page1 = Factory.create(:page, :site => site)
+      page2 = Factory.create(:page)
+
+      editor.set_page_ids [page1.id.to_s, page2.id.to_s] 
+      editor.page_ids.should == [page1.id]
+    end
+  end
+
   describe 'sites' do
     it "should return actual editor sites" do
       editor = Factory.create(:editor)

@@ -10,6 +10,14 @@ class Owner < User
     editor
   end
 
+  def find_site(site_id)
+    sites.find site_id
+  end
+
+  def find_page(site_id, page_id)
+    find_site(site_id).pages.find page_id
+  end
+
   def send_confirmation_instructions
     Mailer.deliver_owner_confirmation_instructions(self)
   end

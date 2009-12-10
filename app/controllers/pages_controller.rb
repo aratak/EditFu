@@ -1,8 +1,9 @@
+require 'ftp_client'
+
 class PagesController < ApplicationController
   layout 'sites'
   before_filter :authenticate_user!, :only => [:show, :update_sections]
   before_filter :authenticate_owner!, :except => [:show, :update_sections]
-  before_filter :find_site
 
   def show
     begin
@@ -15,12 +16,13 @@ class PagesController < ApplicationController
   end
 
   def new
+    find_site
     @page = Page.new 
   end
 
   def create
     @page = Page.new params[:page]
-    @page.site = @site
+    @page.site = find_site
 
     if @page.save
       redirect_to site_page_path(@site, @page)
@@ -44,10 +46,12 @@ class PagesController < ApplicationController
   private
 
   def find_site
-    @site = current_user.sites.find params[:site_id]
+    @site = current_user.find_site(params[:site_id])
   end
 
   def find_page
-    @page = @site.pages.find params[:id]
+    @page = current_user.find_page(params[:site_id], params[:id])
+    @site = @page.site
+    @page
   end
 end

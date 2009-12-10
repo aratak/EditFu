@@ -13,8 +13,20 @@
     %th Confirmed:
     %td= h @editor.confirmed?
 
--# form_for @editor do |form|
-  %table#permissions.card
+- form_for @editor do |form|
+  %table#permissions
+    %tr
+      %th Editor Permissions
     - current_user.sites.each do |site|
       %tr.site_perm
-        %td= site.name
+        %td
+          = check_box_tag "sites[#{site.id}]"
+          = site.name
+      - site.pages.each do |page|
+        %tr.page_perm
+          %td
+            = check_box_tag 'pages[]', page.id, @editor.pages.include?(page), |
+              :id => "pages_#{page.id}" |
+            = label_tag "pages_#{page.id}", page.path
+    %tr
+      %td= submit_tag

@@ -22,12 +22,9 @@ class EditorsController < ApplicationController
     find_editor
   end
 
-  def edit
-    find_editor
-  end
-
   def update
-    find_editor.sites
+    find_editor.set_page_ids(params[:pages] || [])
+    redirect_to @editor
   end
 
   def destroy
