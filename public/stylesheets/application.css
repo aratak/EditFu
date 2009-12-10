@@ -55,8 +55,12 @@ table td {
   vertical-align: top;
 }
 
-#notice {
-  colour: green;
+#success {
+  color: green;
+}
+
+#failure {
+  color: red;
 }
 
 #permissions .site_perm {

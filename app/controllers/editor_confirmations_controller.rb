@@ -23,7 +23,7 @@ class EditorConfirmationsController < ApplicationController
   def find_editor
     @editor = Editor.find_by_confirmation_token params[:confirmation_token]
     unless @editor 
-      flash[:notice] = 'Invalid confirmation token.'
+      flash[:failure] = 'Invalid confirmation token.'
       redirect_to root_path
     end
   end

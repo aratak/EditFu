@@ -7,7 +7,7 @@ class OwnersController < ApplicationController
     @owner = Owner.new params[:owner]
     @owner.require_password
     if @owner.save
-      flash[:notice] = t('devise.confirmations.send_instructions')
+      flash[:success] = t('devise.confirmations.send_instructions')
       redirect_to root_path
     else
       render :new

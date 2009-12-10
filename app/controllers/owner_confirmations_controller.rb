@@ -3,10 +3,10 @@ class OwnerConfirmationsController < ApplicationController
     @owner = Owner.confirm!(:confirmation_token => params[:confirmation_token])
 
     if @owner.errors.empty?
-      flash[:notice] = 'Account is confirmed.'
+      flash[:success] = 'Account is confirmed.'
       sign_in_and_redirect @owner
     else
-      flash[:notice] = 'Invalid confirmation token.'
+      flash[:failure] = 'Invalid confirmation token.'
       redirect_to root_path
     end
   end

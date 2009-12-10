@@ -8,6 +8,8 @@
 
   %body
     #systemBar
+      - unless user_signed_in?
+        = link_to 'Login', new_user_session_path
       - if user_signed_in?
         = link_to 'Sites', sites_path  
         - owner? do
@@ -22,9 +24,10 @@
     #sourceBar
       = yield :sourceBar
     #actionWindow
-      - if flash[:notice]
-        #notice
-          = flash[:notice]
+      - if flash[:success]
+        #success= flash[:success]
+      - if flash[:failure]
+        #failure= flash[:failure]
       = yield
     #actionBar
       - owner? do
