@@ -20,4 +20,17 @@ describe Site do
       @site.errors.should_not be_empty
     end
   end
+
+  describe "#destroy" do
+    before(:each) do
+      2.times do
+        Factory(:page, :site => @site)
+      end
+    end
+
+    it "should destroy pages of this site" do
+      @site.destroy
+      Page.find_all_by_site_id(@site.id).should == []
+    end
+  end
 end

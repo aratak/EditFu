@@ -34,4 +34,23 @@ describe Owner do
       editor.confirmed?.should be_false
     end
   end
+
+  describe "#destroy" do
+    before(:each) do
+      2.times do
+        Factory(:site, :owner => @owner)
+        Factory(:editor, :owner => @owner)
+      end
+    end
+
+    it "should destroy owner's sites" do
+      @owner.destroy
+      Site.find_all_by_owner_id(@owner.id).should == []
+    end
+
+    it "should destroy owner's editors" do
+      @owner.destroy
+      Editor.find_all_by_owner_id(@owner.id).should == []
+    end
+  end
 end

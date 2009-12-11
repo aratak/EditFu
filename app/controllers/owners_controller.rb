@@ -1,8 +1,12 @@
 class OwnersController < ApplicationController
+  before_filter :authenticate_owner!, :only => :destroy
+
+  # GET /owners/new
   def new
     @owner = Owner.new
   end
 
+  # POST /owners
   def create
     @owner = Owner.new params[:owner]
     @owner.require_password
@@ -12,5 +16,13 @@ class OwnersController < ApplicationController
     else
       render :new
     end
+  end
+
+  # DELETE /owner
+  def destroy
+    current_user.destroy
+
+    flash[:success] = "Your acccount was canceled."
+    redirect_to root_url
   end
 end

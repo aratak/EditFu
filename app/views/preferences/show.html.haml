@@ -9,3 +9,6 @@
   %tr
     %th Email
     %td= @preferences.email
+
+%p
+  #{link_to 'Cancel', owner_path, :method => :delete, :confirm => "Are you sure?"} my account
