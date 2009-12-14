@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091209093600) do
+ActiveRecord::Schema.define(:version => 20091214093721) do
 
   create_table "editors_pages", :force => true do |t|
     t.integer "editor_id"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20091209093600) do
     t.string   "name"
     t.integer  "owner_id"
     t.string   "type",                 :limit => 10,  :null => false
+    t.string   "plan"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

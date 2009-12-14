@@ -15,4 +15,7 @@
     %tr
       %th= f.label :password_confirmation
       %td= f.password_field :password_confirmation
+    %tr
+      %th= f.label :plan
+      %td= f.select :plan, Owner.plans
   = submit_tag :submit

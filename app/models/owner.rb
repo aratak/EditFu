@@ -1,6 +1,21 @@
 class Owner < User
-  has_many :sites, :dependent => :destroy
+  @@plans = %w(trial free professional)
+
+  # Associations
+  has_many :sites,   :dependent => :destroy
   has_many :editors, :dependent => :destroy
+
+  # Validations
+  validates_presence_of  :plan
+  validates_inclusion_of :plan, :in => @@plans
+
+  # Mass assignment protection
+  attr_accessible :plan
+
+  # Methods
+  def self.plans
+    @@plans
+  end
 
   def site_pages(site)
     site.pages
