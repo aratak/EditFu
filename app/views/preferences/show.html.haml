@@ -10,5 +10,6 @@
     %th Email
     %td= @preferences.email
 
-%p
-  #{link_to 'Cancel', owner_path, :method => :delete, :confirm => "Are you sure?"} my account
+- if current_user.kind_of?(Owner)
+  %p
+    #{link_to 'Cancel', owner_path, :method => :delete, :confirm => "Are you sure?"} my account
