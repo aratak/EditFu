@@ -6,7 +6,7 @@ development:
   pool: 5
   username: root
   password:
-  socket: /tmp/mysql.sock
+  socket: <%= ['/var/lib/mysql/mysql.sock', '/var/run/mysqld/mysqld.sock', '/tmp/mysql.sock'].detect{ |socket| File.exist?(socket) } %>
 
 test:
   adapter: mysql
@@ -16,7 +16,7 @@ test:
   pool: 5
   username: root
   password:
-  socket: /tmp/mysql.sock
+  socket: <%= ['/var/lib/mysql/mysql.sock', '/var/run/mysqld/mysqld.sock', '/tmp/mysql.sock'].detect{ |socket| File.exist?(socket) } %>
 
 production:
   adapter: mysql
@@ -26,4 +26,4 @@ production:
   pool: 5
   username: edit-fu
   password: edit-fu
-  socket: /var/run/mysqld/mysqld.sock
+  socket: <%= ['/var/lib/mysql/mysql.sock', '/var/run/mysqld/mysqld.sock', '/tmp/mysql.sock'].detect{ |socket| File.exist?(socket) } %>
