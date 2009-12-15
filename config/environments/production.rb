@@ -28,4 +28,4 @@ config.action_view.cache_template_loading            = true
 # config.threadsafe!
 
 ActionMailer::Base.delivery_method = :smtp
-config.action_mailer.default_url_options = { :host => '174.143.144.69' }
+config.action_mailer.default_url_options = { :host => 'dev.editfu.com' }
