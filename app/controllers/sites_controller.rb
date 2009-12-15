@@ -2,6 +2,7 @@ class SitesController < ApplicationController
   layout 'sites'
   before_filter :authenticate_user!, :only => [:index, :show]
   before_filter :authenticate_owner!, :except => [:index, :show]
+  before_filter :check_limits, :only => :create
 
   def index
   end
@@ -47,5 +48,9 @@ class SitesController < ApplicationController
 
   def find_site
     @site = current_user.find_site(params[:id])
+  end
+
+  def check_limits
+    redirect_to :action => :new unless current_user.can_add_site?
   end
 end

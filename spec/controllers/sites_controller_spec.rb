@@ -9,7 +9,7 @@ describe SitesController do
     sign_in :user, @owner
   end
 
-  describe "create" do
+  describe "#create" do
     it "should work" do
       FtpClient.should_receive(:noop)
       post :create, :site => Factory.attributes_for(:site, :owner => nil)
@@ -26,6 +26,12 @@ describe SitesController do
 
       assigns(:site).new_record?.should be_true
       response.should render_template(:new)
+    end
+
+    it "should redirect to new if user can't add sites" do
+      controller.current_user.stub!(:can_add_site?).and_return(false)
+      post :create
+      response.should redirect_to(:action => :new)
     end
   end
 

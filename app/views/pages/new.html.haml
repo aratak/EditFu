@@ -1,8 +1,12 @@
 %h2 Add new page
-- form_for [@site, @page] do |form|
-  = form.error_messages
-  %table.card
-    %tr
-      %th= form.label :path
-      %td= form.text_field :path
-  = submit_tag :create
+
+- if current_user.can_add_page?
+  - form_for [@site, @page] do |form|
+    = form.error_messages
+    %table.card
+      %tr
+        %th= form.label :path
+        %td= form.text_field :path
+    = submit_tag :create
+- else
+  = render :partial => 'shared/upgrade'

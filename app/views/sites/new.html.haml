@@ -1,2 +1,6 @@
 %h2 New Site
-= render :partial => 'form'
+
+- if current_user.can_add_site?
+  = render :partial => 'form'
+- else
+  = render :partial => 'shared/upgrade'

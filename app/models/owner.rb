@@ -2,7 +2,8 @@ class Owner < User
   @@plans = %w(trial free professional)
 
   # Associations
-  has_many :sites,   :dependent => :destroy
+  has_many :sites, :dependent => :destroy
+  has_many :pages, :through => :sites
   has_many :editors, :dependent => :destroy
 
   # Validations
@@ -15,6 +16,18 @@ class Owner < User
   # Methods
   def self.plans
     @@plans
+  end
+
+  def can_add_editor?
+    plan != "free"
+  end
+
+  def can_add_site?
+    !(plan == "free" && sites.count >= 1)
+  end
+
+  def can_add_page?
+    !(plan == "free" && pages.count >= 3)
   end
 
   def site_pages(site)
