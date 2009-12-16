@@ -12,7 +12,7 @@ describe PagesController do
   describe "#create" do
     it "should redirect to new if user can't add pages" do
       controller.current_user.stub!(:can_add_page?).and_return(false)
-      post :create
+      post :create, :site_id => 1
       response.should redirect_to(:action => :new)
     end
   end

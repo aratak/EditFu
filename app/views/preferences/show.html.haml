@@ -9,7 +9,13 @@
   %tr
     %th Email
     %td= @preferences.email
+  - if current_user.owner?
+    %tr
+      %th Plan
+      %td
+        = @preferences.plan.humanize
+        = link_to 'Change', edit_preferences_plan_path
 
-- if current_user.kind_of?(Owner)
+- if current_user.owner?
   %p
     #{link_to 'Cancel', owner_path, :method => :delete, :confirm => "Are you sure?"} my account
