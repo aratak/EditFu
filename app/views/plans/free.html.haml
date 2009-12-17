@@ -1,0 +1,26 @@
+%h2 Free Plan
+
+%p
+  All editors will be removed.
+  
+%p
+  Pick single site and 3 pages, others will be removed:
+
+- form_for current_user, :url => preferences_plan_path, :html => { :method => :put } do |f|
+  = f.error_messages
+  = f.hidden_field :plan, :value => "free"
+
+  %ul
+    - current_user.sites.each do |site|
+      %li
+        = check_box_tag "sites[]", site.id
+        =h site.name
+        %ul
+          - site.pages.each do |page|
+            %li
+              = check_box_tag "pages[]", page.id
+              =h page.path
+
+  %p
+    = submit_tag "Confirm"
+

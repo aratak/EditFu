@@ -1,0 +1,7 @@
+%h2 Professional Plan
+
+- form_for current_user, :url => preferences_plan_path, :html => { :method => :put } do |f|
+  = f.error_messages
+  = f.hidden_field :plan, :value => "professional"
+  %p
+    = submit_tag "Confirm"

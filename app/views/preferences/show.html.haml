@@ -14,7 +14,12 @@
       %th Plan
       %td
         = @preferences.plan.humanize
-        = link_to 'Change', edit_preferences_plan_path
+        ( Change to
+        = link_to 'Free', free_preferences_plan_path unless @current_user.plan == 'free'
+        - if @current_user.plan == 'trial'
+          or
+        = link_to 'Professional', professional_preferences_plan_path unless @current_user.plan == 'professional'
+        )
 
 - if current_user.owner?
   %p

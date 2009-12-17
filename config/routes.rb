@@ -7,7 +7,12 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :owners, :only => [:new, :create]
   map.resource :owner, :only => [:destroy]
   map.resources :editors
-  map.resource :preferences, :has_one => :plan
+  map.resource :preferences do |preferences|
+    preferences.resource :plan, :member => {
+      :free => :get,
+      :professional => :get
+    }
+  end
 
   map.resources :sites do |site|
     site.resources :pages, :member => { :update_sections => :post }
