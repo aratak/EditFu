@@ -53,4 +53,24 @@ class Owner < User
   def send_confirmation_instructions
     Mailer.deliver_owner_confirmation_instructions(self)
   end
+
+  protected
+
+  def before_save
+    if plan == "free" && changed.include?('plan')
+      editors.clear
+    end
+  end
+
+  def validate
+    if plan == "free" && changed.include?('plan')
+      if sites.count { |r| !r.destroyed? } > 1
+        errors.add_to_base I18n.t("free_plan.site_count")
+      end
+
+      if pages.count { |r| !r.destroyed? } > 3
+        errors.add_to_base I18n.t("free_plan.page_count")
+      end
+    end
+  end
 end

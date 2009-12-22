@@ -8,7 +8,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :owner, :only => [:destroy]
   map.resources :editors
   map.resource :preferences do |preferences|
-    preferences.resource :plan, :member => {
+    preferences.resource :plan, :only => :update, :member => {
       :free => :get,
       :professional => :get
     }

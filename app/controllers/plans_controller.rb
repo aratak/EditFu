@@ -1,25 +1,22 @@
 class PlansController < ApplicationController
   before_filter :authenticate_owner!
 
-  # GET /preferences/plan/edit
-  def edit
-  end
-
-  # PUT /preferences/plan
   def update
-    if current_user.update_attributes(params[:owner])
-
-      # TODO: need refactoring
-      current_user.reload
-
-      if current_user.plan == "free"
-        current_user.sites.all(:conditions => ["sites.id NOT IN (?)", params[:sites]]).each { |site| site.destroy }
-        current_user.pages.all(:conditions =>["pages.id NOT IN (?)", params[:pages]]).each { |page| page.destroy }
+    current_user.attributes = params[:owner]
+    if current_user.plan == "free"
+      [:pages, :sites].each do |assoc|
+        ids = params[assoc] ? params[assoc].map(&:to_i) : []
+        members = current_user.send(assoc)
+        members.each do |member|
+          member.destroy unless ids.include?(member.id)
+        end
       end
+    end
 
+    if current_user.save
       redirect_to preferences_url
     else
-      render :action => :edit
+      render :action => current_user.plan.to_sym
     end
   end
 

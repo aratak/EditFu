@@ -1,7 +1,0 @@
-%h2 Change Plan
-
-- form_for current_user, :url => preferences_plan_path, :html => { :method => :put } do |f|
-  = f.error_messages
-  %p
-    = f.select :plan, Owner.plans
-    = submit_tag :change

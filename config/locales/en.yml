@@ -3,3 +3,7 @@
 
 en:
   hello: "Hello world"
+
+  free_plan:
+    site_count: "There are too many remaining sites for free plan. Please delete all but one."
+    page_count: "There are too many remaining pages for free.plan."
