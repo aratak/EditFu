@@ -9,9 +9,11 @@ class Owner < User
   # Validations
   validates_presence_of  :plan
   validates_inclusion_of :plan, :in => @@plans
+  validates_presence_of :card_number, :card_expiration, :first_name, :last_name,
+    :if => :allow_billing_validation
 
   # Mass assignment protection
-  attr_accessible :plan
+  attr_accessible :plan, :card_number, :card_expiration, :first_name, :last_name
 
   # Methods
   def self.plans
@@ -72,5 +74,9 @@ class Owner < User
         errors.add_to_base I18n.t("free_plan.page_count")
       end
     end
+  end
+
+  def allow_billing_validation
+    plan == "professional"
   end
 end

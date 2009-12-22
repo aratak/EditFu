@@ -91,4 +91,15 @@ describe Owner do
       end
     end
   end
+
+  describe "professional plan" do
+    it "should fail if there are no billing information provided" do
+      @owner.plan = "professional"
+      @owner.save.should be_false
+      @owner.errors.on(:card_number).should_not be_nil
+      @owner.errors.on(:card_expiration).should_not be_nil
+      @owner.errors.on(:first_name).should_not be_nil
+      @owner.errors.on(:last_name).should_not be_nil
+    end
+  end
 end

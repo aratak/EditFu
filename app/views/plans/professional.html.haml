@@ -3,5 +3,17 @@
 - form_for current_user, :url => preferences_plan_path, :html => { :method => :put } do |f|
   = f.error_messages
   = f.hidden_field :plan, :value => "professional"
-  %p
-    = submit_tag "Confirm"
+  %table.card
+    %tr
+      %th= f.label :card_number
+      %td= f.text_field :card_number
+    %tr
+      %th= f.label :card_expiration
+      %td= f.date_select :card_expiration, :include_blank => true
+    %tr
+      %th= f.label :first_name
+      %td= f.text_field :first_name
+    %tr
+      %th= f.label :last_name
+      %td= f.text_field :last_name
+  = submit_tag "Confirm"

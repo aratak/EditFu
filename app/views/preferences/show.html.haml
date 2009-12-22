@@ -20,7 +20,19 @@
           or
         = link_to 'Professional', professional_preferences_plan_path unless @current_user.plan == 'professional'
         )
-
+  - if current_user.owner? && current_user.plan == 'professional'
+    %tr
+      %th Card Number
+      %td=h @preferences.card_number
+    %tr
+      %th Card Expiration
+      %td= @preferences.card_expiration
+    %tr
+      %th First Name
+      %td=h @preferences.first_name
+    %tr
+      %th Last Name
+      %td=h @preferences.last_name
 - if current_user.owner?
   %p
     #{link_to 'Cancel', owner_path, :method => :delete, :confirm => "Are you sure?"} my account
