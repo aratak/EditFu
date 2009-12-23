@@ -90,16 +90,26 @@ describe Owner do
         @owner.save.should be_false
       end
     end
-  end
 
-  describe "professional plan" do
-    it "should fail if there are no billing information provided" do
-      @owner.plan = "professional"
-      @owner.save.should be_false
-      @owner.errors.on(:card_number).should_not be_nil
-      @owner.errors.on(:card_expiration).should_not be_nil
-      @owner.errors.on(:first_name).should_not be_nil
-      @owner.errors.on(:last_name).should_not be_nil
+    describe "professional plan" do
+      it "should fail if there are no billing information provided" do
+        @owner.plan = "professional"
+        @owner.save.should be_false
+        @owner.errors.on(:card_number).should_not be_nil
+        @owner.errors.on(:card_expiration).should_not be_nil
+        @owner.errors.on(:first_name).should_not be_nil
+        @owner.errors.on(:last_name).should_not be_nil
+      end
+    end
+
+    describe "trial plan" do
+      it "should not be set after plan was changed to free or professional" do
+        @owner.plan = "free"
+        @owner.save!
+
+        @owner.plan = "trial"
+        lambda { @owner.save }.should raise_error
+      end
     end
   end
 end

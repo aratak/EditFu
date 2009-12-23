@@ -59,19 +59,23 @@ class Owner < User
   protected
 
   def before_save
-    if plan == "free" && changed.include?('plan')
+    if plan == "free" && plan_changed?
       editors.clear
     end
   end
 
   def validate
-    if plan == "free" && changed.include?('plan')
-      if sites.count { |r| !r.destroyed? } > 1
-        errors.add_to_base I18n.t("free_plan.site_count")
-      end
+    if plan_changed?
+      if plan == "trial"
+        raise "Invalid plan change" if ["free", "professional"].include?(plan_was)
+      elsif plan == "free"
+        if sites.count { |r| !r.destroyed? } > 1
+          errors.add_to_base I18n.t("free_plan.site_count")
+        end
 
-      if pages.count { |r| !r.destroyed? } > 3
-        errors.add_to_base I18n.t("free_plan.page_count")
+        if pages.count { |r| !r.destroyed? } > 3
+          errors.add_to_base I18n.t("free_plan.page_count")
+        end
       end
     end
   end
