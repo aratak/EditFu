@@ -112,4 +112,31 @@ describe Owner do
       end
     end
   end
+
+  describe "#trial_period_expired?" do
+    it "should work" do
+      now = DateTime.civil(2009, 12, 1)
+      Time.stub(:now).and_return { now.to_time }
+
+      trial = Factory.create :owner
+      free = Factory.create :owner, :plan => 'free'
+      trial.confirm!
+      free.confirm!
+
+      trial.trial_period_expired?.should be_false
+      free.trial_period_expired?.should be_false
+
+      now = 1.day.from_now
+      trial.trial_period_expired?.should be_false
+      free.trial_period_expired?.should be_false
+
+      now = 1.month.from_now
+      trial.trial_period_expired?.should be_true
+      free.trial_period_expired?.should be_false
+
+      trial.plan = "professional"
+      trial.save
+      trial.trial_period_expired?.should be_false
+    end
+  end
 end

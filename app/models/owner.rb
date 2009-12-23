@@ -32,6 +32,10 @@ class Owner < User
     !(plan == "free" && pages.count >= 3)
   end
 
+  def trial_period_expired?
+    plan == 'trial' && 30.days.since(confirmed_at).past?
+  end  
+  
   def site_pages(site)
     site.pages
   end
