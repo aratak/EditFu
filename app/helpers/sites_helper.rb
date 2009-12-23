@@ -4,7 +4,9 @@ module SitesHelper
   end
 
   def new_site_content(&block)
-    if current_user.can_add_site?
+    if current_user.trial_period_expired?
+      render :partial => 'shared/trial_period_expired'
+    elsif current_user.can_add_site?
       capture(&block)
     else
       render :partial => 'shared/upgrade'
