@@ -1,6 +1,6 @@
 %h2 Add new page
 
-- if current_user.can_add_page?
+= new_page_content do
   - form_for [@site, @page] do |form|
     = form.error_messages
     %table.card
@@ -8,5 +8,3 @@
         %th= form.label :path
         %td= form.text_field :path
     = submit_tag :create
-- else
-  = render :partial => 'shared/upgrade'
