@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091222145958) do
+ActiveRecord::Schema.define(:version => 20091228091048) do
 
   create_table "editors_pages", :force => true do |t|
     t.integer "editor_id"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(:version => 20091222145958) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                :limit => 100, :null => false
+    t.string   "email",                :limit => 100,                      :null => false
     t.string   "encrypted_password",   :limit => 40
     t.string   "password_salt",        :limit => 20
     t.string   "confirmation_token",   :limit => 20
@@ -50,8 +50,8 @@ ActiveRecord::Schema.define(:version => 20091222145958) do
     t.datetime "updated_at"
     t.string   "name"
     t.integer  "owner_id"
-    t.string   "type",                 :limit => 10,  :null => false
-    t.string   "plan"
+    t.string   "type",                 :limit => 10,                       :null => false
+    t.string   "plan",                                :default => "trial"
     t.string   "card_number",          :limit => 20
     t.date     "card_expiration"
     t.string   "first_name",           :limit => 20
