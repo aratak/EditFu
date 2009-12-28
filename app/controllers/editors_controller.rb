@@ -2,6 +2,7 @@ class EditorsController < ApplicationController
   layout 'editors'
 
   before_filter :authenticate_owner!
+  before_filter :check_trial_period, :only => :create
   before_filter :check_limits, :only => :create
 
   def index

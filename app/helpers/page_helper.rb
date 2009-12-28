@@ -12,4 +12,12 @@ module PageHelper
      render :partial => 'shared/upgrade'
     end
   end
+
+  def show_page_content(&block)
+    if current_user.trial_period_expired?
+      render :partial => 'shared/trial_period_expired'
+    else
+      capture(&block)
+    end
+  end
 end

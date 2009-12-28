@@ -2,6 +2,7 @@ class SitesController < ApplicationController
   layout 'sites'
   before_filter :authenticate_user!, :only => [:index, :show]
   before_filter :authenticate_owner!, :except => [:index, :show]
+  before_filter :check_trial_period, :only => :create
   before_filter :check_limits, :only => :create
 
   def index

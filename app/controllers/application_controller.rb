@@ -17,4 +17,8 @@ class ApplicationController < ActionController::Base
       redirect_to root_path
     end
   end
+
+  def check_trial_period
+    raise if current_user.trial_period_expired?
+  end
 end

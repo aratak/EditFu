@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   layout 'sites'
   before_filter :authenticate_user!, :only => [:show, :update_sections]
   before_filter :authenticate_owner!, :except => [:show, :update_sections]
+  before_filter :check_trial_period, :only => [:create, :update_sections]
   before_filter :check_limits, :only => :create
 
   def show

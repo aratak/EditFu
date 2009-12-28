@@ -9,14 +9,6 @@ describe SitesController do
     sign_in :user, @owner
   end
 
-  #describe "#new" do
-  #  it "should not create new site when trial period expired" do
-  #    controller.current_user.stub!(:trial_period_expired?).and_return(true)
-  #    get :new
-  #    response.should redirect_to(:action => :show)
-  #  end
-  #end
-
   describe "#create" do
     it "should work" do
       FtpClient.should_receive(:noop)
@@ -40,6 +32,11 @@ describe SitesController do
       controller.current_user.stub!(:can_add_site?).and_return(false)
       post :create
       response.should redirect_to(:action => :new)
+    end
+
+    it "should not create new site when trial period expired" do
+      controller.current_user.stub!(:trial_period_expired?).and_return(true)
+      lambda { post :create }.should raise_error
     end
   end
 

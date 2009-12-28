@@ -41,4 +41,12 @@ describe Editor do
       editor.sites.should == [site1, site2]
     end
   end
+
+  describe "trial_period_expired?" do
+    it "should delegate to owner" do
+      editor = Factory.create(:editor)
+      editor.owner.should_receive(:trial_period_expired?).and_return(true)
+      editor.trial_period_expired?.should be_true
+    end
+  end
 end

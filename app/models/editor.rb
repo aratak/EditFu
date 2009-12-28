@@ -30,4 +30,8 @@ class Editor < User
   def send_confirmation_instructions
     Mailer.deliver_editor_confirmation_instructions(self)
   end
+
+  def trial_period_expired?
+    owner.trial_period_expired?
+  end  
 end

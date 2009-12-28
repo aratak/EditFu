@@ -1,21 +1,22 @@
 = javascript_include_tag 'tiny_mce/tiny_mce.js'
 = javascript_include_tag 'page.js'
 
-%h2=@page.path
-- owner? do
-  #actions
-    %a(href='#') View
-    %a(href='#') Settings
-    = link_to 'Remove Page', [@site, @page], |
-      :method => :delete, :confirm => 'Are you sure?' |
+= show_page_content do
+  %h2=@page.path
+  - owner? do
+    #actions
+      %a(href='#') View
+      %a(href='#') Settings
+      = link_to 'Remove Page', [@site, @page], |
+        :method => :delete, :confirm => 'Are you sure?' |
 
-#saveNotice{:style => 'display: none'} Saving page content...
-- if @error
-  .error= @error
-- else
-  - form_tag update_sections_site_page_path(@site, @page),  |
-    :id => 'update_form', :onsubmit => 'return savePageSections();' do |
-    - @sections.each_with_index do |section, index|
-      .section{:id=>"section_#{index}"}
-        = text_area_tag 'sections[]', section, :id => nil
-    = submit_tag :update
+    #saveNotice{:style => 'display: none'} Saving page content...
+  - if @error
+    .error= @error
+  - else
+    - form_tag update_sections_site_page_path(@site, @page),  |
+      :id => 'update_form', :onsubmit => 'return savePageSections();' do |
+      - @sections.each_with_index do |section, index|
+        .section{:id=>"section_#{index}"}
+          = text_area_tag 'sections[]', section, :id => nil
+      = submit_tag :update
