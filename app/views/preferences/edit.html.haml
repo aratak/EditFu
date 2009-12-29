@@ -9,17 +9,4 @@
     %tr
       %th= f.label :email
       %td= f.text_field :email
-    - if current_user.owner? && current_user.plan == 'professional'
-      %tr
-        %th= f.label :card_number
-        %td= f.text_field :card_number
-      %tr
-        %th= f.label :card_expiration
-        %td= f.date_select :card_expiration, :include_blank => true
-      %tr
-        %th= f.label :first_name
-        %td= f.text_field :first_name
-      %tr
-        %th= f.label :last_name
-        %td= f.text_field :last_name
   = submit_tag :update

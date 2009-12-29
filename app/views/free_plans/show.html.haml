@@ -6,9 +6,8 @@
 %p
   Pick single site and 3 pages, others will be removed:
 
-- form_for current_user, :url => preferences_plan_path, :html => { :method => :put } do |f|
+- form_for current_user, :url => free_plan_path do |f|
   = f.error_messages
-  = f.hidden_field :plan, :value => "free"
 
   %ul
     - current_user.sites.each do |site|
@@ -23,4 +22,3 @@
 
   %p
     = submit_tag "Confirm"
-

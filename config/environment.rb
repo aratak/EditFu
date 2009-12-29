@@ -10,8 +10,9 @@ Rails::Initializer.run do |config|
   config.gem 'hpricot'
   config.gem 'haml'
   config.gem 'warden'
-  config.gem 'devise'
   config.gem 'action_mailer_tls', :lib => false
+  config.gem 'activemerchant', :lib => 'active_merchant'
+  config.gem 'devise'
 
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers

@@ -1,9 +1,4 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
-  hello: "Hello world"
-
   free_plan:
     site_count: "There are too many remaining sites for free plan. Please delete all but one."
     page_count: "There are too many remaining pages for free.plan."

@@ -12,9 +12,6 @@ class Owner < User
   validates_presence_of :card_number, :card_expiration, :first_name, :last_name,
     :if => :allow_billing_validation
 
-  # Mass assignment protection
-  attr_accessible :plan, :card_number, :card_expiration, :first_name, :last_name
-
   # Methods
   def self.plans
     @@plans
@@ -58,6 +55,26 @@ class Owner < User
 
   def send_confirmation_instructions
     Mailer.deliver_owner_confirmation_instructions(self)
+  end
+      
+  def set_professional_plan(card)
+    self.plan = "professional"
+    self.card_number = card.display_number
+    self.save
+  end
+
+  def set_free_plan(sites, pages)
+    self.sites.each do |site|
+      site.destroy unless sites.include?(site)
+    end
+
+    self.pages.each do |page|
+      page.destroy unless pages.include?(page)
+    end
+
+    self.plan = "free"
+    self.card_number = nil
+    self.save
   end
 
   protected
