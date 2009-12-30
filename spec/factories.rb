@@ -8,9 +8,6 @@ end
 Factory.define :owner, :class => :owner, :parent => :user do |o|
   o.sequence(:name) { |s| "owner#{s}" }
   o.plan "trial"
-  o.card_expiration DateTime.now
-  o.first_name "John"
-  o.last_name "Doe"
 end
 
 Factory.define :editor, :class => :editor, :parent => :user do |e|

@@ -9,8 +9,6 @@ class Owner < User
   # Validations
   validates_presence_of  :plan
   validates_inclusion_of :plan, :in => @@plans
-  validates_presence_of :card_number, :card_expiration, :first_name, :last_name,
-    :if => :allow_billing_validation
 
   # Methods
   def self.plans
@@ -94,9 +92,5 @@ class Owner < User
         end
       end
     end
-  end
-
-  def allow_billing_validation
-    plan == "professional"
   end
 end
