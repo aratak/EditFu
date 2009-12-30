@@ -6,7 +6,8 @@
 %p
   Pick single site and 3 pages, others will be removed:
 
-- form_for current_user, :url => free_plan_path do |f|
+- form_for current_user, |
+    :url => free_preferences_plans_path, :html => { :method => :post }  do |f| |
   = f.error_messages
 
   %ul

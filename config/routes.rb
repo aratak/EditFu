@@ -8,14 +8,13 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :owner, :only => [:destroy]
   map.resources :editors
   map.resource :preferences do |preferences|
+    preferences.resource :plans, 
+      :member => { :free => [:get, :post], :professional => [:get, :post] }
   end
 
   map.resources :sites do |site|
     site.resources :pages, :member => { :update_sections => :post }
   end
-
-  map.resource :professional_plan
-  map.resource :free_plan
 
   map.root :controller => 'home', :action => 'show'
 end
