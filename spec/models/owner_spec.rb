@@ -104,7 +104,7 @@ describe Owner do
 
   describe "#set_professional_plan" do
     it "should work" do
-      card = ActiveMerchant::Billing::CreditCard.new(:number => '4242424242424242')
+      card = Factory.build :card
       @owner.set_professional_plan(card)
 
       @owner.reload
@@ -113,7 +113,7 @@ describe Owner do
     end
     
     it "should not work twice" do
-      card = ActiveMerchant::Billing::CreditCard.new(:number => '4242424242424242')
+      card = Factory.build :card
       @owner.set_professional_plan(card)
       @owner.card_number = nil
       @owner.set_professional_plan(card)

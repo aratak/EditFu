@@ -18,4 +18,3 @@ config.action_controller.perform_caching             = false
 
 ActionMailer::Base.delivery_method = :smtp
 config.action_mailer.default_url_options = { :host => 'localhost:3000' }
-ActiveMerchant::Billing::CreditCard.require_verification_value = false

@@ -29,3 +29,7 @@ config.action_mailer.default_url_options = { :host => 'www.edit-fu.com' }
 # config.active_record.schema_format = :sql
 
 config.gem "thoughtbot-factory_girl", :lib => "factory_girl"
+
+CreditCard.login = 'test'
+CreditCard.password = 'test_pass'
+CreditCard.recurring_amount = 100

@@ -28,3 +28,11 @@ Factory.define :page do |p|
   p.sequence(:path) { |p| "#{p}.html" }
   p.site { |p| p.association(:site) }
 end
+
+Factory.define :card , :class => CreditCard do |c|
+  c.first_name 'John'
+  c.last_name 'Doe'
+  c.number '4242424242424242'
+  c.year 2015
+  c.month 1
+end
