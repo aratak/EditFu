@@ -104,26 +104,37 @@ describe Owner do
 
   describe "#set_professional_plan" do
     it "should work" do
-      owner = Factory.create :owner
       card = ActiveMerchant::Billing::CreditCard.new(:number => '4242424242424242')
-      owner.set_professional_plan(card)
+      @owner.set_professional_plan(card)
 
-      owner.reload
-      owner.plan.should == "professional"
-      owner.card_number == card.display_number
+      @owner.reload
+      @owner.plan.should == "professional"
+      @owner.card_number.should == card.display_number
     end
   end
     
-#  describe "#set_free_plan" do
-#    it "should work" do
-#      owner = Factory.create :owner
-#      owner.set_free_plan
-#
-#     owner.reload
-#      owner.plan.should == "professional"
-#      owner.card_number == card.display_number
-#    end
-#  end
+  describe "#set_free_plan" do
+    it "should work" do
+      owner = Factory.create :owner
+      site = Factory.create :site, :owner => owner
+      4.times do
+        Factory.create :page, :site => site
+      end
+      pages = site.pages
+
+      site2 = Factory.create :site, :owner => owner
+      Factory.create :page, :site => site2
+      
+      owner.set_free_plan([site], pages[1..2])
+
+      owner.reload
+      owner.plan.should == "free"
+      owner.card_number.should be_nil
+
+      owner.sites.should == [site]
+      owner.pages.should == pages[1..2]
+    end
+  end
 
   describe "#trial_period_expired?" do
     it "should work" do
