@@ -91,17 +91,6 @@ describe Owner do
       end
     end
 
-    describe "professional plan" do
-      it "should fail if there are no billing information provided" do
-        @owner.plan = "professional"
-        @owner.save.should be_false
-        @owner.errors.on(:card_number).should_not be_nil
-        @owner.errors.on(:card_expiration).should_not be_nil
-        @owner.errors.on(:first_name).should_not be_nil
-        @owner.errors.on(:last_name).should_not be_nil
-      end
-    end
-
     describe "trial plan" do
       it "should not be set after plan was changed to free or professional" do
         @owner.plan = "free"
@@ -112,6 +101,29 @@ describe Owner do
       end
     end
   end
+
+  describe "#set_professional_plan" do
+    it "should work" do
+      owner = Factory.create :owner
+      card = ActiveMerchant::Billing::CreditCard.new(:number => '4242424242424242')
+      owner.set_professional_plan(card)
+
+      owner.reload
+      owner.plan.should == "professional"
+      owner.card_number == card.display_number
+    end
+  end
+    
+#  describe "#set_free_plan" do
+#    it "should work" do
+#      owner = Factory.create :owner
+#      owner.set_free_plan
+#
+#     owner.reload
+#      owner.plan.should == "professional"
+#      owner.card_number == card.display_number
+#    end
+#  end
 
   describe "#trial_period_expired?" do
     it "should work" do

@@ -60,17 +60,12 @@ class Owner < User
   def set_professional_plan(card)
     self.plan = "professional"
     self.card_number = card.display_number
-    self.save
+    self.save!
   end
 
   def set_free_plan(sites, pages)
-    self.sites.each do |site|
-      site.destroy unless sites.include?(site)
-    end
-
-    self.pages.each do |page|
-      page.destroy unless pages.include?(page)
-    end
+    (self.sites - sites).each { |site| site.destroy }
+    (self.pages - pages).each { |page| page.destroy }
 
     self.plan = "free"
     self.card_number = nil
