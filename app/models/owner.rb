@@ -57,8 +57,10 @@ class Owner < User
       
   def set_professional_plan(card)
     self.plan = "professional"
-    self.card_number = card.display_number
-    self.save!
+    if plan_changed?
+      self.card_number = card.display_number
+      self.save!
+    end
   end
 
   def set_free_plan(sites, pages)

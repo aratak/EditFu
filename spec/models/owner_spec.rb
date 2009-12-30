@@ -111,6 +111,15 @@ describe Owner do
       @owner.plan.should == "professional"
       @owner.card_number.should == card.display_number
     end
+    
+    it "should not work twice" do
+      card = ActiveMerchant::Billing::CreditCard.new(:number => '4242424242424242')
+      @owner.set_professional_plan(card)
+      @owner.card_number = nil
+      @owner.set_professional_plan(card)
+      
+      @owner.card_number.should be_nil
+    end
   end
     
   describe "#set_free_plan" do
