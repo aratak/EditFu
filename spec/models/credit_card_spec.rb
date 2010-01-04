@@ -2,25 +2,20 @@ require 'spec_helper'
 
 describe CreditCard do
   describe '#valid?' do
-    it "should authorize card balance" do
-      card = Factory.build :card
+    it "should authorize valid card" do
+      card = Factory.build :card, :number => '1'
+      card.valid?.should be_true
+    end
 
-      gateway = mock('gateway')
-      ActiveMerchant::Billing::AuthorizeNetGateway.stub(:new).and_return(gateway)
-      gateway.should_receive(:authorize).with(CreditCard.recurring_amount, card).
-        and_return(
-          ActiveMerchant::Billing::Response.new(false, "error raised")
-        )
-
+    it "should not authorize invalid card" do
+      card = Factory.build :card, :number => '2'
       card.valid?.should be_false
       card.errors.on(:base).should_not be_nil
     end
 
-    it "should not authorize balance if credit card is not valid" do
+    it "should not call authorized? if base validation fail" do
       card = Factory.build :card, :number => nil
-
-      gateway = mock('gateway')
-      ActiveMerchant::Billing::AuthorizeNetGateway.stub(:new).and_return(gateway)
+      PaymentSystem.should_not_receive(:authorized?)
 
       card.valid?.should be_false
     end

@@ -57,6 +57,12 @@ describe Owner do
       @owner.destroy
       Editor.find_all_by_owner_id(@owner.id).should == []
     end
+
+    it "should cancel recurring if plan is professional" do
+      owner = Factory.create :owner, :plan => 'professional'
+      PaymentSystem.should_receive(:cancel_recurring).with(owner)
+      owner.destroy
+    end
   end
 
   describe "#validate" do
@@ -105,6 +111,7 @@ describe Owner do
   describe "#set_professional_plan" do
     it "should work" do
       card = Factory.build :card
+      PaymentSystem.should_receive(:recurring).with(@owner, card)
       @owner.set_professional_plan(card)
 
       @owner.reload
@@ -142,6 +149,18 @@ describe Owner do
 
       owner.sites.should == [site]
       owner.pages.should == pages[1..2]
+    end
+
+    it "should cancel recurring if previous plan was professional" do
+      owner = Factory.create :owner, :plan => 'professional'
+      PaymentSystem.should_receive(:cancel_recurring).with(owner)
+
+      owner.set_free_plan([], [])
+    end
+
+    it "should not cancel recurring if previous plan was trial" do
+      PaymentSystem.should_not_receive(:cancel_recurring)
+      @owner.set_free_plan([], [])
     end
   end
 

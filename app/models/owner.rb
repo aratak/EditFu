@@ -58,6 +58,7 @@ class Owner < User
   def set_professional_plan(card)
     self.plan = "professional"
     if plan_changed?
+      PaymentSystem.recurring(self, card)
       self.card_number = card.display_number
       self.save!
     end
@@ -67,9 +68,11 @@ class Owner < User
     (self.sites - sites).each { |site| site.destroy }
     (self.pages - pages).each { |page| page.destroy }
 
+    cancel_recurring
+
     self.plan = "free"
     self.card_number = nil
-    self.save
+    self.save!
   end
 
   protected
@@ -78,6 +81,10 @@ class Owner < User
     if plan == "free" && plan_changed?
       editors.clear
     end
+  end
+
+  def before_destroy
+    cancel_recurring
   end
 
   def validate
@@ -94,5 +101,9 @@ class Owner < User
         end
       end
     end
+  end
+
+  def cancel_recurring
+    PaymentSystem.cancel_recurring(self) if self.plan == 'professional'
   end
 end

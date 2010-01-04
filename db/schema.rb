@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091230090504) do
+ActiveRecord::Schema.define(:version => 20091230143320) do
 
   create_table "editors_pages", :force => true do |t|
     t.integer "editor_id"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(:version => 20091230090504) do
     t.string   "type",                 :limit => 10,                       :null => false
     t.string   "plan",                                :default => "trial"
     t.string   "card_number",          :limit => 20
+    t.string   "subscription_id",      :limit => 13
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

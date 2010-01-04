@@ -32,7 +32,7 @@ end
 Factory.define :card , :class => CreditCard do |c|
   c.first_name 'John'
   c.last_name 'Doe'
-  c.number '4242424242424242'
+  c.number '1'
   c.year 2015
   c.month 1
 end

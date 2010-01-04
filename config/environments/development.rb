@@ -18,3 +18,9 @@ config.action_controller.perform_caching             = false
 
 ActionMailer::Base.delivery_method = :smtp
 config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+ActiveMerchant::Billing::Base.mode = :test
+PaymentSystem.gateway_name = 'authorize_net'
+PaymentSystem.gateway_opts = { 
+  :login => 'login', :password => 'password'
+}
