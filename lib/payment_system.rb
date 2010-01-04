@@ -1,13 +1,11 @@
 class PaymentSystem
-  cattr_accessor :gateway_name, :gateway_opts, :recurring_amount
-
   def self.authorized?(card)
-    gateway.authorize(recurring_amount, card).success?
+    gateway.authorize(PAYMENT_RECURRING_AMOUNT, card).success?
   end
 
   def self.recurring(owner, card)
     check_response(
-      recurring_gateway.create(gateway, recurring_amount, owner, card)
+      recurring_gateway.create(gateway, PAYMENT_RECURRING_AMOUNT, owner, card)
     )
   end
 
@@ -24,10 +22,11 @@ class PaymentSystem
   end
 
   def self.recurring_gateway
-    Kernel.const_get("#{self.gateway_name}_recurring".camelize)
+    Kernel.const_get("#{PAYMENT_GATEWAY_NAME}_recurring".camelize)
   end
 
   def self.gateway
-    ActiveMerchant::Billing::Base.gateway(gateway_name).new(gateway_opts)
+    ActiveMerchant::Billing::Base.gateway(PAYMENT_GATEWAY_NAME).
+      new(PAYMENT_GATEWAY_OPTS)
   end
 end

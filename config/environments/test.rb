@@ -31,4 +31,5 @@ config.action_mailer.default_url_options = { :host => 'www.edit-fu.com' }
 config.gem "thoughtbot-factory_girl", :lib => "factory_girl"
 
 ActiveMerchant::Billing::Base.mode = :test
-PaymentSystem.gateway_name = 'bogus'
+PAYMENT_GATEWAY_NAME = 'bogus'
+PAYMENT_GATEWAY_OPTS = {}

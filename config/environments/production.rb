@@ -29,3 +29,9 @@ config.action_view.cache_template_loading            = true
 
 ActionMailer::Base.delivery_method = :smtp
 config.action_mailer.default_url_options = { :host => 'dev.editfu.com' }
+
+ActiveMerchant::Billing::Base.mode = :test
+PAYMENT_GATEWAY_NAME = 'authorize_net'
+PAYMENT_GATEWAY_OPTS = { 
+  :login => '5m7cmanV9SJ', :password => '5r9gt5rCRzM8N24w', :test => true
+}
