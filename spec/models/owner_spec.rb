@@ -164,6 +164,28 @@ describe Owner do
     end
   end
 
+  describe "#set_card" do
+    it "should cancel previous and subscribe new recurrings" do
+      card = Factory.build :card
+      owner = Factory.create :owner, :plan => 'professional'
+
+      PaymentSystem.should_receive(:cancel_recurring).with(owner)
+      PaymentSystem.should_receive(:recurring).with(owner, card)
+
+      owner.set_card card
+    end
+
+    it "should not call PaymentSystem if plan is not professional" do
+      card = Factory.build :card
+      owner = Factory.create :owner, :plan => 'free'
+
+      PaymentSystem.should_not_receive(:cancel_recurring)
+      PaymentSystem.should_not_receive(:recurring)
+
+      owner.set_card card
+    end
+  end
+
   describe "#trial_period_expired?" do
     it "should work" do
       now = DateTime.civil(2009, 12, 1)
