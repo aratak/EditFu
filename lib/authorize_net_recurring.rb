@@ -8,13 +8,12 @@ class AuthorizeNetRecurring
       }
     )
     owner.subscription_id = response.params['subscription_id']
-    response
+    raise PaymentSystemError, response.message unless owner.subscription_id
   end
 
   def self.cancel(gateway, owner)
     response = gateway.cancel_recurring(owner.subscription_id)
+    raise PaymentSystemError, response.message unless response.success?
     owner.subscription_id = nil
-    response
   end
 end
-

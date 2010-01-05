@@ -4,8 +4,12 @@ class PlansController < ApplicationController
   def professional
     @card = CreditCard.new params[:card]
     if request.post? && @card.valid?
-      current_user.set_professional_plan(@card)
-      redirect_to preferences_path
+      begin
+        current_user.set_professional_plan(@card)
+        redirect_to preferences_path
+      rescue PaymentSystemError => e
+        flash.now[:failure] = e.message
+      end
     end
   end
 

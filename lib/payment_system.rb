@@ -4,22 +4,14 @@ class PaymentSystem
   end
 
   def self.recurring(owner, card)
-    check_response(
-      recurring_gateway.create(gateway, PAYMENT_RECURRING_AMOUNT, owner, card)
-    )
+    recurring_gateway.create(gateway, PAYMENT_RECURRING_AMOUNT, owner, card)
   end
 
   def self.cancel_recurring(owner)
-    check_response(
-      recurring_gateway.cancel(gateway, owner)
-    )
+    recurring_gateway.cancel(gateway, owner)
   end
 
   private
-
-  def self.check_response(response)
-    raise response.message unless response.success?
-  end
 
   def self.recurring_gateway
     Kernel.const_get("#{PAYMENT_GATEWAY_NAME}_recurring".camelize)

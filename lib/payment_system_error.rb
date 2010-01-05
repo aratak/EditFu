@@ -1,0 +1,2 @@
+class PaymentSystemError < RuntimeError
+end
