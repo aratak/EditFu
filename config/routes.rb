@@ -10,6 +10,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :preferences do |preferences|
     preferences.resource :plans, 
       :member => { :free => [:get, :post], :professional => [:get, :post] }
+    preferences.resource :card, :only => [:edit, :update]
   end
 
   map.resources :sites do |site|

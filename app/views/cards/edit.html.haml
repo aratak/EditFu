@@ -1,0 +1,22 @@
+%h2 Change Credit Card
+
+- form_for :card, @card, |
+    :url => preferences_card_path, :html => { :method => :put }  do |f| |
+  = f.error_messages
+
+  %table.card
+    %tr
+      %th= f.label :number
+      %td= f.text_field :number
+    %tr
+      %th= f.label :expiration
+      %td
+        = select_month @card.month.to_i, :prefix => 'card'
+        = select_year @card.year.to_i, :start_year => Date.today.year, :prefix => 'card'
+    %tr
+      %th= f.label :first_name
+      %td= f.text_field :first_name
+    %tr
+      %th= f.label :last_name
+      %td= f.text_field :last_name
+  = submit_tag "Confirm"
