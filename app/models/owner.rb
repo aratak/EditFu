@@ -56,11 +56,9 @@ class Owner < User
   end
       
   def set_professional_plan(card)
-    self.plan = "professional"
-    if plan_changed?
-      PaymentSystem.recurring(self, card)
-      self.card_number = card.display_number
-      self.save!
+    if plan != "professional"
+      self.plan = "professional"
+      recurring(card)
     end
   end
 
@@ -71,7 +69,6 @@ class Owner < User
     cancel_recurring
 
     self.plan = "free"
-    self.card_number = nil
     self.save!
   end
 
@@ -103,7 +100,14 @@ class Owner < User
     end
   end
 
+  def recurring(card)
+    PaymentSystem.recurring(self, card)
+    self.card_number = card.display_number
+    save!
+  end
+
   def cancel_recurring
     PaymentSystem.cancel_recurring(self) if self.plan == 'professional'
+    self.card_number = nil
   end
 end
