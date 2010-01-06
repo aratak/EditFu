@@ -11,14 +11,24 @@ class ApplicationController < ActionController::Base
   protected
 
   def authenticate_owner!
-    authenticate_user!
+    authenticate_user_type!(Owner)
+  end
 
-    if user_signed_in? && !current_user.kind_of?(Owner)
-      redirect_to root_path
-    end
+  def authenticate_admin!
+    authenticate_user_type!(Admin)
   end
 
   def check_trial_period
     raise if current_user.trial_period_expired?
+  end
+
+  private
+
+  def authenticate_user_type!(type)
+    authenticate_user!
+
+    if user_signed_in? && !current_user.kind_of?(type)
+      redirect_to root_path
+    end
   end
 end

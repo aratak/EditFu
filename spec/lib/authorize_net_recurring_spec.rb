@@ -68,5 +68,12 @@ describe AuthorizeNetRecurring do
       }.should raise_error(PaymentSystemError)
       @owner.subscription_id.should_not be_nil
     end
+
+    it "should not contact server if subscription_id is nil" do
+      @owner.subscription_id = nil
+
+      @gateway.should_not_receive(:cancel_recurring)
+      AuthorizeNetRecurring.cancel(@gateway, @owner)
+    end
   end
 end

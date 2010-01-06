@@ -1,5 +1,6 @@
 class AddAdmin < ActiveRecord::Migration
   def self.up
+    # password = KlatfildEabTerv
     execute "INSERT INTO users(name, email, type, " + 
       "encrypted_password, password_salt, confirmed_at)" +
       "VALUES('admin', 'admin@editfu.com', 'Admin', " + 

@@ -17,5 +17,9 @@ ActionController::Routing::Routes.draw do |map|
     site.resources :pages, :member => { :update_sections => :post }
   end
 
+  map.namespace :admin do |admin|
+    admin.resources :owners
+  end
+
   map.root :controller => 'home', :action => 'show'
 end

@@ -1,0 +1,18 @@
+%h2 Owner - #{@owner.name}
+
+#actions
+  = link_to 'Cancel', admin_owner_path(@owner), |
+    :method => :delete, :confirm => "Are you sure?" |
+%table.card
+  %tr
+    %th Name
+    %td=h @owner.name
+  %tr
+    %th Email
+    %td=h @owner.email
+  %tr
+    %th Plan
+    %td=h @owner.plan
+  %tr
+    %th Created
+    %td=h @owner.created_at
