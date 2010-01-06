@@ -14,6 +14,15 @@ class User < ActiveRecord::Base
     kind_of?(Owner)
   end
 
+  def admin?
+    kind_of?(Admin)
+  end
+
+  def send_reset_password_instructions
+    generate_reset_password_token!
+    Mailer.deliver_reset_password_instructions(self)
+  end
+
   protected
 
   def password_required?

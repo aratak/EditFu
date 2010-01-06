@@ -14,4 +14,12 @@ class Mailer < ActionMailer::Base
     content_type 'text/html'
     body         :editor => editor
   end
+
+  def reset_password_instructions(user)
+    subject      "Reset edit-fu password"
+    from         "edit.fu.cms@gmail.com"
+    recipients   user.email
+    content_type 'text/html'
+    body         :user => user
+  end
 end
