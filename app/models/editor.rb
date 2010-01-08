@@ -34,4 +34,8 @@ class Editor < User
   def trial_period_expired?
     owner.trial_period_expired?
   end  
+
+  def enabled?
+    owner.enabled?
+  end
 end

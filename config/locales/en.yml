@@ -1,4 +1,8 @@
 en:
+  devise:
+    sessions:
+      disabled: 'Your account is temporarily disabled by administrator.'
+
   credit_card:
     authorize: "Can't authorize credit card. Please check your balance."
 
