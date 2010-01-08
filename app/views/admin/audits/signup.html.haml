@@ -1,0 +1,13 @@
+%h2 Sign-up log
+
+%table.data
+  %tr
+    %th Name
+    %th Email
+    %th Created
+  - @owners.each do |owner|
+    %tr
+      %td= link_to(owner.name, admin_owner_path(owner))
+      %td=h owner.email
+      %td= time_ago_in_words(owner.created_at) + ' ago '
+
