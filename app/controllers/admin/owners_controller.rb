@@ -6,14 +6,35 @@ class Admin::OwnersController < ApplicationController
   end
 
   def show
-    @owner = Owner.find(params[:id])
+    find_owner
   end
 
   def destroy
-    @owner = Owner.find(params[:id])
-    @owner.destroy
+    find_owner.destroy
 
     flash[:success] = I18n.t('admin.owner.canceled', :email => @owner.email)
     redirect_to admin_owners_path
+  end
+
+  def enable
+    find_owner.enabled = true
+    @owner.save!
+
+    flash[:success] = I18n.t('admin.owner.enabled')
+    redirect_to admin_owner_path(@owner)
+  end
+
+  def disable
+    find_owner.enabled = false
+    @owner.save!
+
+    flash[:success] = I18n.t('admin.owner.disabled')
+    redirect_to admin_owner_path(@owner)
+  end
+
+  private
+
+  def find_owner
+    @owner = Owner.find(params[:id])
   end
 end

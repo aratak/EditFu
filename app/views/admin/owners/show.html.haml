@@ -3,6 +3,11 @@
 #actions
   = link_to 'Cancel', admin_owner_path(@owner), |
     :method => :delete, :confirm => "Are you sure?" |
+  - if @owner.enabled? 
+    = link_to 'Disable', disable_admin_owner_path(@owner), :method => :post
+  - else
+    = link_to 'Enable', enable_admin_owner_path(@owner), :method => :post
+
 %table.card
   %tr
     %th Name:
@@ -16,3 +21,6 @@
   %tr
     %th Created:
     %td=h @owner.created_at
+  %tr
+    %th Enabled:
+    %td=h @owner.enabled?

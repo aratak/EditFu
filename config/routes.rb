@@ -18,7 +18,7 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.namespace :admin do |admin|
-    admin.resources :owners
+    admin.resources :owners, :member => { :enable => :post, :disable => :post }
   end
 
   map.root :controller => 'home', :action => 'show'
