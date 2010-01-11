@@ -1,6 +1,8 @@
 class Owner < User
   @@plans = %w(trial free professional)
 
+  acts_as_audited :only => [:plan]
+
   # Associations
   has_many :sites, :dependent => :destroy
   has_many :pages, :through => :sites

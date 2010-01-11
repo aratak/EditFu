@@ -13,6 +13,7 @@
       - if user_signed_in?
         - if current_user.admin?
           = link_to 'Owners', admin_owners_path
+          = link_to 'Audit', admin_audits_path
         - else
           = link_to 'Sites', sites_path  
           - if current_user.owner?

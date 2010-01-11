@@ -13,7 +13,8 @@ Rails::Initializer.run do |config|
   config.gem 'action_mailer_tls', :lib => false
   config.gem 'activemerchant', :lib => 'active_merchant'
   config.gem 'devise'
-
+  config.gem 'acts_as_audited', :lib => false
+  
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
   # -- all .rb files in that directory are automatically loaded.

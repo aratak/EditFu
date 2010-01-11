@@ -1,5 +1,8 @@
 class Admin::AuditsController < ApplicationController
-  def signup
-    @owners = Owner.all :order => 'created_at DESC'
+  before_filter :authenticate_admin!
+
+  def index
+    @audits = Audit.all(:include => :auditable, :order => 'created_at DESC')
+    @audits = @audits.select { |audit| audit.auditable }
   end
 end
