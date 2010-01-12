@@ -13,7 +13,7 @@ ActionController::Routing::Routes.draw do |map|
     preferences.resource :card, :only => [:edit, :update]
   end
 
-  map.resources :sites do |site|
+  map.resources :sites, :new => { :ls => :get } do |site|
     site.resources :pages, :member => { :update_sections => :post }
   end
 

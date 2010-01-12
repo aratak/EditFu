@@ -25,6 +25,18 @@ class FtpClient
     end
   end
 
+  def self.ls(site)
+    open site do |f|
+      dirs, files = [], []
+      f.ls.each do |line|
+        line =~ /(\S+)\s+(\S+\s+){7}(.*)/
+        mode, name = $1, $3
+        (mode.start_with?('d') ? dirs : files) << name
+      end
+      return dirs, files
+    end
+  end
+
   private
 
   def self.open(site)

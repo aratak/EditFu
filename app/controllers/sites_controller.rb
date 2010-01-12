@@ -45,6 +45,17 @@ class SitesController < ApplicationController
     redirect_to sites_path
   end
 
+  def ls
+    site = Site.new params[:site]
+    json = {}
+    begin
+      json[:dirs], json[:files] = FtpClient.ls(site)
+    rescue FtpClientError => e
+      json[:message] = e.message
+    end
+    render :json => json
+  end
+
   private
 
   def find_site

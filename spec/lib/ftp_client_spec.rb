@@ -40,6 +40,21 @@ describe FtpClient do
     end
   end
 
+  describe "ls" do
+    it "show issue FTP 'ls' command and parse its output" do
+      @site.site_root = '/home'
+      FtpClient.should_receive(:open).with(@site).and_yield(@ftp)
+      @ftp.should_receive(:ls).and_return [
+        "drwxr-xr-x    5 1003     1003         4096 Dec 11 11:31 peter",
+        "drwxr-xr-x    5 1002     1002         4096 Nov 20 12:31 james",
+        "drwxr-xr-x    2 0        65534        4096 Nov 19 15:28 jane",
+        "-rw-r--r--    2 0        65534        4096 Nov 19 15:28 README"
+      ]
+
+      FtpClient.ls(@site).should == [['peter', 'james', 'jane'], ['README']]
+    end
+  end
+
   describe "open" do
     it "should issue all required commands" do
       Net::FTP.should_receive(:open).with(@site.server).and_return(@ftp)
