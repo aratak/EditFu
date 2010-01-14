@@ -51,7 +51,12 @@ describe FtpClient do
         "-rw-r--r--    2 0        65534        4096 Nov 19 15:28 README"
       ]
 
-      FtpClient.ls(@site).should == [['peter', 'james', 'jane'], ['README']]
+      FtpClient.ls(@site).should == [
+        { :name => 'peter', :type => :folder },
+        { :name => 'james', :type => :folder },
+        { :name => 'jane', :type => :folder }, 
+        { :name => 'README', :type => :file }
+      ]
     end
   end
 

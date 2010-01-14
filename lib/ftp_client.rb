@@ -27,13 +27,10 @@ class FtpClient
 
   def self.ls(site)
     open site do |f|
-      dirs, files = [], []
-      f.ls.each do |line|
+      f.ls.map do |line|
         line =~ /(\S+)\s+(\S+\s+){7}(.*)/
-        mode, name = $1, $3
-        (mode.start_with?('d') ? dirs : files) << name
+        { :name => $3, :type => $1.start_with?('d') ? :folder : :file }
       end
-      return dirs, files
     end
   end
 

@@ -47,13 +47,14 @@ class SitesController < ApplicationController
 
   def ls
     site = Site.new params[:site]
-    json = {}
     begin
-      json[:dirs], json[:files] = FtpClient.ls(site)
+      @files = FtpClient.ls(site).sort do |a, b| 
+        a[:name] <=> b[:name] && b[:type].to_s <=> a[:type].to_s
+      end
+      render :layout => false
     rescue FtpClientError => e
-      json[:message] = e.message
+      head :ftp_error => e.message
     end
-    render :json => json
   end
 
   private

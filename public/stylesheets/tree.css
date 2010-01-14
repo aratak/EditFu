@@ -1,0 +1,35 @@
+#ftpTree {
+  margin: 0px;
+  padding: 0px;
+}
+
+#ftpTree ul {
+  margin-left: 20px;
+  padding-left: 0px;
+  display: none;
+}
+
+#ftpTree li {
+  list-style-type: none;
+  vertical-align: middle;
+}
+
+#ftpTree span {
+  color: #000;
+  text-decoration: none;
+  font-family: arial;
+  font-size: 0.8em;
+  padding-left: 2px;
+}
+
+#ftpTree li.folder > span {
+  cursor: pointer;
+}
+
+#ftpTree li.folder > span:hover {
+  background: blue;
+}
+
+#ftpTree span.selected {
+  background: red;
+}
