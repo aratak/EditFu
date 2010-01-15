@@ -66,3 +66,7 @@ table td {
 #permissions .site_perm {
   font-weight: bold;
 }
+
+#actionBar {
+  clear: both;
+}

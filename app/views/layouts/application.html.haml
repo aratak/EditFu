@@ -28,10 +28,8 @@
     #sourceBar
       = yield :sourceBar
     #actionWindow
-      - if flash[:success]
-        #success= flash[:success]
-      - if flash[:failure]
-        #failure= flash[:failure]
+      #success= flash[:success]
+      #failure= flash[:failure]
       = yield
     #actionBar
       - owner? do

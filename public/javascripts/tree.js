@@ -14,6 +14,7 @@ var FtpTree = Class.create({
       '<li class="root"><span>' + server + '</span></li>'
     );
     this.loadFolder(ul.select('li').first());
+    div.style.display = 'block';
   },
 
   createBranch: function(parentNode, html) {
@@ -89,17 +90,21 @@ var FtpTree = Class.create({
     new Ajax.Request('/sites/ls', {
       method: 'get',
       parameters: params,
-      onSuccess: tree.parseResponse.bind(tree, li)
+      
+      onSuccess: function(response) {
+        $('failure').innerHTML = response.getHeader('ftp-error');
+        tree.parseResponse(li, response.responseText);
+      },
+
+      onFailure: function() {
+        $('failure').innerHTML = 'Server error';
+        tree.parseResponse(li, '');
+      }
     });
   },
 
-  parseResponse: function(li, response) {
-    var error = response.getHeader('ftp_error');
-    if (error) {
-      $$('#ftpTree .error').innerHTML = error;
-    }
-
-    this.createBranch(li, response.responseText);
+  parseResponse: function(li, responseText) {
+    this.createBranch(li, responseText);
     if (li.select('li').size() == 0) {
       li.select('img.plus').each(function(plus) {
         plus.style.visibility = 'hidden';
@@ -121,3 +126,24 @@ var FtpTree = Class.create({
     return '/' + names.reverse().join('/');
   }
 });
+
+function initSiteForm() {
+  $('site_server', 'site_login', 'site_password').each(function(input) {
+      input.observe('change', function() {
+        $('ftpTree').hide();
+      });
+  });
+}
+
+FtpTree.show = function() {
+  var names = ['server', 'login', 'password'];
+  for(var i = 0; i < names.length; i++) {
+    if(!$F('site_' + names[i])) {
+      $('failure').innerHTML = names[i].capitalize() + " can't be blank";
+      return;
+    }
+  }
+
+  $('failure').innerHTML = '';
+  new FtpTree();
+}

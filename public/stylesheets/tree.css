@@ -1,6 +1,13 @@
+#site_form {
+  float: left;
+}
+
 #ftpTree {
   margin: 0px;
   padding: 0px;
+  display: none;
+  width: 49%;
+  float: left;
 }
 
 #ftpTree ul {
