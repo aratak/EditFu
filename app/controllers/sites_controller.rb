@@ -48,7 +48,10 @@ class SitesController < ApplicationController
   def ls
     site = Site.new params[:site]
     begin
-      @files = FtpClient.ls(site).sort do |a, b| 
+      @files = FtpClient.ls(site).select do |f| 
+        f[:type] == :folder || /\.html?$/ =~ f[:name]
+      end
+      @files.sort! do |a, b| 
         a[:name] <=> b[:name] && b[:type].to_s <=> a[:type].to_s
       end
       render :layout => false
