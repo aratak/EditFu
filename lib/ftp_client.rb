@@ -26,8 +26,9 @@ class FtpClient
   end
 
   def self.ls(site, folder)
-    open site do |f|
-      f.ls(folder).map do |line|
+    # FTP doesn't raise FTPPermError on ls - we should chdir to get it.
+    open site, folder do |f|
+      f.ls.map do |line|
         line =~ /(\S+)\s+(\S+\s+){7}(.*)/
         { :name => $3, :type => $1.start_with?('d') ? :folder : :file }
       end
@@ -36,7 +37,7 @@ class FtpClient
 
   private
 
-  def self.open(site)
+  def self.open(site, dir = site.site_root)
     begin
       f = Net::FTP.open site.server
     rescue 
@@ -46,7 +47,7 @@ class FtpClient
     begin
       f.login site.login, site.password
       f.passive = true
-      f.chdir site.site_root
+      f.chdir dir
 
       yield f if block_given?
     rescue Net::FTPError => e
