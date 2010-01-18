@@ -134,7 +134,7 @@ var SiteFtpTree = Class.create(FtpTree, {
   },
 
   onItemSelected: function(li) {
-    $('site_site_root') = this.getItemPath(li);
+    $('site_site_root').value = this.getItemPath(li);
   },
 
   getRequestParams: function() {
