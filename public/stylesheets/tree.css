@@ -29,11 +29,11 @@
   padding-left: 2px;
 }
 
-#ftpTree li.folder > span {
+#ftpTree span.selectable {
   cursor: pointer;
 }
 
-#ftpTree li.folder > span:hover {
+#ftpTree span.selectable:hover {
   background: blue;
 }
 

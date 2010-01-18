@@ -33,4 +33,11 @@ describe Site do
       Page.find_all_by_site_id(@site.id).should == []
     end
   end
+
+  describe "#root_folders" do
+    it "should return a list of site_root folders" do
+      @site.site_root = '/home/peter/site'
+      @site.root_folders.should == ['home', 'peter', 'site']
+    end
+  end
 end

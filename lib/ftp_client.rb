@@ -25,9 +25,9 @@ class FtpClient
     end
   end
 
-  def self.ls(site)
+  def self.ls(site, folder)
     open site do |f|
-      f.ls.map do |line|
+      f.ls(folder).map do |line|
         line =~ /(\S+)\s+(\S+\s+){7}(.*)/
         { :name => $3, :type => $1.start_with?('d') ? :folder : :file }
       end

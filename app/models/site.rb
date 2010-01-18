@@ -19,4 +19,8 @@ class Site < ActiveRecord::Base
     end
     errors.empty?
   end
+
+  def root_folders
+    site_root.split('/').select { |i| !i.blank? }
+  end
 end

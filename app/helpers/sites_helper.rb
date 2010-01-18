@@ -12,4 +12,14 @@ module SitesHelper
       render :partial => 'shared/upgrade'
     end
   end
+
+  def render_site_root(site)
+    ul = ''
+    site.root_folders.reverse.each do |name|
+      span = content_tag :span, name
+      li = content_tag :li, span + ul, :class => :folder
+      ul = content_tag :ul, li
+    end
+    ul
+  end
 end

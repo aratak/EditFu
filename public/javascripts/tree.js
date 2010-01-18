@@ -4,19 +4,6 @@ var FtpTree = Class.create({
   plusImage: 'plus.gif',
   minusImage: 'minus.gif',
 
-  initialize: function() {
-    var div = $('ftpTree');
-    var form = $('site_form');
-    var server = $F(form['site_server']);
-
-    var ul = this.createBranch(
-      div,
-      '<li class="root"><span>' + server + '</span></li>'
-    );
-    this.loadFolder(ul.select('li').first());
-    div.style.display = 'block';
-  },
-
   createBranch: function(parentNode, html) {
     var ul = parentNode.select('ul').first();
     if (ul) {
@@ -35,13 +22,16 @@ var FtpTree = Class.create({
     var tree = this;
     branch.select('li').each(function(li) {
       var aTag = li.select('span').first();
-      if (li.className == 'folder') {
+      aTag.onclick = tree.onItemClick.bind(tree, li);
+
+      if(li.className == tree.selectableClass) {
+        aTag.className = 'selectable';
+      }
+      if(li.className == 'folder') {
         var plusImg = $(document.createElement('img'));
         plusImg.className = 'plus';
         plusImg.src = tree.imageFolder + tree.plusImage;
         plusImg.onclick = tree.toggleFolder.bind(tree, li);
-
-        aTag.onclick = tree.selectFolder.bind(tree, li);
         li.insertBefore(plusImg, aTag);
       }
 
@@ -51,18 +41,22 @@ var FtpTree = Class.create({
     });
   },
 
-  selectFolder: function(li) {
-    $('site_form')['site[site_root]'].value = this.getFolderPath(li);
-    var selected = $('ftpTree').select('span.selected').first();
-    if (selected) {
-      selected.removeAttribute('class');
+  onItemClick: function(li) {
+    if (li.className == this.selectableClass) {
+      this.onItemSelected(li);
+      $('ftpTree').select('span.selected').each(function(selected) {
+        selected.removeClassName('selected');
+      });
+      li.select('span').first().addClassName('selected');
     }
-    li.select('span').first().className = 'selected';
-    this.toggleFolder(li);
+
+    if (li.className == 'folder') {
+      this.toggleFolder(li);
+    }
   },
 
   toggleFolder: function(li) {
-    var img = li.select('img').first();
+    var img = li.select('img.plus').first();
     if (!img || !img.visible()) return;
 
     var ul = li.select('ul').first();
@@ -77,16 +71,14 @@ var FtpTree = Class.create({
         ul.style.display = 'block';
       }
     }
-    
-    return false;
   },
 
   loadFolder: function(li) {
     this.createBranch(li, "<li class='load'><span>Loading...</span></li>");
 
     var tree = this;
-    var params = $('site_form').serialize(true);
-    params['site[site_root]'] = this.getFolderPath(li);
+    var params = this.getRequestParams();
+    params['folder'] = this.getItemPath(li);
     new Ajax.Request('/sites/ls', {
       method: 'get',
       parameters: params,
@@ -112,11 +104,11 @@ var FtpTree = Class.create({
     }
   },
 
-  getFolderPath: function(li) {
+  getItemPath: function(li, relative) {
     var names = [];
     li.childElements().first().ancestors().each(function(folder) {
       if (folder.tagName == 'LI') {
-        if (folder.className == 'root') {
+        if(folder.className == 'root') {
           throw $break;
         } else {
           names.push(folder.select('span').first().innerHTML);
@@ -127,7 +119,30 @@ var FtpTree = Class.create({
   }
 });
 
-function initSiteForm() {
+// SiteFtpTree - for sites/new and sites/edit
+
+var SiteFtpTree = Class.create(FtpTree, {
+  selectableClass: 'folder',
+
+  initialize: function() {
+    var ul = this.createBranch(
+      $('ftpTree'),
+      '<li class="root"><span>' + $F('site_server') + '</span></li>'
+    );
+    this.loadFolder(ul.select('li').first());
+    $('ftpTree').style.display = 'block';
+  },
+
+  onItemSelected: function(li) {
+    $('site_site_root') = this.getItemPath(li);
+  },
+
+  getRequestParams: function() {
+    return $('site_form').serialize(true);
+  }
+});
+
+SiteFtpTree.initForm = function() {
   $('site_server', 'site_login', 'site_password').each(function(input) {
       input.observe('change', function() {
         $('ftpTree').hide();
@@ -135,7 +150,7 @@ function initSiteForm() {
   });
 }
 
-FtpTree.show = function() {
+SiteFtpTree.show = function() {
   var names = ['server', 'login', 'password'];
   for(var i = 0; i < names.length; i++) {
     if(!$F('site_' + names[i])) {
@@ -145,5 +160,41 @@ FtpTree.show = function() {
   }
 
   $('failure').innerHTML = '';
-  new FtpTree();
+  new SiteFtpTree();
+}
+
+// PageFtpTree - for pages/new
+
+var PageFtpTree = Class.create(FtpTree, {
+  selectableClass: 'file',
+
+  initialize: function($super, site_id) {
+    this.site_id = site_id;
+    this.parseBranch($('ftpTree').select('ul').first());
+
+    $('ftpTree').select('ul').each(function(ul) {
+      ul.style.display = 'block';
+    });
+    $('ftpTree').select('li.folder').each(function(li) {
+      li.select('img.plus').first().remove();
+    });
+
+    var site_root = $('ftpTree').select('li').last();
+    this.root_path = this.getItemPath(site_root);
+    this.loadFolder(site_root);
+
+    $super();
+  },
+
+  onItemSelected: function(li) {
+    $('page_path').value = this.getItemPath(li).sub(this.root_path + '/', '');
+  },
+
+  getRequestParams: function() {
+    return { site_id: this.site_id }
+  }
+});
+
+PageFtpTree.show = function() {
+  $('ftpTree').style.display = 'block';
 }

@@ -11,7 +11,7 @@
       %th= form.label :site_root
       %td
         = form.text_field :site_root
-        = link_to_function image_tag('tree/open.png'), 'FtpTree.show()'
+        = link_to_function image_tag('tree/open.png'), 'SiteFtpTree.show()'
     %tr
       %th= form.label :login
       %td= form.text_field :login
@@ -21,7 +21,6 @@
   = submit_tag :submit
 
 #ftpTree
-  .error
 
 :javascript
-  initSiteForm();
+  SiteFtpTree.initForm();

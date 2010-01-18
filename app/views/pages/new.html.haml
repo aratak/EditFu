@@ -6,5 +6,16 @@
     %table.card
       %tr
         %th= form.label :path
-        %td= form.text_field :path
+        %td
+          = form.text_field :path
+          = link_to_function image_tag('tree/open.png'), 'PageFtpTree.show()'
     = submit_tag :create
+
+#ftpTree
+  %ul
+    %li.root
+      %span= @site.server
+      = render_site_root(@site)
+
+:javascript
+  new PageFtpTree(#{@site.id});

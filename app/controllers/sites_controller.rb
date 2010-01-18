@@ -46,9 +46,15 @@ class SitesController < ApplicationController
   end
 
   def ls
-    site = Site.new params[:site]
+    if params[:site_id]
+      site = current_user.sites.find params[:site_id]
+    else
+      site = Site.new params[:site]
+      site.site_root = '/'
+    end
+
     begin
-      @files = FtpClient.ls(site).select do |f| 
+      @files = FtpClient.ls(site, params[:folder]).select do |f| 
         f[:type] == :folder || /\.html?$/ =~ f[:name]
       end
       @files.sort! do |a, b| 
