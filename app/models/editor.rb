@@ -2,6 +2,10 @@ class Editor < User
   belongs_to :owner
   has_and_belongs_to_many :pages
 
+  def subdomain
+    owner.subdomain
+  end
+
   def sites
     pages.map { |p| p.site }.uniq
   end

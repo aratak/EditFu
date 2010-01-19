@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
+  before_filter :redirect_to_subdomain if RAILS_ENV != 'test'
+
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
 
@@ -23,6 +25,21 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def redirect_to_subdomain
+    host = desired_host
+    if request.host != host
+      redirect_to request.protocol + host + request.port_string + request.request_uri
+    end
+  end
+
+  def desired_host
+    if !user_signed_in?
+      BASE_DOMAIN
+    else
+      "#{current_user.subdomain}.#{BASE_DOMAIN}"
+    end
+  end
 
   def authenticate_user_type!(type)
     authenticate_user!

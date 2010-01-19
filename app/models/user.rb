@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   include Devise::Models::Confirmable
 
   validates_presence_of :name
+  validates_uniqueness_of :name
 
   attr_accessible :name, :email, :password, :password_confirmation
 

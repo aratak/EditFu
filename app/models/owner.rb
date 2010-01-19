@@ -11,7 +11,13 @@ class Owner < User
   # Validations
   validates_presence_of  :plan
   validates_inclusion_of :plan, :in => @@plans
+  validates_format_of :name, :with => /^\w+$/
+  validates_exclusion_of :name, :in => %w(www admin)
 
+  def subdomain
+    name.downcase
+  end
+  
   # Methods
   def self.plans
     @@plans

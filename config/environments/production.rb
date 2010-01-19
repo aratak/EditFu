@@ -27,8 +27,10 @@ config.action_view.cache_template_loading            = true
 # Enable threaded mode
 # config.threadsafe!
 
+BASE_DOMAIN = 'dev.editfu.com'
+
 ActionMailer::Base.delivery_method = :smtp
-config.action_mailer.default_url_options = { :host => 'dev.editfu.com' }
+config.action_mailer.default_url_options = { :host => BASE_DOMAIN }
 
 ActiveMerchant::Billing::Base.mode = :test
 PAYMENT_GATEWAY_NAME = 'authorize_net'
