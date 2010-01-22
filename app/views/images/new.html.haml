@@ -1,0 +1,18 @@
+= content_for :body do
+  %h2 Add New Image
+
+  = javascript_include_tag 'image', 'tiny_mce/tiny_mce_popup'
+
+  #success
+  #failure
+  #processing{:style => 'display: none;'} Uploading image to server...
+
+  - form_tag site_images_path(@site), |
+    :id => 'new_image_form', :multipart => true, |
+    :method => :post, :onsubmit => 'return submitForm();' do |
+
+    %table.card
+      %tr
+        %th= label_tag 'image'
+        %td= file_field_tag 'image'
+    = submit_tag :submit

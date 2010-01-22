@@ -15,6 +15,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :sites, :collection => { :ls => :get } do |site|
     site.resources :pages, :member => { :update_sections => :post }
+    site.resources :images, :only => [:new, :create]
   end
 
   map.namespace :admin do |admin|

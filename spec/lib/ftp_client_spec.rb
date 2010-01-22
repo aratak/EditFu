@@ -14,19 +14,19 @@ describe FtpClient do
     end
   end
 
-  describe "get" do
+  describe "get_page" do
     it "should download a remote file" do
       FtpClient.should_receive(:open).with(@site).and_yield(@ftp)
       @ftp.should_receive(:retrbinary).
         with("RETR #{@page.path}", Net::FTP::DEFAULT_BLOCKSIZE).
         and_yield('first...').and_yield('and second')
 
-      FtpClient.get(@page)
+      FtpClient.get_page(@page)
       @page.content.should == 'first...and second'
     end
   end
 
-  describe "put" do
+  describe "put_page" do
     it "should upload content to remote file" do
       FtpClient.should_receive(:open).with(@site).and_yield(@ftp)
       @ftp.should_receive(:storbinary).with(
@@ -36,7 +36,30 @@ describe FtpClient do
       end
 
       @page.content = 'some html text'
-      FtpClient.put(@page)
+      FtpClient.put_page(@page)
+    end
+  end
+
+  describe "put_image" do
+    it "should check images folder exists and upload image file" do
+      image_src = "#{Site::IMAGES_FOLDER}/photo.gif"
+      FtpClient.should_receive(:open).with(@site).and_yield(@ftp)
+      @ftp.should_receive(:ls).with(Site::IMAGES_FOLDER).and_return [
+        "drwxr-xr-x    5 1003     1003         4096 Dec 11 11:31 " +
+        Site::IMAGES_FOLDER
+      ]
+      @ftp.should_receive(:put).with('/tmp/1.gif', image_src)
+
+      FtpClient.put_image(@site, '/tmp/1.gif', 'photo.gif').should == image_src
+    end
+
+    it "should create images folder if it doesn't exist yet" do
+      FtpClient.should_receive(:open).and_yield(@ftp)
+      @ftp.should_receive(:ls).and_return []
+      @ftp.should_receive(:mkdir).with(Site::IMAGES_FOLDER)
+      @ftp.should_receive(:put)
+
+      FtpClient.put_image(@site, '/tmp/1.gif', 'photo.gif')
     end
   end
 

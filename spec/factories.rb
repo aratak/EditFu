@@ -19,6 +19,7 @@ Factory.define :site do |s|
   s.sequence(:name) { |s| "site#{s}" }
   s.server { |s| "ftp.#{s.name}.com" }
   s.site_root { |s| "/var/www/#{s.name}" }
+  s.site_url { |s| "www.{s.name}.com" }
   s.login { |s| s.name }
   s.password { |s| s.login }
   s.owner { |s| s.association(:owner) }

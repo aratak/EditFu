@@ -9,7 +9,7 @@ class FtpClient
     end
   end
 
-  def self.get(page)
+  def self.get_page(page)
     open page.site do |f|
       page.content = ""
       f.retrbinary "RETR #{page.path}", Net::FTP::DEFAULT_BLOCKSIZE do |data|
@@ -18,11 +18,22 @@ class FtpClient
     end
   end
 
-  def self.put(page)
+  def self.put_page(page)
     open page.site do |f|
       f.storbinary "STOR #{page.path}", 
         StringIO.new(page.content), Net::FTP::DEFAULT_BLOCKSIZE
     end
+  end
+
+  def self.put_image(site, local_path, remote_name)
+    src = Site::IMAGES_FOLDER + '/' + remote_name
+    open site do |f|
+      if f.ls(Site::IMAGES_FOLDER).empty?
+        f.mkdir Site::IMAGES_FOLDER
+      end
+      f.put local_path, src
+    end
+    src
   end
 
   def self.ls(site, folder)

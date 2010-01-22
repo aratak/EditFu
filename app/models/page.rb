@@ -6,7 +6,7 @@ class Page < ActiveRecord::Base
   validates_uniqueness_of :path, :scope => :site_id
 
   def sections
-    FtpClient.get(self)
+    FtpClient.get_page(self)
 
     map_sections(document) do |element|
       element.inner_html
@@ -22,7 +22,7 @@ class Page < ActiveRecord::Base
     end
     self.content = document.to_html
 
-    FtpClient.put(self)
+    FtpClient.put_page(self)
   end
 
   private

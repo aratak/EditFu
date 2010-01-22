@@ -1,8 +1,10 @@
 class Site < ActiveRecord::Base
+  IMAGES_FOLDER = 'edit-fu-images'
+
   belongs_to :owner
   has_many :pages, :dependent => :delete_all
 
-  validates_presence_of :name, :server, :site_root, :login, :password
+  validates_presence_of :name, :server, :site_root, :site_url, :login, :password
   validates_uniqueness_of :name, :scope => :owner_id
 
   def validate_and_save

@@ -1,4 +1,4 @@
-= javascript_include_tag 'tiny_mce/tiny_mce', 'page'
+= javascript_include_tag 'tiny_mce/tiny_mce', 'mce_image', 'page'
 
 = show_page_content do
   %h2=@page.path
@@ -19,3 +19,9 @@
         .section{:id=>"section_#{index}"}
           = text_area_tag 'sections[]', section, :id => nil
       = submit_tag :update
+
+:javascript
+  initTinyMCE({
+    new_image_path: '#{new_site_image_path(@site)}',
+    document_base_url: '#{@site.site_url}/'
+  });

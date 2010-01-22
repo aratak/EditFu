@@ -1,36 +1,30 @@
-!!! strict
-%html
-  %head
-    %title Edit-Fu
-    %meta{ 'http-equiv' => 'Content-Type', :content => 'text/html; charset=UTF-8' }
-    = stylesheet_link_tag 'application', 'tree'
-    = javascript_include_tag :defaults, 'tree' , :cache => true
+= content_for :body do
+  #systemBar
+    - unless user_signed_in?
+      = link_to 'Login', new_user_session_path
+    - if user_signed_in?
+      - if current_user.admin?
+        = link_to 'Owners', admin_owners_path
+        = link_to 'Audit', admin_audits_path
+      - else
+        = link_to 'Sites', sites_path  
+        - if current_user.owner?
+          = link_to 'Editors', editors_path  
 
-  %body
-    #systemBar
-      - unless user_signed_in?
-        = link_to 'Login', new_user_session_path
-      - if user_signed_in?
-        - if current_user.admin?
-          = link_to 'Owners', admin_owners_path
-          = link_to 'Audit', admin_audits_path
-        - else
-          = link_to 'Sites', sites_path  
-          - if current_user.owner?
-            = link_to 'Editors', editors_path  
+      = link_to 'Preferences', preferences_path
+      |
+      Logged in as: 
+      %strong= current_user.name
+      |
+      = link_to 'Logout', destroy_user_session_path
+  #sourceBar
+    = yield :sourceBar
+  #actionWindow
+    #success= flash[:success]
+    #failure= flash[:failure]
+    = yield
+  #actionBar
+    - owner? do
+      = yield :actionBar
 
-        = link_to 'Preferences', preferences_path
-        |
-        Logged in as: 
-        %strong= current_user.name
-        |
-        = link_to 'Logout', destroy_user_session_path
-    #sourceBar
-      = yield :sourceBar
-    #actionWindow
-      #success= flash[:success]
-      #failure= flash[:failure]
-      = yield
-    #actionBar
-      - owner? do
-        = yield :actionBar
+= render :file => 'layouts/page'

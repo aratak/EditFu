@@ -13,6 +13,9 @@
         = form.text_field :site_root
         = link_to_function image_tag('tree/open.png'), 'SiteFtpTree.show()'
     %tr
+      %th= form.label :site_url
+      %td= form.text_field :site_url
+    %tr
       %th= form.label :login
       %td= form.text_field :login
     %tr
