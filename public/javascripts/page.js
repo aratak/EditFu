@@ -31,9 +31,8 @@ function initMceEditor(ed) {
       });
   });
 
-  ed.addButton('efImage', {
+  ed.addButton('image', {
     title: 'Add Image',
-    image: '/javascripts/tiny_mce/plugins/advimage/img/sample.gif',
     cmd: 'efImage'
   });
 }
@@ -44,7 +43,7 @@ function initTinyMCE(settings) {
     theme: "advanced",
     theme_advanced_buttons1: 
       'bold,italic,underline,strikethrough,separator,' + 
-      'undo,redo,separator,bullist,numlist,separator,efImage',
+      'undo,redo,separator,bullist,numlist,separator,image',
     theme_advanced_buttons2: "",
     theme_advanced_buttons3: "",
     
