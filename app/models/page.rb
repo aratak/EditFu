@@ -25,6 +25,14 @@ class Page < ActiveRecord::Base
     FtpClient.put_page(self)
   end
 
+  def images
+    FtpClient.get_page(self)
+
+    map_images(document) do |element|
+      element.attributes['src']
+    end
+  end
+
   private
 
   def document
@@ -33,5 +41,9 @@ class Page < ActiveRecord::Base
 
   def map_sections(document)
     (document / '.editfu').map { |element| yield element }
+  end
+
+  def map_images(document)
+    (document / 'img.editfu').map { |element| yield element }
   end
 end

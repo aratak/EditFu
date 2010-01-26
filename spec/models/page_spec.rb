@@ -17,9 +17,7 @@ describe Page do
         EOS
       end
 
-      sections = @page.sections
-      sections.first.should == 'Hello, <b>World</b>!'
-      sections.size.should == 1
+      @page.sections.should == ['Hello, <b>World</b>!']
     end
   end
 
@@ -42,6 +40,25 @@ describe Page do
           </body>
         </html>
       EOS
+    end
+  end
+
+  describe "#images" do
+    it "should return a list of tagged images from a remote server" do
+      FtpClient.should_receive(:get_page).with(@page).and_return do
+        @page.content = <<-EOS
+          <html>
+            <body>
+              <img src='photo.gif' class='editfu'>
+              <div>
+                <img src='images/banner.png' class='editfu'>
+              </div>
+            </body>
+          </html>
+        EOS
+      end
+
+      @page.images.should == ['photo.gif', 'images/banner.png']
     end
   end
 end
