@@ -6,7 +6,7 @@ describe Page do
   end
 
   describe "sections" do
-    it "should get page content from remote server and cache it" do
+    it "should parse page html content" do
       @page.content = <<-EOS
         <html>
           <body>
@@ -20,7 +20,7 @@ describe Page do
   end
 
   describe "sections=" do
-    it "should put page content to remote server" do
+    it "should merge updated sections into page html" do
       @page.content = <<-EOS
         <html>
           <body>
@@ -41,7 +41,7 @@ describe Page do
   end
 
   describe "#images" do
-    it "should return a list of tagged images from a remote server" do
+    it "should return a list of tagged images from a page" do
       @page.content = <<-EOS
         <html>
           <body>
