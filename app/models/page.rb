@@ -6,15 +6,14 @@ class Page < ActiveRecord::Base
   validates_uniqueness_of :path, :scope => :site_id
 
   def sections
-    map_sections(document) do |element|
+    map_sections do |element|
       element.inner_html
     end
   end
 
   def sections=(sections)
     i = 0
-    document = Hpricot(content) 
-    map_sections(document) do |element|
+    map_sections do |element|
       element.inner_html = sections[i]
       i = i + 1
     end
@@ -22,7 +21,7 @@ class Page < ActiveRecord::Base
   end
 
   def images
-    map_images(document) do |element|
+    map_images do |element|
       element.attributes['src']
     end
   end
@@ -30,14 +29,14 @@ class Page < ActiveRecord::Base
   private
 
   def document
-    Hpricot(content) 
+    @document ||= Hpricot(content) 
   end
 
-  def map_sections(document)
+  def map_sections
     (document / '.editfu').map { |element| yield element }
   end
 
-  def map_images(document)
+  def map_images
     (document / 'img.editfu').map { |element| yield element }
   end
 end
