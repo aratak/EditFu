@@ -2,9 +2,9 @@ require 'ftp_client'
 
 class PagesController < ApplicationController
   layout 'sites'
-  before_filter :authenticate_user!, :only => [:show, :update_sections]
-  before_filter :authenticate_owner!, :except => [:show, :update_sections]
-  before_filter :check_trial_period, :only => [:create, :update_sections]
+  before_filter :authenticate_user!, :only => [:show, :update]
+  before_filter :authenticate_owner!, :except => [:show, :update]
+  before_filter :check_trial_period, :only => [:create, :update]
   before_filter :check_limits, :only => :create
 
   def show
@@ -39,10 +39,10 @@ class PagesController < ApplicationController
     redirect_to site_path(@site)
   end
 
-  def update_sections
-    FtpClient.put_page(find_page)
-    @page.sections = params[:sections]
+  def update
+    find_page.sections = params[:sections]
     @page.save
+    FtpClient.put_page(@page)
 
     render :json => { :status => "ok" }
   end

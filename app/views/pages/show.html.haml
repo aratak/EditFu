@@ -13,8 +13,9 @@
   - if @error
     .error= @error
   - else
-    - form_tag update_sections_site_page_path(@site, @page),  |
-      :id => 'update_form', :onsubmit => 'return savePageSections();' do |
+    - form_for [@site, @page], :html => { |
+        :id => 'update_form', :onsubmit => 'return savePageSections();' |
+      } do |
       - @sections.each_with_index do |section, index|
         .section{:id=>"section_#{index}"}
           = text_area_tag 'sections[]', section, :id => nil
