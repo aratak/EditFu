@@ -9,7 +9,8 @@ class PagesController < ApplicationController
 
   def show
     begin
-      @sections = find_page.sections
+      FtpClient.get_page(find_page)
+      @sections = @page.sections
       @error = "Page hasn't editable content" if @sections.blank?
       @page.save
     rescue FtpClientError => e
@@ -39,7 +40,8 @@ class PagesController < ApplicationController
   end
 
   def update_sections
-    find_page.sections = params[:sections]
+    FtpClient.put_page(find_page)
+    @page.sections = params[:sections]
     @page.save
 
     render :json => { :status => "ok" }

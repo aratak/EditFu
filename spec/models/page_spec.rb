@@ -7,15 +7,13 @@ describe Page do
 
   describe "sections" do
     it "should get page content from remote server and cache it" do
-      FtpClient.should_receive(:get_page).with(@page).and_return do
-        @page.content = <<-EOS
-          <html>
-            <body>
-              <h1 class='editfu'>Hello, <b>World</b>!</h1>
-            </body>
-          </html>
-        EOS
-      end
+      @page.content = <<-EOS
+        <html>
+          <body>
+            <h1 class='editfu'>Hello, <b>World</b>!</h1>
+          </body>
+        </html>
+      EOS
 
       @page.sections.should == ['Hello, <b>World</b>!']
     end
@@ -30,7 +28,6 @@ describe Page do
           </body>
         </html>
       EOS
-      FtpClient.should_receive(:put_page).with(@page)
 
       @page.sections = ['Good-by, blue sky...']
       @page.content.should == <<-EOS
@@ -45,18 +42,16 @@ describe Page do
 
   describe "#images" do
     it "should return a list of tagged images from a remote server" do
-      FtpClient.should_receive(:get_page).with(@page).and_return do
-        @page.content = <<-EOS
-          <html>
-            <body>
-              <img src='photo.gif' class='editfu'>
-              <div>
-                <img src='images/banner.png' class='editfu'>
-              </div>
-            </body>
-          </html>
-        EOS
-      end
+      @page.content = <<-EOS
+        <html>
+          <body>
+            <img src='photo.gif' class='editfu'>
+            <div>
+              <img src='images/banner.png' class='editfu'>
+            </div>
+          </body>
+        </html>
+      EOS
 
       @page.images.should == ['photo.gif', 'images/banner.png']
     end
