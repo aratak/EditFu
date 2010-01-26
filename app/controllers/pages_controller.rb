@@ -11,7 +11,11 @@ class PagesController < ApplicationController
     begin
       FtpClient.get_page(find_page)
       @sections = @page.sections
-      @error = "Page hasn't editable content" if @sections.blank?
+      @images = @page.images
+
+      if @sections.blank? && @images.blank?
+        @error = "Page hasn't editable content" 
+      end
       @page.save
     rescue FtpClientError => e
       @error = e.message
@@ -41,6 +45,7 @@ class PagesController < ApplicationController
 
   def update
     find_page.sections = params[:sections]
+    @page.images = params[:images]
     @page.save
     FtpClient.put_page(@page)
 

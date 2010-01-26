@@ -1,25 +1,29 @@
-function updateImage(src) {
+function updateSection(imageSrc) {
   var ed = tinyMCEPopup.editor;
   var el = ed.selection.getNode();
   tinyMCEPopup.restoreSelection();
 
-  if (!src) {
+  if (!imageSrc) {
     if (el && el.nodeName == 'IMG') {
       ed.dom.remove(el);
       ed.execCommand('mceRepaint');
     }
   } else {
     if (el && el.nodeName == 'IMG') {
-      ed.dom.setAttrib(el, args);
+      ed.dom.setAttrib(el, 'src', imageSrc);
     } else {
       ed.execCommand('mceInsertContent', false, 
           '<img id="__mce_tmp" />', {skip_undo: 1});
-      ed.dom.setAttrib('__mce_tmp', 'src', src);
+      ed.dom.setAttrib('__mce_tmp', 'src', imageSrc);
       ed.dom.setAttrib('__mce_tmp', 'id', '');
       ed.undoManager.add();
     }
   }
-  tinyMCEPopup.close();
+}
+
+function updateImage(src) {
+  editedImage.image.src = tinyMCE.settings.site_url + '/' + src;
+  editedImage.input.value = src;
 }
 
 function submitForm() {
@@ -39,8 +43,12 @@ function submitForm() {
       if(response.error) {
         $('failure').innerHTML = 'Server error';
       } else {
-        $('success').innerHTML = 'Good work.';
-        updateImage(response.src);
+        if(editedImage) {
+          updateImage(response.src);
+        } else {
+          updateSection(response.src);
+        }
+        tinyMCEPopup.close();
       }
     }
   });

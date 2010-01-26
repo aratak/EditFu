@@ -16,13 +16,24 @@
     - form_for [@site, @page], :html => { |
         :id => 'update_form', :onsubmit => 'return savePageSections();' |
       } do |
-      - @sections.each_with_index do |section, index|
-        .section{:id=>"section_#{index}"}
-          = text_area_tag 'sections[]', section, :id => nil
+      - unless @sections.empty?
+        #sections
+          %h3 Section List
+          - @sections.each_with_index do |section, index|
+            .section{:id=>"section_#{index}"}
+              = text_area_tag 'sections[]', section, :id => nil
+
+      - unless @images.empty?
+        #images
+          %h3 Image List
+          - @images.each do |src|
+            %img{:src => "#{@site.site_url}/#{src}"}
+            = text_field_tag 'images[]', src, :id => nil, :style => 'display: none;'
       = submit_tag :update
 
 :javascript
   initTinyMCE({
+    site_url: '#{@site.site_url}',
     new_image_path: '#{new_site_image_path(@site)}',
     document_base_url: '#{@site.site_url}/'
   });

@@ -4,9 +4,7 @@ function savePageSections() {
   form.commit.disable();
 
   tinyMCE.triggerSave();
-  new Ajax.Request(form.action, {
-    asynchronous: true,
-    parameters: Form.serialize(form),
+  form.request({
     onSuccess: function() {
       $('saveNotice').hide();
       form.commit.enable();
@@ -50,3 +48,17 @@ function initTinyMCE(settings) {
     setup: initMceEditor
   }).toObject());
 }
+
+function swapOutImage(img) {
+  popup = window.open(tinyMCE.settings.new_image_path, '', "width=300,height=100");
+  popup.editedImage = {
+    image: img,
+    input: img.next('input')
+  };
+}
+
+Event.observe(window, 'load', function() {
+  $$('#images img').each(function(img) {
+    Event.observe(img, 'click', swapOutImage.curry(img));
+  });
+});

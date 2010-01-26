@@ -36,10 +36,8 @@ class Page < ActiveRecord::Base
   end
 
   def update_elements(img, values)
-    i = 0
-    elements(img).each do |element|
-      yield element, values[i]
-      i = i + 1
+    elements(img).each_with_index do |element, index|
+      yield element, values[index]
     end
     self.content = document.to_html
   end

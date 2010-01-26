@@ -70,3 +70,7 @@ table td {
 #actionBar {
   clear: both;
 }
+
+#images img {
+  cursor: pointer;
+}
