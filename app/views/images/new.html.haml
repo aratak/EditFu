@@ -1,18 +1,35 @@
+- @title = 'Insert/Edit Image'
 = content_for :body do
-  %h2 Add New Image
+  = javascript_include_tag 'image', 'tiny_mce/tiny_mce_popup', 'tiny_mce/utils/mctabs'
 
-  = javascript_include_tag 'image', 'tiny_mce/tiny_mce_popup'
+  .tabs
+    %ul
+      %li#select_tab.current
+        %span Select
+      %li#upload_tab
+        %span Upload
 
-  #success
-  #failure
-  #processing{:style => 'display: none;'} Uploading image to server...
+  .panel_wrapper
+    #select_panel.panel.current
+      #images
+        - @images.each do |src|
+          .image
+            .thumbnail
+              %img{:src => "#{@site.site_url}/#{src}"}
+            .title= File.basename(src)
+      .clearLeft
+    #upload_panel.panel
+      #success
+      #failure
+      #processing{:style => 'display: none;'} Uploading image to server...
 
-  - form_tag site_images_path(@site), |
-    :id => 'new_image_form', :multipart => true, |
-    :method => :post, :onsubmit => 'return submitForm();' do |
+      - form_tag site_images_path(@site), |
+        :id => 'new_image_form', :multipart => true, |
+        :method => :post, :onsubmit => 'return false;' do |
 
-    %table.card
-      %tr
-        %th= label_tag 'image'
-        %td= file_field_tag 'image'
-    = submit_tag :submit
+        %table
+          %tr
+            %td
+              %strong Select your local file for upload:
+          %tr
+            %td= file_field_tag 'image', :id => 'uploadImage'

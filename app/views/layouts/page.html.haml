@@ -1,7 +1,7 @@
 !!! strict
 %html
   %head
-    %title Edit-Fu
+    %title= @title || 'Edit-Fu'
     %meta{ 'http-equiv' => 'Content-Type', :content => 'text/html; charset=UTF-8' }
     = stylesheet_link_tag 'application', 'tree'
     = javascript_include_tag :defaults, 'tree', 'upload', :cache => true

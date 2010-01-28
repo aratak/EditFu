@@ -4,6 +4,16 @@ class ImagesController < ApplicationController
 
   def new
     find_site
+
+    begin
+      dir = "#{@site.site_root}/#{Site::IMAGES_FOLDER}" 
+      @images = FtpClient.ls(@site, dir).map do |f| 
+        "#{Site::IMAGES_FOLDER}/#{f[:name]}" 
+      end
+      @images.sort!
+    rescue
+      @images = []
+    end
   end
 
   def create

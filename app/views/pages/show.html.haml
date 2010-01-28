@@ -25,10 +25,12 @@
 
       - unless @images.empty?
         #images
-          %h3 Image List
           - @images.each do |src|
-            %img{:src => "#{@site.site_url}/#{src}"}
-            = text_field_tag 'images[]', src, :id => nil, :style => 'display: none;'
+            .image
+              .thumbnail
+                %img{:src => "#{@site.site_url}/#{src}"}
+              = hidden_field_tag 'images[]', src, :id => nil
+        .clearLeft
       = submit_tag :update
 
 :javascript

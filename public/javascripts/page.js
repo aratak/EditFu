@@ -13,6 +13,13 @@ function savePageSections() {
   return false;
 }
 
+var popupProps = $H({
+  width: 500,
+  height: 300,
+  resizable: 1,
+  scrollbars: 1
+});
+
 function initMceEditor(ed) {
   ed.addCommand('efImage', function() {
       // Internal image object like a flash placeholder
@@ -21,12 +28,9 @@ function initMceEditor(ed) {
         return;
       }
 
-      ed.windowManager.open({
-        file: ed.settings.new_image_path,
-        width: 300,
-        height: 100,
-        inline: 1
-      });
+      ed.windowManager.open(
+        popupProps.merge({file: ed.settings.new_image_path}).toObject()
+      );
   });
 
   ed.addButton('image', {
@@ -50,10 +54,13 @@ function initTinyMCE(settings) {
 }
 
 function swapOutImage(img) {
-  popup = window.open(tinyMCE.settings.new_image_path, '', "width=300,height=100");
+  var features = popupProps.map(function(pair) {
+    return pair.key + '=' + pair.value;
+  }).join(',');
+  var popup = window.open(tinyMCE.settings.new_image_path, '', features);
   popup.editedImage = {
     image: img,
-    input: img.next('input')
+    input: img.up().next('input')
   };
 }
 
