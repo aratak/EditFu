@@ -15,9 +15,7 @@ function savePageSections() {
 
 var popupProps = $H({
   width: 500,
-  height: 300,
-  resizable: 1,
-  scrollbars: 1
+  height: 300
 });
 
 function initMceEditor(ed) {
