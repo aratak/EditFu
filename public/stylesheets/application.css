@@ -91,10 +91,12 @@ table td {
   overflow: hidden;
   height: 75px;
   width: 75px;
+  line-height: 75px;
+  text-align: center;
 }
 
-.image .thumbnail img {
-  height: 75px;
+.thumbnail img {
+  vertical-align: middle;
 }
 
 .image .title {

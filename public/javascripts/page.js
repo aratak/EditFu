@@ -68,4 +68,5 @@ Event.observe(window, 'load', function() {
   $$('#images img').each(function(img) {
     Event.observe(img, 'click', swapOutImage.curry(img));
   });
+  resizeImages();
 });

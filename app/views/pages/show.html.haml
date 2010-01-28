@@ -24,7 +24,7 @@
               = text_area_tag 'sections[]', section, :id => nil
 
       - unless @images.empty?
-        #images
+        #images(style='visibility:hidden')
           - @images.each do |path|
             .image
               .thumbnail

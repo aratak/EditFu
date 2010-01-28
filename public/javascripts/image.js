@@ -60,13 +60,16 @@ Event.observe(window, 'load', function() {
       mcTabs.displayTab(id, id.sub('tab', 'panel'));
     });
   });
-
   $$('#images img').each(function(img) {
     Event.observe(img, 'click', function() {
       var path = img.src.substr(tinyMCE.settings.document_base_url.length);
       updateImage(path);
     });
   });
-
   Event.observe('uploadImage', 'change', submitUploadForm);
+
+  $$('#images .title').each(function(title) {
+    title.innerHTML = title.innerHTML.truncate(20);
+  });
+  resizeImages();
 });

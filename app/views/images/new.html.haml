@@ -11,7 +11,7 @@
 
   .panel_wrapper
     #select_panel.panel.current
-      #images
+      #images(style='visibility:hidden;')
         - @images.each do |name|
           .image
             .thumbnail
