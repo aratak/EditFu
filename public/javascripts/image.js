@@ -1,44 +1,36 @@
-function updateSectionImage(imageSrc) {
+function updateEditorImage(path) {
   var ed = tinyMCEPopup.editor;
   var el = ed.selection.getNode();
   tinyMCEPopup.restoreSelection();
 
-  if (!imageSrc) {
-    if (el && el.nodeName == 'IMG') {
-      ed.dom.remove(el);
-      ed.execCommand('mceRepaint');
-    }
+  if (el && el.nodeName == 'IMG') {
+    ed.dom.setAttrib(el, 'src', path);
   } else {
-    if (el && el.nodeName == 'IMG') {
-      ed.dom.setAttrib(el, 'src', imageSrc);
-    } else {
-      ed.execCommand('mceInsertContent', false, 
-          '<img id="__mce_tmp" />', {skip_undo: 1});
-      ed.dom.setAttrib('__mce_tmp', 'src', imageSrc);
-      ed.dom.setAttrib('__mce_tmp', 'id', '');
-      ed.undoManager.add();
-    }
+    ed.execCommand('mceInsertContent', false, 
+        '<img id="__mce_tmp" />', {skip_undo: 1});
+    ed.dom.setAttrib('__mce_tmp', 'src', path);
+    ed.dom.setAttrib('__mce_tmp', 'id', '');
+    ed.undoManager.add();
   }
   tinyMCEPopup.close();
 }
 
-function updateStandaloneImage(src) {
-  editedImage.image.src = tinyMCE.settings.site_url + '/' + src;
-  editedImage.input.value = src;
+function updateStandaloneImage(path) {
+  editedImage.image.src = tinyMCE.settings.site_url + '/' + path;
+  editedImage.input.value = path;
   window.close();
 }
 
-function updateImage(src) {
+function updateImage(path) {
   if(window.editedImage) {
-    updateStandaloneImage(src);
+    updateStandaloneImage(path);
   } else {
-    updateSectionImage(src);
+    updateEditorImage(path);
   }
 }
 
 function submitUploadForm() {
   if($F('uploadImage').blank()) {
-    $('failure').innerHTML = 'Please select image.';
     return;
   }
 
@@ -71,8 +63,8 @@ Event.observe(window, 'load', function() {
 
   $$('#images img').each(function(img) {
     Event.observe(img, 'click', function() {
-      var src = img.src.substr(tinyMCE.settings.document_base_url.length);
-      updateImage(src);
+      var path = img.src.substr(tinyMCE.settings.document_base_url.length);
+      updateImage(path);
     });
   });
 

@@ -7,10 +7,7 @@ class ImagesController < ApplicationController
 
     begin
       dir = "#{@site.site_root}/#{Site::IMAGES_FOLDER}" 
-      @images = FtpClient.ls(@site, dir).map do |f| 
-        "#{Site::IMAGES_FOLDER}/#{f[:name]}" 
-      end
-      @images.sort!
+      @images = FtpClient.ls(@site, dir).map { |f| f[:name] }.sort!
     rescue
       @images = []
     end

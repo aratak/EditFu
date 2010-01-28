@@ -25,11 +25,11 @@
 
       - unless @images.empty?
         #images
-          - @images.each do |src|
+          - @images.each do |path|
             .image
               .thumbnail
-                %img{:src => "#{@site.site_url}/#{src}"}
-              = hidden_field_tag 'images[]', src, :id => nil
+                %img{:src => @site.site_url + '/' + path}
+              = hidden_field_tag 'images[]', path, :id => nil
         .clearLeft
       = submit_tag :update
 

@@ -12,11 +12,11 @@
   .panel_wrapper
     #select_panel.panel.current
       #images
-        - @images.each do |src|
+        - @images.each do |name|
           .image
             .thumbnail
-              %img{:src => "#{@site.site_url}/#{src}"}
-            .title= File.basename(src)
+              %img{:src => image_url(name), :alt => name}
+            .title= name
       .clearLeft
     #upload_panel.panel
       #success
