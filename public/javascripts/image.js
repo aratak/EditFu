@@ -21,9 +21,18 @@ function updateEditorImage(img) {
 }
 
 function updateStandaloneImage(img) {
-  editedImage.image.src = img.src;
-  editedImage.image.height = img.height;
-  editedImage.image.width = img.width;
+  if(img.originalHeight != editedImage.image.originalHeight ||
+     img.originalWidth != editedImage.image.originalWidth) {
+    var s = confirm('Dimensions of original and new image are different ' +
+      'so operation may cause display issues. Are you really want to proceed?');
+    if(!s) {
+      return;
+    }
+  }
+
+  ['src', 'height', 'width', 'originalHeight', 'originalWidth'].each(function(f) {
+    editedImage.image[f] = img[f];
+  });
   editedImage.input.value = getThumbnailPath(img);
   window.close();
 }
