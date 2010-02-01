@@ -44,8 +44,7 @@ describe FtpClient do
     it "should check images folder exists and upload image file" do
       FtpClient.should_receive(:open).with(@site).and_yield(@ftp)
       @ftp.should_receive(:ls).with(Site::IMAGES_FOLDER).and_return [
-        "drwxr-xr-x    5 1003     1003         4096 Dec 11 11:31 " +
-        Site::IMAGES_FOLDER
+        "drwxr-xr-x    5 1003     1003         4096 Dec 11 11:31 image.png"
       ]
       @ftp.should_receive(:put).with('/tmp/1.gif', "#{Site::IMAGES_FOLDER}/photo.gif")
 
@@ -59,6 +58,46 @@ describe FtpClient do
       @ftp.should_receive(:put)
 
       FtpClient.put_image(@site, '/tmp/1.gif', 'photo.gif')
+    end
+
+    it "should skip mkdir error in hope it's cause by empty image folder existence" do
+      FtpClient.should_receive(:open).and_yield(@ftp)
+      @ftp.should_receive(:ls).and_return []
+      @ftp.should_receive(:mkdir).and_raise(FtpClientError)
+      @ftp.should_receive(:put)
+
+      FtpClient.put_image(@site, '/tmp/1.gif', 'photo.gif')
+    end
+    
+    it "should add index to basename if file already exists" do
+      FtpClient.should_receive(:open).with(@site).and_yield(@ftp)
+      @ftp.should_receive(:ls).and_return [
+        "drwxr-xr-x    5 1003     1003         4096 Dec 11 11:31 photo.gif"
+      ]
+      @ftp.should_receive(:put)
+
+      FtpClient.put_image(@site, '/tmp/1.gif', 'photo.gif').should == 'photo2.gif'
+    end
+
+    it "should iterate over existing filenames during image name generation" do
+      FtpClient.should_receive(:open).with(@site).and_yield(@ftp)
+      @ftp.should_receive(:ls).and_return [
+        "drwxr-xr-x    5 1003     1003         4096 Dec 11 11:31 photo.gif",
+        "drwxr-xr-x    5 1003     1003         4096 Dec 11 11:31 photo2.gif"
+      ]
+      @ftp.should_receive(:put)
+
+      FtpClient.put_image(@site, '/tmp/1.gif', 'photo.gif').should == 'photo3.gif'
+    end
+
+    it "should use max revision name in name generation" do
+      FtpClient.should_receive(:open).with(@site).and_yield(@ftp)
+      @ftp.should_receive(:ls).and_return [
+        "drwxr-xr-x    5 1003     1003         4096 Dec 11 11:31 photo100.gif"
+      ]
+      @ftp.should_receive(:put)
+
+      FtpClient.put_image(@site, '/tmp/1.gif', 'photo.gif').should == 'photo101.gif'
     end
   end
 

@@ -27,8 +27,15 @@ class FtpClient
 
   def self.put_image(site, local_path, remote_name)
     open site do |f|
-      if f.ls(Site::IMAGES_FOLDER).empty?
-        f.mkdir Site::IMAGES_FOLDER
+      images = list(f, Site::IMAGES_FOLDER).map { |file| file[:name] }
+      if !images.empty?
+        remote_name = generate_image_name(remote_name, images)
+      else
+        begin
+          f.mkdir Site::IMAGES_FOLDER
+        rescue FtpClientError
+          # Seems like image folder already exists - skip error
+        end
       end
       f.put local_path, Site::IMAGES_FOLDER + '/' + remote_name
     end
@@ -38,10 +45,7 @@ class FtpClient
   def self.ls(site, folder)
     # FTP doesn't raise FTPPermError on ls - we should chdir to get it.
     open site, folder do |f|
-      f.ls.map do |line|
-        line =~ /(\S+)\s+(\S+\s+){7}(.*)/
-        { :name => $3, :type => $1.start_with?('d') ? :folder : :file }
-      end
+      list(f)
     end
   end
 
@@ -65,6 +69,26 @@ class FtpClient
     ensure
       f.close
     end
+  end
+
+  def self.list(ftp, *args) 
+    ftp.ls(*args).map do |line|
+      line =~ /(\S+)\s+(\S+\s+){7}(.*)/
+      { :name => $3, :type => $1.start_with?('d') ? :folder : :file }
+    end
+  end
+
+  def self.generate_image_name(original_name, existing_names)
+    original_name =~ /^([^.]*)(\.?.*)$/
+    basename, suffix = $1, $2
+    revisions = existing_names.map do |n| 
+      n =~ /^#{basename}(\d*)#{suffix}$/ 
+      $1
+    end.compact.map { |n| n.blank? ? 1 : n.to_i }
+    
+    return original_name if revisions.empty?
+    rev = revisions.max + 1
+    basename + rev.to_s + suffix
   end
 
   def self.translate_ftp_error(e)

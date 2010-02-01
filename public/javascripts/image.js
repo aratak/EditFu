@@ -21,8 +21,9 @@ function updateEditorImage(img) {
 }
 
 function updateStandaloneImage(img) {
-  if(img.originalHeight != editedImage.image.originalHeight ||
-     img.originalWidth != editedImage.image.originalWidth) {
+  var eimg = editedImage.image
+  if(img.originalHeight != eimg.originalHeight ||
+     img.originalWidth != eimg.originalWidth) {
     var s = confirm('Dimensions of original and new image are different ' +
       'so operation may cause display issues. Are you really want to proceed?');
     if(!s) {
@@ -30,10 +31,13 @@ function updateStandaloneImage(img) {
     }
   }
 
-  ['src', 'height', 'width', 'originalHeight', 'originalWidth'].each(function(f) {
-    editedImage.image[f] = img[f];
-  });
+  eimg.src = img.src;
+  eimg.setAttribute('height', img.getAttribute('height'));
+  eimg.setAttribute('width', img.getAttribute('width'));
+  eimg.originalHeight = img.originalHeight;
+  eimg.originalWidth = img.originalWidth;
   editedImage.input.value = getThumbnailPath(img);
+
   window.close();
 }
 
@@ -65,9 +69,10 @@ function submitUploadForm() {
         tmp.innerHTML = response;
 
         var image = tmp.down();
-        image.down('img').onload = function() {
+        var img = image.down('img')
+        img.onload = function() {
           adjustImage(image);
-          updateImage(image.down('img'));
+          updateImage(img);
         };
         $('images').insert(image);
       }
