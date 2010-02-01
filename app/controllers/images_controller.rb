@@ -16,10 +16,10 @@ class ImagesController < ApplicationController
   def create
     begin
       image = params[:image]
-      image_src = FtpClient.put_image(find_site, image.path, image.original_filename)
-      render :text => {:src => image_src}.to_json
+      name = FtpClient.put_image(find_site, image.path, image.original_filename)
+      render :partial => 'show', :locals => { :name => name }
     rescue Exception => e
-      render :text => {:error => e.message}.to_json
+      render :nothing => true
     end
   end
 

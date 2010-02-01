@@ -24,9 +24,9 @@
               = text_area_tag 'sections[]', section, :id => nil
 
       - unless @images.empty?
-        #images(style='visibility:hidden')
+        #images
           - @images.each do |path|
-            .image
+            .image(style='visibility:hidden')
               .thumbnail
                 %img{:src => @site.site_url + '/' + path}
               = hidden_field_tag 'images[]', path, :id => nil

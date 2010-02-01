@@ -42,15 +42,14 @@ describe FtpClient do
 
   describe "put_image" do
     it "should check images folder exists and upload image file" do
-      image_src = "#{Site::IMAGES_FOLDER}/photo.gif"
       FtpClient.should_receive(:open).with(@site).and_yield(@ftp)
       @ftp.should_receive(:ls).with(Site::IMAGES_FOLDER).and_return [
         "drwxr-xr-x    5 1003     1003         4096 Dec 11 11:31 " +
         Site::IMAGES_FOLDER
       ]
-      @ftp.should_receive(:put).with('/tmp/1.gif', image_src)
+      @ftp.should_receive(:put).with('/tmp/1.gif', "#{Site::IMAGES_FOLDER}/photo.gif")
 
-      FtpClient.put_image(@site, '/tmp/1.gif', 'photo.gif').should == image_src
+      FtpClient.put_image(@site, '/tmp/1.gif', 'photo.gif').should == 'photo.gif'
     end
 
     it "should create images folder if it doesn't exist yet" do

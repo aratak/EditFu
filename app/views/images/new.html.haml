@@ -11,12 +11,8 @@
 
   .panel_wrapper
     #select_panel.panel.current
-      #images(style='visibility:hidden;')
-        - @images.each do |name|
-          .image
-            .thumbnail
-              %img{:src => image_url(name), :alt => name}
-            .title= name
+      #images
+        = render :partial => 'show', :collection => @images, :as => :name
       .clearLeft
     #upload_panel.panel
       #success

@@ -115,6 +115,7 @@ table td {
 
 .panel_wrapper {
   height: 255px;
+  overflow-y : auto;
 }
 
 #upload_panel form {

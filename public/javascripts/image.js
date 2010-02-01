@@ -1,4 +1,9 @@
-function updateEditorImage(path) {
+function getThumbnailPath(img) {
+  return img.src.substr(tinyMCE.settings.document_base_url.length);
+}
+
+function updateEditorImage(img) {
+  var path = getThumbnailPath(img);
   var ed = tinyMCEPopup.editor;
   var el = ed.selection.getNode();
   tinyMCEPopup.restoreSelection();
@@ -15,17 +20,19 @@ function updateEditorImage(path) {
   tinyMCEPopup.close();
 }
 
-function updateStandaloneImage(path) {
-  editedImage.image.src = tinyMCE.settings.site_url + '/' + path;
-  editedImage.input.value = path;
+function updateStandaloneImage(img) {
+  editedImage.image.src = img.src;
+  editedImage.image.height = img.height;
+  editedImage.image.width = img.width;
+  editedImage.input.value = getThumbnailPath(img);
   window.close();
 }
 
-function updateImage(path) {
+function updateImage(img) {
   if(window.editedImage) {
-    updateStandaloneImage(path);
+    updateStandaloneImage(img);
   } else {
-    updateEditorImage(path);
+    updateEditorImage(img);
   }
 }
 
@@ -40,12 +47,20 @@ function submitUploadForm() {
       $('processing').show();
     },
 
-    onComplete: function(responseText) {
-      var response = responseText.evalJSON();
-      if(response.error) {
+    onComplete: function(response) {
+      $('processing').hide();
+      if(response.blank()) {
         $('failure').innerHTML = 'Server error';
       } else {
-        updateImage(response.src);
+        var tmp = $(document.createElement('div'));
+        tmp.innerHTML = response;
+
+        var image = tmp.down();
+        image.down('img').onload = function() {
+          adjustImage(image);
+          updateImage(image.down('img'));
+        };
+        $('images').insert(image);
       }
     }
   });
@@ -60,10 +75,11 @@ Event.observe(window, 'load', function() {
       mcTabs.displayTab(id, id.sub('tab', 'panel'));
     });
   });
-  $$('#images img').each(function(img) {
+  $$('#images .image').each(function(image) {
+    var img = image.down('img');
+    adjustImage(image);
     Event.observe(img, 'click', function() {
-      var path = img.src.substr(tinyMCE.settings.document_base_url.length);
-      updateImage(path);
+      updateImage(img);
     });
   });
   Event.observe('uploadImage', 'change', submitUploadForm);
@@ -71,5 +87,4 @@ Event.observe(window, 'load', function() {
   $$('#images .title').each(function(title) {
     title.innerHTML = title.innerHTML.truncate(20);
   });
-  resizeImages();
 });

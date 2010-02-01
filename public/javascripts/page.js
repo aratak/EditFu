@@ -63,8 +63,9 @@ function swapOutImage(img) {
 }
 
 Event.observe(window, 'load', function() {
-  $$('#images img').each(function(img) {
+  $$('#images .image').each(function(image) {
+    var img = image.down('img');
+    adjustImage(image);
     Event.observe(img, 'click', swapOutImage.curry(img));
   });
-  resizeImages();
 });

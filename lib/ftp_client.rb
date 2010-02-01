@@ -26,14 +26,13 @@ class FtpClient
   end
 
   def self.put_image(site, local_path, remote_name)
-    src = Site::IMAGES_FOLDER + '/' + remote_name
     open site do |f|
       if f.ls(Site::IMAGES_FOLDER).empty?
         f.mkdir Site::IMAGES_FOLDER
       end
-      f.put local_path, src
+      f.put local_path, Site::IMAGES_FOLDER + '/' + remote_name
     end
-    src
+    remote_name
   end
 
   def self.ls(site, folder)
