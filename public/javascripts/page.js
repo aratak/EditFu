@@ -15,7 +15,7 @@ function savePageSections() {
 
 var popupProps = $H({
   width: 600,
-  height: 475,
+  height: 460,
   resizable: 'no',
   scrollbars: 'no'
 });

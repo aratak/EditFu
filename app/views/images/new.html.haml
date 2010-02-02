@@ -7,10 +7,6 @@
     :method => :post, :onsubmit => 'return false;' do |
 
     - field_set_tag 'URL' do
-      %h4 
-        Select image from the list, upload new one or 
-        set image URL explicitly:
-
       #images
         = render :partial => 'show', :collection => @images, :as => :name
       .clearLeft
@@ -20,7 +16,7 @@
           %td
             = label_tag 'image', 'Upload:' 
             = file_field_tag 'image', :id => 'uploadImage'
-          %td
+          %td#urlBox(style='visibility: hidden;')
             = label_tag 'url', 'Image URL:'
             = text_field_tag 'url'
 
@@ -32,5 +28,5 @@
         #processing(style='display: none;') Uploading image to the server...
 
       .buttons
-        = submit_tag 'Insert'
+        = submit_tag 'Submit', :id => 'submit'
         = submit_tag 'Cancel', :onclick => 'tinyMCEPopup.close();'

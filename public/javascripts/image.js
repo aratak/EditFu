@@ -120,4 +120,11 @@ Event.observe(window, 'load', function() {
     }
     $('url').value = editedPath;
   }
+
+  document.title = window.opener.imageAction + ' Image';
+  $('submit').value = window.opener.imageAction;
+
+  if(!window.opener.isSwapOut) {
+    $('urlBox').style.visibility = 'visible';
+  }
 });
