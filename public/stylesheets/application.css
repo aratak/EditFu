@@ -76,6 +76,11 @@ table td {
   float: left;
 }
 
+#image_form #images {
+  height: 375px;
+  overflow-y: auto;
+}
+
 #images .image {
   float: left;
   cursor: pointer;
@@ -85,6 +90,10 @@ table td {
 
 #images .image:hover {
   background-color: #FFFFCC;
+}
+
+#images .image.selected {
+  background-color: #FFFF66;
 }
 
 .image .thumbnail {
@@ -109,17 +118,20 @@ table td {
   text-align: center;
 }
 
-.tabs li {
-  cursor: pointer;
+.inputs {
+  width: 100%;
 }
 
-.panel_wrapper {
-  height: 255px;
-  overflow-y : auto;
+.inputs #url {
+  width: 200px;
 }
 
-#upload_panel form {
-  padding-top: 40px;
+.messages {
+  float: left;
+}
+
+.buttons {
+  float: right;
 }
 
 .clearLeft {

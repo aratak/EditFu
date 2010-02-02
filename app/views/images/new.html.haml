@@ -2,30 +2,35 @@
 = content_for :body do
   = javascript_include_tag 'image', 'tiny_mce/tiny_mce_popup', 'tiny_mce/utils/mctabs'
 
-  .tabs
-    %ul
-      %li#select_tab.current
-        %span Select
-      %li#upload_tab
-        %span Upload
+  - form_tag site_images_path(@site), |
+    :id => 'image_form', :multipart => true, |
+    :method => :post, :onsubmit => 'return false;' do |
 
-  .panel_wrapper
-    #select_panel.panel.current
+    - field_set_tag 'URL' do
+      %h4 
+        Select image from the list, upload new one or 
+        set image URL explicitly:
+
       #images
         = render :partial => 'show', :collection => @images, :as => :name
       .clearLeft
-    #upload_panel.panel
-      #success
-      #failure
-      #processing{:style => 'display: none;'} Uploading image to server...
 
-      - form_tag site_images_path(@site), |
-        :id => 'new_image_form', :multipart => true, |
-        :method => :post, :onsubmit => 'return false;' do |
+      %table.inputs
+        %tr
+          %td
+            = label_tag 'image', 'Upload:' 
+            = file_field_tag 'image', :id => 'uploadImage'
+          %td
+            = label_tag 'url', 'Image URL:'
+            = text_field_tag 'url'
 
-        %table
-          %tr
-            %td
-              %strong Select your local file for upload:
-          %tr
-            %td= file_field_tag 'image', :id => 'uploadImage'
+
+    .mceActionPanel
+      .messages
+        #success
+        #failure
+        #processing(style='display: none;') Uploading image to the server...
+
+      .buttons
+        = submit_tag 'Insert'
+        = submit_tag 'Cancel', :onclick => 'tinyMCEPopup.close();'

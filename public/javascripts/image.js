@@ -1,29 +1,34 @@
 function getThumbnailPath(img) {
-  return img.src.substr(tinyMCE.settings.document_base_url.length);
+  return img.src.sub(tinyMCE.settings.document_base_url, '');
 }
 
-function updateEditorImage(img) {
-  var path = getThumbnailPath(img);
+function selectImage(image) {
+  $$('#images .image.selected').each(function(selected) {
+    selected.removeClassName('selected');
+  });
+  image.addClassName('selected');
+
+  $('url').value = decodeURIComponent(getThumbnailPath(image.down('img')));
+}
+
+function updateEditorImage(edited, path) {
   var ed = tinyMCEPopup.editor;
-  var el = ed.selection.getNode();
   tinyMCEPopup.restoreSelection();
 
-  if (el && el.nodeName == 'IMG') {
-    ed.dom.setAttrib(el, 'src', path);
+  if (edited) {
+    ed.dom.setAttrib(edited, 'src', path);
   } else {
     ed.execCommand('mceInsertContent', false, 
-        '<img id="__mce_tmp" />', {skip_undo: 1});
+        '<img id="__mce_tmp" />', { skip_undo: 1 });
     ed.dom.setAttrib('__mce_tmp', 'src', path);
     ed.dom.setAttrib('__mce_tmp', 'id', '');
     ed.undoManager.add();
   }
-  tinyMCEPopup.close();
 }
 
-function updateStandaloneImage(img) {
-  var eimg = editedImage.image
-  if(img.originalHeight != eimg.originalHeight ||
-     img.originalWidth != eimg.originalWidth) {
+function swapOutImage(edited, selected) {
+  if(edited.originalHeight != selected.originalHeight ||
+     edited.originalWidth != selected.originalWidth) {
     var s = confirm('Dimensions of original and new image are different ' +
       'so operation may cause display issues. Are you really want to proceed?');
     if(!s) {
@@ -31,22 +36,28 @@ function updateStandaloneImage(img) {
     }
   }
 
-  eimg.src = img.src;
-  eimg.setAttribute('height', img.getAttribute('height'));
-  eimg.setAttribute('width', img.getAttribute('width'));
-  eimg.originalHeight = img.originalHeight;
-  eimg.originalWidth = img.originalWidth;
-  editedImage.input.value = getThumbnailPath(img);
-
-  window.close();
+  edited.src = selected.src;
+  edited.setAttribute('height', selected.getAttribute('height'));
+  edited.setAttribute('width', selected.getAttribute('width'));
+  edited.originalHeight = selected.originalHeight;
+  edited.originalWidth = selected.originalWidth;
+  window.opener.imageInput.value = getThumbnailPath(selected);
 }
 
-function updateImage(img) {
-  if(window.editedImage) {
-    updateStandaloneImage(img);
+function updateImage() {
+  var edited = window.opener.editedImage;
+  if(!window.opener.isSwapOut) {
+    var url = $F('url');
+    if (!url.blank()) {
+      updateEditorImage(edited, url);
+    }
   } else {
-    updateEditorImage(img);
+    var selected = $('images').down('.image.selected img');
+    if(selected) {
+      swapOutImage(edited, selected);
+    }
   }
+  tinyMCEPopup.close();
 }
 
 function submitUploadForm() {
@@ -54,7 +65,7 @@ function submitUploadForm() {
     return;
   }
 
-  AjaxUpload.submit($('new_image_form'), {
+  AjaxUpload.submit($('image_form'), {
     onStart: function() {
       $('failure').innerHTML = '';
       $('processing').show();
@@ -72,28 +83,21 @@ function submitUploadForm() {
         var img = image.down('img')
         img.onload = function() {
           adjustImage(image);
-          updateImage(img);
+          selectImage(image);
         };
         $('images').insert(image);
       }
     }
   });
 
-  return $('new_image_form').submit();
+  return $('image_form').submit();
 }
 
 Event.observe(window, 'load', function() {
-  $$('.tabs span').each(function(tab) {
-    Event.observe(tab, 'click', function() {
-      var id = tab.up('li').id;
-      mcTabs.displayTab(id, id.sub('tab', 'panel'));
-    });
-  });
   $$('#images .image').each(function(image) {
-    var img = image.down('img');
     adjustImage(image);
-    Event.observe(img, 'click', function() {
-      updateImage(img);
+    Event.observe(image, 'click', function() {
+      selectImage(image);
     });
   });
   Event.observe('uploadImage', 'change', submitUploadForm);
@@ -101,4 +105,19 @@ Event.observe(window, 'load', function() {
   $$('#images .title').each(function(title) {
     title.innerHTML = title.innerHTML.truncate(20);
   });
+
+  Event.observe($('image_form'), 'submit', function() {
+    updateImage();
+    return false;
+  });
+
+  if(window.opener.editedImage) {
+    var editedPath = decodeURIComponent(getThumbnailPath(window.opener.editedImage));
+    var editedUrl = tinyMCE.settings.document_base_url + editedPath;
+    var editedImg = $('images').down('img[src="' + editedUrl + '"]');
+    if(editedImg) {
+      selectImage(editedImg.up('.image'));
+    }
+    $('url').value = editedPath;
+  }
 });
