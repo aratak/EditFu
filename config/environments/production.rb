@@ -35,5 +35,5 @@ config.action_mailer.default_url_options = { :host => BASE_DOMAIN }
 ActiveMerchant::Billing::Base.mode = :production
 PAYMENT_GATEWAY_NAME = 'authorize_net'
 PAYMENT_GATEWAY_OPTS = { 
-  :login => '6wXU53eCCJbd', :password => '6Cx4w83E5xrBC3sd', :test => true
+  :login => '6wXU53eCCJbd', :password => '6Cx4w83E5xrBC3sd', :test => false
 }
