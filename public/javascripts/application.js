@@ -1,6 +1,11 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 
+function adjustImageSize(img) {
+  img.up('.image').down('.size').innerHTML = 
+    img.originalHeight + 'x' + img.originalWidth;
+}
+
 function adjustImage(image) {
   var maxSize = parseInt(image.down('.thumbnail').getStyle('width'), 10);
   var img = image.down('img');

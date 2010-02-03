@@ -27,6 +27,7 @@
         #images
           - @images.each do |path|
             .image(style='visibility:hidden')
+              .size
               .thumbnail
                 %img{:src => @site.site_url + '/' + path}
               = hidden_field_tag 'images[]', path, :id => nil

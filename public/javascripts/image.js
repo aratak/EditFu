@@ -43,6 +43,7 @@ function swapOutImage(edited, selected) {
   edited.setAttribute('width', selected.getAttribute('width'));
   edited.originalHeight = selected.originalHeight;
   edited.originalWidth = selected.originalWidth;
+  adjustImageSize(edited);
   window.opener.imageInput.value = getThumbnailPath(selected);
 }
 

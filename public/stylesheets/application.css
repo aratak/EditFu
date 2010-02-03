@@ -103,6 +103,12 @@ table td {
   vertical-align: middle;
 }
 
+.image .size {
+  text-align: right;
+  background-color: #66FFFF;
+  padding: 3px;
+}
+
 .clearLeft {
   clear:left;
 }
