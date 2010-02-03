@@ -4,7 +4,7 @@
   %h2=@page.path
   - owner? do
     #actions
-      %a(href='#') View
+      = link_to 'View', @page.url
       %a(href='#') Settings
       = link_to 'Remove Page', [@site, @page], |
         :method => :delete, :confirm => 'Are you sure?' |

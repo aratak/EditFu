@@ -1,0 +1,38 @@
+#images {
+  height: 375px;
+  overflow-y: auto;
+}
+
+.image .title {
+  width: 75px;
+  height: 35px;
+  overflow: hidden;
+  font-size: 12px;
+  font-weight: normal;
+  color: #333;
+  text-align: center;
+}
+
+.urlBox {
+  width: 100%;
+}
+
+.urlBox #url {
+  width: 200px;
+}
+
+.altBox {
+  text-align: center;
+}
+
+.messages {
+  float: left;
+}
+
+.buttons {
+  float: right;
+}
+
+input[disabled] {
+  background: silver;
+}

@@ -5,6 +5,10 @@ class Page < ActiveRecord::Base
   validates_presence_of :path
   validates_uniqueness_of :path, :scope => :site_id
 
+  def url
+    site.site_url + '/' + path
+  end
+
   def sections
     elements(false).map { |element| element.inner_html }
   end

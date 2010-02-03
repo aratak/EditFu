@@ -11,16 +11,18 @@ function selectImage(image) {
   $('url').value = decodeURIComponent(getThumbnailPath(image.down('img')));
 }
 
-function updateEditorImage(edited, path) {
+function updateEditorImage(edited, path, alt) {
   var ed = tinyMCEPopup.editor;
   tinyMCEPopup.restoreSelection();
 
   if (edited) {
     ed.dom.setAttrib(edited, 'src', path);
+    ed.dom.setAttrib(edited, 'alt', alt);
   } else {
     ed.execCommand('mceInsertContent', false, 
         '<img id="__mce_tmp" />', { skip_undo: 1 });
     ed.dom.setAttrib('__mce_tmp', 'src', path);
+    ed.dom.setAttrib('__mce_tmp', 'alt', alt);
     ed.dom.setAttrib('__mce_tmp', 'id', '');
     ed.undoManager.add();
   }
@@ -49,7 +51,7 @@ function updateImage() {
   if(!window.opener.isSwapOut) {
     var url = $F('url');
     if (!url.blank()) {
-      updateEditorImage(edited, url);
+      updateEditorImage(edited, url, $F('alt'));
     }
   } else {
     var selected = $('images').down('.image.selected img');
@@ -119,12 +121,14 @@ Event.observe(window, 'load', function() {
       selectImage(editedImg.up('.image'));
     }
     $('url').value = editedPath;
+    $('alt').value = window.opener.editedImage.alt;
   }
 
   document.title = window.opener.imageAction + ' Image';
   $('submit').value = window.opener.imageAction;
 
-  if(!window.opener.isSwapOut) {
-    $('urlBox').style.visibility = 'visible';
+  if(window.opener.isSwapOut) {
+    $('url').disabled = true;
+    $('alt').disabled = true;
   }
 });

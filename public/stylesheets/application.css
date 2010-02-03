@@ -76,11 +76,6 @@ table td {
   float: left;
 }
 
-#image_form #images {
-  height: 375px;
-  overflow-y: auto;
-}
-
 #images .image {
   float: left;
   cursor: pointer;
@@ -106,32 +101,6 @@ table td {
 
 .thumbnail img {
   vertical-align: middle;
-}
-
-.image .title {
-  width: 75px;
-  height: 35px;
-  overflow: hidden;
-  font-size: 12px;
-  font-weight: normal;
-  color: #333;
-  text-align: center;
-}
-
-.inputs {
-  width: 100%;
-}
-
-.inputs #url {
-  width: 200px;
-}
-
-.messages {
-  float: left;
-}
-
-.buttons {
-  float: right;
 }
 
 .clearLeft {
