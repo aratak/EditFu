@@ -28,7 +28,7 @@ class ImagesController < ApplicationController
   private
 
   def type_dir
-    @type = params[:type]
+    @type = File.basename(params[:type])
     @type_dir = File.join Site::IMAGES_FOLDER, @type
   end
 
