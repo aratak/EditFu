@@ -49,4 +49,4 @@ Rails::Initializer.run do |config|
 end
 
 ActiveMerchant::Billing::CreditCard.require_verification_value = false
-PAYMENT_RECURRING_AMOUNT = 1000
+PAYMENT_RECURRING_AMOUNT = 100
