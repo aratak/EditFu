@@ -11,6 +11,13 @@ function selectImage(image) {
   $('url').value = decodeURIComponent(getThumbnailPath(image.down('img')));
 }
 
+function initImage(image) {
+  adjustImage(image);
+  Event.observe(image, 'click', function() {
+    selectImage(image);
+  });
+}
+
 function updateEditorImage(edited, path, alt) {
   var ed = tinyMCEPopup.editor;
   tinyMCEPopup.restoreSelection();
@@ -85,7 +92,7 @@ function submitUploadForm() {
         var image = tmp.down();
         var img = image.down('img')
         img.onload = function() {
-          adjustImage(image);
+          initImage(image);
           selectImage(image);
         };
         $('images').insert(image);
@@ -97,17 +104,8 @@ function submitUploadForm() {
 }
 
 Event.observe(window, 'load', function() {
-  $$('#images .image').each(function(image) {
-    adjustImage(image);
-    Event.observe(image, 'click', function() {
-      selectImage(image);
-    });
-  });
+  $$('#images .image').each(initImage);
   Event.observe('uploadImage', 'change', submitUploadForm);
-
-  $$('#images .title').each(function(title) {
-    title.innerHTML = title.innerHTML.truncate(20);
-  });
 
   Event.observe($('image_form'), 'submit', function() {
     updateImage();
@@ -126,7 +124,7 @@ Event.observe(window, 'load', function() {
   }
 
   document.title = window.opener.imageAction + ' Image';
-  $('submit').value = window.opener.imageAction;
+  $('submitButton').value = window.opener.imageAction;
 
   if(window.opener.isSwapOut) {
     $('url').disabled = true;

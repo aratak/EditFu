@@ -25,19 +25,17 @@ class FtpClient
     end
   end
 
-  def self.put_image(site, local_path, remote_name)
+  def self.put_image(site, local_path, remote_path)
+    remote_dir, remote_name = File.split(remote_path)
+
     open site do |f|
-      images = list(f, Site::IMAGES_FOLDER).map { |file| file[:name] }
-      if !images.empty?
-        remote_name = generate_image_name(remote_name, images)
+      images = list(f, remote_dir).map { |file| file[:name] }
+      if images.empty?
+        mkdir_p f, remote_dir
       else
-        begin
-          f.mkdir Site::IMAGES_FOLDER
-        rescue FtpClientError
-          # Seems like image folder already exists - skip error
-        end
+        remote_name = generate_image_name(remote_name, images)
       end
-      f.put local_path, Site::IMAGES_FOLDER + '/' + remote_name
+      f.put local_path, File.join(remote_dir, remote_name)
     end
     remote_name
   end
@@ -89,6 +87,17 @@ class FtpClient
     return original_name if revisions.empty?
     rev = revisions.max + 1
     basename + rev.to_s + suffix
+  end
+
+  def self.mkdir_p(ftp, path)
+    dir = nil
+    path.split(File::SEPARATOR).each do |name|
+      dir = dir.nil? ? name : File.join(dir, name)
+      begin
+        ftp.mkdir dir
+      rescue Net::FTPError
+      end
+    end
   end
 
   def self.translate_ftp_error(e)

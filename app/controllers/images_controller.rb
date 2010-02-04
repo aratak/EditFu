@@ -6,7 +6,7 @@ class ImagesController < ApplicationController
     find_site
 
     begin
-      dir = "#{@site.site_root}/#{Site::IMAGES_FOLDER}" 
+      dir = File.join(@site.site_root, type_dir)
       @images = FtpClient.ls(@site, dir).map { |f| f[:name] }.sort!
     rescue
       @images = []
@@ -16,14 +16,21 @@ class ImagesController < ApplicationController
   def create
     begin
       image = params[:image]
-      name = FtpClient.put_image(find_site, image.path, image.original_filename)
+      remote_path = File.join(type_dir, image.original_filename)
+      name = FtpClient.put_image(find_site, image.path, remote_path)
       render :partial => 'show', :locals => { :name => name }
     rescue Exception => e
+      logger.warn 'Got exception in image upload: ' + e.message
       render :nothing => true
     end
   end
 
   private
+
+  def type_dir
+    @type = params[:type]
+    @type_dir = File.join Site::IMAGES_FOLDER, @type
+  end
 
   def find_site
     @site = Site.find params[:site_id]

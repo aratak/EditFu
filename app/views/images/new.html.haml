@@ -7,6 +7,8 @@
     :id => 'image_form', :multipart => true, |
     :method => :post, :onsubmit => 'return false;' do |
 
+    = hidden_field_tag :type, @type
+
     - field_set_tag 'URL' do
       #images
         = render :partial => 'show', :collection => @images, :as => :name
@@ -33,5 +35,5 @@
         #processing(style='display: none;') Uploading image to the server...
 
       .buttons
-        = submit_tag 'Submit', :id => 'submit'
-        = submit_tag 'Cancel', :onclick => 'tinyMCEPopup.close();'
+        = submit_tag 'Submit', :id => 'submitButton'
+        = submit_tag 'Cancel', :onclick => 'tinyMCEPopup.close(); return false;'

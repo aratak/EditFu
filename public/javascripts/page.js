@@ -36,8 +36,10 @@ function initMceEditor(ed) {
         window.imageAction = 'Edit';
       }
       window.isSwapOut = false;
+
+      var url = ed.settings.new_image_path + '?type=content';
       ed.windowManager.open(
-        popupProps.merge({file: ed.settings.new_image_path}).toObject()
+        popupProps.merge({file: url}).toObject()
       );
   });
 
@@ -71,7 +73,7 @@ function swapOutImage(img) {
   window.imageInput = img.up().next('input');
   window.imageAction = 'Swap Out';
   window.isSwapOut = true;
-  window.open(tinyMCE.settings.new_image_path, '', features);
+  window.open(tinyMCE.settings.new_image_path + '?type=only', '', features);
 }
 
 Event.observe(window, 'load', function() {

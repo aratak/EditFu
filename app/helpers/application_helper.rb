@@ -5,10 +5,10 @@ module ApplicationHelper
   end
 
   def image_path(name)
-    Site::IMAGES_FOLDER + '/' + name
+    File.join(@type_dir, name)
   end
 
   def image_url(name)
-    @site.site_url + '/' + image_path(name)
+    File.join(@site.site_url, image_path(name))
   end
 end
