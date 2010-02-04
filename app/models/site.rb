@@ -1,5 +1,5 @@
 class Site < ActiveRecord::Base
-  IMAGES_FOLDER = 'edit-fu-images'
+  IMAGES_FOLDER = 'editfu'
 
   belongs_to :owner
   has_many :pages, :dependent => :delete_all
