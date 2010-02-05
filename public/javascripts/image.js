@@ -1,4 +1,4 @@
-function getThumbnailPath(img) {
+function getImagePath(img) {
   return img.src.sub(tinyMCE.settings.document_base_url, '');
 }
 
@@ -8,28 +8,26 @@ function selectImage(image) {
   });
   image.addClassName('selected');
 
-  $('src').value = decodeURIComponent(getThumbnailPath(image.down('img')));
+  $('src').value = decodeURIComponent(getImagePath(image.down('img')));
 }
 
 function initImage(image) {
   adjustImage(image);
-  Event.observe(image, 'click', function() {
-    selectImage(image);
-  });
+  Event.observe(image, 'click', selectImage.curry(image));
 }
 
-function updateEditorImage(edited, path) {
+function updateEditorImage(edited) {
   var ed = tinyMCEPopup.editor;
   tinyMCEPopup.restoreSelection();
 
   if (edited) {
-    ed.dom.setAttrib(edited, 'src', path);
+    ed.dom.setAttrib(edited, 'src', $F('src'));
     ed.dom.setAttrib(edited, 'alt', $F('alt'));
   } else {
     ed.execCommand('mceInsertContent', false, 
         '<img id="__mce_tmp" />', { skip_undo: 1 });
-    ed.dom.setAttrib('__mce_tmp', 'src', path);
-    ed.dom.setAttrib('__mce_tmp', 'alt', alt);
+    ed.dom.setAttrib('__mce_tmp', 'src', $F('src'));
+    ed.dom.setAttrib('__mce_tmp', 'alt', $F('alt'));
     ed.dom.setAttrib('__mce_tmp', 'id', '');
     ed.undoManager.add();
   }
@@ -65,9 +63,8 @@ function swapOutImage(edited, selected) {
 function updateImage() {
   var edited = window.opener.editedImg;
   if(!window.opener.isSwapOut) {
-    var src = $F('src');
-    if (!src.blank()) {
-      updateEditorImage(edited, src);
+    if (!$F('src').blank()) {
+      updateEditorImage(edited);
     }
   } else {
     var selected = $('images').down('.image.selected img');
@@ -121,7 +118,7 @@ Event.observe(window, 'load', function() {
   });
 
   if(window.opener.editedImg) {
-    var editedPath = decodeURIComponent(getThumbnailPath(window.opener.editedImg));
+    var editedPath = decodeURIComponent(getImagePath(window.opener.editedImg));
     var editedUrl = tinyMCE.settings.document_base_url + editedPath;
     var editedImg = $('images').down('img[src="' + editedUrl + '"]');
     if(editedImg) {
