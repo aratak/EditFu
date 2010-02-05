@@ -29,10 +29,10 @@ function initMceEditor(ed) {
       }
 
       if (!el || el.nodeName != 'IMG') {
-        window.editedImage = null;
+        window.editedImg = null;
         window.imageAction = 'Insert';
       } else {
-        window.editedImage = el;
+        window.editedImg = el;
         window.imageAction = 'Edit';
       }
       window.isSwapOut = false;
@@ -69,8 +69,8 @@ function swapOutImage(img) {
     return pair.key + '=' + pair.value;
   }).join(',');
 
-  window.editedImage = img;
-  window.imageInput = img.up().next('input');
+  window.editedImage = img.up('.image');
+  window.editedImg = img;
   window.imageAction = 'Swap Out';
   window.isSwapOut = true;
   window.open(tinyMCE.settings.new_image_path + '?type=only', '', features);

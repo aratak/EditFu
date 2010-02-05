@@ -8,7 +8,7 @@ function selectImage(image) {
   });
   image.addClassName('selected');
 
-  $('url').value = decodeURIComponent(getThumbnailPath(image.down('img')));
+  $('src').value = decodeURIComponent(getThumbnailPath(image.down('img')));
 }
 
 function initImage(image) {
@@ -18,13 +18,13 @@ function initImage(image) {
   });
 }
 
-function updateEditorImage(edited, path, alt) {
+function updateEditorImage(edited, path) {
   var ed = tinyMCEPopup.editor;
   tinyMCEPopup.restoreSelection();
 
   if (edited) {
     ed.dom.setAttrib(edited, 'src', path);
-    ed.dom.setAttrib(edited, 'alt', alt);
+    ed.dom.setAttrib(edited, 'alt', $F('alt'));
   } else {
     ed.execCommand('mceInsertContent', false, 
         '<img id="__mce_tmp" />', { skip_undo: 1 });
@@ -46,20 +46,28 @@ function swapOutImage(edited, selected) {
   }
 
   edited.src = selected.src;
+  edited.alt = $F('alt');
   edited.setAttribute('height', selected.getAttribute('height'));
   edited.setAttribute('width', selected.getAttribute('width'));
   edited.originalHeight = selected.originalHeight;
   edited.originalWidth = selected.originalWidth;
   adjustImageSize(edited);
-  window.opener.imageInput.value = getThumbnailPath(selected);
+
+  $$('input[type="text"]').each(function(imageInput) {
+    var selector = 'input[name*="' + imageInput.name + '"]';
+    var pageInput = window.opener.editedImage.down(selector);
+    if (pageInput) {
+      pageInput.value = imageInput.value;
+    }
+  });
 }
 
 function updateImage() {
-  var edited = window.opener.editedImage;
+  var edited = window.opener.editedImg;
   if(!window.opener.isSwapOut) {
-    var url = $F('url');
-    if (!url.blank()) {
-      updateEditorImage(edited, url, $F('alt'));
+    var src = $F('src');
+    if (!src.blank()) {
+      updateEditorImage(edited, src);
     }
   } else {
     var selected = $('images').down('.image.selected img');
@@ -112,22 +120,21 @@ Event.observe(window, 'load', function() {
     return false;
   });
 
-  if(window.opener.editedImage) {
-    var editedPath = decodeURIComponent(getThumbnailPath(window.opener.editedImage));
+  if(window.opener.editedImg) {
+    var editedPath = decodeURIComponent(getThumbnailPath(window.opener.editedImg));
     var editedUrl = tinyMCE.settings.document_base_url + editedPath;
     var editedImg = $('images').down('img[src="' + editedUrl + '"]');
     if(editedImg) {
       selectImage(editedImg.up('.image'));
     }
-    $('url').value = editedPath;
-    $('alt').value = window.opener.editedImage.alt;
+    $('src').value = editedPath;
+    $('alt').value = window.opener.editedImg.alt;
   }
 
   document.title = window.opener.imageAction + ' Image';
   $('submitButton').value = window.opener.imageAction;
 
   if(window.opener.isSwapOut) {
-    $('url').disabled = true;
-    $('alt').disabled = true;
+    $('src').disabled = true;
   }
 });

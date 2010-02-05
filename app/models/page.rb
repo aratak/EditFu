@@ -1,6 +1,8 @@
 require 'hpricot'
 
 class Page < ActiveRecord::Base
+  IMAGE_ATTRIBUTES = ['src', 'alt']
+
   belongs_to :site
   validates_presence_of :path
   validates_uniqueness_of :path, :scope => :site_id
@@ -20,7 +22,11 @@ class Page < ActiveRecord::Base
   end
 
   def images
-    elements(true).map { |element| { :src => element.attributes['src'] } }
+    elements(true).map do |element| 
+      result = {}
+      IMAGE_ATTRIBUTES.each { |k| result[k] = element[k] || '' }
+      result
+    end
   end
 
   def images=(elements)
