@@ -66,7 +66,9 @@ describe Page do
         </html>
       EOS
 
-      @page.images.should == ['photo.gif', 'images/banner.png']
+      @page.images.should == [
+        { :src => 'photo.gif' }, { :src => 'images/banner.png' }
+      ]
     end
   end
 
@@ -80,7 +82,7 @@ describe Page do
         </html>
       EOS
 
-      @page.images = ['photo.gif']
+      @page.images = [ { :src => 'photo.gif'} ]
       @page.content.should == <<-EOS
         <html>
           <body>

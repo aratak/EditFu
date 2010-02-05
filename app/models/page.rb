@@ -20,12 +20,12 @@ class Page < ActiveRecord::Base
   end
 
   def images
-    elements(true).map { |element| element.attributes['src'] }
+    elements(true).map { |element| { :src => element.attributes['src'] } }
   end
 
-  def images=(srcs)
-    update_elements(true, srcs) do |img, src| 
-      img.attributes['src'] = src
+  def images=(elements)
+    update_elements(true, elements) do |img, attributes| 
+      attributes.each { |k,v| img.attributes[k.to_s] = v }
     end
   end
 
