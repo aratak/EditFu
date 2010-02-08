@@ -27,4 +27,10 @@ class Site < ActiveRecord::Base
   def root_folders
     site_root.split('/').select { |i| !i.blank? }
   end
+
+  protected
+
+  def before_save
+    self.site_url = self.site_url.strip.sub(/\/$/, '')
+  end
 end

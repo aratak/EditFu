@@ -43,10 +43,7 @@ function initMceEditor(ed) {
       );
   });
 
-  ed.addButton('image', {
-    title: 'Add Image',
-    cmd: 'efImage'
-  });
+  ed.addButton('image', { title: 'Add Image', cmd: 'efImage' });
 }
 
 function initTinyMCE(settings) {
@@ -64,23 +61,24 @@ function initTinyMCE(settings) {
   }).toObject());
 }
 
-function swapOutImage(img) {
+function swapOutImage() {
   var features = popupProps.map(function(pair) {
     return pair.key + '=' + pair.value;
   }).join(',');
 
-  window.editedImage = img.up('.image');
-  window.editedImg = img;
+  window.editedImage = this;
+  window.editedImg = this.down('img');
   window.imageAction = 'Swap Out';
   window.isSwapOut = true;
   window.open(tinyMCE.settings.new_image_path + '?type=only', '', features);
 }
 
+function initImage(img) {
+  adjustImage(img.up('.image'));
+}
+
 Event.observe(window, 'load', function() {
   $$('#images .image').each(function(image) {
-    var img = image.down('img');
-    adjustImage(image);
-    adjustImageSize(img);
-    Event.observe(img, 'click', swapOutImage.curry(img));
+    Event.observe(image, 'click', swapOutImage);
   });
 });

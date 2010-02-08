@@ -1,4 +1,4 @@
-function getImagePath(img) {
+function getImgPath(img) {
   return img.src.sub(tinyMCE.settings.document_base_url, '');
 }
 
@@ -8,7 +8,7 @@ function selectImage(image) {
   });
   image.addClassName('selected');
 
-  $('src').value = decodeURIComponent(getImagePath(image.down('img')));
+  $('src').value = decodeURIComponent(getImgPath(image.down('img')));
 }
 
 function initImage(image) {
@@ -43,13 +43,15 @@ function swapOutImage(edited, selected) {
     }
   }
 
-  edited.src = selected.src;
   edited.alt = $F('alt');
-  edited.setAttribute('height', selected.getAttribute('height'));
-  edited.setAttribute('width', selected.getAttribute('width'));
-  edited.originalHeight = selected.originalHeight;
-  edited.originalWidth = selected.originalWidth;
-  adjustImageSize(edited);
+  if(edited.src == selected.src) {
+    return;
+  }
+
+  window.opener.editedImage.style.visibility = 'hidden';
+  edited.removeAttribute('height');
+  edited.removeAttribute('width');
+  edited.src = selected.src;
 
   $$('input[type="text"]').each(function(imageInput) {
     var selector = 'input[name*="' + imageInput.name + '"]';
@@ -62,14 +64,14 @@ function swapOutImage(edited, selected) {
 
 function updateImage() {
   var edited = window.opener.editedImg;
-  if(!window.opener.isSwapOut) {
-    if (!$F('src').blank()) {
+  if (!$F('src').blank()) {
+    if(!window.opener.isSwapOut) {
       updateEditorImage(edited);
-    }
-  } else {
-    var selected = $('images').down('.image.selected img');
-    if(selected) {
-      swapOutImage(edited, selected);
+    } else {
+      var selected = $('images').down('.image.selected img');
+      if(selected) {
+        swapOutImage(edited, selected);
+      }
     }
   }
   tinyMCEPopup.close();
@@ -112,13 +114,8 @@ Event.observe(window, 'load', function() {
   $$('#images .image').each(initImage);
   Event.observe('uploadImage', 'change', submitUploadForm);
 
-  Event.observe($('image_form'), 'submit', function() {
-    updateImage();
-    return false;
-  });
-
   if(window.opener.editedImg) {
-    var editedPath = decodeURIComponent(getImagePath(window.opener.editedImg));
+    var editedPath = decodeURIComponent(getImgPath(window.opener.editedImg));
     var editedUrl = tinyMCE.settings.document_base_url + editedPath;
     var editedImg = $('images').down('img[src="' + editedUrl + '"]');
     if(editedImg) {

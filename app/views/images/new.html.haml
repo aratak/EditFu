@@ -5,7 +5,7 @@
 
   - form_tag site_images_path(@site), |
     :id => 'image_form', :multipart => true, |
-    :method => :post, :onsubmit => 'return false;' do |
+    :onsubmit => 'updateImage(); return false;', :method => :post do |
 
     = hidden_field_tag :type, @type
 

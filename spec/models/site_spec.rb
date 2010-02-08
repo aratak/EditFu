@@ -40,4 +40,11 @@ describe Site do
       @site.root_folders.should == ['home', 'peter', 'site']
     end
   end
+
+  describe "before_save" do
+    it "should strip spaces and remove trailing slash" do
+      Factory.create(:site, :site_url => ' www.yandex.ru/ ').site_url.should == 
+        'www.yandex.ru'
+    end
+  end
 end

@@ -29,7 +29,9 @@
             .image(style='visibility:hidden')
               .size
               .thumbnail
-                %img{:src => @site.site_url + '/' + attributes['src'], :alt => attributes['alt']}
+                %img{:src => @site.site_url + '/' + attributes['src'], |
+                  :alt => attributes['alt'], |
+                  :onload => 'initImage($(this));'} |
               - attributes.each do |k,v|
                 = hidden_field_tag "images[][#{k}]", v, :id => nil
         .clearLeft
