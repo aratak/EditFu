@@ -8,7 +8,7 @@ class Page < ActiveRecord::Base
   validates_uniqueness_of :path, :scope => :site_id
 
   def url
-    site.site_url + '/' + path
+    File.join(site.site_url, path)
   end
 
   def sections
@@ -33,6 +33,12 @@ class Page < ActiveRecord::Base
     update_elements(true, elements) do |img, attributes| 
       attributes.each { |k,v| img.attributes[k.to_s] = v }
     end
+  end
+
+  protected
+
+  def before_save
+    self.path = self.path.strip.sub(/^\//, '').sub(/\/$/, '')
   end
 
   private

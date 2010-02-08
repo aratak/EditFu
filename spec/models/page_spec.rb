@@ -93,4 +93,11 @@ describe Page do
       EOS
     end
   end
+
+  describe "before_save" do
+    it "should strip path and remove start and end slashes" do
+      Factory.create(:page, :path => ' /index.html/ ').path.should == 
+        'index.html'
+    end
+  end
 end

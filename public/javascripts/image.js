@@ -34,6 +34,11 @@ function updateEditorImage(edited) {
 }
 
 function swapOutImage(edited, selected) {
+  edited.alt = $F('alt');
+  if(!selected) {
+    return;
+  }
+
   if(edited.originalHeight != selected.originalHeight ||
      edited.originalWidth != selected.originalWidth) {
     var s = confirm('Dimensions of original and new image are different ' +
@@ -43,7 +48,6 @@ function swapOutImage(edited, selected) {
     }
   }
 
-  edited.alt = $F('alt');
   if(edited.src == selected.src) {
     return;
   }
@@ -69,9 +73,7 @@ function updateImage() {
       updateEditorImage(edited);
     } else {
       var selected = $('images').down('.image.selected img');
-      if(selected) {
-        swapOutImage(edited, selected);
-      }
+      swapOutImage(edited, selected);
     }
   }
   tinyMCEPopup.close();

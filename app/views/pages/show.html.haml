@@ -29,7 +29,7 @@
             .image(style='visibility:hidden')
               .size
               .thumbnail
-                %img{:src => @site.site_url + '/' + attributes['src'], |
+                %img{:src => File.join(@site.site_url, attributes['src']), |
                   :alt => attributes['alt'], |
                   :onload => 'initImage($(this));'} |
               - attributes.each do |k,v|
