@@ -1,0 +1,167 @@
+html {
+  background: #555 url(/images/bg.jpg);
+}
+
+body {
+  background-color: white;
+  width: 960px;
+  margin: 50px auto 50px auto;
+}
+
+a {
+  text-decoration: none;
+  color: #787878;
+}
+
+.system-bar {
+  height: 50px;
+  background: #e21303 url(/images/logo.png) no-repeat center center;
+  position: fixed;
+  top: 0;
+  width: 960px;
+}
+
+.tabs {
+  float: left;
+}
+
+.tabs a {
+  float: left;
+  width: 120px;
+  height: 50px;
+}
+
+.tabs img {
+  margin-left: 45px;
+  margin-top: 12px;
+}
+
+.tabs .selected {
+  background: #ddd url(/images/source-bar-bg.jpg);
+}
+
+.logout {
+  float: right;
+  line-height: 50px;
+  color: white;
+  font-family: impact;
+  margin-right: 10px;
+}
+
+.source-bar {
+  float: left;
+  background: #ddd url(/images/source-bar-bg.jpg);
+  width: 240px;
+  height: 100%;
+}
+
+.top-menu {
+  margin: 18px 12px;
+  padding: 0px;
+  list-style-type: none;
+}
+
+.top-menu li {
+  font-family: impact;
+  font-size: 16px;
+  font-weight: bold;
+  color: #636363;
+  margin-top: 12px
+}
+
+.menu {
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+  margin-top: 3px;
+}
+
+.menu li {
+  font-family: helvetica;
+  font-size: 16px;
+  font-weight: normal;
+  color: #6a6a6a;
+  margin: 0px;
+  margin-left: -5px;
+}
+
+.menu li .label {
+  padding: 2px;
+  padding-left: 20px;
+}
+
+.menu li.selected {
+  border-bottom: solid 2px #c2c2c2;
+  border-right: solid 2px #c2c2c2;
+  background: white url(/images/selected-page-bg.png) repeat-x bottom;
+}
+
+.menu .selected .label {
+  border: 1px solid #aaaaaa;
+  background: url(/images/selected-page.png) no-repeat 2px center;
+}
+
+.action-window {
+  margin-top: 50px;
+  margin-left: 240px;
+  height: 100%;
+  background: #e4e4e4 url(/images/action-window-bg.png) no-repeat center center;
+}
+
+.main {
+  padding: 40px;
+  color: #636363;
+}
+
+.main-header {
+  width: 100%;
+}
+
+.main-header td, .main-header td * {
+  vertical-align: bottom;
+  text-decoration: underline;
+}
+
+.main-header td {
+  white-space: no-wrap;
+}
+
+.main-header .left {
+  font-family: impact;
+}
+
+.main-header .right {
+  text-align: right;
+}
+
+.main-header .page-name {
+  display: inline;
+  font-size: 23px;
+}
+
+.action-bar {
+  height: 50px;
+  clear: left;
+  background: #f9f9f9 url(/images/action-bar-bg.png) repeat-x;
+  position: fixed;
+  bottom: 0;
+  width: 960px;
+}
+
+.plus-action {
+  display: block;
+  float: left;
+  margin-left: 16px;
+  margin-top: 12px;
+}
+
+.update-action {
+  margin-right: 16px;
+  padding-left: 40px;
+  display: block;
+  float: right;
+  font-family: impact;
+  font-size: 20px;
+  line-height: 50px;
+  background: url(/images/up.png) no-repeat left center;
+}
