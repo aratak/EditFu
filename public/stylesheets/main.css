@@ -100,7 +100,6 @@ a img {
 
 .menu li .label {
   padding: 2px;
-  padding-left: 20px;
 }
 
 .menu li.selected {
@@ -111,7 +110,6 @@ a img {
 
 .menu .selected .label {
   border: 1px solid #aaaaaa;
-  background: url(/images/selected-page.png) no-repeat 2px center;
 }
 
 .action-window {
