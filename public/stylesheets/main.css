@@ -53,12 +53,17 @@ a img {
   right: -16px;
 }
 
-.logout {
+.system-link {
   float: right;
+  margin-right: 10px;
+  margin-left: 25px;
   line-height: 50px;
   color: #f3a39d;
   font-family: impact;
-  margin-right: 10px;
+}
+
+.system-link img {
+  padding-top: 11px;
 }
 
 .source-bar {
