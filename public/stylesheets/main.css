@@ -1,11 +1,5 @@
-html {
-  background: #555 url(/images/bg.jpg);
-}
-
 body {
-  background-color: white;
-  width: 960px;
-  margin: 50px auto 50px auto;
+  margin: 50px 0;
 }
 
 a {
@@ -22,7 +16,7 @@ a img {
   background: #e21303;
   position: fixed;
   top: 0;
-  width: 960px;
+  width: 100%;
 }
 
 .tabs {
@@ -58,6 +52,7 @@ a img {
   left: 50%;
   width: 55px;
   height: 75px;
+  z-index: 1;
   background: url(/images/logo.png) center top no-repeat;
 }
 
@@ -76,6 +71,7 @@ a img {
 
 .source-bar {
   float: left;
+  overflow: auto;
   background: #ddd url(/images/source-bar-bg.jpg);
   width: 240px;
   height: 100%;
@@ -126,10 +122,12 @@ a img {
 }
 
 .action-window {
-  margin-top: 50px;
-  margin-left: 240px;
-  height: 100%;
-  width: 720px;
+  position: absolute;
+  overflow: auto;
+  top: 50px;
+  left: 240px;
+  right: 0;
+  bottom: 50px;
   overflow: auto;
   background: #e4e4e4 url(/images/action-window-bg.png) no-repeat center center;
 }
@@ -212,7 +210,7 @@ a img {
   background: #f9f9f9 url(/images/action-bar-bg.png) repeat-x;
   position: fixed;
   bottom: 0;
-  width: 960px;
+  width: 100%;
 }
 
 .plus-action {
