@@ -10,7 +10,7 @@ body {
 
 a {
   text-decoration: none;
-  color: #787878;
+  color: #636363;
 }
 
 a img {
@@ -19,7 +19,7 @@ a img {
 
 .system-bar {
   height: 50px;
-  background: #e21303 url(/images/logo.png) no-repeat center center;
+  background: #e21303;
   position: fixed;
   top: 0;
   width: 960px;
@@ -51,6 +51,14 @@ a img {
   height: 50px;
   width: 16px;
   right: -16px;
+}
+
+.logo {
+  position: absolute;
+  left: 50%;
+  width: 55px;
+  height: 75px;
+  background: url(/images/logo.png) center top no-repeat;
 }
 
 .system-link {
