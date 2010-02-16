@@ -75,6 +75,24 @@ function swapOutImage() {
   window.open(tinyMCE.settings.new_image_path + '?type=only', '', features);
 }
 
+function initImage2(img) {
+  var image = img.up('.image');
+
+  img.originalHeight = img.height;
+  img.originalWidth = img.width;
+
+  if(img.width < 150) {
+    img.width = 150;
+  } else if(img.height > 641) {
+    img.height = 641;
+  }
+
+  var bar = image.down('.bar');
+  bar.innerHTML = img.originalHeight + ' X ' + img.originalWidth;
+
+  image.style.visibility = 'visible';
+}
+
 function initImage(img) {
   adjustImage(img.up('.image'));
 }
