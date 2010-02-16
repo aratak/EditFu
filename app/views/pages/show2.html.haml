@@ -1,9 +1,27 @@
-= content_for :actionWindow do
-  .main
-    .header
-      %span.page-name= @page.path
-      %span.actions
-        = link_to 'View', @page.url, :target => '_blank'
-      .hint
-        %span.nbsp &nbsp;
-        Edit sections below and then click update to make changes
+= javascript_include_tag 'tiny_mce/tiny_mce', 'page'
+
+.main
+  .header
+    %span.page-name= @page.path
+    %span.actions
+      = link_to 'View', @page.url, :target => '_blank'
+      - if current_user.owner?
+        = link_to 'Remove', [@site, @page], |
+          :method => :delete, :confirm => 'Are you sure?' |
+    .hint
+      %span.nbsp &nbsp;
+      Edit sections below and then click update to make changes
+
+  - form_for [@site, @page], :html => { |
+      :id => 'update_form', :onsubmit => 'return savePageSections();' |
+    } do |
+    - @sections.each do |section|
+      .mce_editor
+        = text_area_tag 'sections[]', section, :id => nil, :class => 'mce_area'
+
+:javascript
+  initTinyMCE({
+    site_url: '#{@site.site_url}',
+    new_image_path: '#{new_site_image_path(@site)}',
+    document_base_url: '#{@site.site_url}/'
+  });

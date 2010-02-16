@@ -50,6 +50,8 @@ function initTinyMCE(settings) {
   tinyMCE.init($H(settings).merge({
     mode: "textareas",
     theme: "advanced",
+    skin: "editfu",
+    theme_advanced_toolbar_location : "top",
     theme_advanced_buttons1: 
       'bold,italic,underline,strikethrough,separator,' + 
       'undo,redo,separator,bullist,numlist,separator,image',

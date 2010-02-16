@@ -160,18 +160,11 @@ a img {
 
 .mce_editor {
   margin: 20px 0;
-}
-
-.mce_toolbar {
-  height: 35px;
-  background-color: #373d43;
+  width: 100%;
 }
 
 .mce_area {
   height: 180px;
-  background-color: #f5f5f5;
-  font: 12px arial;
-  padding: 12px;
 }
 
 .image {
