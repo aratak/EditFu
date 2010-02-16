@@ -158,8 +158,11 @@ a img {
   font: 10px arial;
 }
 
-.mce_editor {
-  margin: 20px 0;
+.mce-editor, .image {
+  margin-top: 20px;
+}
+
+.mce-editor {
   width: 100%;
 }
 
@@ -168,9 +171,9 @@ a img {
 }
 
 .image {
+  margin-right: 20px;
   cursor: pointer;
   float: left;
-  margin: 13px 13px 0 0;
 }
 
 .image .bar {
