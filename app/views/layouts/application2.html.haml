@@ -1,0 +1,25 @@
+= content_for :body do
+  .system-bar
+    .tabs
+      = render 'layouts/tab', :name => 'pages', :href => sites_path, :selected => true
+      - if current_user.owner?
+        = render 'layouts/tab', :name => 'editors', :href => editors_path, :selected => false
+    
+    .logo
+
+    = link_to 'Logout', destroy_user_session_path, :class => 'system-link'
+    - link_to '#', :class => 'system-link', :alt => 'Help' do
+      %img(src='/images/help.png')
+    - link_to preferences_path, :class => 'system-link', :alt => 'Preferences' do
+      %img(src='/images/preferences.png')
+
+  .source-bar
+    = yield :sourceBar
+
+  .action-window
+    = yield :actionWindow
+
+  .action-bar
+    = yield :actionBar
+    
+= render :file => 'layouts/page2'

@@ -20,6 +20,8 @@ class PagesController < ApplicationController
     rescue FtpClientError => e
       @error = e.message
     end
+    
+    render :template => 'pages/show2', :layout => 'sites2' if params[:design]
   end
 
   def new

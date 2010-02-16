@@ -11,4 +11,9 @@ module ApplicationHelper
   def image_url(name)
     File.join(@site.site_url, image_path(name))
   end
+
+  def selected_class(selected, classes = '')
+    classes << ' selected' if selected
+    { :class => classes.strip } unless classes.blank?
+  end
 end

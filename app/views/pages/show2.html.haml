@@ -1,0 +1,9 @@
+= content_for :actionWindow do
+  .main
+    .header
+      %span.page-name= @page.path
+      %span.actions
+        = link_to 'View', @page.url, :target => '_blank'
+      .hint
+        %span.nbsp &nbsp;
+        Edit sections below and then click update to make changes

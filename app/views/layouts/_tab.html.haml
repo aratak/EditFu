@@ -1,0 +1,7 @@
+%a{selected_class(selected, 'tab'), :title => name.capitalize, :href => href}
+  - if selected
+    .shadow
+  - if selected
+    %img(src="/images/selected-#{name}-tab.png")
+  - else
+    %img(src="/images/#{name}-tab.png")

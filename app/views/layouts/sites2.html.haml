@@ -1,0 +1,22 @@
+= content_for :sourceBar do
+  %ul.top-menu
+    - current_user.sites.each do |site|
+      %li
+        = link_to site.name, site_path(site)
+        %ul.menu
+          - site.pages.each do |page|
+            %li{selected_class(page == @page)}
+              - link_to site_page_path(site, page), :class => 'label' do
+                - if page == @page
+                  %img(src="/images/page-icon.png")
+                - else
+                  %img(src="/images/blank.png" width='9' height='13')
+                &nbsp;
+                = page.path
+
+= content_for :actionBar do
+  - link_to new_site_path, :class => 'plus-action' do
+    %img(src='/images/plus.png')
+  = link_to 'Update', '#', :class => 'update-action'
+
+= render :file => 'layouts/application2'

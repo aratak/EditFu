@@ -70,11 +70,13 @@ a img {
 }
 
 .source-bar {
-  float: left;
+  position: absolute;
   overflow: auto;
-  background: #ddd url(/images/source-bar-bg.jpg);
+  top: 50px;
+  left: 0px;
+  bottom: 50px;
   width: 240px;
-  height: 100%;
+  background: #ddd url(/images/source-bar-bg.jpg);
 }
 
 .top-menu {
@@ -84,7 +86,7 @@ a img {
 }
 
 .top-menu li {
-  font-family: impact;
+  font-family: helvetica;
   font-size: 16px;
   font-weight: bold;
   color: #636363;
@@ -108,6 +110,7 @@ a img {
 }
 
 .menu li .label {
+  display: block;
   padding: 2px;
 }
 
@@ -128,7 +131,6 @@ a img {
   left: 240px;
   right: 0;
   bottom: 50px;
-  overflow: auto;
   background: #e4e4e4 url(/images/action-window-bg.png) no-repeat center center;
 }
 
