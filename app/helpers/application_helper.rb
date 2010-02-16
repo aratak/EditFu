@@ -14,6 +14,6 @@ module ApplicationHelper
 
   def selected_class(selected, classes = '')
     classes << ' selected' if selected
-    { :class => classes.strip } unless classes.blank?
+    classes.blank? ? {} : { :class => classes.strip } 
   end
 end
