@@ -90,7 +90,7 @@ function initImage(img) {
 }
 
 Event.observe(window, 'load', function() {
-  $$('#images .image').each(function(image) {
+  $$('.image').each(function(image) {
     Event.observe(image, 'click', swapOutImage);
   });
 });

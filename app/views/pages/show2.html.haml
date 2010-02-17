@@ -13,18 +13,20 @@
       Edit sections below and then click update to make changes
 
   - form_for [@site, @page] do
-    - @sections.each do |section|
-      .mce-editor
-        = text_area_tag 'sections[]', section, :id => nil, :class => 'mce_area'
+    - if @sections
+      - @sections.each do |section|
+        .mce-editor
+          = text_area_tag 'sections[]', section, :id => nil, :class => 'mce_area'
 
-    - @images.each do |attributes|
-      .image
-        .bar 100 X 100
-        .thumbnail
-          %img{:src => File.join(@site.site_url, attributes['src']), |
-            :alt => attributes['alt'], :onload => 'initImage(this);' } |
-        - attributes.each do |k,v|
-          = hidden_field_tag "images[][#{k}]", v, :id => nil
+    - if @images
+      - @images.each do |attributes|
+        .image
+          .bar 100 X 100
+          .thumbnail
+            %img{:src => File.join(@site.site_url, attributes['src']), |
+              :alt => attributes['alt'], :onload => 'initImage(this);' } |
+          - attributes.each do |k,v|
+            = hidden_field_tag "images[][#{k}]", v, :id => nil
 
 :javascript
   initTinyMCE({

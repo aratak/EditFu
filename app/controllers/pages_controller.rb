@@ -18,7 +18,7 @@ class PagesController < ApplicationController
       end
       @page.save
     rescue FtpClientError => e
-      @error = e.message
+      flash[:error] = e.message
     end
     
     render :template => 'pages/show2', :layout => 'sites2' if params[:design]
