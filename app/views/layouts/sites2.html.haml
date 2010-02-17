@@ -17,6 +17,6 @@
 = content_for :actionBar do
   - link_to new_site_path, :class => 'plus-action' do
     %img(src='/images/plus.png')
-  = link_to 'Update', '#', :class => 'update-action'
+  = link_to_function 'Update', 'updatePage();', :class => 'update-action'
 
 = render :file => 'layouts/application2'

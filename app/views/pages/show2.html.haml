@@ -1,6 +1,6 @@
-= javascript_include_tag 'tiny_mce/tiny_mce', 'page'
+= javascript_include_tag 'tiny_mce/tiny_mce', 'page2'
 
-.main
+#main
   .header
     %span.page-name= @page.path
     %span.actions
@@ -12,9 +12,7 @@
       %span.nbsp &nbsp;
       Edit sections below and then click update to make changes
 
-  - form_for [@site, @page], :html => { |
-      :id => 'update_form', :onsubmit => 'return savePageSections();' |
-    } do |
+  - form_for [@site, @page] do
     - @sections.each do |section|
       .mce-editor
         = text_area_tag 'sections[]', section, :id => nil, :class => 'mce_area'
@@ -24,7 +22,7 @@
         .bar 100 X 100
         .thumbnail
           %img{:src => File.join(@site.site_url, attributes['src']), |
-            :alt => attributes['alt'], :onload => 'initImage2(this);' } |
+            :alt => attributes['alt'], :onload => 'initImage(this);' } |
         - attributes.each do |k,v|
           = hidden_field_tag "images[][#{k}]", v, :id => nil
 

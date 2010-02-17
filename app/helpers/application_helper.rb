@@ -16,4 +16,8 @@ module ApplicationHelper
     classes << ' selected' if selected
     classes.blank? ? {} : { :class => classes.strip } 
   end
+
+  def message_kind
+    ([:info, :success, :warning, :error] & flash.keys).first
+  end
 end

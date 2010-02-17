@@ -26,3 +26,8 @@ function adjustImage(image) {
 
   image.style.visibility = 'visible';
 }
+
+function showMessage(kind, text) {
+  $('action-bar').className = kind;
+  $('message').innerHTML = text;
+}

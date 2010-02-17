@@ -1,6 +1,6 @@
 = content_for :body do
-  .system-bar
-    .tabs
+  #system-bar
+    #tabs
       = render 'layouts/tab', :name => 'pages', :href => sites_path, :selected => true
       - if current_user.owner?
         = render 'layouts/tab', :name => 'editors', :href => editors_path, :selected => false
@@ -13,13 +13,16 @@
     - link_to preferences_path, :class => 'system-link', :alt => 'Preferences' do
       %img(src='/images/preferences.png')
 
-  .source-bar
+  #source-bar
     = yield :sourceBar
 
-  .action-window
+  #action-window
     = yield
 
-  .action-bar
+  #action-bar(class=message_kind)
     = yield :actionBar
+    %span#message
+      - if message_kind
+        = flash[message_kind]
     
 = render :file => 'layouts/page2'

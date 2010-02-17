@@ -11,7 +11,7 @@ a img {
   border: none;
 }
 
-.system-bar {
+#system-bar {
   height: 50px;
   background: #e21303;
   position: fixed;
@@ -19,27 +19,27 @@ a img {
   width: 100%;
 }
 
-.tabs {
+#tabs {
   float: left;
 }
 
-.tabs a {
+#tabs a {
   float: left;
   width: 120px;
   height: 50px;
 }
 
-.tabs img {
+#tabs img {
   margin-left: 45px;
   margin-top: 12px;
 }
 
-.tabs .selected {
+#tabs .selected {
   background: #ddd url(/images/source-bar-bg.jpg);
   position: relative;
 }
 
-.tabs .selected .shadow {
+#tabs .selected .shadow {
   background: #e21303 url(/images/tab-shadow.png) left repeat-y;
   position: absolute;
   height: 50px;
@@ -47,7 +47,7 @@ a img {
   right: -16px;
 }
 
-.logo {
+#system-bar .logo {
   position: absolute;
   left: 50%;
   width: 55px;
@@ -69,7 +69,7 @@ a img {
   padding-top: 11px;
 }
 
-.source-bar {
+#source-bar {
   position: absolute;
   overflow: auto;
   top: 50px;
@@ -124,7 +124,7 @@ a img {
   border: 1px solid #aaaaaa;
 }
 
-.action-window {
+#action-window {
   position: absolute;
   overflow: auto;
   top: 50px;
@@ -134,12 +134,12 @@ a img {
   background: #e4e4e4 url(/images/action-window-bg.png) no-repeat center center;
 }
 
-.main {
+#main {
   padding: 40px;
   color: #636363;
 }
 
-.header {
+#action-window .header {
   position: relative;
 }
 
@@ -151,11 +151,16 @@ a img {
   font: 12px arial;
 }
 
+.header .actions a {
+  text-decoration: underline;
+}
+
 .hint {
   position: absolute;
   right: 0px;
   bottom: 0px;
   font: 10px arial;
+  color: #919191;
 }
 
 .mce-editor, .image {
@@ -186,20 +191,40 @@ a img {
   font-size: 18px;
 }
 
-.action-bar {
+#action-bar {
   height: 50px;
   clear: left;
   background: #f9f9f9 url(/images/action-bar-bg.png) repeat-x;
   position: fixed;
   bottom: 0;
   width: 100%;
+
+  text-align: center;
+}
+
+#action-bar.success {
+  background: #60cc97;
+}
+
+#action-bar.warning {
+  background: #fcdc6b;
+}
+
+#action-bar.error {
+  background: #eb4250;
+}
+
+#message {
+  font: 18px impact;
+  color: #373d43;
+  line-height: 50px;
 }
 
 .plus-action {
   display: block;
   float: left;
   margin-left: 16px;
-  margin-top: 12px;
+  margin-top: 13px;
 }
 
 .update-action {
