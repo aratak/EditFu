@@ -1,0 +1,45 @@
+= javascript_include_tag 'tiny_mce/tiny_mce', 'page'
+
+= show_page_content do
+  %h2=@page.path
+  - owner? do
+    #actions
+      = link_to 'View', @page.url, :target => '_blank'
+      %a(href='#') Settings
+      = link_to 'Remove Page', [@site, @page], |
+        :method => :delete, :confirm => 'Are you sure?' |
+
+    #saveNotice{:style => 'display: none'} Saving page content...
+  - if @error
+    .error= @error
+  - else
+    - form_for [@site, @page], :html => { |
+        :id => 'update_form', :onsubmit => 'return savePageSections();' |
+      } do |
+      - unless @sections.empty?
+        #sections
+          %h3 Section List
+          - @sections.each_with_index do |section, index|
+            .section{:id=>"section_#{index}"}
+              = text_area_tag 'sections[]', section, :id => nil
+
+      - unless @images.empty?
+        #images
+          - @images.each do |attributes|
+            .image(style='visibility:hidden')
+              .size
+              .thumbnail
+                %img{:src => File.join(@site.site_url, attributes['src']), |
+                  :alt => attributes['alt'], |
+                  :onload => 'initImage($(this));'} |
+              - attributes.each do |k,v|
+                = hidden_field_tag "images[][#{k}]", v, :id => nil
+        .clearLeft
+      = submit_tag :update
+
+:javascript
+  initTinyMCE({
+    site_url: '#{@site.site_url}',
+    new_image_path: '#{new_site_image_path(@site)}',
+    document_base_url: '#{@site.site_url}/'
+  });

@@ -14,14 +14,18 @@ class PagesController < ApplicationController
       @images = @page.images
 
       if @sections.blank? && @images.blank?
-        @error = "Page hasn't editable content" 
+        flash.now[:warning] = "Page hasn't editable content" 
       end
       @page.save
     rescue FtpClientError => e
-      flash[:error] = e.message
+      flash.now[:error] = e.message
     end
     
-    render :template => 'pages/show2', :layout => 'sites2' if params[:design]
+   if params[:old]
+      render :template => 'pages/show_old', :layout => 'sites'
+   else
+      render :template => 'pages/show', :layout => 'sites2'
+   end
   end
 
   def new

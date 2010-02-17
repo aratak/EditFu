@@ -1,41 +1,33 @@
-= javascript_include_tag 'tiny_mce/tiny_mce', 'page'
+= javascript_include_tag 'tiny_mce/tiny_mce', 'page2'
 
 = show_page_content do
-  %h2=@page.path
-  - owner? do
-    #actions
-      = link_to 'View', @page.url, :target => '_blank'
-      %a(href='#') Settings
-      = link_to 'Remove Page', [@site, @page], |
-        :method => :delete, :confirm => 'Are you sure?' |
+  #main
+    .header
+      %span.page-name= @page.path
+      %span.actions
+        = link_to 'View', @page.url, :target => '_blank'
+        - if current_user.owner?
+          = link_to 'Remove', [@site, @page], |
+            :method => :delete, :confirm => 'Are you sure?' |
+      .hint
+        %span.nbsp &nbsp;
+        Edit sections below and then click update to make changes
 
-    #saveNotice{:style => 'display: none'} Saving page content...
-  - if @error
-    .error= @error
-  - else
-    - form_for [@site, @page], :html => { |
-        :id => 'update_form', :onsubmit => 'return savePageSections();' |
-      } do |
-      - unless @sections.empty?
-        #sections
-          %h3 Section List
-          - @sections.each_with_index do |section, index|
-            .section{:id=>"section_#{index}"}
-              = text_area_tag 'sections[]', section, :id => nil
+    - form_for [@site, @page] do
+      - if @sections
+        - @sections.each do |section|
+          .mce-editor
+            = text_area_tag 'sections[]', section, :id => nil, :class => 'mce_area'
 
-      - unless @images.empty?
-        #images
-          - @images.each do |attributes|
-            .image(style='visibility:hidden')
-              .size
-              .thumbnail
-                %img{:src => File.join(@site.site_url, attributes['src']), |
-                  :alt => attributes['alt'], |
-                  :onload => 'initImage($(this));'} |
-              - attributes.each do |k,v|
-                = hidden_field_tag "images[][#{k}]", v, :id => nil
-        .clearLeft
-      = submit_tag :update
+      - if @images
+        - @images.each do |attributes|
+          .image
+            .bar 100 X 100
+            .thumbnail
+              %img{:src => File.join(@site.site_url, attributes['src']), |
+                :alt => attributes['alt'], :onload => 'initImage(this);' } |
+            - attributes.each do |k,v|
+              = hidden_field_tag "images[][#{k}]", v, :id => nil
 
 :javascript
   initTinyMCE({
