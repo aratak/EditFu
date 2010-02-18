@@ -1,9 +1,9 @@
 = content_for :body do
   #system-bar
     #tabs
-      = render 'layouts/tab', :name => 'pages', :href => sites_path, :selected => true
+      = render 'layouts/tab', :name => 'pages', :href => sites_path, :tab => tab
       - if current_user.owner?
-        = render 'layouts/tab', :name => 'editors', :href => editors_path, :selected => false
+        = render 'layouts/tab', :name => 'editors', :href => editors_path, :tab => tab
     
     .logo
 
@@ -17,10 +17,21 @@
     = yield :sourceBar
 
   #action-window
-    = yield
+    #main
+      .header
+        %span.title= @title
+        %span.actions
+          = yield :actions
+        .hint
+          %span.nbsp &nbsp;
+          = @hint
+      = yield
 
   #action-bar(class=message_kind)
-    = yield :actionBar
+    - link_to new_href, :class => 'plus-action' do
+      %img(src='/images/plus.png')
+    = link_to_function 'Update', 'doUpdate();', :class => 'update-action'
+
     %span#message
       - if message_kind
         = flash[message_kind]

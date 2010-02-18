@@ -1,0 +1,27 @@
+.mce-editor, .image {
+  margin-bottom: 20px;
+}
+
+.mce-editor {
+  width: 100%;
+}
+
+.mce_area {
+  height: 180px;
+}
+
+.image {
+  margin-right: 20px;
+  cursor: pointer;
+  float: left;
+}
+
+.image .bar {
+  line-height: 35px;
+  padding-right: 10px;
+  background: #373d43 url(/images/swap-out.png) no-repeat 10px center;
+  text-align: right;
+  color: #f5f5f5;
+  font-family: helvetica;
+  font-size: 18px;
+}

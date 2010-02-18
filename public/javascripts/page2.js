@@ -1,7 +1,7 @@
-function updatePage() {
+function doUpdate() {
   tinyMCE.triggerSave();
   showMessage('info', 'Saving page...');
-  $('main').down('form').request({
+  mainForm().request({
     onSuccess: function() {
       showMessage('success', 'Your changes were updated successfully.');
     }

@@ -27,7 +27,15 @@ function adjustImage(image) {
   image.style.visibility = 'visible';
 }
 
+function doUpdate () {
+  mainForm().submit();
+}
+
 function showMessage(kind, text) {
   $('action-bar').className = kind;
   $('message').innerHTML = text;
+}
+
+function mainForm() {
+  return $('main').down('form');
 }

@@ -1,33 +1,31 @@
 = javascript_include_tag 'tiny_mce/tiny_mce', 'page2'
+= stylesheet_link_tag 'page'
+
+- @title = @page.path
+- @hint = 'Edit sections below and then click update to make changes'
+
+= content_for :actions do
+  = link_to 'View', @page.url, :target => '_blank'
+  - if current_user.owner?
+    = link_to 'Delete', [@site, @page], |
+      :method => :delete, :confirm => 'Are you sure?', :class => 'important' |
 
 = show_page_content do
-  #main
-    .header
-      %span.page-name= @page.path
-      %span.actions
-        = link_to 'View', @page.url, :target => '_blank'
-        - if current_user.owner?
-          = link_to 'Remove', [@site, @page], |
-            :method => :delete, :confirm => 'Are you sure?' |
-      .hint
-        %span.nbsp &nbsp;
-        Edit sections below and then click update to make changes
+  - form_for [@site, @page] do
+    - if @sections
+      - @sections.each do |section|
+        .mce-editor
+          = text_area_tag 'sections[]', section, :id => nil, :class => 'mce_area'
 
-    - form_for [@site, @page] do
-      - if @sections
-        - @sections.each do |section|
-          .mce-editor
-            = text_area_tag 'sections[]', section, :id => nil, :class => 'mce_area'
-
-      - if @images
-        - @images.each do |attributes|
-          .image
-            .bar 100 X 100
-            .thumbnail
-              %img{:src => File.join(@site.site_url, attributes['src']), |
-                :alt => attributes['alt'], :onload => 'initImage(this);' } |
-            - attributes.each do |k,v|
-              = hidden_field_tag "images[][#{k}]", v, :id => nil
+    - if @images
+      - @images.each do |attributes|
+        .image
+          .bar 100 X 100
+          .thumbnail
+            %img{:src => File.join(@site.site_url, attributes['src']), |
+              :alt => attributes['alt'], :onload => 'initImage(this);' } |
+          - attributes.each do |k,v|
+            = hidden_field_tag "images[][#{k}]", v, :id => nil
 
 :javascript
   initTinyMCE({

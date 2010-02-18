@@ -39,12 +39,22 @@ a img {
   position: relative;
 }
 
-#tabs .selected .shadow {
-  background: #e21303 url(/images/tab-shadow.png) left repeat-y;
+#tabs .shadow {
   position: absolute;
   height: 50px;
   width: 16px;
+  bottom: 0;
+  background: #e21303;
+}
+
+#tabs .shadow.right {
+  background: url(/images/tab-shadow-right.png) left repeat-y;
   right: -16px;
+}
+
+#tabs .shadow.left {
+  background: url(/images/tab-shadow-left.png) right repeat-y;
+  left: -16px;
 }
 
 #system-bar .logo {
@@ -141,9 +151,10 @@ a img {
 
 #action-window .header {
   position: relative;
+  margin-bottom: 10px;
 }
 
-.header .page-name, .header .nbsp {
+.header .title, .header .nbsp {
   font: 23px impact;
 }
 
@@ -155,40 +166,16 @@ a img {
   text-decoration: underline;
 }
 
+.header .actions a.important {
+  color: #fe7e57;
+}
+
 .hint {
   position: absolute;
   right: 0px;
   bottom: 0px;
   font: 10px arial;
   color: #919191;
-}
-
-.mce-editor, .image {
-  margin-top: 20px;
-}
-
-.mce-editor {
-  width: 100%;
-}
-
-.mce_area {
-  height: 180px;
-}
-
-.image {
-  margin-right: 20px;
-  cursor: pointer;
-  float: left;
-}
-
-.image .bar {
-  line-height: 35px;
-  padding-right: 10px;
-  background: #373d43 url(/images/swap-out.png) no-repeat 10px center;
-  text-align: right;
-  color: #f5f5f5;
-  font-family: helvetica;
-  font-size: 18px;
 }
 
 #action-bar {
