@@ -1,0 +1,34 @@
+%h2=@editor.name
+#actions
+  = link_to 'Remove', @editor, :method => :delete, :confirm => 'Are you sure?'
+
+%table.card
+  %tr
+    %th Name:
+    %td= h @editor.name
+  %tr
+    %th Email:
+    %td= h @editor.email
+  %tr
+    %th Confirmed:
+    %td= h @editor.confirmed?
+
+= javascript_include_tag 'editor'
+
+- form_for @editor do |form|
+  %table#permissions
+    %tr
+      %th Editor Permissions
+    - current_user.sites.each do |site|
+      %tr.site_perm
+        %td
+          = check_box_tag "sites[#{site.id}]"
+          = site.name
+      - site.pages.each do |page|
+        %tr.page_perm
+          %td
+            = check_box_tag 'pages[]', page.id, @editor.pages.include?(page), |
+              :id => "pages_#{page.id}", :class => "sites_#{site.id}" |
+            = label_tag "pages_#{page.id}", page.path
+    %tr
+      %td= submit_tag

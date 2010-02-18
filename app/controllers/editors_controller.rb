@@ -23,12 +23,12 @@ class EditorsController < ApplicationController
 
   def show
     find_editor
-    render 'show2', :layout => 'editors2' if params[:design]
+    render :template => 'editors/show', :layout => 'editors2'
   end
 
   def update
     find_editor.set_page_ids(params[:pages] || [])
-    flash[:success] = 'Editor permissions was updated.'
+    flash[:success] = 'Editor permissions were updated.'
     redirect_to @editor
   end
 
