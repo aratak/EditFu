@@ -18,13 +18,14 @@
 
   #action-window
     #main
-      .header
-        %span.title= @title
-        %span.actions
-          = yield :actions
-        .hint
-          %span.nbsp &nbsp;
-          = @hint
+      -if @title && @hint
+        .header
+          %span.title= @title
+          %span.actions
+            = yield :actions
+          .hint
+            %span.nbsp &nbsp;
+            = @hint
       = yield
 
   #action-bar(class=message_kind)

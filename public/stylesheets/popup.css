@@ -1,0 +1,95 @@
+.popup {
+  background: white;
+  position: relative;
+}
+
+.popup h1 {
+  font: 16px impact;
+  color: #ff1200;
+  text-align: center;
+  margin-top: 7px;
+  margin-bottom: 25px;
+}
+
+#new-site.popup {
+  height: 425px;
+}
+
+#new-site.popup .inputs {
+  width: 435px;
+}
+
+#new-site.popup .tree-area {
+  float: right;
+  width: 350px;
+  height: 280px;
+  background: #f1f1f1;
+  padding: 15px;
+  padding-top: 10px;
+  overflow: auto;
+}
+
+.popup .input-hint {
+  font: 12px helvetica;
+  color: #b7b7b7;
+}
+
+.popup .input {
+  position: relative;
+  padding-left: 15px;
+  height: 35px;
+  background: #f1f1f1;
+  margin-bottom: 15px;
+  font: 24px helvetica;
+}
+
+.popup .input input {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 10px;
+  position: absolute;
+  display: none;
+  font: 24px helvetica;
+}
+
+.popup .input .label {
+  line-height: 35px;
+}
+
+.popup .input.active .label {
+  display: none;
+}
+
+.popup .input.active input {
+  display: inline;
+}
+
+.popup .action-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: #ff1200;
+}
+
+.popup .action-bar a {
+  font: 20px impact;
+  color: #fefefe;
+  line-height: 40px;
+  float: right;
+  margin-right: 15px;
+}
+
+.popup .action-bar a.cancel {
+  color: #ff8d84;
+}
+
+.popup .popup-hint {
+  position: absolute;
+  left: 15px;
+  bottom: 55px;
+  font: 10px helvetica;
+  color: #838383;
+}

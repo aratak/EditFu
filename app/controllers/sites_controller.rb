@@ -14,6 +14,7 @@ class SitesController < ApplicationController
 
   def new
     @site = Site.new
+    render :action => 'new', :layout => 'sites2'
   end
 
   def create

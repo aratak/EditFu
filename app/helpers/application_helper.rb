@@ -20,4 +20,11 @@ module ApplicationHelper
   def message_kind
     ([:info, :success, :warning, :error] & flash.keys).first
   end
+
+  def popup_input(label, input)
+    cls = label == 'Login' ? ' active' : ''
+    content_tag(:div, :class => 'input' + cls) do
+      content_tag(:span, label, :class => 'label') + input
+    end
+  end
 end

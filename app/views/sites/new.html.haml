@@ -1,4 +1,19 @@
-%h2 New Site
+= stylesheet_link_tag 'popup'
 
-= new_site_content do
-  = render :partial => 'form'
+#new-site.popup
+  %h1 New Site
+  - form_for @site, :html => { :id => 'site_form' } do |form|
+    = form.error_messages
+    .tree-area
+      .input-hint Choose the site root
+    .inputs
+      = popup_input 'Server Name', text_field_tag(:name, 'Name')
+      = popup_input 'ftp.mywebsite.com', text_field_tag(:server, 'ftp.qqq.com')
+      = popup_input 'www.mywebsite.com', text_field_tag(:site_url)
+      = popup_input 'Login', text_field_tag(:login, 'peter')
+      = popup_input 'Password', password_field_tag(:password)
+
+  .popup-hint *Click within the content above to edit it
+  .action-bar
+    = link_to 'Save', '#'
+    = link_to 'Cancel', '#', :class => 'cancel'
