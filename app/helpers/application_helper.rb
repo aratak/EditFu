@@ -22,8 +22,7 @@ module ApplicationHelper
   end
 
   def popup_input(label, input)
-    cls = label == 'Login' ? ' active' : ''
-    content_tag(:div, :class => 'input' + cls) do
+    content_tag(:div, :class => 'input') do
       content_tag(:span, label, :class => 'label') + input
     end
   end
