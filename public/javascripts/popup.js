@@ -12,6 +12,9 @@ Event.observe(window, 'load', function() {
   $$('.popup .input input').each(function(input) {
     Event.observe(input, 'blur', function() {
       input.up().removeClassName('active');
+      if(input.value) {
+        input.up().down('.label').innerHTML = input.value;
+      }
     });
   });
 });

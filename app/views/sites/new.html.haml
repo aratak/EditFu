@@ -8,10 +8,10 @@
     .tree-area
       .input-hint Choose the site root
     .inputs
-      = popup_input 'Server Name', text_field_tag(:name, 'Name')
-      = popup_input 'ftp.mywebsite.com', text_field_tag(:server, 'ftp.qqq.com')
+      = popup_input 'Server Name', text_field_tag(:name)
+      = popup_input 'ftp.mywebsite.com', text_field_tag(:server)
       = popup_input 'www.mywebsite.com', text_field_tag(:site_url)
-      = popup_input 'Login', text_field_tag(:login, 'peter')
+      = popup_input 'Login', text_field_tag(:login)
       = popup_input 'Password', password_field_tag(:password)
 
   .popup-hint *Click within the content above to edit it
