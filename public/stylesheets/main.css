@@ -178,6 +178,35 @@ a img {
   color: #919191;
 }
 
+.message {
+  width: 100%;
+  height: 50px;
+  font: bold 20px helvetica;
+  text-align: center;
+}
+
+#page-message {
+  position: fixed;
+  bottom: 50px;
+}
+
+.message div {
+  color: white;
+  line-height: 50px;
+}
+
+.message .success {
+  background: #60cc97;
+}
+
+.message .warning {
+  background: #fcdc6b;
+}
+
+.message .error {
+  background: #eb4250;
+}
+
 #action-bar {
   height: 50px;
   clear: left;
@@ -187,24 +216,6 @@ a img {
   width: 100%;
 
   text-align: center;
-}
-
-#action-bar.success {
-  background: #60cc97;
-}
-
-#action-bar.warning {
-  background: #fcdc6b;
-}
-
-#action-bar.error {
-  background: #eb4250;
-}
-
-#message {
-  font: 18px impact;
-  color: #373d43;
-  line-height: 50px;
 }
 
 .plus-action {

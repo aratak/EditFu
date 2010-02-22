@@ -33,11 +33,21 @@ function doUpdate () {
 
 function showMessage(kind, text) {
   if(text && !text.blank()) {
-    $('action-bar').className = kind;
-    $('message').innerHTML = text;
+    var message = $('page-message');
+    message.innerHTML = '<div class="' + kind + '">' + text + '</div>';
+    message.show();
+    message.fade({duration: 10});
   }
 }
 
 function mainForm() {
   return $('main').down('form');
 }
+
+Event.observe(window, 'load', function() {
+  $$('.message').each(function(message) {
+    Event.observe(message, 'click', function() {
+      message.hide();
+    });
+  });
+});

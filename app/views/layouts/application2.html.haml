@@ -28,13 +28,14 @@
             = @hint
       = yield
 
-  #action-bar(class=message_kind)
+  #page-message.message(style='display: none;')
+    
+  #action-bar
     - link_to new_href, :class => 'plus-action' do
       %img(src='/images/plus.png')
     = link_to_function 'Update', 'doUpdate();', :class => 'update-action'
 
-    %span#message
-      - if message_kind
-        = flash[message_kind]
-    
+  - if message_kind
+    :javascript
+      showMessage("#{message_kind}", "#{flash[message_kind]}");
 = render :file => 'layouts/page2'
