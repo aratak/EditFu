@@ -17,6 +17,7 @@
       = form.hidden_field :site_root
 
   .popup-hint *Click within the content above to edit it
+  .message(style='display: none;')
   .action-bar
     = link_to_function 'Save', 'return submitPopup(this);'
     = link_to 'Cancel', '#', :class => 'cancel'

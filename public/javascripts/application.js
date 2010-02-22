@@ -33,7 +33,8 @@ function doUpdate () {
 
 function showMessage(kind, text) {
   if(text && !text.blank()) {
-    var message = $('page-message');
+    var popup = $$('.popup').first();
+    var message = popup ? popup.down('.message') : $('page-message');
     message.innerHTML = '<div class="' + kind + '">' + text + '</div>';
     message.show();
     message.fade({duration: 10});

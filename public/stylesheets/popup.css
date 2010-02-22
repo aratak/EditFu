@@ -47,24 +47,29 @@
   display: inline;
 }
 
+.popup .message {
+  position: absolute;
+  bottom: 50px;
+}
+
 .popup .action-bar {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 40px;
-  background: #ff1200;
+  height: 50px;
 }
 
 .popup .action-bar a {
-  font: 20px impact;
-  color: #fefefe;
-  line-height: 40px;
+  font: bold 20px helvetica;
+  color: #555555;
+  line-height: 50px;
   float: right;
   margin-right: 15px;
 }
 
 .popup .action-bar a.cancel {
+  font-weight: normal;
   color: #ff8d84;
 }
 
