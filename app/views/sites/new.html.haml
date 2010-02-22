@@ -1,5 +1,5 @@
-= stylesheet_link_tag 'popup'
-= javascript_include_tag 'popup'
+= stylesheet_link_tag 'popup', 'tree2'
+= javascript_include_tag 'popup', 'tree2'
 
 #new-site.popup
   %h1 New Site
@@ -7,14 +7,19 @@
     = form.error_messages
     .tree-area
       .input-hint Choose the site root
+      #ftp-tree
     .inputs
-      = popup_input 'Server Name', text_field_tag(:name)
-      = popup_input 'ftp.mywebsite.com', text_field_tag(:server)
-      = popup_input 'www.mywebsite.com', text_field_tag(:site_url)
-      = popup_input 'Login', text_field_tag(:login)
-      = popup_input 'Password', password_field_tag(:password)
+      = popup_input 'Server Name', form.text_field(:name)
+      = popup_input 'ftp.mywebsite.com', form.text_field(:server)
+      = popup_input 'www.mywebsite.com', form.text_field(:site_url)
+      = popup_input 'Login', form.text_field(:login)
+      = popup_input 'Password', form.password_field(:password)
+      = form.hidden_field :site_root
 
   .popup-hint *Click within the content above to edit it
   .action-bar
-    = link_to 'Save', '#'
+    = link_to_function 'Save', 'return submitPopup(this);'
     = link_to 'Cancel', '#', :class => 'cancel'
+
+:javascript
+  SiteFtpTree.initForm();

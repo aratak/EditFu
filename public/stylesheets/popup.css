@@ -11,24 +11,6 @@
   margin-bottom: 25px;
 }
 
-#new-site.popup {
-  height: 425px;
-}
-
-#new-site.popup .inputs {
-  width: 435px;
-}
-
-#new-site.popup .tree-area {
-  float: right;
-  width: 350px;
-  height: 280px;
-  background: #f1f1f1;
-  padding: 15px;
-  padding-top: 10px;
-  overflow: auto;
-}
-
 .popup .input-hint {
   font: 12px helvetica;
   color: #b7b7b7;
@@ -92,4 +74,26 @@
   bottom: 55px;
   font: 10px helvetica;
   color: #838383;
+}
+
+#new-site.popup {
+  height: 425px;
+}
+
+#new-site.popup .inputs {
+  width: 435px;
+}
+
+#new-site.popup .tree-area {
+  float: right;
+  width: 350px;
+  height: 280px;
+  background: #f1f1f1;
+  padding: 15px;
+  padding-top: 10px;
+}
+
+#new-site.popup #ftp-tree {
+  margin-top: 5px;
+  height: 265px;
 }

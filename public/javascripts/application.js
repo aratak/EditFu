@@ -32,8 +32,10 @@ function doUpdate () {
 }
 
 function showMessage(kind, text) {
-  $('action-bar').className = kind;
-  $('message').innerHTML = text;
+  if(text && !text.blank()) {
+    $('action-bar').className = kind;
+    $('message').innerHTML = text;
+  }
 }
 
 function mainForm() {
