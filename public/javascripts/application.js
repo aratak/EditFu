@@ -32,13 +32,22 @@ function doUpdate () {
 }
 
 function showMessage(kind, text) {
+  var message = clearMessage();
   if(text && !text.blank()) {
-    var popup = $$('.popup').first();
-    var message = popup ? popup.down('.message') : $('page-message');
     message.innerHTML = '<div class="' + kind + '">' + text + '</div>';
     message.show();
-    message.fade({duration: 10});
+    message.effect = new Effect.Fade(message, {delay: 10, duration: 5});
   }
+}
+
+function clearMessage() {
+  var popup = $$('.popup').first();
+  var message = popup ? popup.down('.message') : $('page-message');
+  if(message.effect) {
+    message.effect.cancel();
+  }
+  message.hide();
+  return message;
 }
 
 function mainForm() {

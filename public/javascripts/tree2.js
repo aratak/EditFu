@@ -140,6 +140,10 @@ var SiteFtpTree = Class.create(FtpTree, {
 
   onItemSelected: function(li) {
     $('site_site_root').value = this.getItemPath(li);
+    var error = $('site_site_root').up('.input').down('.error');
+    if(error) {
+      error.remove();
+    }
   },
 
   getRequestParams: function() {
@@ -150,6 +154,7 @@ var SiteFtpTree = Class.create(FtpTree, {
 SiteFtpTree.initForm = function() {
   $('site_server', 'site_login', 'site_password').each(function(input) {
       input.observe('change', function() {
+        $('site_site_root').value = '';
         if($F('site_server') && $F('site_login') && $F('site_password')) {
           SiteFtpTree.show();
         } else {

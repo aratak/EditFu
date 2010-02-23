@@ -1,20 +1,25 @@
 Event.observe(window, 'load', function() {
   $$('.popup .input').each(function(input) {
     Event.observe(input, 'click', function() {
-      input.addClassName('active');
-      input.down('input').focus();
+      if(!input.hasClassName('active') && input.down('input')) {
+        input.addClassName('active');
+        input.down('input').focus();
+      }
     });
   });
 
   $$('.popup .input input').each(function(input) {
-    Event.observe(input, 'blur', function() {
-      var p = input.up('.input');
-      p.removeClassName('active');
+    var p = input.up('.input');
 
+    Event.observe(input, 'change', function() {
       var error = p.down('.error');
       if(error) {
         error.remove();
       }
+    });
+
+    Event.observe(input, 'blur', function() {
+      p.removeClassName('active');
 
       if(input.value && input.type != 'password') {
         p.down('.label').innerHTML = input.value;
@@ -29,24 +34,30 @@ function submitPopup(link) {
   popup.select('.error').each(function(error) {
     error.remove();
   });
+  showMessage('info', 'Processing request...');
 
   form.request({
     method: 'post',
     onSuccess: function(transport) {
-      alert(transport.responseJSON);
-      $A(transport.responseJSON).each(function(error) {
-        form.getInputs().each(function(input) {
-          var p = input.up('.input');
-          if (p && !p.down('.error')) {
-            var match = input.name.match(/\[([^[]*)\]$/) 
-            if(match && error[0] == match[1]) {
-              var element = document.createElement('div');
-              element.className = 'error';
-              element.innerHTML = error[1];
-              p.insert({top: element});
+      clearMessage();
+      var errors = $A(transport.responseJSON);
+      errors.each(function(error) {
+        if(error[0] == 'base') {
+          showMessage('error', error[1]);    
+        } else {
+          form.getInputs().each(function(input) {
+            var p = input.up('.input');
+            if (p && !p.down('.error')) {
+              var match = input.name.match(/\[([^[]*)\]$/) 
+              if(match && error[0] == match[1]) {
+                var element = document.createElement('div');
+                element.className = 'error';
+                element.innerHTML = error[1];
+                p.insert({top: element});
+              }
             }
-          }
-        });
+          });
+        }
       });
     }
   });

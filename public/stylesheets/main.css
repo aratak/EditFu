@@ -199,7 +199,7 @@ a img {
   background: #60cc97;
 }
 
-.message .warning {
+.message .warning, .message .info {
   background: #fcdc6b;
 }
 

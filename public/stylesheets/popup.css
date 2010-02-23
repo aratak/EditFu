@@ -105,11 +105,13 @@
   width: 435px;
 }
 
-#new-site.popup .tree-area {
+#new-site.popup .tree-input {
   float: right;
-  width: 350px;
+  width: 375px;
+}
+
+#new-site.popup .tree-input .box {
   height: 280px;
-  background: #f1f1f1;
   padding: 15px;
   padding-top: 10px;
 }
