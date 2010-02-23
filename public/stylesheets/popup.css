@@ -17,12 +17,27 @@
 }
 
 .popup .input {
-  position: relative;
+  margin-bottom: 15px;
+}
+
+.popup .input .box {
   padding-left: 15px;
+  position: relative;
   height: 35px;
   background: #f1f1f1;
-  margin-bottom: 15px;
   font: 24px helvetica;
+}
+
+.popup .input .error {
+  padding-left: 15px;
+  height: 35px;
+  background: #ff0000;
+  color: white;
+  font: 14px/35px helvetica;
+}
+
+.popup .input .error * {
+  line-height: 35px;
 }
 
 .popup .input input {
@@ -58,6 +73,7 @@
   left: 0;
   right: 0;
   height: 50px;
+  background: #f1f1f1;
 }
 
 .popup .action-bar a {
@@ -82,7 +98,7 @@
 }
 
 #new-site.popup {
-  height: 425px;
+  height: 525px;
 }
 
 #new-site.popup .inputs {

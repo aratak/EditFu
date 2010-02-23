@@ -21,11 +21,8 @@ class SitesController < ApplicationController
     @site = Site.new params[:site]
     @site.owner = current_user
 
-    if @site.validate_and_save
-      redirect_to site_path(@site)
-    else
-      render :action => :new
-    end
+    @site.validate_and_save
+    render :json => @site.errors
   end
 
   def edit

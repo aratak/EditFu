@@ -23,7 +23,9 @@ module ApplicationHelper
 
   def popup_input(label, input)
     content_tag(:div, :class => 'input') do
-      content_tag(:span, label, :class => 'label') + input
+      content_tag(:div, :class => 'box') do
+        content_tag(:span, label, :class => 'label') + input
+      end
     end
   end
 end
