@@ -89,13 +89,13 @@ a img {
   background: #ddd url(/images/source-bar-bg.jpg);
 }
 
-.top-menu {
+#top-menu {
   margin: 18px 12px;
   padding: 0px;
   list-style-type: none;
 }
 
-.top-menu li {
+#top-menu li {
   font-family: helvetica;
   font-size: 16px;
   font-weight: bold;
@@ -103,14 +103,14 @@ a img {
   margin-top: 12px
 }
 
-.menu {
+#top-menu .menu {
   list-style-type: none;
   padding: 0px;
   margin: 0px;
   margin-top: 3px;
 }
 
-.menu li {
+#top-menu .menu li {
   font-family: helvetica;
   font-size: 16px;
   font-weight: normal;

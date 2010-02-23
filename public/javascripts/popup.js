@@ -41,27 +41,31 @@ function submitPopup(link) {
   form.request({
     method: 'post',
     onSuccess: function(transport) {
-      clearMessage();
-      var errors = $A(transport.responseJSON);
-      errors.each(function(error) {
-        if(error[0] == 'base') {
-          showMessage('error', error[1]);    
-        } else {
-          form.getInputs().each(function(input) {
-            var p = input.up('.input');
-            if (p && !p.down('.error')) {
-              var match = input.name.match(/\[([^[]*)\]$/) 
-              if(match && error[0] == match[1]) {
-                var element = document.createElement('div');
-                element.className = 'error';
-                element.innerHTML = error[1];
-                p.insert({top: element});
-              }
-            }
-          });
+      handlePopupResponse(form, transport);
+    }
+  });
+  return false;
+}
+
+function handlePopupResponse(form, transport) {
+  clearMessage();
+
+  $A(transport.responseJSON).each(function(error) {
+    if(error[0] == 'base') {
+      showMessage('error', error[1]);    
+    } else {
+      form.getInputs().each(function(input) {
+        var p = input.up('.input');
+        if (p && !p.down('.error')) {
+          var match = input.name.match(/\[([^[]*)\]$/) 
+          if(match && error[0] == match[1]) {
+            var element = document.createElement('div');
+            element.className = 'error';
+            element.innerHTML = error[1];
+            p.insert({top: element});
+          }
         }
       });
     }
   });
-  return false;
 }

@@ -1,11 +1,6 @@
 = content_for :sourceBar do
-  %ul.top-menu
+  %ul#top-menu
     - current_user.sites.each do |site|
-      %li
-        = link_to site.name, site_path(site)
-        %ul.menu
-          - site.pages.each do |page|
-            = render 'layouts/menu_item', :name => 'page', :text => page.path, |
-              :href => site_page_path(site, page), :selected => page == @page |
+      = render 'layouts/site_menu_item', :site => site
 
 = render :file => 'layouts/application2', :locals => { :tab => 'pages', :new_href => new_site_path }

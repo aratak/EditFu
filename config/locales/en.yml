@@ -10,6 +10,9 @@ en:
     site_count: "There are too many remaining sites for free plan. Please delete all but one."
     page_count: "There are too many remaining pages for free.plan."
 
+  site:
+    created: "Site was created"
+
   admin:
     owner:
       canceled: "{{email}} was canceled."

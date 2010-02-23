@@ -28,4 +28,9 @@ module ApplicationHelper
       end
     end
   end
+
+  def show_message(page, key)
+    message = I18n.t(key)
+    page << "showMessage('success', '#{message}');"
+  end
 end

@@ -21,8 +21,9 @@ class SitesController < ApplicationController
     @site = Site.new params[:site]
     @site.owner = current_user
 
-    @site.validate_and_save
-    render :json => @site.errors
+    if !@site.validate_and_save
+      render :json => @site.errors
+    end
   end
 
   def edit
