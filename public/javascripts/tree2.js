@@ -140,10 +140,7 @@ var SiteFtpTree = Class.create(FtpTree, {
 
   onItemSelected: function(li) {
     $('site_site_root').value = this.getItemPath(li);
-    var error = $('site_site_root').up('.input').down('.error');
-    if(error) {
-      error.remove();
-    }
+    $('site_site_root').fire('custom:change');
   },
 
   getRequestParams: function() {

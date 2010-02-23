@@ -11,12 +11,14 @@ Event.observe(window, 'load', function() {
   $$('.popup .input input').each(function(input) {
     var p = input.up('.input');
 
-    Event.observe(input, 'change', function() {
+    var onchange = function() {
       var error = p.down('.error');
       if(error) {
         error.remove();
       }
-    });
+    };
+    Event.observe(input, 'blur', onchange);
+    Event.observe(input, 'custom:change', onchange);
 
     Event.observe(input, 'blur', function() {
       p.removeClassName('active');
