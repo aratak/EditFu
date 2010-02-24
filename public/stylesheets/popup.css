@@ -97,26 +97,26 @@
   color: #838383;
 }
 
-#new-site.popup {
+.site-popup {
   height: 525px;
 }
 
-#new-site.popup .inputs {
+.site-popup .inputs {
   width: 435px;
 }
 
-#new-site.popup .tree-input {
+.site-popup .tree-input {
   float: right;
   width: 375px;
 }
 
-#new-site.popup .tree-input .box {
+.site-popup .tree-input .box {
   height: 280px;
   padding: 15px;
   padding-top: 10px;
 }
 
-#new-site.popup #ftp-tree {
+.site-popup #ftp-tree {
   margin-top: 5px;
   height: 265px;
 }

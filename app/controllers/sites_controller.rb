@@ -21,22 +21,17 @@ class SitesController < ApplicationController
     @site = Site.new params[:site]
     @site.owner = current_user
 
-    if !@site.validate_and_save
-      render :json => @site.errors
-    end
+    validate_and_save
   end
 
   def edit
     find_site
+    render :action => 'edit', :layout => 'sites2'
   end
 
   def update
     find_site.attributes= params[:site]
-    if @site.validate_and_save
-      redirect_to site_path(@site)
-    else
-      render :action => :edit
-    end
+    validate_and_save
   end
 
   def destroy
@@ -69,6 +64,12 @@ class SitesController < ApplicationController
 
   def find_site
     @site = current_user.find_site(params[:id])
+  end
+
+  def validate_and_save
+    if !@site.validate_and_save
+      render :json => @site.errors
+    end
   end
 
   def check_limits

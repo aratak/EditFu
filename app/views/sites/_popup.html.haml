@@ -1,0 +1,26 @@
+= stylesheet_link_tag 'popup', 'tree2'
+= javascript_include_tag 'popup', 'tree2'
+
+.site-popup.popup
+  %h1= title
+  - form_for @site, :html => { :id => 'site_form', :onsubmit => 'return false;' } do |form|
+    .input.tree-input
+      .box
+        .input-hint Choose the site root
+        #ftp-tree
+        = form.hidden_field :site_root
+    .inputs
+      = popup_input @site.name || 'Server Name', form.text_field(:name)
+      = popup_input @site.server || 'ftp.mywebsite.com', form.text_field(:server)
+      = popup_input @site.site_url || 'www.mywebsite.com', form.text_field(:site_url)
+      = popup_input @site.login || 'Login', form.text_field(:login)
+      = popup_input 'Password', form.password_field(:password)
+
+  .popup-hint Click within the content above to edit it. To learn more about FTP click here.
+  .message(style='display: none;')
+  .action-bar
+    = link_to_function 'Save', 'return submitPopup(this);'
+    = link_to 'Cancel', '#', :class => 'cancel'
+
+:javascript
+  SiteFtpTree.initForm();
