@@ -51,9 +51,6 @@ class SitesController < ApplicationController
       @files = FtpClient.ls(site, params[:folder]).select do |f| 
         f[:type] == :folder || /\.html?$/ =~ f[:name]
       end
-      @files.sort! do |a, b| 
-        a[:name] <=> b[:name] && b[:type].to_s <=> a[:type].to_s
-      end
       render :layout => false
     rescue FtpClientError => e
       head :ftp_error => e.message

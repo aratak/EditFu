@@ -17,7 +17,7 @@ describe SitesController do
       site = assigns(:site)
       site.new_record?.should be_false
       site.owner.should == @owner
-      response.should redirect_to(site_path(site))
+      response.should render_template('create.rjs')
     end
 
     it "should complain if there are connection problem" do
@@ -25,7 +25,7 @@ describe SitesController do
       post :create, :site => Factory.attributes_for(:site, :owner => nil)
 
       assigns(:site).new_record?.should be_true
-      response.should render_template(:new)
+      response.should_not render_template(:new)
     end
 
     it "should redirect to new if user can't add sites" do
@@ -48,7 +48,7 @@ describe SitesController do
       put :update, :id => site.id, :site => { :login => 'invalid' }
 
       site.reload.login.should == 'valid'
-      response.should render_template(:edit)
+      response.should_not render_template(:edit)
     end
   end
 end

@@ -126,6 +126,19 @@ describe FtpClient do
         { :name => 'README', :type => :file }
       ]
     end
+
+    it "should sort items by their names and types" do
+      FtpClient.should_receive(:open).and_yield(@ftp)
+
+      @ftp.should_receive(:ls).with().and_return [
+        "-rw-r--r--    2 0        65534        4096 Nov 19 15:28 b",
+        "-rw-r--r--    2 0        65534        4096 Nov 19 15:28 a",
+        "drwxr-xr-x    5 1003     1003         4096 Dec 11 11:31 folder"
+      ]
+
+      items = FtpClient.ls(@site, '/home/peter').map { |i| i[:name] }
+      items.should == ['folder', 'b', 'a']
+    end
   end
 
   describe "open" do

@@ -7,7 +7,7 @@ class ImagesController < ApplicationController
 
     begin
       dir = File.join(@site.site_root, type_dir)
-      @images = FtpClient.ls(@site, dir).map { |f| f[:name] }.sort!
+      @images = FtpClient.ls(@site, dir).map { |f| f[:name] }
     rescue
       @images = []
     end

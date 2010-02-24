@@ -43,7 +43,9 @@ class FtpClient
   def self.ls(site, folder)
     # FTP doesn't raise FTPPermError on ls - we should chdir to get it.
     open site, folder do |f|
-      list(f)
+      list(f).sort do |a, b|
+        a[:name] <=> b[:name] && b[:type].to_s <=> a[:type].to_s
+      end
     end
   end
 
