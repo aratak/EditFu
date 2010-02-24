@@ -39,5 +39,5 @@
 }
 
 #ftp-tree span.selected {
-  background: red;
+  color: #ff0000;
 }

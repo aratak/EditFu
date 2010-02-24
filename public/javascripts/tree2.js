@@ -36,6 +36,7 @@ var FtpTree = Class.create({
       }
 
       var iconImg = document.createElement('img');
+      iconImg.className = 'icon';
       iconImg.src = tree.getIconSrc(li);
       li.insertBefore(iconImg, aTag);
     });
@@ -46,8 +47,12 @@ var FtpTree = Class.create({
       this.onItemSelected(li);
       $('ftp-tree').select('span.selected').each(function(selected) {
         selected.removeClassName('selected');
+        var icon = selected.up('li').down('.icon');
+        icon.src = icon.src.sub('selected-', '');
       });
-      li.select('span').first().addClassName('selected');
+      li.down('span').addClassName('selected');
+      var icon = li.down('.icon');
+      icon.src = icon.src.replace(/([^\/]*)$/, 'selected-$1'); 
     }
 
     if (li.className == 'folder') {
@@ -119,7 +124,10 @@ var FtpTree = Class.create({
   },
 
   getIconSrc: function(li) {
-    var basename = 'folder';
+    var basename = li.className;
+    if(basename == 'root') {
+      basename = 'folder';
+    }
     return this.imageFolder + basename + this.imageSuffix;
   }
 });
