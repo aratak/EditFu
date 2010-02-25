@@ -137,7 +137,64 @@ describe FtpClient do
       ]
 
       items = FtpClient.ls(@site, '/home/peter').map { |i| i[:name] }
-      items.should == ['folder', 'b', 'a']
+      items.should == ['folder', 'a', 'b']
+    end
+  end
+
+  describe "tree" do
+    it "should return list of files in all ancestor folders" do
+      FtpClient.should_receive(:open).with(@site, '/').and_yield(@ftp)
+
+      @ftp.should_receive(:ls).with('/').and_return [
+        "drwxr-xr-x    5 1003     1003         4096 Dec 11 11:31 etc",
+        "drwxr-xr-x    2 0        65534        4096 Nov 19 15:28 home",
+      ]
+      @ftp.should_receive(:ls).with('/home').and_return [
+        "drwxr-xr-x    5 1003     1003         4096 Dec 11 11:31 peter",
+        "drwxr-xr-x    5 1002     1002         4096 Nov 20 12:31 james",
+      ]
+      @ftp.should_receive(:ls).with('/home/peter').and_return [
+        "drwxr-xr-x    5 1003     1003         4096 Dec 11 11:31 site",
+        "drwxr-xr-x    5 1002     1002         4096 Nov 20 12:31 tmp",
+      ]
+
+      tree, complete = FtpClient.tree(@site, '/home/peter/site')
+      tree.should == [
+        { :name => 'etc', :type => :folder },
+        { :name => 'home', :type => :folder, :children => [
+            { :name => 'peter', :type => :folder, :children => [
+                { :name => 'site', :type => :folder },
+                { :name => 'tmp', :type => :folder }
+              ]
+            },
+            { :name => 'james', :type => :folder }
+          ]
+        }
+      ]
+      complete.should be_true
+    end
+
+    it "should return flag that tree is incomplete" do
+      FtpClient.should_receive(:open).and_yield(@ftp)
+
+      @ftp.should_receive(:ls).with('/').and_return [
+        "drwxr-xr-x    5 1003     1003         4096 Dec 11 11:31 etc",
+        "drwxr-xr-x    2 0        65534        4096 Nov 19 15:28 home",
+      ]
+      @ftp.should_receive(:ls).with('/home').and_return [
+        "drwxr-xr-x    5 1002     1002         4096 Nov 20 12:31 james",
+      ]
+      @ftp.should_receive(:ls).with('/home/peter').and_return []
+
+      tree, complete = FtpClient.tree(@site, '/home/peter/site')
+      tree.should == [
+        { :name => 'etc', :type => :folder },
+        { :name => 'home', :type => :folder, :children => [
+            { :name => 'james', :type => :folder }
+          ]
+        }
+      ]
+      complete.should be_false
     end
   end
 

@@ -43,10 +43,30 @@ class FtpClient
   def self.ls(site, folder)
     # FTP doesn't raise FTPPermError on ls - we should chdir to get it.
     open site, folder do |f|
-      list(f).sort do |a, b|
-        a[:name] <=> b[:name] && b[:type].to_s <=> a[:type].to_s
+      list(f)
+    end
+  end
+
+  def self.tree(site, folder)
+    result = nil
+    complete = true
+
+    open site, File::SEPARATOR do |f|
+      while folder != File::SEPARATOR do
+        children = result
+        folder, child = File.split(folder)
+        result = list(f, folder)
+
+        child_file = result.find { |file| file[:name] == child }
+        if !child_file
+          complete = false
+        elsif children
+          child_file[:children] = children
+        end
       end
     end
+
+    return result, complete
   end
 
   private
@@ -75,6 +95,8 @@ class FtpClient
     ftp.ls(*args).map do |line|
       line =~ /(\S+)\s+(\S+\s+){7}(.*)/
       { :name => $3, :type => $1.start_with?('d') ? :folder : :file }
+    end.sort do |a, b|
+      a[:name] <=> b[:name] && b[:type].to_s <=> a[:type].to_s
     end
   end
 
