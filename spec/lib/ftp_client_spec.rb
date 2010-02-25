@@ -158,8 +158,7 @@ describe FtpClient do
         "drwxr-xr-x    5 1002     1002         4096 Nov 20 12:31 tmp",
       ]
 
-      tree, complete = FtpClient.tree(@site, '/home/peter/site')
-      tree.should == [
+      FtpClient.tree(@site, '/home/peter/site').should == [
         { :name => 'etc', :type => :folder },
         { :name => 'home', :type => :folder, :children => [
             { :name => 'peter', :type => :folder, :children => [
@@ -171,10 +170,9 @@ describe FtpClient do
           ]
         }
       ]
-      complete.should be_true
     end
 
-    it "should return flag that tree is incomplete" do
+    it "should handle incomplete tree" do
       FtpClient.should_receive(:open).and_yield(@ftp)
 
       @ftp.should_receive(:ls).with('/').and_return [
@@ -186,15 +184,13 @@ describe FtpClient do
       ]
       @ftp.should_receive(:ls).with('/home/peter').and_return []
 
-      tree, complete = FtpClient.tree(@site, '/home/peter/site')
-      tree.should == [
+      FtpClient.tree(@site, '/home/peter/site').should == [
         { :name => 'etc', :type => :folder },
         { :name => 'home', :type => :folder, :children => [
             { :name => 'james', :type => :folder }
           ]
         }
       ]
-      complete.should be_false
     end
   end
 

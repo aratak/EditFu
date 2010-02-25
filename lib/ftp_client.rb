@@ -49,7 +49,6 @@ class FtpClient
 
   def self.tree(site, folder)
     result = nil
-    complete = true
 
     open site, File::SEPARATOR do |f|
       while folder != File::SEPARATOR do
@@ -58,15 +57,13 @@ class FtpClient
         result = list(f, folder)
 
         child_file = result.find { |file| file[:name] == child }
-        if !child_file
-          complete = false
-        elsif children
+        if child_file && children
           child_file[:children] = children
         end
       end
     end
 
-    return result, complete
+    result
   end
 
   private

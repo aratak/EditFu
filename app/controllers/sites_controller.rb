@@ -47,13 +47,15 @@ class SitesController < ApplicationController
       site.site_root = '/'
     end
 
-    begin
-      @files = FtpClient.ls(site, params[:folder]).select do |f| 
-        f[:type] == :folder || /\.html?$/ =~ f[:name]
-      end
-      render :layout => false
-    rescue FtpClientError => e
-      head :ftp_error => e.message
+    render_tree(site, params[:folder]) do
+      FtpClient.ls(site, params[:folder])
+    end
+  end
+
+  def tree
+    site = current_user.sites.find params[:site_id]
+    render_tree(site, site.site_root) do
+      FtpClient.tree(site, site.site_root)
     end
   end
 
@@ -66,6 +68,15 @@ class SitesController < ApplicationController
   def validate_and_save
     if !@site.validate_and_save
       render :json => @site.errors
+    end
+  end
+
+  def render_tree(site, folder)
+    begin
+      files = FtpClient.tree(site, folder)
+      render :partial => 'tree', :locals => { :files => yield }
+    rescue FtpClientError => e
+      head :ftp_error => e.message
     end
   end
 

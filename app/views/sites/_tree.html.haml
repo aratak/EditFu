@@ -1,0 +1,6 @@
+- files.each do |file|
+  - if file[:type] == :folder || /\.html?$/ =~ file[:name]
+    %li{:class => "#{file[:type]}"}
+      %span= file[:name]
+      - if file[:children]
+        %ul= render '_tree', :files => file[:children]
