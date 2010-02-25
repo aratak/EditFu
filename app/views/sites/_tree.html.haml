@@ -3,4 +3,4 @@
     %li{:class => "#{file[:type]}"}
       %span= file[:name]
       - if file[:children]
-        %ul= render '_tree', :files => file[:children]
+        %ul= render 'tree', :files => file[:children]

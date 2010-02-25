@@ -14,7 +14,7 @@ ActionController::Routing::Routes.draw do |map|
     preferences.resource :card, :only => [:edit, :update]
   end
 
-  map.resources :sites, :collection => { :ls => :get } do |site|
+  map.resources :sites, :collection => { :ls => :get, :tree => :get } do |site|
     site.resources :pages
     site.resources :images, :only => [:new, :create]
   end

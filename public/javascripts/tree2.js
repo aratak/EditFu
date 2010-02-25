@@ -5,7 +5,7 @@ var FtpTree = Class.create({
   openedImage: 'opened.png',
 
   createBranch: function(parentNode, html) {
-    var ul = parentNode.select('ul').first();
+    var ul = parentNode.down('ul');
     if (ul) {
       ul.remove();
     }
@@ -45,14 +45,7 @@ var FtpTree = Class.create({
   onItemClick: function(li) {
     if (li.className == this.selectableClass) {
       this.onItemSelected(li);
-      $('ftp-tree').select('span.selected').each(function(selected) {
-        selected.removeClassName('selected');
-        var icon = selected.up('li').down('.icon');
-        icon.src = icon.src.sub('selected-', '');
-      });
-      li.down('span').addClassName('selected');
-      var icon = li.down('.icon');
-      icon.src = icon.src.replace(/([^\/]*)$/, 'selected-$1'); 
+      this.markSelected(li);
     }
 
     if (li.className == 'folder') {
@@ -60,37 +53,91 @@ var FtpTree = Class.create({
     }
   },
 
+  markSelected: function(li) {
+    $('ftp-tree').select('span.selected').each(function(selected) {
+      selected.removeClassName('selected');
+      var icon = selected.up('li').down('.icon');
+      icon.src = icon.src.sub('selected-', '');
+    });
+
+    li.down('span').addClassName('selected');
+    var icon = li.down('.icon');
+    icon.src = icon.src.replace(/([^\/]*)$/, 'selected-$1'); 
+  },
+
   toggleFolder: function(li) {
-    var img = li.select('img.closed').first();
+    var img = li.down('img.closed');
     if (!img || !img.visible()) return;
 
-    var ul = li.select('ul').first();
     if (img.src.indexOf(this.closedImage) < 0) {
-      img.src = img.src.replace(this.openedImage, this.closedImage);
-      ul.style.display = 'none';
+      this.collapseFolder(li);
     } else {
-      img.src = img.src.replace(this.closedImage, this.openedImage);
-      if (!ul) {
-        this.loadFolder(li);
-      } else {
-        ul.style.display = 'block';
-      }
+      this.expandFolder(li);
     }
   },
 
-  loadFolder: function(li) {
+  expandFolder: function(li) {
+    var img = li.down('img.closed');
+    if(img) {
+      img.src = img.src.replace(this.closedImage, this.openedImage);
+    }
+
+    var ul = li.down('ul');
+    if (!ul) {
+      this.loadList(li);
+    } else {
+      ul.style.display = 'block';
+    }
+  },
+
+  collapseFolder: function(li) {
+    var img = li.down('img.closed');
+    img.src = img.src.replace(this.openedImage, this.closedImage);
+    li.down('ul').style.display = 'none';
+  },
+
+  expandTree: function(li) {
+    var tree = this;
+    li.select('li.folder ul').each(function(ul) {
+      tree.expandFolder(ul.up('li.folder'));
+    });
+  },
+
+  loadList: function(li) {
+    var params = this.getRequestParams();
+    params['folder'] = this.getItemPath(li);
+    this.loadData(li, 'ls', params);
+  },
+
+  loadTree: function(li) {
+    var tree = this;
+    this.loadData(li, 'tree', { site_id: this.site_id }, function() {
+      tree.expandTree(li);
+      var path = $F('site_site_root').substr(1);
+      var selected = tree.findItem(li, path);
+      if(selected) {
+        tree.markSelected(selected);
+      } else {
+        showMessage('error', "Site root isn't exist on the server.");
+      }
+    });
+  },
+
+  loadData: function(li, method, params, callback) {
     this.createBranch(li, "<li class='load'><span>Loading...</span></li>");
 
     var tree = this;
-    var params = this.getRequestParams();
-    params['folder'] = this.getItemPath(li);
-    new Ajax.Request('/sites/ls', {
+    new Ajax.Request('/sites/' + method, {
       method: 'get',
       parameters: params,
       
       onSuccess: function(response) {
-        showMessage('error', response.getHeader('ftp-error'));
+        var error = response.getHeader('ftp-error');
+        showMessage('error', error);
         tree.parseResponse(li, response.responseText);
+        if(!error && callback) {
+          callback();
+        }
       },
 
       onFailure: function() {
@@ -123,12 +170,32 @@ var FtpTree = Class.create({
     return '/' + names.reverse().join('/');
   },
 
+  findItem: function(li, relativePath) {
+    relativePath.match(/([^\/]*)\/?(.*)/);
+    var name = RegExp.$1;
+    var rest = RegExp.$2;
+
+    var child = li.down('ul').childElements().find(function(e) {
+      return e.down('span').innerHTML == name;
+    });
+
+    if(!rest || !child) {
+      return child;
+    } else {
+      return this.findItem(child, rest);
+    }
+  },
+
   getIconSrc: function(li) {
     var basename = li.className;
     if(basename == 'root') {
       basename = 'folder';
     }
     return this.imageFolder + basename + this.imageSuffix;
+  },
+
+  getRoot: function() {
+    return $('ftp-tree').down('li');
   }
 });
 
@@ -137,13 +204,20 @@ var FtpTree = Class.create({
 var SiteFtpTree = Class.create(FtpTree, {
   selectableClass: 'folder',
 
-  initialize: function() {
-    var ul = this.createBranch(
+  initialize: function(site_id) {
+    this.site_id = site_id;
+    this.createBranch(
       $('ftp-tree'),
       '<li class="root"><span>Root/</span></li>'
     );
-    this.loadFolder(ul.select('li').first());
-    $('ftp-tree').style.display = 'block';
+
+    var root = this.getRoot();
+    if(this.site_id) {
+      this.loadTree(root);
+    } else {
+      this.loadList(root);
+    }
+    this.expandFolder(root);
   },
 
   onItemSelected: function(li) {
@@ -156,21 +230,21 @@ var SiteFtpTree = Class.create(FtpTree, {
   }
 });
 
-SiteFtpTree.initForm = function() {
+SiteFtpTree.initForm = function(site_id) {
   $('site_server', 'site_login', 'site_password').each(function(input) {
-      input.observe('change', function() {
-        $('site_site_root').value = '';
-        if($F('site_server') && $F('site_login') && $F('site_password')) {
-          SiteFtpTree.show();
-        } else {
-          $('ftp-tree').hide();
-        }
-      });
+    input.observe('change', function() {
+      $('site_site_root').value = '';
+      if($F('site_server') && $F('site_login') && $F('site_password')) {
+        new SiteFtpTree()
+      } else {
+        $('ftp-tree').hide();
+      }
+    });
   });
-}
 
-SiteFtpTree.show = function() {
-  new SiteFtpTree();
+  if(site_id) {
+    new SiteFtpTree(site_id);
+  }
 }
 
 // PageFtpTree - for pages/new
@@ -178,7 +252,7 @@ SiteFtpTree.show = function() {
 var PageFtpTree = Class.create(FtpTree, {
   selectableClass: 'file',
 
-  initialize: function($super, site_id) {
+  initialize: function(site_id) {
     this.site_id = site_id;
     this.parseBranch($('ftp-tree').select('ul').first());
 
@@ -191,9 +265,7 @@ var PageFtpTree = Class.create(FtpTree, {
 
     var site_root = $('ftp-tree').select('li').last();
     this.root_path = this.getItemPath(site_root);
-    this.loadFolder(site_root);
-
-    $super();
+    this.loadList(site_root);
   },
 
   onItemSelected: function(li) {
