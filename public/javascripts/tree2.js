@@ -289,6 +289,6 @@ var PageFtpTree = Class.create(FtpTree, {
   },
 
   getRequestParams: function() {
-    return { site_id: this.site_id }
+    return { site_id: this.site_id, files: true }
   }
 });

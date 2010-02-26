@@ -38,6 +38,8 @@ class SitesController < ApplicationController
   end
 
   def ls
+    @files = params[:files]
+
     if params[:site_id]
       site = current_user.sites.find params[:site_id]
     else
