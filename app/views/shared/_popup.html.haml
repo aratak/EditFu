@@ -1,0 +1,12 @@
+= stylesheet_link_tag 'popup'
+= javascript_include_tag 'popup'
+
+.popup(id=id class=clazz)
+  %h1= title
+  = yield
+
+  .popup-hint Click within the content above to edit it. To learn more about FTP click here.
+  .message(style='display: none;')
+  .action-bar
+    = link_to_function 'Save', 'return submitPopup(this);'
+    = link_to 'Cancel', '#', :class => 'cancel'

@@ -1,5 +1,5 @@
 class SitesController < ApplicationController
-  layout 'sites'
+  layout 'sites2'
   before_filter :authenticate_user!, :only => [:index, :show]
   before_filter :authenticate_owner!, :except => [:index, :show, :ls]
   before_filter :check_trial_period, :only => :create
@@ -14,7 +14,6 @@ class SitesController < ApplicationController
 
   def new
     @site = Site.new
-    render :action => 'new', :layout => 'sites2'
   end
 
   def create
@@ -26,7 +25,6 @@ class SitesController < ApplicationController
 
   def edit
     find_site
-    render :action => 'edit', :layout => 'sites2'
   end
 
   def update
@@ -66,7 +64,7 @@ class SitesController < ApplicationController
   end
 
   def validate_and_save
-    if !@site.validate_and_save
+    unless @site.validate_and_save
       render :json => @site.errors
     end
   end

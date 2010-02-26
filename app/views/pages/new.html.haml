@@ -1,21 +1,9 @@
-%h2 Add new page
+= stylesheet_link_tag 'tree2'
+= javascript_include_tag 'tree2'
 
-= new_page_content do
-  - form_for [@site, @page] do |form|
-    = form.error_messages
-    %table.card
-      %tr
-        %th= form.label :path
-        %td
-          = form.text_field :path
-          = link_to_function image_tag('tree/open.png'), 'PageFtpTree.show()'
-    = submit_tag :create
-
-#ftpTree
-  %ul
-    %li.root
-      %span= @site.server
-      = render_site_root(@site)
+- popup :id => 'new-page', :title => 'New Page' do
+  - form_for [@site, @page], :html => { :onsubmit => 'return false;' } do |form|
+    = render 'shared/tree_input', :hint => 'Choose the page', :form => form, :hidden => :path
 
 :javascript
-  new PageFtpTree(#{@site.id});
+  new PageFtpTree(#{@site.id}, "#{@site.site_root}");

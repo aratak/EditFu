@@ -31,16 +31,15 @@ class PagesController < ApplicationController
   def new
     find_site
     @page = Page.new 
+    render :layout => 'sites2'
   end
 
   def create
     @page = Page.new params[:page]
     @page.site = find_site
 
-    if @page.save
-      redirect_to site_page_path(@site, @page)
-    else
-      render :action => :new
+    unless @page.save
+      render :json => @page.errors
     end
   end
 

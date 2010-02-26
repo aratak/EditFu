@@ -13,6 +13,9 @@ en:
   site:
     created: "Site was created"
 
+  page:
+    created: "Page was added"
+
   admin:
     owner:
       canceled: "{{email}} was canceled."

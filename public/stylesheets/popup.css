@@ -97,6 +97,21 @@
   color: #838383;
 }
 
+.popup .tree-input {
+  width: 375px;
+}
+
+.popup .tree-input .box {
+  height: 280px;
+  padding: 15px;
+  padding-top: 10px;
+}
+
+.popup #ftp-tree {
+  margin-top: 5px;
+  height: 265px;
+}
+
 .site-popup {
   height: 525px;
 }
@@ -107,16 +122,9 @@
 
 .site-popup .tree-input {
   float: right;
+}
+
+#new-page.popup {
+  height: 460px;
   width: 375px;
-}
-
-.site-popup .tree-input .box {
-  height: 280px;
-  padding: 15px;
-  padding-top: 10px;
-}
-
-.site-popup #ftp-tree {
-  margin-top: 5px;
-  height: 265px;
 }

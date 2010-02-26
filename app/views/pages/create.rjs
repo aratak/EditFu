@@ -1,0 +1,7 @@
+page.insert_html :bottom, "site-menu-#{@page.site.id}", 
+  :partial => 'layouts/menu_item', 
+  :locals => { 
+    :name => 'page', :text => @page.path, 
+    :href => site_page_path(@page.site, @page), :selected => false
+  }
+show_message(page, 'page.created')

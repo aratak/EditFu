@@ -21,6 +21,11 @@ module ApplicationHelper
     ([:info, :success, :warning, :error] & flash.keys).first
   end
 
+  def popup(opts, &block)
+    locals = { :id => nil, :clazz => nil }.merge(opts)
+    render :layout => 'shared/popup', :locals => locals, &block
+  end
+
   def popup_input(label, input)
     content_tag(:div, :class => 'input') do
       content_tag(:div, :class => 'box') do
