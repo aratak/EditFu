@@ -22,20 +22,30 @@ module ApplicationHelper
   end
 
   def popup(opts, &block)
-    locals = { :id => nil, :clazz => nil }.merge(opts)
+    locals = { :id => nil, :clazz => nil, :hint => nil, :action => []}.merge(opts)
     render :layout => 'shared/popup', :locals => locals, &block
   end
 
-  def popup_input(label, input)
-    content_tag(:div, :class => 'input') do
-      content_tag(:div, :class => 'box') do
-        content_tag(:span, label, :class => 'label') + input
-      end
+  def popup_input(opts = {}, &block)
+    locals = { :clazz => nil, :hint => nil, :has_hint => nil }.merge(opts)
+    locals[:has_hint] = 'has-hint' if opts.has_key?(:hint)
+    render :layout => 'shared/popup_input', :locals => locals, &block
+  end
+
+  def label_input(label, opts = {}, &block)
+    popup_input(opts) do
+      content_tag(:div, label, :class => 'label') + capture(&block)
     end
   end
 
   def show_message(page, key)
     message = I18n.t(key)
     page << "showMessage('success', '#{message}');"
+  end
+
+  private
+
+  def classes(*args)
+    { :class => args.compact.join(' ') }
   end
 end

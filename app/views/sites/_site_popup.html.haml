@@ -5,11 +5,16 @@
   - form_for @site, :html => { :id => 'site_form', :onsubmit => 'return false;' } do |form|
     = render 'shared/tree_input', :hint => 'Choose the site root', :form => form, :hidden => :site_root
     .inputs
-      = popup_input @site.name || 'Server Name', form.text_field(:name)
-      = popup_input @site.server || 'ftp.mywebsite.com', form.text_field(:server)
-      = popup_input @site.site_url || 'www.mywebsite.com', form.text_field(:site_url)
-      = popup_input @site.login || 'Login', form.text_field(:login)
-      = popup_input 'Password', form.password_field(:password)
+      - label_input @site.name || 'Server Name' do 
+        = form.text_field(:name)
+      - label_input @site.server || 'ftp.mywebsite.com' do
+        = form.text_field(:server)
+      - label_input @site.site_url || 'www.mywebsite.com' do
+        = form.text_field(:site_url)
+      - label_input @site.login || 'Login' do 
+        = form.text_field(:login)
+      - label_input 'Password' do
+        = form.password_field(:password)
 
 :javascript
   SiteFtpTree.initForm(#{@site.id});

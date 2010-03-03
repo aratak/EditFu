@@ -11,21 +11,23 @@
   margin-bottom: 25px;
 }
 
-.popup .input-hint {
-  font: 12px helvetica;
-  color: #b7b7b7;
-}
-
 .popup .input {
   margin-bottom: 15px;
 }
 
 .popup .input .box {
   padding-left: 15px;
-  position: relative;
-  height: 35px;
   background: #f1f1f1;
-  font: 24px helvetica;
+}
+
+.popup .box.has-hint {
+  padding: 7px 15px 8px 15px;
+}
+
+.popup .input-hint {
+  font: 10px helvetica;
+  color: #b7b7b7;
+  margin-bottom: 8px;
 }
 
 .popup .input .error {
@@ -36,18 +38,21 @@
   font: 14px/35px helvetica;
 }
 
-.popup .input .error * {
-  line-height: 35px;
+.popup .input .label, .popup .input input {
+  font: 24px helvetica;
 }
 
 .popup .input input {
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 10px;
-  position: absolute;
+  width: 100%;
+  height: 29px;
+  margin: 0;
+  margin-left: -2px;
+  padding: 0;
+  padding-top: 4px;
+  border: solid gray 1px;
+  outline: none;
+
   display: none;
-  font: 24px helvetica;
 }
 
 .popup .input .label {
@@ -59,7 +64,7 @@
 }
 
 .popup .input.active input {
-  display: inline;
+  display: block;
 }
 
 .popup .message {
@@ -103,8 +108,10 @@
 
 .popup .tree-input .box {
   height: 280px;
-  padding: 15px;
-  padding-top: 10px;
+}
+
+.popup .tree-input .input-hint {
+  font: 12px helvetica;
 }
 
 .popup #ftp-tree {
@@ -127,4 +134,79 @@
 #new-page.popup {
   height: 460px;
   width: 375px;
+}
+
+#image-popup {
+  height: 445px;
+  width: 890px;
+}
+
+#image-popup .input {
+  color: #b7b7b7;
+}
+
+#image-popup .image-list.input {
+  position: absolute;
+}
+
+#image-popup #thumbnails {
+  overflow: auto;
+  width: 405px;
+  height: 180px;
+}
+
+.file-inputs {
+  position: relative;
+}
+
+.fake-file {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.popup .file-inputs input {
+  cursor: pointer;
+  display: inline;
+  position: relative;
+  text-align: right;
+  -moz-opacity: 0;
+  filter: alpha(opacity: 0);
+  opacity: 0;
+  z-index: 2;
+}
+
+.file-inputs img {
+  vertical-align: middle;
+}
+
+.file-inputs .path {
+  font: 12px helvetica;
+  vertical-align: middle;
+}
+
+#image-popup .upload, #image-popup .url {
+  margin-left: 460px;
+}
+
+#image-popup .input.alt {
+  margin-top: 85px;
+  color: #383838;
+}
+
+#thumbnails .thumbnail {
+  float: left;
+  width: 62px;
+  height: 62px;
+  line-height: 62px;
+  text-align: center;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  visibility: hidden;
+  cursor: pointer;
+}
+
+#thumbnails .thumbnail img {
+  vertical-align: middle;
 }

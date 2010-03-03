@@ -5,8 +5,8 @@
   %h1= title
   = yield
 
-  .popup-hint Click within the content above to edit it. To learn more about FTP click here.
+  .popup-hint= hint || 'Click within the content above to edit it. To learn more about FTP click here.'
   .message(style='display: none;')
   .action-bar
-    = link_to_function 'Save', 'return submitPopup(this);'
+    = link_to_function action[0] || 'Save', action[1] || 'return submitPopup(this);'
     = link_to 'Cancel', '#', :class => 'cancel'

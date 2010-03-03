@@ -1,11 +1,13 @@
 Event.observe(window, 'load', function() {
   $$('.popup .input').each(function(input) {
-    Event.observe(input, 'click', function() {
-      if(!input.hasClassName('active') && input.down('input')) {
-        input.addClassName('active');
-        input.down('input').focus();
-      }
-    });
+    if(input.down('.label')) {
+      Event.observe(input, 'click', function() {
+        if(!input.hasClassName('active') && input.down('input')) {
+          input.addClassName('active');
+          input.down('input').focus();
+        }
+      });
+    }
   });
 
   $$('.popup .input input').each(function(input) {
@@ -23,8 +25,9 @@ Event.observe(window, 'load', function() {
     Event.observe(input, 'blur', function() {
       p.removeClassName('active');
 
-      if(input.value && input.type != 'password') {
-        p.down('.label').innerHTML = input.value;
+      var label = p.down('.label');
+      if(input.value && input.type != 'password' && label) {
+        label.innerHTML = input.value;
       }
     });
   });
