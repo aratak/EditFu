@@ -68,6 +68,22 @@ function doImageAction() {
 
 Event.observe(window, 'load', function() {
   Event.observe('uploadImage', 'change', uploadImage);
+
+  if(window.opener.editedImg) {
+    var editedPath = decodeURIComponent(getImgPath(window.opener.editedImg));
+    var editedUrl = tinyMCE.settings.document_base_url + editedPath;
+    var editedImg = $('thumbnails').down('img[src="' + editedUrl + '"]');
+    if(editedImg) {
+      selectImage(editedImg);
+    }
+    setImageInput('src', editedPath);
+    setImageInput('alt', window.opener.editedImg.alt);
+  }
+
+  var popup = $('image-popup');
+  popup.down('h1').innerHTML  = document.title = 
+    window.opener.imageAction + ' Image';
+  popup.down('.action-bar').down('.save').innerHTML = window.opener.imageAction;
 });
 
 function insertOrEditImage(edited, selected) {

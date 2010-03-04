@@ -11,7 +11,7 @@ Event.observe(window, 'load', function() {
   });
 
   $$('.popup .input input').each(function(input) {
-    var p = input.up('.input');
+    var p = input.up('div.input');
 
     var onchange = function() {
       var error = p.down('.error');
