@@ -149,6 +149,15 @@
   position: absolute;
 }
 
+#image-popup .upload, #image-popup .src {
+  margin-left: 460px;
+}
+
+#image-popup .input.alt {
+  margin-top: 85px;
+  color: #383838;
+}
+
 #image-popup #thumbnails {
   overflow: auto;
   width: 405px;
@@ -184,15 +193,6 @@
 .file-inputs .path {
   font: 12px helvetica;
   vertical-align: middle;
-}
-
-#image-popup .upload, #image-popup .src {
-  margin-left: 460px;
-}
-
-#image-popup .input.alt {
-  margin-top: 85px;
-  color: #383838;
 }
 
 #thumbnails {

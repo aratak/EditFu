@@ -66,7 +66,7 @@ function swapOutImage() {
 
   window.editedImage = this;
   window.editedImg = this.down('img');
-  window.imageAction = 'Swap Out';
+  window.imageAction = 'Swap';
   window.isSwapOut = true;
   window.open(tinyMCE.settings.new_image_path + '?type=only', '', features);
 }
