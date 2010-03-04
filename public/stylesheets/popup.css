@@ -186,7 +186,7 @@
   vertical-align: middle;
 }
 
-#image-popup .upload, #image-popup .url {
+#image-popup .upload, #image-popup .src {
   margin-left: 460px;
 }
 
@@ -195,16 +195,23 @@
   color: #383838;
 }
 
+#thumbnails {
+  margin-left: -5px;
+}
+
 #thumbnails .thumbnail {
   float: left;
   width: 62px;
   height: 62px;
   line-height: 62px;
   text-align: center;
-  margin-right: 10px;
-  margin-bottom: 10px;
+  padding: 5px;
   visibility: hidden;
   cursor: pointer;
+}
+
+#thumbnails .thumbnail.selected {
+  background: red;
 }
 
 #thumbnails .thumbnail img {

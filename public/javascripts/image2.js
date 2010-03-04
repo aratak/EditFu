@@ -9,11 +9,23 @@ function initThumbnail(img) {
   } else {
     img.width = maxSize;
   }
-  img.style.visibility = 'visible';
+
+  img.up('.thumbnail').style.visibility = 'visible';
+  img.onclick = selectImage.curry(img);
+}
+
+function selectImage(img) {
+  $$('#thumbnails .thumbnail.selected').each(function(selected) {
+    selected.removeClassName('selected');
+  });
+  img.up('.thumbnail').addClassName('selected');
+
+  var src = decodeURIComponent(getImgPath(img));
+  setImageInput('src', src);
 }
 
 function uploadImage() {
-  this.up('.input').down('.path').innerHTML = this.value;
+  this.up().down('.path').innerHTML = this.value;
   if(this.value.blank()) {
     return;
   }
@@ -30,14 +42,59 @@ function uploadImage() {
         showMessage('error', 'Server error');
       } else {
         showMessage('success', 'Image was successfully uploaded.');
-        $('thumbnails').insert(response);
+
+        var tmp = $(document.createElement('div'));
+        tmp.innerHTML = response;
+        
+        var img = tmp.down('img');
+        img.onload = function() {
+          initThumbnail(img);
+          selectImage(img);
+        };
+        $('thumbnails').insert(tmp.down());
       }
     }
   });
 
-  return $('image_form').submit();
+  return $('image-form').submit();
+}
+
+function doImageAction() {
+  var edited = window.opener.editedImg;
+  var selected = $('thumbnails').down('.thumbnail.selected img');
+  insertOrEditImage(edited, selected);
+  tinyMCEPopup.close();
 }
 
 Event.observe(window, 'load', function() {
   Event.observe('uploadImage', 'change', uploadImage);
 });
+
+function insertOrEditImage(edited, selected) {
+  var ed = tinyMCEPopup.editor;
+  tinyMCEPopup.restoreSelection();
+
+  var src = $('image-form')['src'].value;
+  var alt = $('image-form')['alt'].value;
+  if (edited) {
+    ed.dom.setAttrib(edited, 'src', src);
+    ed.dom.setAttrib(edited, 'alt', alt);
+  } else {
+    ed.execCommand('mceInsertContent', false, 
+        '<img id="__mce_tmp" />', { skip_undo: 1 });
+    ed.dom.setAttrib('__mce_tmp', 'src', src);
+    ed.dom.setAttrib('__mce_tmp', 'alt', alt);
+    ed.dom.setAttrib('__mce_tmp', 'id', '');
+    ed.undoManager.add();
+  }
+}
+
+function setImageInput(name, value) {
+  var input = $($('image-form')[name]);
+  input.value = value;
+  input.up().down('.label').innerHTML = value;
+}
+
+function getImgPath(img) {
+  return img.src.sub(tinyMCE.settings.document_base_url, '');
+}

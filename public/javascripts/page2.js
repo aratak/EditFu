@@ -10,8 +10,8 @@ function doUpdate() {
 }
 
 var popupProps = $H({
-  width: 600,
-  height: 495,
+  width: 900,
+  height: 575,
   resizable: 'no',
   scrollbars: 'no'
 });
