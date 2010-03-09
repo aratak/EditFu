@@ -15,8 +15,8 @@ class PlansController < ApplicationController
 
   def free
     if request.post?
-      sites = Site.all(params[:sites]) 
-      pages = Page.all(params[:pages])
+      sites = Site.find(params[:sites]) 
+      pages = Page.find(params[:pages])
       if current_user.set_free_plan(sites, pages)
         redirect_to preferences_path
       end

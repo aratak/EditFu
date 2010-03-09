@@ -78,7 +78,7 @@ class Owner < User
     cancel_recurring
 
     self.plan = "free"
-    self.save!
+    self.save
   end
 
   def set_card(card)
