@@ -1,5 +1,5 @@
 var FtpTree = Class.create({
-  imageFolder: '/images/tree2/',
+  imageFolder: '/images/tree/',
   imageSuffix: '.png',
   closedImage: 'closed.png',
   openedImage: 'opened.png',
