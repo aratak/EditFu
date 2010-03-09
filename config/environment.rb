@@ -8,11 +8,10 @@ require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
   config.gem 'hpricot'
-  config.gem 'haml'
-  config.gem 'warden'
+  config.gem 'haml', :version => "2.2.13" 
   config.gem 'action_mailer_tls', :lib => false
-  config.gem 'activemerchant', :lib => 'active_merchant'
-  config.gem 'devise'
+  config.gem 'activemerchant', :lib => 'active_merchant', :version => "1.4.2"
+  config.gem 'devise', :version => "0.6.2"
   config.gem 'acts_as_audited', :lib => false
   
   # Settings in config/environments/* take precedence over those specified here.
