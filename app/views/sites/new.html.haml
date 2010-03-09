@@ -1,1 +1,3 @@
-= render 'site_popup', :title => 'New Site'
+- popup :id => 'upgrade-popup', :title => 'Upgrade', :hint => '' do
+  = new_site_content do
+    = render 'site_popup', :title => 'New Site'
