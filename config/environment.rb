@@ -7,12 +7,12 @@ RAILS_GEM_VERSION = '2.3.3' unless defined? RAILS_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
-  config.gem 'hpricot'
+  config.gem 'hpricot', :version => "0.8.2" 
   config.gem 'haml', :version => "2.2.13" 
   config.gem 'action_mailer_tls', :lib => false
   config.gem 'activemerchant', :lib => 'active_merchant', :version => "1.4.2"
   config.gem 'devise', :version => "0.6.2"
-  config.gem 'acts_as_audited', :lib => false
+  config.gem 'acts_as_audited', :lib => false, :version => "1.1.0" 
   
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
