@@ -3,6 +3,7 @@ class PreferencesController < ApplicationController
   before_filter :set_preferences
 
   def show
+    render 'show2', :layout => 'sites2' if params['new']
   end
 
   def edit

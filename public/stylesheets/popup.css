@@ -38,7 +38,7 @@
   font: 14px/35px helvetica;
 }
 
-.popup .input .label, .popup .input input {
+.popup .label, .popup .input input {
   font: 24px helvetica;
 }
 
@@ -74,7 +74,6 @@
 
 .popup .action-bar {
   position: absolute;
-  bottom: 0;
   left: 0;
   right: 0;
   height: 50px;

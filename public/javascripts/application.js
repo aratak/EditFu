@@ -55,6 +55,17 @@ function mainForm() {
 }
 
 Event.observe(window, 'load', function() {
+  $$('.plan input.radio').each(function(input) {
+    Event.observe(input, 'change', function() {
+      $$('.plan .plan-label').invoke('removeClassName', 'checked');
+      input.next().addClassName('checked');
+    });
+  });
+  $$('.label-input input').each(function(input) {
+    Event.observe(input, 'blur', function() {
+      input.addClassName('with-text');
+    });
+  });
   $$('.message').each(function(message) {
     Event.observe(message, 'click', function() {
       message.hide();
