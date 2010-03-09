@@ -1,42 +1,43 @@
-#site_form {
-  float: left;
+#ftp-tree {
+  overflow: auto;
 }
 
-#ftpTree {
-  margin: 0px;
-  padding: 0px;
+#ftp-tree ul {
+  padding: 0;
+  margin: 0;
   display: none;
-  width: 49%;
-  float: left;
 }
 
-#ftpTree ul {
+#ftp-tree ul ul {
   margin-left: 20px;
-  padding-left: 0px;
-  display: none;
 }
 
-#ftpTree li {
+#ftp-tree li {
   list-style-type: none;
-  vertical-align: middle;
+  padding-top: 5px;
 }
 
-#ftpTree span {
-  color: #000;
+#ftp-tree img.closed {
+  padding: 5px 5px 0 0;
+  vertical-align: top;
+}
+
+#ftp-tree span {
+  color: #626262;
   text-decoration: none;
-  font-family: arial;
-  font-size: 0.8em;
+  font-family: helvetica;
+  font-size: 18px;
   padding-left: 2px;
 }
 
-#ftpTree span.selectable {
+#ftp-tree span.selectable {
   cursor: pointer;
 }
 
-#ftpTree span.selectable:hover {
+#ftp-tree span.selectable:hover {
   background: blue;
 }
 
-#ftpTree span.selected {
-  background: red;
+#ftp-tree span.selected {
+  color: #ff0000;
 }

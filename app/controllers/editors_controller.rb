@@ -23,7 +23,6 @@ class EditorsController < ApplicationController
 
   def show
     find_editor
-    render :template => 'editors/show', :layout => 'editors2'
   end
 
   def update

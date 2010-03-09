@@ -20,18 +20,11 @@ class PagesController < ApplicationController
     rescue FtpClientError => e
       flash.now[:error] = e.message
     end
-    
-   if params[:old]
-      render :template => 'pages/show_old', :layout => 'sites'
-   else
-      render :template => 'pages/show', :layout => 'sites2'
-   end
   end
 
   def new
     find_site
     @page = Page.new 
-    render :layout => 'sites2'
   end
 
   def create

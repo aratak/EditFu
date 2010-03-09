@@ -1,5 +1,5 @@
 class SitesController < ApplicationController
-  layout 'sites2'
+  layout 'sites'
   before_filter :authenticate_user!, :only => [:index, :show]
   before_filter :authenticate_owner!, :except => [:index, :show, :ls]
   before_filter :check_trial_period, :only => :create

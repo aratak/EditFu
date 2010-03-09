@@ -1,51 +1,135 @@
-function getImgPath(img) {
-  return img.src.sub(tinyMCE.settings.document_base_url, '');
+function initThumbnail(img) {
+  var maxSize = parseInt($(img).up().getStyle('width'), 10);
+
+  img.originalHeight = img.height;
+  img.originalWidth = img.width;
+
+  if(img.height > img.width) {
+    img.height = maxSize;
+  } else {
+    img.width = maxSize;
+  }
+
+  img.up('.thumbnail').style.visibility = 'visible';
+  img.onclick = selectImage.curry(img);
 }
 
-function selectImage(image) {
-  $$('#images .image.selected').each(function(selected) {
+function selectImage(img) {
+  $$('#thumbnails .thumbnail.selected').each(function(selected) {
     selected.removeClassName('selected');
   });
-  image.addClassName('selected');
+  img.up('.thumbnail').addClassName('selected');
 
-  $('src').value = decodeURIComponent(getImgPath(image.down('img')));
+  var src = decodeURIComponent(getImgPath(img));
+  setImageInput('src', src);
+
+  if(window.opener.isSwapOut) {
+    var edited = window.opener.editedImg;
+    clearMessage();
+    if(edited.originalHeight != img.originalHeight ||
+       edited.originalWidth != img.originalWidth) {
+      showMessage('warning', 'This image is of different diminsions than the image your replacing.');
+    }
+  }
 }
 
-function initImage(image) {
-  adjustImage(image);
-  Event.observe(image, 'click', selectImage.curry(image));
+function uploadImage() {
+  this.up().down('.path').innerHTML = this.value;
+  if(this.value.blank()) {
+    return;
+  }
+
+  AjaxUpload.submit($(this.form), {
+    onStart: function() {
+      showMessage('info', 'Uploading image to the server...');
+    },
+
+    onComplete: function(response) {
+      clearMessage();
+
+      if(response.blank()) {
+        showMessage('error', 'Server error');
+      } else {
+        showMessage('success', 'Image was successfully uploaded.');
+
+        var tmp = $(document.createElement('div'));
+        tmp.innerHTML = response;
+        
+        var img = tmp.down('img');
+        img.onload = function() {
+          initThumbnail(img);
+          selectImage(img);
+        };
+        $('thumbnails').insert(tmp.down());
+      }
+    }
+  });
+
+  return $('image-form').submit();
 }
 
-function updateEditorImage(edited) {
+function doImageAction() {
+  var edited = window.opener.editedImg;
+  var src = $('image-form')['src'].value;
+
+  if(!src.blank()) {
+    if(!window.opener.isSwapOut) {
+      insertOrEditImage(edited);
+    } else {
+      var selected = $('thumbnails').down('.thumbnail.selected img');
+      swapImage(edited, selected);
+    }
+  }
+  tinyMCEPopup.close();
+}
+
+Event.observe(window, 'load', function() {
+  Event.observe('uploadImage', 'change', uploadImage);
+
+  if(window.opener.editedImg) {
+    var editedPath = decodeURIComponent(getImgPath(window.opener.editedImg));
+    var editedUrl = tinyMCE.settings.document_base_url + editedPath;
+    var editedImg = $('thumbnails').down('img[src="' + editedUrl + '"]');
+    if(editedImg) {
+      selectImage(editedImg);
+    }
+    setImageInput('src', editedPath);
+    setImageInput('alt', window.opener.editedImg.alt);
+  }
+
+  var popup = $('image-popup');
+  popup.down('h1').innerHTML  = document.title = 
+    window.opener.imageAction + ' Image';
+  popup.down('.action-bar').down('.save').innerHTML = window.opener.imageAction;
+
+  if(window.opener.isSwapOut) {
+    $('image-form').down('.input.src').style.visibility = 'hidden';
+  }
+});
+
+function insertOrEditImage(edited) {
   var ed = tinyMCEPopup.editor;
   tinyMCEPopup.restoreSelection();
 
+  var src = $('image-form')['src'].value;
+  var alt = $('image-form')['alt'].value;
   if (edited) {
-    ed.dom.setAttrib(edited, 'src', $F('src'));
-    ed.dom.setAttrib(edited, 'alt', $F('alt'));
+    ed.dom.setAttrib(edited, 'src', src);
+    ed.dom.setAttrib(edited, 'alt', alt);
   } else {
     ed.execCommand('mceInsertContent', false, 
         '<img id="__mce_tmp" />', { skip_undo: 1 });
-    ed.dom.setAttrib('__mce_tmp', 'src', $F('src'));
-    ed.dom.setAttrib('__mce_tmp', 'alt', $F('alt'));
+    ed.dom.setAttrib('__mce_tmp', 'src', src);
+    ed.dom.setAttrib('__mce_tmp', 'alt', alt);
     ed.dom.setAttrib('__mce_tmp', 'id', '');
     ed.undoManager.add();
   }
 }
 
-function swapOutImage(edited, selected) {
-  edited.alt = $F('alt');
+function swapImage(edited, selected) {
+  edited.alt = $('image-form')['alt'].value;
   if(!selected) {
     return;
-  }
-
-  if(edited.originalHeight != selected.originalHeight ||
-     edited.originalWidth != selected.originalWidth) {
-    var s = confirm('Dimensions of original and new image are different ' +
-      'so operation may cause display issues. Are you really want to proceed?');
-    if(!s) {
-      return;
-    }
   }
 
   if(edited.src == selected.src) {
@@ -57,7 +141,7 @@ function swapOutImage(edited, selected) {
   edited.removeAttribute('width');
   edited.src = selected.src;
 
-  $$('input[type="text"]').each(function(imageInput) {
+  $$('#image-form input[type="text"]').each(function(imageInput) {
     var selector = 'input[name*="' + imageInput.name + '"]';
     var pageInput = window.opener.editedImage.down(selector);
     if (pageInput) {
@@ -66,71 +150,12 @@ function swapOutImage(edited, selected) {
   });
 }
 
-function updateImage() {
-  var edited = window.opener.editedImg;
-  if (!$F('src').blank()) {
-    if(!window.opener.isSwapOut) {
-      updateEditorImage(edited);
-    } else {
-      var selected = $('images').down('.image.selected img');
-      swapOutImage(edited, selected);
-    }
-  }
-  tinyMCEPopup.close();
+function setImageInput(name, value) {
+  var input = $($('image-form')[name]);
+  input.value = value;
+  input.up().down('.label').innerHTML = value;
 }
 
-function submitUploadForm() {
-  if($F('uploadImage').blank()) {
-    return;
-  }
-
-  AjaxUpload.submit($('image_form'), {
-    onStart: function() {
-      $('failure').innerHTML = '';
-      $('processing').show();
-    },
-
-    onComplete: function(response) {
-      $('processing').hide();
-      if(response.blank()) {
-        $('failure').innerHTML = 'Server error';
-      } else {
-        var tmp = $(document.createElement('div'));
-        tmp.innerHTML = response;
-
-        var image = tmp.down();
-        var img = image.down('img')
-        img.onload = function() {
-          initImage(image);
-          selectImage(image);
-        };
-        $('images').insert(image);
-      }
-    }
-  });
-
-  return $('image_form').submit();
+function getImgPath(img) {
+  return img.src.sub(tinyMCE.settings.document_base_url, '');
 }
-
-Event.observe(window, 'load', function() {
-  $$('#images .image').each(initImage);
-  Event.observe('uploadImage', 'change', submitUploadForm);
-
-  if(window.opener.editedImg) {
-    var editedPath = decodeURIComponent(getImgPath(window.opener.editedImg));
-    var editedUrl = tinyMCE.settings.document_base_url + editedPath;
-    var editedImg = $('images').down('img[src="' + editedUrl + '"]');
-    if(editedImg) {
-      selectImage(editedImg.up('.image'));
-    }
-    $('src').value = editedPath;
-    $('alt').value = window.opener.editedImg.alt;
-  }
-
-  document.title = window.opener.imageAction + ' Image';
-  $('submitButton').value = window.opener.imageAction;
-
-  if(window.opener.isSwapOut) {
-    $('src').disabled = true;
-  }
-});

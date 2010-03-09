@@ -1,9 +1,9 @@
 = content_for :sourceBar do
-  - current_user.editors.each do |editor|
-    .editor
-      %a{ :href=>editor_path(editor) }= editor.name
+  %ul#top-menu
+    %li
+      %ul.menu
+        - current_user.editors.each do |editor|
+          = render 'layouts/menu_item', :name => 'editor', :text => editor.name, |
+            :href => editor_path(editor), :selected => editor == @editor |
 
-= content_for :actionBar do
-  %a{:href=>new_editor_path} New
-
-= render :file => 'layouts/application'
+= render :file => 'layouts/application2', :locals => { :tab => 'editors', :new_href => new_editor_path }

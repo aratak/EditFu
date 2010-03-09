@@ -1,21 +1,17 @@
-function savePageSections() {
-  $('saveNotice').show();
-  var form = $('update_form');
-  form.commit.disable();
-
+function doUpdate() {
   tinyMCE.triggerSave();
-  form.request({
+  showMessage('info', 'Saving page...');
+  mainForm().request({
     onSuccess: function() {
-      $('saveNotice').hide();
-      form.commit.enable();
+      showMessage('success', 'Your changes were updated successfully.');
     }
   });
   return false;
 }
 
 var popupProps = $H({
-  width: 600,
-  height: 495,
+  width: 900,
+  height: 575,
   resizable: 'no',
   scrollbars: 'no'
 });
@@ -70,17 +66,31 @@ function swapOutImage() {
 
   window.editedImage = this;
   window.editedImg = this.down('img');
-  window.imageAction = 'Swap Out';
+  window.imageAction = 'Swap';
   window.isSwapOut = true;
   window.open(tinyMCE.settings.new_image_path + '?type=only', '', features);
 }
 
 function initImage(img) {
-  adjustImage(img.up('.image'));
+  var image = img.up('.image');
+
+  img.originalHeight = img.height;
+  img.originalWidth = img.width;
+
+  if(img.width < 150) {
+    img.width = 150;
+  } else if(img.height > 641) {
+    img.height = 641;
+  }
+
+  var bar = image.down('.bar');
+  bar.innerHTML = img.originalHeight + ' X ' + img.originalWidth;
+
+  image.style.visibility = 'visible';
 }
 
 Event.observe(window, 'load', function() {
-  $$('#images .image').each(function(image) {
+  $$('.image').each(function(image) {
     Event.observe(image, 'click', swapOutImage);
   });
 });

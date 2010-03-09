@@ -1,11 +1,6 @@
 = content_for :sourceBar do
-  - current_user.sites.each do |site|
-    .site{ site_attributes(site) }
-      %a{ :href=>site_path(site) }= site.name
-      - current_user.site_pages(site).each do |page|
-        %a.page{ page_attributes(page), :href=>site_page_path(site, page) }= page.path
+  %ul#top-menu
+    - current_user.sites.each do |site|
+      = render 'layouts/site_menu_item', :site => site
 
-= content_for :actionBar do
-  %a{:href=>new_site_path} New
-
-= render :file => 'layouts/application'
+= render :file => 'layouts/application2', :locals => { :tab => 'pages', :new_href => new_site_path }

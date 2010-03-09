@@ -11,7 +11,6 @@ class ImagesController < ApplicationController
     rescue
       @images = []
     end
-    render 'new2', :layout => 'page2'
   end
 
   def create
@@ -19,7 +18,7 @@ class ImagesController < ApplicationController
       image = params[:image]
       remote_path = File.join(type_dir, image.original_filename)
       name = FtpClient.put_image(find_site, image.path, remote_path)
-      render :partial => 'show2', :locals => { :name => name }
+      render :partial => 'show', :locals => { :name => name }
     rescue Exception => e
       logger.warn 'Got exception in image upload: ' + e.message
       render :nothing => true
