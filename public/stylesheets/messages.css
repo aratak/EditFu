@@ -1,0 +1,32 @@
+.message#page-message {
+  position: fixed;
+  bottom: 50px;
+}
+
+.message {
+  width: 100%;
+  font: bold 20px helvetica;
+  text-align: center;
+  height: 50px;
+}
+
+.message div {
+  color: white;
+  line-height: 50px;
+}
+
+.message .success {
+  background: #60cc97;
+}
+
+.message .warning {
+  background: #fcdc6b;
+}
+
+.message .info {
+  background: #fcdc6b;
+}
+
+.message .error {
+  background: #eb4250;
+}

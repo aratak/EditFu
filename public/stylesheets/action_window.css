@@ -1,0 +1,46 @@
+#action-window {
+  position: absolute;
+  overflow: auto;
+  top: 50px;
+  left: 240px;
+  right: 0;
+  bottom: 50px;
+  background: #e4e4e4 url(/images/action-window-bg.png) no-repeat center center;
+}
+
+#action-window #main {
+  padding: 40px;
+  color: #636363;
+}
+
+#action-window #main .header {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+#action-window #main.header .title, 
+#action-window #main .header .nbsp {
+  font: 23px impact;
+}
+
+#action-window #main .header .actions {
+  font: 12px arial;
+}
+
+#action-window #main .header .actions a {
+  text-decoration: underline;
+}
+
+#action-window #main .header .actions a.important {
+  color: #fe7e57;
+}
+
+#action-window #main .header .hint {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  font: 10px arial;
+  color: #919191;
+}
+
+

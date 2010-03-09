@@ -1,0 +1,140 @@
+/* &copy Pavel Markovnin */
+
+html {
+    color: #666666;
+    font-family: Arial, Verdana, Helvetica, sans-serif;
+    font-size: 10pt;
+    line-height: 1.4em;
+    background: #FFF;
+}
+
+body {
+  margin: 50px 0;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    outline: none;
+    font-size: 100%;
+    line-height: 1.4em;
+}
+
+input:link, textarea:link {
+    padding: 0.2em;
+    border: 1px solid #90586A;
+}
+
+img, a.img {
+    border: 0;
+}
+
+.clear {
+  clear: both;
+  overflow: hidden;
+  margin: 0 ! important;
+  padding: 0 ! important;
+  font-size: 0 ! important;
+}
+
+.clearLeft {
+  clear:left;
+}
+
+
+.nocss {
+    display: none;
+}
+
+hr.clear {
+    display: none;
+}
+
+
+a:link {
+    color: #636363;
+    text-decoration: none;
+}
+
+a:active {
+    color: #636363;
+}
+
+a:hover {
+    color: #636363;
+}
+
+a:visited {
+    color: #636363;
+}
+
+h1 {
+    font-size: 1.6em;
+    margin: 0 0 0.5em 0;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin: 0 0 0.5em 0;
+}
+
+h3 {
+    font-size: 1.4em;
+    margin: 0 0 0.5em 0;
+}
+
+h4 {
+    font-size: 1.3em;
+    margin: 0 0 0.5em 0;
+}
+
+h5 {
+    font-size: 1.2em;
+    margin: 0 0 0.5em 0;
+}
+
+h6 {
+    font-size: 1em;
+    margin: 0 0 0.5em 0;
+}
+
+p {
+    margin: 0 0 0.7em 0;
+}
+
+table {
+    border: 0;
+    border-collapse: collapse;
+}
+
+table td, th {
+    padding: 0;
+    vertical-align: top;
+    text-align: left;
+}
+
+ul, ol {
+/*    margin: 0 1em 0.7em 3em; */
+}
+
+ul li, ol li {
+    list-style: default;
+}
+
+small, sup, sub {
+    font-size: 0.8em;
+}
+
+big {
+    font-size: 1.2em;
+}
+
+a.img {
+  border-bottom: 0 ! important;
+}
+
+blockquote {
+    background: #f3deac;
+    border: 1px solid #d2d2d5;
+    padding: 10px;
+}

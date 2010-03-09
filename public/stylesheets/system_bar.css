@@ -1,0 +1,70 @@
+#system-bar {
+  height: 50px;
+  background: #e21303;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  font-size: 1.2em;
+}
+
+#system-bar .logo {
+  position: absolute;
+  left: 50%;
+  width: 55px;
+  height: 75px;
+  z-index: 1;
+  background: url(/images/logo.png) center top no-repeat;
+}
+
+#system-bar .system-link {
+  float: right;
+  margin-right: 10px;
+  margin-left: 25px;
+  line-height: 50px;
+  color: #f3a39d;
+  font-family: impact;
+  text-decoration: none;
+}
+
+#system-bar .system-link img {
+  padding-top: 11px;
+}
+
+#system-bar #tabs {
+  float: left;
+}
+
+#system-bar #tabs a {
+  float: left;
+  width: 120px;
+  height: 50px;
+}
+
+#system-bar #tabs img {
+  margin-left: 45px;
+  margin-top: 12px;
+}
+
+#system-bar #tabs .selected {
+  background: #ddd url(/images/source-bar-bg.jpg);
+  position: relative;
+}
+
+#system-bar #tabs .shadow {
+  position: absolute;
+  height: 50px;
+  width: 16px;
+  bottom: 0;
+  background: #e21303;
+}
+
+#system-bar #tabs .shadow.right {
+  background: url(/images/tab-shadow-right.png) left repeat-y;
+  right: -16px;
+}
+
+#system-bar #tabs .shadow.left {
+  background: url(/images/tab-shadow-left.png) right repeat-y;
+  left: -16px;
+}
+
