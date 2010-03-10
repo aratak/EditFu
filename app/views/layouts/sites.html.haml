@@ -4,5 +4,10 @@
       - current_user.sites.each do |site|
         = render 'layouts/site_menu_item', :site => site
 
-  - @content_for_tab = "pages"
-  - @content_for_new_href = new_site_path
+  = content_for :tabs do
+    = render "layouts/tabs", :tab => "pages"    
+
+  #add-action-bar
+    = link_to "", new_site_path, :class => 'plus-action'
+
+  = yield

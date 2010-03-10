@@ -7,5 +7,12 @@
             = render 'layouts/menu_item', :name => 'editor', :text => editor.name, |
               :href => editor_path(editor), :selected => editor == @editor |
 
-  - @content_for_tab = "editors"
-  - @content_for_new_href = new_editor_path
+  = content_for :tabs do
+    = render "layouts/tabs", :tab => "editors"    
+  
+  #add-action-bar
+    = link_to "", new_editor_path, :class => 'plus-action'
+  
+  
+  
+  = yield
