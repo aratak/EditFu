@@ -1,3 +1,5 @@
 - owner? do
   #add-action-bar
-    = link_to("", url, :class => 'plus-action')
+    = link_to_remote "", :url => url, |
+      :method => :get, |
+      :html => { :class => 'plus-action', :href => url } |
