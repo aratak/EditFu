@@ -1,0 +1,4 @@
+page.replace_html 'popup', :partial => 'show'
+page.show 'popup-system'
+page << "$('popup-system').appear();"
+page << "$('popup').slideDown();"
