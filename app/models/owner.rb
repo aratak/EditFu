@@ -44,7 +44,7 @@ class Owner < User
   end
 
   def add_editor(email)
-    name = email[0, email.index('@')]
+    name = email.to_s.gsub(/@.*/, "")
     editor = Editor.new :name => name, :email => email
     editor.owner = self
     editor.save
