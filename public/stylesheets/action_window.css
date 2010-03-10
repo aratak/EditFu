@@ -1,11 +1,13 @@
+body {
+  background: #e4e4e4 url(/images/action-window-bg.png) no-repeat center center;
+}
+
 #action-window {
-  position: absolute;
-  overflow: auto;
   top: 50px;
-  left: 240px;
+  margin-left: 240px;
+  padding: 50px 0;
   right: 0;
   bottom: 50px;
-  background: #e4e4e4 url(/images/action-window-bg.png) no-repeat center center;
 }
 
 #action-window #main {

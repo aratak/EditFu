@@ -1,5 +1,5 @@
 class PreferencesController < ApplicationController
-  layout 'sites'
+  layout 'application'
   
   before_filter :authenticate_user!
   before_filter :set_preferences
