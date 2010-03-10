@@ -1,10 +1,1 @@
-%h2 New Editor
-
-= new_editor_content do
-  - form_for @editor do |form|
-    = form.error_messages
-    %table.card
-      %tr
-        %th= form.label :email
-        %td= form.text_field :email
-    = submit_tag :submit
+= render "new"
