@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
+  before_filter :check_trial_period
   before_filter :redirect_to_subdomain if RAILS_ENV != 'test'
 
   # Scrub sensitive parameters from your log
@@ -20,8 +21,11 @@ class ApplicationController < ActionController::Base
     authenticate_user_type!(Admin)
   end
 
+  # TODO: perpetual redirect!
   def check_trial_period
-    raise if current_user.trial_period_expired?
+    if current_user && current_user.trial_period_expired?
+      redirect_to(trial_period_expired_path) and return 
+    end
   end
 
   private
@@ -48,4 +52,5 @@ class ApplicationController < ActionController::Base
       redirect_to root_path
     end
   end
+  
 end
