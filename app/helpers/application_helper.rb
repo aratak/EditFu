@@ -1,9 +1,14 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
+  
   def owner?
-    yield if user_signed_in? && current_user.kind_of?(Owner)
+    yield if user_signed_in? && current_user.owner?
   end
-
+  
+  def admin?
+    yield if user_signed_in? && current_user.admin?
+  end
+  
   def image_path(name)
     File.join(@type_dir, name)
   end
