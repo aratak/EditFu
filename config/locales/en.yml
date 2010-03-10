@@ -15,6 +15,10 @@ en:
 
   page:
     created: "Page was added"
+    updated: "Your changes were updated successfully"
+  
+  editor:
+    updated: "Your changes were updated successfully"
 
   admin:
     owner:
