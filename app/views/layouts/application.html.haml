@@ -4,6 +4,7 @@
     %title= @title || 'Edit-Fu'
     %meta{ 'http-equiv' => 'Content-Type', :content => 'text/html; charset=UTF-8' }
     = stylesheet_link_tag 'reset', 'layout', 'messages', 'source_bar', 'system_bar', 'action_window', 'action_bar', :cache => true
+    = stylesheet_link_tag 'popups/popup', 'popups/preferences-popup', :cache => true
     = javascript_include_tag :defaults, 'tree', 'upload', :cache => true
 
   %body
@@ -15,8 +16,10 @@
         = link_to 'Logout', destroy_user_session_path, :class => 'system-link'
         - link_to '#', :class => 'system-link', :alt => 'Help' do
           %img(src='/images/help.png')
-        - link_to preferences_path, :class => 'system-link', :alt => 'Preferences' do
-          %img(src='/images/preferences.png')
+        = link_to_remote image_tag("preferences.png", :alt => 'Preferences'), | 
+          :url => preferences_path, | 
+          :method => :get, |
+          :html => { :class => 'system-link', :href => preferences_path } |
 
       #source-bar
         = yield :sourceBar
