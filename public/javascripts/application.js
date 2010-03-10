@@ -71,4 +71,16 @@ Event.observe(window, 'load', function() {
       message.hide();
     });
   });
+  
+});
+
+Ajax.Responders.register({
+    onCreate: function() {
+      showMessage('info', 'Processing request...');
+    },
+    onComplete: function() {
+        // if ($('ajax_popup').visible()) {
+        //     $('ajax_popup').scrollTo()
+        // }
+    }
 });
