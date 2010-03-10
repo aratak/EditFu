@@ -1,12 +1,8 @@
 function doUpdate() {
-  tinyMCE.triggerSave();
-  showMessage('info', 'Saving page...');
-  mainForm().request({
-    onSuccess: function() {
-      showMessage('success', 'Your changes were updated successfully.');
-    }
-  });
-  return false;
+  Event.observe(window, 'load', function() {
+    Event.observe($$("form.edit_page"), "submit", tinyMCE.triggerSave);
+  })
+  
 }
 
 var popupProps = $H({

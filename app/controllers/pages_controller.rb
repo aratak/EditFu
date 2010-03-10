@@ -46,8 +46,6 @@ class PagesController < ApplicationController
     @page.images = params[:images]
     @page.save
     FtpClient.put_page(@page)
-
-    render :json => { :status => "ok" }
   end
 
   private

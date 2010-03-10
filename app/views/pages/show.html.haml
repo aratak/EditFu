@@ -11,7 +11,7 @@
       :method => :delete, :confirm => 'Are you sure?', :class => 'important' |
 
 = show_page_content do
-  - form_for [@site, @page] do
+  - remote_form_for [@site, @page] do |f|
     - if @sections
       - @sections.each do |section|
         .mce-editor
@@ -26,6 +26,7 @@
               :alt => attributes['alt'], :onload => 'initImage(this);' } |
           - attributes.each do |k,v|
             = hidden_field_tag "images[][#{k}]", v, :id => nil
+    = f.submit "Update", :class => "update-button"
 
 :javascript
   initTinyMCE({

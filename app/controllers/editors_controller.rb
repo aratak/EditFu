@@ -27,8 +27,6 @@ class EditorsController < ApplicationController
 
   def update
     find_editor.set_page_ids(params[:pages] || [])
-    flash[:success] = 'Editor permissions were updated.'
-    redirect_to @editor
   end
 
   def destroy

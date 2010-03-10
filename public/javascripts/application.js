@@ -27,14 +27,14 @@ function adjustImage(image) {
   image.style.visibility = 'visible';
 }
 
-function doUpdate () {
-  mainForm().submit();
-}
-
 function showMessage(kind, text) {
   var message = clearMessage();
   if(text && !text.blank()) {
-    message.innerHTML = '<div class="' + kind + '">' + text + '</div>';
+    var d = document.createElement('div');
+    d.className = kind;
+    d.innerHTML = text;
+
+    message.update(d);
     message.show();
     message.effect = new Effect.Fade(message, {delay: 10, duration: 5});
   }
@@ -43,13 +43,11 @@ function showMessage(kind, text) {
 function clearMessage() {
   var popup = $$('.popup').first();
   var message = popup ? popup.down('.message') : $('page-message');
-  if(message.effect) {
-    message.effect.cancel();
-  }
   message.hide();
   return message;
 }
 
+/* TODO: maybe it should be removed */
 function mainForm() {
   return $('main').down('form');
 }

@@ -8,7 +8,7 @@
   = link_to 'Settings', '#'
   = link_to 'Delete', @editor, :method => :delete, :confirm => 'Are you sure?', :class => 'important'
 
-- form_for @editor do |form|
+- remote_form_for @editor do |form|
   %ul.sites
     - current_user.sites.each do |site|
       %li.site
@@ -22,3 +22,5 @@
                 = check_box_tag 'pages[]', page.id, @editor.pages.include?(page), |
                   :id => "pages_#{page.id}", :class => "sites_#{site.id}" |
                 = label_tag "pages_#{page.id}", page.path
+  = form.submit "Update", :class => "update-button"
+
