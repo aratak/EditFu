@@ -1,27 +1,26 @@
-= content_for :body do
-  = javascript_include_tag 'image', 'tiny_mce/tiny_mce_popup' 
+= javascript_include_tag 'image', 'tiny_mce/tiny_mce_popup' 
 
-  - popup :id => 'image-popup', :title => 'Insert Image', |
-    :hint => 'Choose an image to replace the current one with. It’s best to use an image of the same size.', |
-    :action => ['Insert', 'doImageAction()'] do |
+- popup :id => 'image-popup', :title => 'Insert Image', |
+  :hint => 'Choose an image to replace the current one with. It’s best to use an image of the same size.', |
+  :action => ['Insert', 'doImageAction()'] do |
 
-    - form_tag site_images_path(@site), :id => 'image-form', :multipart => true, :onsubmit => 'return false;', :method => :post do
-      = hidden_field_tag :type, @type
-      - popup_input :clazz => 'image-list', :hint => 'Choose an image that was previously uploaded...' do
-        #thumbnails
-          = render :partial => 'show', :collection => @images, :as => :name
+  - form_tag site_images_path(@site), :id => 'image-form', :multipart => true, :onsubmit => 'return false;', :method => :post do
+    = hidden_field_tag :type, @type
+    - popup_input :clazz => 'image-list', :hint => 'Choose an image that was previously uploaded...' do
+      #thumbnails
+        = render :partial => 'show', :collection => @images, :as => :name
 
-      - popup_input :clazz => 'upload', :hint => 'or add a new image.' do 
-        .file-inputs
-          = file_field_tag 'image', :id => 'uploadImage'
-          .fake-file
-            %img(src='/images/choose_a_file.png')
-            %span.path MyComputer/folder/image2234.jpg
+    - popup_input :clazz => 'upload', :hint => 'or add a new image.' do 
+      .file-inputs
+        = file_field_tag 'image', :id => 'uploadImage'
+        .fake-file
+          %img(src='/images/choose_a_file.png')
+          %span.path MyComputer/folder/image2234.jpg
 
-      - label_input 'www.flickr.com/user/image.jpg', |
-        :clazz => 'src', :hint => 'or paste a link to an image. ' do |
-        = text_field_tag 'src', nil, :id => nil
+    - label_input 'www.flickr.com/user/image.jpg', |
+      :clazz => 'src', :hint => 'or paste a link to an image. ' do |
+      = text_field_tag 'src', nil, :id => nil
 
-      - label_input 'Image Title Goes Here', |
-        :clazz => 'alt', :hint => 'Provide an alternate text title for this image.' do |
-        = text_field_tag 'alt', nil, :id => nil
+    - label_input 'Image Title Goes Here', |
+      :clazz => 'alt', :hint => 'Provide an alternate text title for this image.' do |
+      = text_field_tag 'alt', nil, :id => nil
