@@ -10,23 +10,22 @@
     = link_to 'Delete', [@site, @page], |
       :method => :delete, :confirm => 'Are you sure?', :class => 'important' |
 
-= show_page_content do
-  - remote_form_for [@site, @page] do |f|
-    - if @sections
-      - @sections.each do |section|
-        .mce-editor
-          = text_area_tag 'sections[]', section, :id => nil, :class => 'mce_area'
+- remote_form_for [@site, @page] do |f|
+  - if @sections
+    - @sections.each do |section|
+      .mce-editor
+        = text_area_tag 'sections[]', section, :id => nil, :class => 'mce_area'
 
-    - if @images
-      - @images.each do |attributes|
-        .image
-          .bar 100 X 100
-          .thumbnail
-            %img{:src => File.join(@site.site_url, attributes['src']), |
-              :alt => attributes['alt'], :onload => 'initImage(this);' } |
-          - attributes.each do |k,v|
-            = hidden_field_tag "images[][#{k}]", v, :id => nil
-    = f.submit "Update", :class => "update-button"
+  - if @images
+    - @images.each do |attributes|
+      .image
+        .bar 100 X 100
+        .thumbnail
+          %img{:src => File.join(@site.site_url, attributes['src']), |
+            :alt => attributes['alt'], :onload => 'initImage(this);' } |
+        - attributes.each do |k,v|
+          = hidden_field_tag "images[][#{k}]", v, :id => nil
+  = f.submit "Update", :class => "update-button"
 
 :javascript
   initTinyMCE({
