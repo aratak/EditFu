@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
   before_filter :redirect_to_subdomain if RAILS_ENV != 'test'
+  
+  include Possibilities
 
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
