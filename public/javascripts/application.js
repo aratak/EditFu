@@ -83,6 +83,7 @@ Ajax.Responders.register({
       showMessage('info', 'Processing request...');
     },
     onComplete: function() {
+      clearMessage();
         // if ($('ajax_popup').visible()) {
         //     $('ajax_popup').scrollTo()
         // }
