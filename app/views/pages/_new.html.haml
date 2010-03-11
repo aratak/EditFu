@@ -1,0 +1,10 @@
+= stylesheet_link_tag 'tree'
+= javascript_include_tag 'tree'
+
+#new-page
+  %h2 New Page
+  - form_for [@site, @page], :html => { :onsubmit => 'return false;' } do |form|
+    = render 'shared/tree_input', :hint => 'Choose the page', :form => form, :hidden => :path
+
+:javascript
+  new PageFtpTree(#{@site.id}, "#{@site.site_root}");

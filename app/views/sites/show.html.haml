@@ -1,7 +1,7 @@
 %h2=@site.name
 - owner? do
   #actions
-    = link_to 'Add Page', new_site_page_path(@site)
+    = link_to_remote 'Add Page', :url => new_site_page_path(@site), :method => :get, :html => { :href => new_site_page_path(@site) }
     = link_to 'Edit Site', edit_site_path(@site)
     = link_to 'Remove Site', @site, :method => :delete, :confirm => 'Are you sure?'
 
