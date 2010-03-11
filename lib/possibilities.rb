@@ -12,33 +12,31 @@ module Possibilities
                :for => ["pages/show", "pages/update", "pages/new", "pages/create", "sites/new", "sites/create", "editors/new", "editors/create"]
   end
   
+  def check_add_page
+    deny_popup "shared/upgrade",
+               :unless => :"can_add_page?", 
+               :for => ["pages/show", "pages/update", "pages/new", "pages/create"]
+  end
+
   def check_add_editor
     deny_popup "shared/upgrade",
-               :if => :"can_add_site?", 
+               :unless => :"can_add_editor?", 
                :for => ["editors/new", "editors/create"]
   end
 
-  def check_add_page
-    deny_popup "shared/upgrade",
-               :if => :"can_add_page?", 
-               :for => ["pages/show", "pages/update", "pages/new", "pages/create"]
-  end
-  
   def check_add_site
     deny_popup "shared/upgrade",
-               :if => :"can_add_site?", 
-               :for => ["pages/show", "pages/update", "pages/new", "pages/create"]
+               :unless => :"can_add_site?", 
+               :for => ["sites/new", "sites/create"]
   end
 
   private
   
   def deny_popup deny_partial, params ={} 
-    deny_condition = params[:if]
-    actions_list = params[:for]
-    
-    return true unless actions_list.include?(current_action)
-    
-    if current_user && current_user.send(deny_condition.to_sym)
+    return true unless current_user
+    return true unless params[:for].to_a.include?(current_action)
+
+    if deny_condition(params)
       respond_to do |format|
         format.html {
           @content_for_popup = render_to_string(:partial => deny_partial) 
@@ -50,6 +48,14 @@ module Possibilities
           end
         }
       end
+    end
+  end
+  
+  def deny_condition params = {}
+    unless params[:if].nil?
+      current_user.send(params[:if].to_sym) 
+    else
+      !current_user.send(params[:unless].to_sym)
     end
   end
 
