@@ -4,8 +4,6 @@ class PagesController < ApplicationController
   layout 'sites'
   before_filter :authenticate_user!, :only => [:show, :update]
   before_filter :authenticate_owner!, :except => [:show, :update]
-  # before_filter :check_trial_period, :only => [:create, :update]
-  before_filter :check_limits, :only => :create
 
   def show
     begin
@@ -60,7 +58,4 @@ class PagesController < ApplicationController
     @page
   end
 
-  def check_limits
-    redirect_to :action => :new unless current_user.can_add_page?
-  end
 end
