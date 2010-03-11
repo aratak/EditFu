@@ -3,6 +3,8 @@ require 'spec_helper'
 describe SitesController do
   include Devise::TestHelpers
 
+  integrate_views
+
   before :each do
     @owner = Factory.create(:owner)
     @owner.confirm!
@@ -28,16 +30,23 @@ describe SitesController do
       response.should_not render_template(:new)
     end
 
-    it "should redirect to new if user can't add sites" do
+    it "should show upgrate popup message if user can't add sites" do
       controller.current_user.stub!(:can_add_site?).and_return(false)
-      post :create
-      response.should redirect_to(:action => :new)
+      xhr :post, :create
+      response.should have_rjs(:replace_html, 'popup') do
+        have_tag "h2#upgrade-message"
+      end
     end
 
-    it "should not create new site when trial period expired" do
+    it "should show 'trial period expired' popup message if user can't add sites" do
       controller.current_user.stub!(:trial_period_expired?).and_return(true)
-      lambda { post :create }.should raise_error
+      xhr :post, :create
+      response.should have_rjs(:replace_html, 'popup') do
+        have_tag "h2#trial-period-expired-message"
+      end
     end
+
+
   end
 
   describe "update" do

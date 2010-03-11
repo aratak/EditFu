@@ -3,6 +3,8 @@ require 'spec_helper'
 describe EditorsController do
   include Devise::TestHelpers
 
+  integrate_views
+
   before :each do
     @owner = Factory.create(:owner)
     @owner.confirm!
@@ -10,10 +12,13 @@ describe EditorsController do
   end
 
   describe "#create" do
-    it "should redirect to new if user can't add editors" do
+    it "should show upgrate popup message if user can't add editors" do
       controller.current_user.stub!(:can_add_editor?).and_return(false)
-      post :create
-      response.should redirect_to(:action => :new)
+
+      xhr :post, :create, :site_id => 1
+      response.should have_rjs(:replace_html, 'popup') do
+        have_tag "h2#upgrade-message"
+      end
     end
   end
 end
