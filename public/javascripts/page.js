@@ -30,9 +30,11 @@ function initMceEditor(ed) {
       window.isSwapOut = false;
 
       var url = ed.settings.new_image_path + '?type=content';
-      ed.windowManager.open(
-        popupProps.merge({file: url}).toObject()
-      );
+      new Ajax.Request(url, { method: "get" })
+      
+      // ed.windowManager.open(
+      //   popupProps.merge({file: url}).toObject()
+      // );
   });
 
   ed.addButton('image', { title: 'Add Image', cmd: 'efImage' });

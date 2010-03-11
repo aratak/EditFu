@@ -1,29 +1,20 @@
-- form_for @site, :html => { :id => 'site_form' } do |form|
-  = form.error_messages
-  %table.card
-    %tr
-      %th= form.label :name
-      %td= form.text_field :name
-    %tr
-      %th= form.label :server
-      %td= form.text_field :server
-    %tr
-      %th= form.label :site_root
-      %td
-        = form.text_field :site_root
-        = link_to_function image_tag('tree/open.png'), 'SiteFtpTree.show()'
-    %tr
-      %th= form.label :site_url
-      %td= form.text_field :site_url
-    %tr
-      %th= form.label :login
-      %td= form.text_field :login
-    %tr
-      %th= form.label :password
-      %td= form.password_field :password
-  = submit_tag :submit
+= stylesheet_link_tag 'tree'
+= javascript_include_tag 'tree'
 
-#ftpTree
+.site-popup#new-site-popup
+  - form_for @site, :html => { :id => 'site_form', :onsubmit => 'return false;' } do |form|
+    = render 'shared/tree_input', :hint => 'Choose the site root', :form => form, :hidden => :site_root
+    .inputs
+      - label_input @site.name || 'Server Name' do 
+        = form.text_field(:name)
+      - label_input @site.server || 'ftp.mywebsite.com' do
+        = form.text_field(:server)
+      - label_input @site.site_url || 'www.mywebsite.com' do
+        = form.text_field(:site_url)
+      - label_input @site.login || 'Login' do 
+        = form.text_field(:login)
+      - label_input 'Password' do
+        = form.password_field(:password)
 
 :javascript
-  SiteFtpTree.initForm();
+  SiteFtpTree.initForm(#{@site.id});
