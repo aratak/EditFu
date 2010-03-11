@@ -70,7 +70,7 @@ Event.observe(window, 'load', function() {
     });
   });
   
-  Event.observe('popup-hider', 'click', function(e, elem) {
+  Event.observe('popup-hider', 'click', function(e) {
     $(this).up().fade({ duration: 0.2})
   })
 
