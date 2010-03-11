@@ -33,7 +33,7 @@ function showMessage(kind, text) {
     var d = document.createElement('div');
     d.className = kind;
     d.innerHTML = text;
-
+  
     message.update(d);
     message.show();
     message.effect = new Effect.Fade(message, {delay: 10, duration: 5});
@@ -41,8 +41,7 @@ function showMessage(kind, text) {
 }
 
 function clearMessage() {
-  var popup = $$('.popup').first();
-  var message = popup ? popup.down('.message') : $('page-message');
+  var message = $('popup').down('.message') || $('page-message');
   message.hide();
   return message;
 }
