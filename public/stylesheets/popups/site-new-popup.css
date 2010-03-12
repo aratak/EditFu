@@ -1,0 +1,28 @@
+#new-site-popup {
+}
+
+#new-site-popup .inputs {
+  width: 435px;
+}
+
+#new-site-popup .tree-input {
+  float: right;
+}
+
+
+#new-site-popup .tree-input {
+  width: 375px;
+}
+
+#new-site-popup .tree-input .box {
+  height: 280px;
+}
+
+#new-site-popup .tree-input .input-hint {
+  font: 12px helvetica;
+}
+
+#new-site-popup #ftp-tree {
+  margin-top: 5px;
+  height: 265px;
+}

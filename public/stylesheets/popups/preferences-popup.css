@@ -3,65 +3,6 @@
   font-family: helvetica, sant-serif;
 }
 
-#preferences-popup h2 {
-  font-weight: normal;
-  font-size: 26px;
-  color: #b7b7b7;
-  padding: 0 10px;
-  margin: 10px 0;
-}
-
-#preferences-popup .inputs div {
-  margin: 0 10px 5px 0;
-  background: #F1F1F1;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-#preferences-popup .inputs div input {
-  width: 100%;
-  line-height: 20px;
-  font-size: 20px;
-  color: #b7b7b7;
-  background: #f1f1f1;
-  padding: 5px 10px;
-  border: 1px solid transparent;
-  
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-.label-input {
-  position: relative;
-}
-
-.label-input label {
-  position: absolute;
-  top: 0;
-  left: 0;
-  line-height: 20px;
-  font-size: 20px;
-  padding: 10px;
-  text-transform: uppercase;
-}
-
-#preferences-popup .inputs div input:focus + label,
-#preferences-popup .inputs div input.with-text + label {
-  z-index: -1;
-}
-
-#preferences-popup .inputs div input:focus {
-  background: #ffffff;
-  border: 1px solid #cccccc;
-}
-
-#preferences-popup .inputs .label-input {
-  float: left;
-}
 
 #preferences-popup .account .username,  
 #preferences-popup .account .domain {
@@ -166,13 +107,7 @@
 }
 
 #preferences-popup .plan small.description {
-  display: inline-block;
-  zoom: 1;
-  *display: inline;
-  padding: 5px 0;
-  margin: 0 10px;
   color: #b7b7b7;
-  font-size: 10px;
 }
 
 #preferences-popup .billing .card-number {
