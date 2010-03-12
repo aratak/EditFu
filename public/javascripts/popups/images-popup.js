@@ -144,7 +144,7 @@ function imagesPopupLoaded() {
 
   var popup = $('image-popup');
   popup.down('h2').innerHTML  = document.title = window.imageAction + ' Image';
-  popup.down('.action-bar').down('.save').innerHTML = window.imageAction;
+  // popup.down('.action-bar').down('.save').innerHTML = window.imageAction;
 
   if(window.isSwapOut) {
     $('image-form').down('.input.src').style.visibility = 'hidden';
