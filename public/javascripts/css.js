@@ -9,14 +9,14 @@ var Behaviours = function() {
       });
       
       $$('.label-input input').each(function(input) {
-        input.addClassName('with-text');
-      })
+        (input.getValue() == "") ? null : input.addClassName('with-text');
+      });
       
       $$('.label-input input').each(function(input) {
         Event.observe(input, 'blur', function() {
-          (input.value == "") ? input.removeClassName('with-text') : null;
+          (input.getValue() == "") ? input.removeClassName('with-text') : null;
         })
-      })
+      });
     },
     
     radioButtons: function() {
