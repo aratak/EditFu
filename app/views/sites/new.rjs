@@ -1,4 +1,4 @@
 page.replace_html 'popup', :partial => 'form'
 page.show 'popup-system'
 page << "Indent.includeJavascript('tree');"
-page << "Indent.includeStylesheet('tree');"
+page << "Indent.includeStylesheet('tree', 'popup', 'popups/site-new-popup');"
