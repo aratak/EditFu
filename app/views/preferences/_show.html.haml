@@ -1,60 +1,62 @@
 #preferences-popup
   %h2 Preferences
   - form_for :preferences, :url => preferences_path, :html => { :method => :put } do |f|
-    .account.inputs
-      %h2 Account
-      .username.label-input
-        = f.text_field 'user_name', :id => nil
-        = f.label 'user_name'
-      .email.label-input
-        = f.text_field 'email', :id => nil
-        = f.label 'email'
-      .domain.label-input
-        = f.text_field 'domain_name', :id => nil
-        = f.label 'domain_name'
-      .editfu_com .editfu.com
-      .clear
-    .plan
-      %h2 Plan
-      .plan-wrapper
-        = f.radio_button 'plan', 'professional', :class => 'radio'
-        .plan-label
-          %label(for='preferences_plan_professional')
-          %dl
-            %dt Pro $24
-            %dd
-              %ul 
-                %li Unlimited Sites
-                %li Unlimited Pages
-                %li Unlimited Editors
-                %li Unlimited Updates
-          %small Current
-                
-        = f.radio_button 'plan', 'free', :class => 'radio'
-        .plan-label
-          %label(for='preferences_plan_free')
-          %dl
-            %dt Free
-            %dd
-              %ul 
-                %li 1 Site
-                %li 3 Pages
-                %li No Editors
-                %li Unlimited Updates
-          %small Current
-      %small.description Click on a different package to upgrade or downgarde...
-    .billing.inputs
-      %h2 Billing
-      .card-number.label-input
-        = f.text_field 'card_number', :id => nil
-        = f.label 'card_number'
-      .exp-date.label-input
-        = f.text_field 'email', :id => nil
-        = f.label 'email'
-      .first-name.label-input
-        = f.text_field 'user_name', :id => nil
-        = f.label 'name'
-      .last-name.label-input
-        = f.text_field 'user_name', :id => nil
-        = f.label 'name'
-      .clear
+    - f.fields_for @owner do |owner|
+      .account.inputs
+        %h2 Account
+        .username.label-input
+          = owner.text_field 'user_name'
+          = owner.label 'user_name'
+        .email.label-input
+          = owner.text_field 'email'
+          = owner.label 'email'
+        .domain.label-input
+          = owner.text_field 'domain_name'
+          = owner.label 'domain_name'
+        .editfu_com .editfu.com
+        .clear
+      .plan
+        %h2 Plan
+        .plan-wrapper
+          = owner.radio_button 'plan', 'professional', :class => 'radio'
+          .plan-label
+            %label(for='preferences_owner_plan_professional')
+            %dl
+              %dt Pro $24
+              %dd
+                %ul 
+                  %li Unlimited Sites
+                  %li Unlimited Pages
+                  %li Unlimited Editors
+                  %li Unlimited Updates
+            %small Current
+                  
+          = owner.radio_button 'plan', 'free', :class => 'radio'
+          .plan-label
+            %label(for='preferences_owner_plan_free')
+            %dl
+              %dt Free
+              %dd
+                %ul 
+                  %li 1 Site
+                  %li 3 Pages
+                  %li No Editors
+                  %li Unlimited Updates
+            %small Current
+        %small.description Click on a different package to upgrade or downgarde...
+    - f.fields_for @card do |card|
+      .billing.inputs
+        %h2 Billing
+        .card-number.label-input
+          = card.text_field 'number'
+          = card.label 'number',  @owner.card_number || 'Card Number'
+        .exp-date.label-input
+          = card.text_field 'year'
+          = card.label 'year'
+        .first-name.label-input
+          = card.text_field 'first_name'
+          = card.label 'first_name'
+        .last-name.label-input
+          = card.text_field 'last_name'
+          = card.label 'last_name'
+        .clear
