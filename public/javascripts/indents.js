@@ -44,7 +44,6 @@ var Indent = function() {
     for(i=0;i<_filenames.length;i++) {
       var content = _template(_type)(_filenames[i]);
       b.insert(content)
-      console.log(b.innerHTML)
     }
   }
 
