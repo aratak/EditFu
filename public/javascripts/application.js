@@ -21,11 +21,11 @@ function clearMessage() {
 }
 
 Ajax.Responders.register({
-    onCreate: function() {
-      showMessage('info', 'Processing request...');
-    },
+  onCreate: function() {
+    showMessage('info', 'Processing request...');
+  },
 
-    onComplete: function() {
-      clearMessage();
-    }
+  onComplete: function() {
+    clearMessage();
+  }
 });

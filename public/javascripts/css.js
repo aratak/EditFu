@@ -21,6 +21,9 @@ var Behaviours = function() {
     
     radioButtons: function() {
       $$('.plan input.radio').each(function(input) {
+        if(input.checked) {
+          input.next().addClassName('checked');
+        }
         Event.observe(input, 'change', function() {
           $$('.plan .plan-label').invoke('removeClassName', 'checked');
           input.next().addClassName('checked');
@@ -56,8 +59,8 @@ Event.observe(window, 'load', function() {
 })
 
 Ajax.Responders.register({
-    onComplete: function() {
-      Behaviours.labels()
-      Behaviours.radioButtons()
-    }
+  onComplete: function() {
+    Behaviours.labels()
+    Behaviours.radioButtons()
+  }
 });
