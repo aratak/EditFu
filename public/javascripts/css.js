@@ -2,7 +2,7 @@ var Behaviours = function() {
   return {
 
     labels: function() {
-        $$('.label-input input').each(function(input) {
+      $$('.label-input input').each(function(input) {
         Event.observe(input, 'blur', function() {
           input.addClassName('with-text');
         });
