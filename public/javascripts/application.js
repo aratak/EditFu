@@ -1,9 +1,6 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 
-
-
-
 function adjustImage(image) {
   var maxSize = parseInt(image.down('.thumbnail').getStyle('width'), 10);
   var img = image.down('img');
@@ -55,27 +52,6 @@ function mainForm() {
 }
 
 Event.observe(window, 'load', function() {
-  $$('.plan input.radio').each(function(input) {
-    Event.observe(input, 'change', function() {
-      $$('.plan .plan-label').invoke('removeClassName', 'checked');
-      input.next().addClassName('checked');
-    });
-  });
-  $$('.label-input input').each(function(input) {
-    Event.observe(input, 'blur', function() {
-      input.addClassName('with-text');
-    });
-  });
-  $$('.message').each(function(message) {
-    Event.observe(message, 'click', function() {
-      message.hide();
-    });
-  });
-  
-  Event.observe('popup-hider', 'click', function(e) {
-    $(this).up().fade({ duration: 0.2})
-  })
-
   
   
 });
@@ -86,8 +62,5 @@ Ajax.Responders.register({
     },
     onComplete: function() {
       clearMessage();
-        // if ($('ajax_popup').visible()) {
-        //     $('ajax_popup').scrollTo()
-        // }
     }
 });
