@@ -4,14 +4,14 @@
     .account.inputs
       %h2 Account
       .username.label-input
-        = f.text_field 'name', :id => nil
-        = f.label 'name'
+        = f.text_field 'user_name', :id => nil
+        = f.label 'user_name'
       .email.label-input
         = f.text_field 'email', :id => nil
         = f.label 'email'
       .domain.label-input
-        = f.text_field 'name', :id => nil
-        = f.label 'domain'
+        = f.text_field 'domain_name', :id => nil
+        = f.label 'domain_name'
       .editfu_com .editfu.com
       .clear
     .plan
@@ -52,9 +52,9 @@
         = f.text_field 'email', :id => nil
         = f.label 'email'
       .first-name.label-input
-        = f.text_field 'name', :id => nil
+        = f.text_field 'user_name', :id => nil
         = f.label 'name'
       .last-name.label-input
-        = f.text_field 'name', :id => nil
+        = f.text_field 'user_name', :id => nil
         = f.label 'name'
       .clear

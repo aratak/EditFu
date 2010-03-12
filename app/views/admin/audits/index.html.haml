@@ -9,6 +9,6 @@
   - @audits.each do |audit|
     %tr
       %td=h time_ago_in_words(audit.created_at) 
-      %td= link_to(audit.auditable.name, admin_owner_path(audit.auditable))
+      %td= link_to(audit.auditable.user_name, admin_owner_path(audit.auditable))
       %td=h audit.auditable.email
       %td=h action(audit)

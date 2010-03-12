@@ -1,4 +1,4 @@
-%h2 Owner - #{@owner.name}
+%h2 Owner - #{@owner.domain_name}
 
 #actions
   = link_to 'Cancel', admin_owner_path(@owner), |
@@ -10,8 +10,11 @@
 
 %table.card
   %tr
-    %th Name:
-    %td=h @owner.name
+    %th Domain Name:
+    %td=h @owner.domain_name
+  %tr
+    %th User Name:
+    %td=h @owner.user_name
   %tr
     %th Email:
     %td=h @owner.email

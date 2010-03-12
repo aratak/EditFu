@@ -31,7 +31,7 @@ describe Owner do
     it "should create an editor" do
       editor = @owner.add_editor('editor@malinator.com')
 
-      editor.name.should == 'editor'
+      editor.user_name.should == 'editor'
       editor.email.should == 'editor@malinator.com'
 
       @owner.editors.should include(editor)

@@ -23,7 +23,7 @@ module ApplicationHelper
   end
 
   def message_kind
-    ([:info, :success, :warning, :error] & flash.keys).first
+    ([:info, :success, :warning, :error, :failure] & flash.keys).first
   end
 
   def popup(opts, &block)

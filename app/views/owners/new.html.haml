@@ -4,8 +4,11 @@
   = f.error_messages
   %table.card
     %tr
-      %th= f.label :name
-      %td= f.text_field :name
+      %th= f.label :domain_name
+      %td= f.text_field :domain_name
+    %tr
+      %th= f.label :user_name
+      %td= f.text_field :user_name
     %tr
       %th= f.label :email
       %td= f.text_field :email

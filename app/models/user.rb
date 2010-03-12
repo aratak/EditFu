@@ -2,10 +2,9 @@ class User < ActiveRecord::Base
   devise :all, :except => :confirmable
   include Devise::Models::Confirmable
 
-  validates_presence_of :name
-  validates_uniqueness_of :name
+  validates_presence_of :user_name
 
-  attr_accessible :name, :email, :password, :password_confirmation
+  attr_accessible :user_name, :email, :password, :password_confirmation
 
   def require_password
     @password_required = true

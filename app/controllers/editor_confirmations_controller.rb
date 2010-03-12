@@ -6,7 +6,7 @@ class EditorConfirmationsController < ApplicationController
 
   def update
     @editor.require_password
-    [:name, :password, :password_confirmation].each do |attribute|
+    [:user_name, :password, :password_confirmation].each do |attribute|
       @editor.update_attribute attribute, params[:editor][attribute]
     end
 

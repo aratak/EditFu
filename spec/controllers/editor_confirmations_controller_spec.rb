@@ -12,7 +12,7 @@ describe EditorConfirmationsController do
     it "should work" do
       post :update, :confirmation_token => @editor.confirmation_token, 
         :editor => {
-          :name => 'Sergey', 
+          :user_name => 'Sergey', 
           :password => '123456', :password_confirmation => '123456'
         }
 
@@ -29,7 +29,7 @@ describe EditorConfirmationsController do
 
     it "should run password validations" do
       post :update, :confirmation_token => @editor.confirmation_token, 
-        :editor => { :name => 'Sergey' }
+        :editor => { :user_name => 'Sergey' }
 
       assigns(:editor).confirmed?.should be_false
       response.should render_template(:edit)
@@ -39,7 +39,7 @@ describe EditorConfirmationsController do
       old_email = @editor.email
       post :update, :confirmation_token => @editor.confirmation_token, 
         :editor => {
-          :name => 'Sergey', :email => 'new_email@malinator.com',
+          :user_name => 'Sergey', :email => 'new_email@malinator.com',
           :password => '123456', :password_confirmation => '123456'
         }
 

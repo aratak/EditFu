@@ -3,21 +3,20 @@ class Owner < User
 
   acts_as_audited :only => [:plan]
 
+  attr_accessible :domain_name
+
   # Associations
   has_many :sites, :dependent => :destroy
   has_many :pages, :through => :sites
   has_many :editors, :dependent => :destroy
 
   # Validations
-  validates_presence_of  :plan
+  validates_presence_of  :plan, :domain_name
   validates_inclusion_of :plan, :in => @@plans
-  validates_format_of :name, :with => /^\w+$/
-  validates_exclusion_of :name, :in => %w(www admin)
+  validates_uniqueness_of :domain_name
+  validates_format_of :domain_name, :with => /^\w+$/
+  validates_exclusion_of :domain_name, :in => %w(www admin)
 
-  def subdomain
-    name.downcase
-  end
-  
   # Methods
   def self.plans
     @@plans
@@ -39,13 +38,17 @@ class Owner < User
     plan == 'trial' && 30.days.since(confirmed_at).past?
   end  
   
+  def subdomain
+    domain_name.downcase
+  end
+  
   def site_pages(site)
     site.pages
   end
 
   def add_editor(email)
-    name = email.to_s.gsub(/@.*/, "")
-    editor = Editor.new :name => name, :email => email
+    editor_name = email.to_s.gsub(/@.*/, "")
+    editor = Editor.new :user_name => editor_name, :email => email
     editor.owner = self
     editor.save
     editor

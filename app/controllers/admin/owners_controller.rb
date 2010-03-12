@@ -2,7 +2,7 @@ class Admin::OwnersController < ApplicationController
   before_filter :authenticate_admin!
 
   def index
-    @owners = Owner.all(:order => 'name')
+    @owners = Owner.all(:order => 'user_name')
   end
 
   def show

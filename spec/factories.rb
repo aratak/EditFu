@@ -1,17 +1,18 @@
 Factory.define :user do |u|
-  u.sequence(:name) { |a| "user#{a}" }
-  u.email { |a| "#{a.name}@mailinator.com" }
-  u.password { |a| "pass_#{a.name}" }
+  u.sequence(:user_name) { |a| "user#{a}" }
+  u.email { |a| "#{a.user_name}@mailinator.com" }
+  u.password { |a| "pass_#{a.user_name}" }
   u.password_confirmation { |a| a.password }
 end
 
 Factory.define :owner, :class => :owner, :parent => :user do |o|
-  o.sequence(:name) { |s| "owner#{s}" }
+  o.sequence(:user_name) { |s| "owner#{s}" }
+  o.sequence(:domain_name) { |s| "domain#{s}" }
   o.plan "trial"
 end
 
 Factory.define :editor, :class => :editor, :parent => :user do |e|
-  e.sequence(:name) { |s| "editor#{s}" }
+  e.sequence(:user_name) { |s| "editor#{s}" }
   e.owner { |e| e.association(:owner) }
 end
 

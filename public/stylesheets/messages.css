@@ -27,6 +27,6 @@
   background: #fcdc6b;
 }
 
-.message .error {
+.message .error, .message .failure {
   background: #eb4250;
 }
