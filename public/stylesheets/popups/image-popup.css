@@ -1,0 +1,26 @@
+#image-popup {
+  width: 890px;
+}
+
+#image-popup .input {
+  color: #b7b7b7;
+}
+
+#image-popup .image-list.input {
+  position: absolute;
+}
+
+#image-popup .upload, #image-popup .src {
+  margin-left: 460px;
+}
+
+#image-popup .input.alt {
+  margin-top: 85px;
+  color: #383838;
+}
+
+#image-popup #thumbnails {
+  overflow: auto;
+  width: 405px;
+  height: 180px;
+}

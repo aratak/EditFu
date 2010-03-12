@@ -1,6 +1,12 @@
 #popup-system {
+  font-family: helvetica, sant-serif;
   display: block;
-  overflow: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
 }
 
 .popup-hider {
@@ -19,14 +25,16 @@
 }
 
 .popup {
-  position: absolute;
-  left: 50%;
-  margin-left: -380px;
-  top: 80px;
-  width: 760px;
+  position: relative;
+  margin: 40px auto 0 auto;
   background: #ffffff;
   min-height: 100px;
+  max-width: 900px;
   z-index: 4;
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+  text-align: left;
 }
 
 .popup h2 {
@@ -207,34 +215,6 @@
 #new-page.popup {
   height: 460px;
   width: 375px;
-}
-
-#image-popup {
-  height: 445px;
-  width: 890px;
-}
-
-#image-popup .input {
-  color: #b7b7b7;
-}
-
-#image-popup .image-list.input {
-  position: absolute;
-}
-
-#image-popup .upload, #image-popup .src {
-  margin-left: 460px;
-}
-
-#image-popup .input.alt {
-  margin-top: 85px;
-  color: #383838;
-}
-
-#image-popup #thumbnails {
-  overflow: auto;
-  width: 405px;
-  height: 180px;
 }
 
 .file-inputs {
