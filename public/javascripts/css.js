@@ -1,3 +1,7 @@
+function hidePopup() {
+  $('popup-hider').up().fade({ duration: 0.2})
+}
+
 var Behaviours = function() {
   return {
 
@@ -33,7 +37,7 @@ var Behaviours = function() {
 
     popup: function() {
       Event.observe('popup-hider', 'click', function(e) {
-        $(this).up().fade({ duration: 0.2})
+        hidePopup()
       })
     },
     

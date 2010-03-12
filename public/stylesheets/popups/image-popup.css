@@ -10,6 +10,35 @@
   position: absolute;
 }
 
+
+#image-popup .file-inputs {
+  margin-bottom: 10px;
+  float: right;
+  width: 50%;
+  background: #F1F1F1;
+  height: 65px;
+}
+
+#image-popup .url-inputs {
+  margin-bottom: 10px;
+  float: right;
+  width: 50%;
+  background: #F1F1F1;
+  height: 65px;
+}
+
+#image-popup .url-inputs .label-input {
+  width: 420px;
+}
+
+#image-popup .file-inputs .fake-file {
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+  margin: 27px 0 0 10px;
+}
+
+
 #image-popup .upload, #image-popup .src {
   margin-left: 460px;
 }
@@ -23,4 +52,38 @@
   overflow: auto;
   width: 405px;
   height: 180px;
+}
+
+
+#image-popup .alt-input {
+  width: 100%;
+}
+
+#image-popup .alt-input .label-input {
+  float: none;
+  margin-right: 0;
+  margin-top: 10px;
+}
+
+#image-popup #thumbnails {
+  margin-right: 0;
+}
+
+#image-popup #thumbnails .thumbnail {
+  float: left;
+  width: 62px;
+  height: 62px;
+  line-height: 62px;
+  text-align: center;
+  padding: 5px;
+  visibility: hidden;
+  cursor: pointer;
+}
+
+#image-popup #thumbnails .thumbnail.selected {
+  background: red;
+}
+
+#image-popup #thumbnails .thumbnail img {
+  vertical-align: middle;
 }
