@@ -3,9 +3,13 @@
   %head
     %title= @title || 'Edit-Fu'
     %meta{ 'http-equiv' => 'Content-Type', :content => 'text/html; charset=UTF-8' }
+
     = stylesheet_link_tag 'reset', 'layout', 'messages', 'source_bar', 'system_bar', 'action_window', 'action_bar', :cache => true
     = stylesheet_link_tag 'popups/popup', 'popups/preferences-popup', :cache => true
+    = stylesheet_links
+
     = javascript_include_tag :defaults, 'tree', 'upload', 'popup', 'css', :cache => true
+    = javascript_includes
 
   %body
     #all
