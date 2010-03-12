@@ -26,6 +26,6 @@ Ajax.Responders.register({
   },
 
   onComplete: function() {
-    clearMessage();
+    $$('.info').hide()
   }
 });
