@@ -1,6 +1,3 @@
-= stylesheet_link_tag 'tree'
-= javascript_include_tag 'tree'
-
 .site-popup#new-site-popup
   - form_for @site, :html => { :id => 'site_form', :onsubmit => 'return false;' } do |form|
     = render 'shared/tree_input', :hint => 'Choose the site root', :form => form, :hidden => :site_root
