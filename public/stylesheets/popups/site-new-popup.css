@@ -2,11 +2,16 @@
 }
 
 #new-site-popup .inputs {
-  width: 435px;
+  width: 50%;
+  float: left;
+}
+
+#new-site-popup .label-input {
 }
 
 #new-site-popup .tree-input {
   float: right;
+  width: 50%;
 }
 
 
@@ -26,3 +31,5 @@
   margin-top: 5px;
   height: 265px;
 }
+
+

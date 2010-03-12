@@ -1,17 +1,26 @@
 .site-popup#new-site-popup
+  %h2 Site
   - form_for @site, :html => { :id => 'site_form', :onsubmit => 'return false;' } do |form|
     = render 'shared/tree_input', :hint => 'Choose the site root', :form => form, :hidden => :site_root
     .inputs
-      - label_input @site.name || 'Server Name' do 
+      .label-input
         = form.text_field(:name)
-      - label_input @site.server || 'ftp.mywebsite.com' do
+        = form.label :name, 'Server Name'
+      .label-input
         = form.text_field(:server)
-      - label_input @site.site_url || 'www.mywebsite.com' do
+        = form.label :server, 'ftp.mywebsite.com'
+      .label-input
         = form.text_field(:site_url)
-      - label_input @site.login || 'Login' do 
+        = form.label :site_url, 'www.mywebsite.com'
+      .label-input
         = form.text_field(:login)
-      - label_input 'Password' do
+        = form.label :login, 'Login'
+      .label-input
         = form.password_field(:password)
+        = form.label :password, 'Password'
+
+    .clear
+    %small.description Click within the content above to edit it. To learn more about FTP click here.
 
 :javascript
   SiteFtpTree.initForm(#{@site.id});
