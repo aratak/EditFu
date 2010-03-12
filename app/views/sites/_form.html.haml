@@ -21,6 +21,10 @@
 
     .clear
     %small.description Click within the content above to edit it. To learn more about FTP click here.
+    
+    .popup-action-bar
+      = form.submit "Save"
+      = link_to_function "Cancel", "hidePopup();", :class => 'cancel'
 
 :javascript
   SiteFtpTree.initForm(#{@site.id});
