@@ -5,3 +5,4 @@ page.insert_html :bottom, "site-menu-#{@page.site.id}",
     :href => site_page_path(@page.site, @page), :selected => false
   }
 show_message(page, 'page.created')
+page << 'hidePopup();'

@@ -1,5 +1,10 @@
+.label-input #ftp-tree {
+  margin: 0 10px;
+}
+
 #ftp-tree {
   overflow: auto;
+  height: 240px;
 }
 
 #ftp-tree ul {

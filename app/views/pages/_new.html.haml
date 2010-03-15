@@ -1,10 +1,16 @@
-= stylesheet_link_tag 'tree'
-= javascript_include_tag 'tree'
+#new-page-popup
+  %h1 New Page
+  - remote_form_for [@site, @page] do |form|
+    .inputs.tree-input
+      .label-input
+        = form.hidden_field :path
+        #ftp-tree
 
-#new-page
-  %h2 New Page
-  - form_for [@site, @page], :html => { :onsubmit => 'return false;' } do |form|
-    = render 'shared/tree_input', :hint => 'Choose the page', :form => form, :hidden => :path
+    .clear
+    %small.description Choose the pages you would like to add
+    .popup-action-bar
+      = form.submit "Add"
+      = link_to_function "Cancel", "hidePopup();", :class => 'cancel'
 
 :javascript
   new PageFtpTree(#{@site.id}, "#{@site.site_root}");

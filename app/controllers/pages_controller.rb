@@ -30,7 +30,9 @@ class PagesController < ApplicationController
     @page.site = find_site
 
     unless @page.save
-      render :json => @page.errors
+      render :update do |page|
+        show_error_messages(page, 'page', @page)
+      end
     end
   end
 

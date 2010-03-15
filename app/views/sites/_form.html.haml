@@ -1,7 +1,11 @@
 .site-popup#new-site-popup
   %h1= title
   - remote_form_for @site, :html => { :id => 'site_form' } do |form|
-    = render 'shared/tree_input', :hint => 'Choose the site root', :form => form, :hidden => :site_root
+    .inputs.tree-input
+      .label-input
+        = form.hidden_field :site_root
+        %small.description Choose the site root
+        #ftp-tree
     .inputs
       .label-input
         = form.text_field(:name)
