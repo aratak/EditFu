@@ -1,3 +1,5 @@
-- popup_input :clazz => 'tree-input', :hint => hint do
-  #ftp-tree
-  = form.hidden_field hidden
+.inputs.tree-input
+  .label-input
+    = form.hidden_field hidden
+    %small.description Choose the site root
+    #ftp-tree

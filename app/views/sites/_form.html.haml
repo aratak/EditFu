@@ -1,6 +1,6 @@
 .site-popup#new-site-popup
-  %h2 Site
-  - form_for @site, :html => { :id => 'site_form', :onsubmit => 'return false;' } do |form|
+  %h1= title
+  - remote_form_for @site, :html => { :id => 'site_form' } do |form|
     = render 'shared/tree_input', :hint => 'Choose the site root', :form => form, :hidden => :site_root
     .inputs
       .label-input

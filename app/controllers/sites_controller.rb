@@ -65,7 +65,9 @@ class SitesController < ApplicationController
 
   def validate_and_save
     unless @site.validate_and_save
-      render :json => @site.errors
+      render :update do |page|
+        show_error_messages(page, 'site', @site)
+      end
     end
   end
 

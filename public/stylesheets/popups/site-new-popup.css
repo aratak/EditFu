@@ -7,30 +7,16 @@
   float: left;
 }
 
-#new-site-popup .label-input {
-}
-
 #new-site-popup .tree-input {
   float: right;
   width: 50%;
 }
 
-
-#new-site-popup .tree-input {
-  width: 375px;
-}
-
-#new-site-popup .tree-input .box {
-  height: 280px;
-}
-
-#new-site-popup .tree-input .input-hint {
-  font: 12px helvetica;
+#new-site-popup .tree-input .label-input {
+  width: 100%;
 }
 
 #new-site-popup #ftp-tree {
-  margin-top: 5px;
+  margin: 0 10px;
   height: 265px;
 }
-
-

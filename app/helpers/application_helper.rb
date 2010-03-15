@@ -48,6 +48,18 @@ module ApplicationHelper
     page << "showMessage('success', '#{message}');"
   end
 
+  def show_error_messages(page, name, object)
+    page << 'clearInputMessages();'
+    object.errors.each do |attr, message|
+      if(attr == :base)
+        page << "showMessage('error', \"#{message}\");"
+      else
+        field = name + '_' + attr
+        page << "showInputMessage('#{field}', \"#{message}\");"
+      end
+    end
+  end
+
   private
 
   def classes(*args)

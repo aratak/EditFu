@@ -1,3 +1,4 @@
 page.insert_html :bottom, 'top-menu', 
   :partial => 'layouts/site_menu_item', :locals => { :site => @site }
 show_message(page, 'site.created')
+page << 'hidePopup();'

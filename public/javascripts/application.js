@@ -20,6 +20,25 @@ function clearMessage() {
   return message;
 }
 
+function clearInputMessages() {
+  clearMessage();
+  $$('.error').invoke('remove');
+}
+
+function showInputMessage(inputId, message) {
+  var input = $(inputId);
+  if(input) {
+    var error = input.previous('.error');
+    if(error) {
+      error.remove();
+    }
+    var div = $(document.createElement('div'));
+    div.className = 'error';
+    div.innerHTML = message;
+    $(inputId).insert({before: div});
+  }
+}
+
 Ajax.Responders.register({
   onCreate: function() {
     showMessage('info', 'Processing request...');

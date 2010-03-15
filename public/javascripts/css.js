@@ -52,9 +52,6 @@ var Behaviours = function() {
   }
 }();
 
-
-
-
 Event.observe(window, 'load', function() {
   Behaviours.labels()
   Behaviours.radioButtons()
