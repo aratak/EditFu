@@ -127,7 +127,6 @@ function swapImage(edited, selected) {
   });
 }
 
-
 function imagesPopupLoaded() {
   Event.observe('uploadImage', 'change', uploadImage);
 
@@ -143,8 +142,7 @@ function imagesPopupLoaded() {
   }
 
   var popup = $('image-popup');
-  popup.down('h2').innerHTML  = document.title = window.imageAction + ' Image';
-  // popup.down('.action-bar').down('.save').innerHTML = window.imageAction;
+  popup.down('h1').innerHTML  = document.title = window.imageAction + ' Image';
 
   if(window.isSwapOut) {
     $('image-form').down('.input.src').style.visibility = 'hidden';
@@ -153,13 +151,9 @@ function imagesPopupLoaded() {
 
 function setImageInput(name, value) {
   var input = $($('image-form')[name]);
-  input.value = value;
-  input.up().down('.label').innerHTML = value;
+  setInputValue(input, value);
 }
 
 function getImgPath(img) {
   return img.src.sub(tinyMCE.settings.document_base_url, '');
 }
-
-
-

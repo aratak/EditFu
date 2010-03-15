@@ -2,24 +2,31 @@ function hidePopup() {
   $('popup-hider').up().fade({ duration: 0.2})
 }
 
+function setInputValue(input, value) {
+  input.value = value;
+  toggleInputClass(input);
+}
+
+function toggleInputClass(input) {
+  if(input.getValue().blank()) {
+    input.removeClassName('with-text');
+  } else {
+    input.addClassName('with-text');
+  }
+}
+
 var Behaviours = function() {
   return {
 
     labels: function() {
       $$('.label-input input').each(function(input) {
         Event.observe(input, 'blur', function() {
-          input.addClassName('with-text');
+          toggleInputClass(input);
         });
       });
       
       $$('.label-input input').each(function(input) {
-        (input.getValue() == "") ? null : input.addClassName('with-text');
-      });
-      
-      $$('.label-input input').each(function(input) {
-        Event.observe(input, 'blur', function() {
-          (input.getValue() == "") ? input.removeClassName('with-text') : null;
-        })
+          toggleInputClass(input);
       });
     },
     

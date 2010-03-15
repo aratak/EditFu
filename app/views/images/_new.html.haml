@@ -1,9 +1,8 @@
 #image-popup
-  %h2 Insert Image
+  %h1 Insert Image
 
   - form_tag site_images_path(@site), :id => 'image-form', :multipart => true, :onsubmit => 'return false;', :method => :post do
     = hidden_field_tag :type, @type
-    
     
     .inputs.image-list
       .label-input
@@ -24,39 +23,13 @@
         = text_field_tag :src, nil
         = label_tag :src, 'www.flickr.com/user/image.jpg'
       
-
     .clear
     .inputs.alt-input
       .label-input
         = text_field_tag :alt
         = label_tag :alt, 'Image Title Goes Here'
     
-    
-    
-    
-    -#
-      - popup_input :clazz => 'image-list', :hint => 'Choose an image that was previously uploaded...' do
-        #thumbnails
-          = render :partial => 'show', :collection => @images, :as => :name
-
-      - popup_input :clazz => 'upload', :hint => 'or add a new image.' do 
-        .file-inputs
-          = file_field_tag 'image', :id => 'uploadImage'
-          .fake-file
-            %img(src='/images/choose_a_file.png')
-            %span.path MyComputer/folder/image2234.jpg
-
-      - label_input 'www.flickr.com/user/image.jpg', |
-        :clazz => 'src', :hint => 'or paste a link to an image. ' do |
-        = text_field_tag 'src', nil, :id => nil
-
-      - label_input 'Image Title Goes Here', |
-        :clazz => 'alt', :hint => 'Provide an alternate text title for this image.' do |
-        = text_field_tag 'alt', nil, :id => nil
-      
     .clear
     .popup-action-bar
       = submit_tag "Save"
       = link_to_function "Cancel", "hidePopup();", :class => 'cancel'
-      
-

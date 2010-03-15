@@ -1,5 +1,5 @@
 page.replace_html 'popup', :partial => 'new'
 page.show 'popup-system'
-page << "Indent.includeJavascript('image');"
+page << "Indent.includeJavascript('popups/image-popup');"
 page << "Indent.includeStylesheet('popups/image-popup');"
 page << "imagesPopupLoaded();"
