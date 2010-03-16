@@ -31,5 +31,5 @@
     
     .clear
     .popup-action-bar
-      = submit_tag "Save"
+      = link_to_function 'Insert', 'doImageAction()'
       = link_to_function "Cancel", "hidePopup();", :class => 'cancel'

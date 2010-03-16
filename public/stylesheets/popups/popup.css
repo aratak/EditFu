@@ -245,11 +245,11 @@
 }
 
 
-.fake-file {
+.popup .fake-file {
   position: relative;
 }
 
-.popup .file-inputs input {
+.popup .fake-file input {
   position: absolute;
   left: 0;
   top: 0;

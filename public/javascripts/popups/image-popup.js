@@ -81,12 +81,11 @@ function doImageAction() {
       swapImage(edited, selected);
     }
   }
-  tinyMCEPopup.close();
+  hidePopup();
 }
 
 function insertOrEditImage(edited) {
-  var ed = tinyMCEPopup.editor;
-  tinyMCEPopup.restoreSelection();
+  var ed = window.editor;
 
   var src = $('image-form')['src'].value;
   var alt = $('image-form')['alt'].value;

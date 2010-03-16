@@ -27,6 +27,7 @@ function initMceEditor(ed) {
         window.editedImg = el;
         window.imageAction = 'Edit';
       }
+      window.editor = ed;
       window.isSwapOut = false;
 
       var url = ed.settings.new_image_path + '?type=content';
