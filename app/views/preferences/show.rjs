@@ -1,2 +1,1 @@
-page.replace_html 'popup', :partial => 'show'
-page.show 'popup-system'
+show_popup page, :partial => 'show'

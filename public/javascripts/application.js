@@ -39,12 +39,17 @@ function showInputMessage(inputId, message) {
   }
 }
 
+function showPopup() {
+  document.body.style.overflow = 'hidden';
+  $('popup-system').show();
+}
+
 Ajax.Responders.register({
   onCreate: function() {
     showMessage('info', 'Processing request...');
   },
 
   onComplete: function() {
-    $$('.info').hide()
+    $$('.info').invoke.('hide');
   }
 });

@@ -43,6 +43,11 @@ module ApplicationHelper
     end
   end
 
+  def show_popup(page, *opts)
+    page.replace_html 'popup', *opts
+    page << 'showPopup();'
+  end
+
   def show_message(page, key)
     message = I18n.t(key)
     page << "showMessage('success', '#{message}');"

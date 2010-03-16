@@ -1,3 +1,2 @@
-page.replace_html 'popup', :partial => 'new'
-page.show 'popup-system'
+show_popup page, :partial => 'new'
 page << "imagesPopupLoaded();"

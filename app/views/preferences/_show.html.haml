@@ -1,6 +1,6 @@
 #preferences-popup
-  %h2 Preferences
-  - form_for :preferences, :url => preferences_path, :html => { :method => :put } do |f|
+  %h1 Preferences
+  - remote_form_for :preferences, :url => preferences_path, :html => { :method => :put } do |f|
     - f.fields_for @owner do |owner|
       .account.inputs
         %h2 Account
@@ -13,7 +13,7 @@
         .domain.label-input
           = owner.text_field 'domain_name'
           = owner.label 'domain_name'
-        .editfu_com .editfu.com
+        .editfu_com .#{BASE_DOMAIN}
         .clear
       .plan
         %h2 Plan
@@ -51,6 +51,7 @@
           = card.text_field 'number'
           = card.label 'number',  @owner.card_number || 'Card Number'
         .exp-date.label-input
+          .error qqqqqqqqqq
           = card.text_field 'year'
           = card.label 'year'
         .first-name.label-input
@@ -60,3 +61,7 @@
           = card.text_field 'last_name'
           = card.label 'last_name'
         .clear
+    .message(style='display: none;')
+    .popup-action-bar
+      = f.submit "Save"
+      = link_to_function "Cancel", "hidePopup();", :class => 'cancel'
