@@ -1,5 +1,6 @@
 function hidePopup() {
-  $('popup-hider').up().fade({ duration: 0.2})
+  $('popup-hider').up().fade({ duration: 0.2});
+  $('popup').innerHTML = '';
 }
 
 function setInputValue(input, value) {
@@ -73,5 +74,6 @@ Ajax.Responders.register({
   onComplete: function() {
     Behaviours.labels();
     Behaviours.radioButtons();
+    Behaviours.message();
   }
 });

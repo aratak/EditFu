@@ -210,11 +210,6 @@
   display: block;
 }
 
-.popup .message {
-  position: absolute;
-  bottom: 50px;
-}
-
 .popup .action-bar {
   position: absolute;
   left: 0;

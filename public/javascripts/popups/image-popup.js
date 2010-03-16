@@ -11,10 +11,10 @@ function initThumbnail(img) {
   }
 
   img.up('.thumbnail').style.visibility = 'visible';
-  img.onclick = selectImage.curry(img);
+  img.onclick = selectImage.curry(img, false);
 }
 
-function selectImage(img) {
+function selectImage(img, skipWarn) {
   $$('#thumbnails .thumbnail.selected').each(function(selected) {
     selected.removeClassName('selected');
   });
@@ -23,7 +23,7 @@ function selectImage(img) {
   var src = decodeURIComponent(getImgPath(img));
   setImageInput('src', src);
 
-  if(window.isSwapOut) {
+  if(!skipWarn && window.isSwapOut) {
     var edited = window.editedImg;
     clearMessage();
     if(edited.originalHeight != img.originalHeight ||
@@ -63,7 +63,7 @@ function uploadImage() {
         var img = thumbnail.down('img');
         img.onload = function() {
           initThumbnail(img);
-          selectImage(img);
+          selectImage(img, false);
         };
         $('thumbnails').insert(thumbnail);
       }
@@ -72,7 +72,6 @@ function uploadImage() {
 
   return $('image-form').submit();
 }
-
 
 function doImageAction() {
   var edited = window.editedImg;
@@ -137,7 +136,7 @@ function imagesPopupLoaded() {
     var editedUrl = tinyMCE.settings.document_base_url + editedPath;
     var editedImg = $('thumbnails').down('img[src="' + editedUrl + '"]');
     if(editedImg) {
-      selectImage(editedImg);
+      selectImage(editedImg, true);
     }
     setImageInput('src', editedPath);
     setImageInput('alt', window.editedImg.alt);

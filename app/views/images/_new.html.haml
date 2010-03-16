@@ -30,6 +30,7 @@
         = label_tag :alt, 'Image Title Goes Here'
     
     .clear
+    .message(style='display: none;')
     .popup-action-bar
       = link_to_function @action, 'doImageAction()'
       = link_to_function "Cancel", "hidePopup();", :class => 'cancel'

@@ -2,15 +2,7 @@ function doUpdate() {
   Event.observe(window, 'load', function() {
     Event.observe($$("form.edit_page"), "submit", tinyMCE.triggerSave);
   })
-  
 }
-
-var popupProps = $H({
-  width: 900,
-  height: 575,
-  resizable: 'no',
-  scrollbars: 'no'
-});
 
 function initMceEditor(ed) {
   ed.addCommand('efImage', function() {
@@ -20,18 +12,18 @@ function initMceEditor(ed) {
         return;
       }
 
+      var imageAction;
       if (!el || el.nodeName != 'IMG') {
         window.editedImg = null;
-        window.imageAction = 'Insert';
+        imageAction = 'Insert';
       } else {
         window.editedImg = el;
-        window.imageAction = 'Edit';
+        imageAction = 'Edit';
       }
       window.editor = ed;
       window.isSwapOut = false;
 
-      var url = ed.settings.new_image_path + '?type=content&imageAction=' + window.imageAction;
-      new Ajax.Request(url, { method: "get" })
+      loadImagePopup({type: 'content', imageAction: imageAction});
   });
 
   ed.addButton('image', { title: 'Add Image', cmd: 'efImage' });
@@ -54,15 +46,10 @@ function initTinyMCE(settings) {
 }
 
 function swapOutImage() {
-  var features = popupProps.map(function(pair) {
-    return pair.key + '=' + pair.value;
-  }).join(',');
-
   window.editedImage = this;
   window.editedImg = this.down('img');
-  window.imageAction = 'Swap';
   window.isSwapOut = true;
-  window.open(tinyMCE.settings.new_image_path + '?type=only', '', features);
+  loadImagePopup({type: 'only', imageAction: 'Swap'});
 }
 
 function initImage(img) {
@@ -81,6 +68,13 @@ function initImage(img) {
   bar.innerHTML = img.originalHeight + ' X ' + img.originalWidth;
 
   image.style.visibility = 'visible';
+}
+
+function loadImagePopup(parameters) {
+  new Ajax.Request(tinyMCE.settings.new_image_path, { 
+    method: "get", 
+    parameters: parameters
+  });
 }
 
 Event.observe(window, 'load', function() {
