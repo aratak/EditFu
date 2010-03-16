@@ -34,12 +34,12 @@ function selectImage(img) {
 }
 
 function uploadImage() {
-  this.up().down('.path').innerHTML = this.value;
-  if(this.value.blank()) {
+  $('popup').down('.fake-file .path').innerHTML = $F('image-file');
+  if($F('image-file').blank()) {
     return;
   }
 
-  AjaxUpload.submit($(this.form), {
+  AjaxUpload.submit($('image-form'), {
     onStart: function() {
       showMessage('info', 'Uploading image to the server...');
     },
@@ -47,20 +47,25 @@ function uploadImage() {
     onComplete: function(response) {
       clearMessage();
 
-      if(response.blank()) {
+      var tmp = $(document.createElement('div'));
+      tmp.innerHTML = response;
+      var pre = tmp.down('pre');
+      if(pre) {
+        tmp.innerHTML = pre.innerHTML.unescapeHTML();
+      }
+
+      var thumbnail = tmp.down('.thumbnail');
+      if(!thumbnail) {
         showMessage('error', 'Server error');
       } else {
         showMessage('success', 'Image was successfully uploaded.');
-
-        var tmp = $(document.createElement('div'));
-        tmp.innerHTML = response;
         
-        var img = tmp.down('img');
+        var img = thumbnail.down('img');
         img.onload = function() {
           initThumbnail(img);
           selectImage(img);
         };
-        $('thumbnails').insert(tmp.down());
+        $('thumbnails').insert(thumbnail);
       }
     }
   });
@@ -127,8 +132,6 @@ function swapImage(edited, selected) {
 }
 
 function imagesPopupLoaded() {
-  Event.observe('uploadImage', 'change', uploadImage);
-
   if(window.editedImg) {
     var editedPath = decodeURIComponent(getImgPath(window.editedImg));
     var editedUrl = tinyMCE.settings.document_base_url + editedPath;
@@ -138,13 +141,6 @@ function imagesPopupLoaded() {
     }
     setImageInput('src', editedPath);
     setImageInput('alt', window.editedImg.alt);
-  }
-
-  var popup = $('image-popup');
-  popup.down('h1').innerHTML  = document.title = window.imageAction + ' Image';
-
-  if(window.isSwapOut) {
-    $('image-form').down('.input.src').style.visibility = 'hidden';
   }
 }
 

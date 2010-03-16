@@ -30,12 +30,8 @@ function initMceEditor(ed) {
       window.editor = ed;
       window.isSwapOut = false;
 
-      var url = ed.settings.new_image_path + '?type=content';
+      var url = ed.settings.new_image_path + '?type=content&imageAction=' + window.imageAction;
       new Ajax.Request(url, { method: "get" })
-      
-      // ed.windowManager.open(
-      //   popupProps.merge({file: url}).toObject()
-      // );
   });
 
   ed.addButton('image', { title: 'Add Image', cmd: 'efImage' });
@@ -53,7 +49,6 @@ function initTinyMCE(settings) {
     theme_advanced_buttons2: "",
     theme_advanced_buttons3: "",
     
-    //convert_urls: false,
     setup: initMceEditor
   }).toObject());
 }

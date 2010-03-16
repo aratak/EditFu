@@ -1,5 +1,5 @@
-#image-popup
-  %h1 Insert Image
+#image-popup(class=@type)
+  %h1 #{@action} Image
 
   - form_tag site_images_path(@site), :id => 'image-form', :multipart => true, :onsubmit => 'return false;', :method => :post do
     = hidden_field_tag :type, @type
@@ -13,7 +13,7 @@
     .inputs.file-inputs
       %small.description or add a new image.
       .fake-file
-        = file_field_tag 'image', :id => 'uploadImage'
+        = file_field_tag 'image', :id => 'image-file', :onchange => 'uploadImage()'
         %img(src='/images/choose_a_file.png')
         %span.path MyComputer/folder/image2234.jpg
     
@@ -31,5 +31,5 @@
     
     .clear
     .popup-action-bar
-      = link_to_function 'Insert', 'doImageAction()'
+      = link_to_function @action, 'doImageAction()'
       = link_to_function "Cancel", "hidePopup();", :class => 'cancel'
