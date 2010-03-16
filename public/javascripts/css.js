@@ -3,12 +3,15 @@ function hidePopup() {
 }
 
 function setInputValue(input, value) {
+  toggleInputClass(input, value);
   input.value = value;
-  toggleInputClass(input);
 }
 
-function toggleInputClass(input) {
-  if(input.getValue().blank()) {
+function toggleInputClass(input, value) {
+  if(!value) {
+    value = input.getValue();
+  }
+  if(value.blank()) {
     input.removeClassName('with-text');
   } else {
     input.addClassName('with-text');
@@ -60,15 +63,15 @@ var Behaviours = function() {
 }();
 
 Event.observe(window, 'load', function() {
-  Behaviours.labels()
-  Behaviours.radioButtons()
-  Behaviours.popup()
-  Behaviours.message()
+  Behaviours.labels();
+  Behaviours.radioButtons();
+  Behaviours.popup();
+  Behaviours.message();
 })
 
 Ajax.Responders.register({
   onComplete: function() {
-    Behaviours.labels()
-    Behaviours.radioButtons()
+    Behaviours.labels();
+    Behaviours.radioButtons();
   }
 });
