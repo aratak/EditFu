@@ -10,7 +10,7 @@
     = link_to 'Delete', [@site, @page], |
       :method => :delete, :confirm => 'Are you sure?', :class => 'important' |
 
-- remote_form_for [@site, @page] do |f|
+- remote_form_for [@site, @page], :html => { :id => 'page-form' } do |f|
   - if @sections
     - @sections.each do |section|
       .mce-editor

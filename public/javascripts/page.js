@@ -1,9 +1,3 @@
-function doUpdate() {
-  Event.observe(window, 'load', function() {
-    Event.observe($$("form.edit_page"), "submit", tinyMCE.triggerSave);
-  })
-}
-
 function initMceEditor(ed) {
   ed.addCommand('efImage', function() {
       var el = ed.selection.getNode();
@@ -78,6 +72,12 @@ function loadImagePopup(parameters) {
 }
 
 Event.observe(window, 'load', function() {
+  var onsubmit = $('page-form').onsubmit;
+  $('page-form').onsubmit = function() {
+    tinyMCE.triggerSave();
+    return onsubmit.apply(this);
+  }
+
   $$('.image').each(function(image) {
     Event.observe(image, 'click', swapOutImage);
   });
