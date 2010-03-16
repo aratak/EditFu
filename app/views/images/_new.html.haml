@@ -12,8 +12,8 @@
     
     .inputs.file-inputs
       %small.description or add a new image.
-      = file_field_tag 'image', :id => 'uploadImage'
       .fake-file
+        = file_field_tag 'image', :id => 'uploadImage'
         %img(src='/images/choose_a_file.png')
         %span.path MyComputer/folder/image2234.jpg
     

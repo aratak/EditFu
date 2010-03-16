@@ -32,10 +32,7 @@
 }
 
 #image-popup .file-inputs .fake-file {
-  display: inline-block;
-  zoom: 1;
-  *display: inline;
-  margin: 27px 0 0 10px;
+  margin: 0 0 0 10px;
 }
 
 
