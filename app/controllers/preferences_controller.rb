@@ -13,10 +13,10 @@ class PreferencesController < ApplicationController
   def update
     @owner.update_attributes(params[:preferences][:owner])
     plan = params[:preferences][:owner][:plan]
-    @card = CreditCard.new params[:preferences][:card]
+    @card = ExtCreditCard.new params[:preferences][:card]
 
     if plan == 'professional' && (plan != @owner.plan || !@card.number.blank?)
-      @card.validate
+      @card.valid?
       if @owner.errors.empty? && @card.errors.empty?
         @owner.set_professional_plan @card
       end
@@ -31,6 +31,6 @@ class PreferencesController < ApplicationController
 
   def set_preferences
     @owner = current_user
-    @card = CreditCard.new
+    @card = ExtCreditCard.new
   end
 end

@@ -62,7 +62,8 @@ module ApplicationHelper
     page << 'clearInputMessages();'
     models.each do |name, record|
       record.errors.each do |attr, message|
-        if(attr == :base)
+        message = message.first if message.kind_of?(Array)
+        if attr == :base
           page << "showMessage('error', \"#{message}\");"
         else
           field = name.to_s + '_' + attr
