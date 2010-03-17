@@ -50,6 +50,6 @@ Ajax.Responders.register({
   },
 
   onComplete: function() {
-    $$('.info').invoke.('hide');
+    $$('.info').invoke('hide');
   }
 });
