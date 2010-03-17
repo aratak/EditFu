@@ -64,11 +64,7 @@ class SitesController < ApplicationController
   end
 
   def validate_and_save
-    unless @site.validate_and_save
-      render :update do |page|
-        show_error_messages(page, 'site', @site)
-      end
-    end
+    render_errors(:site => @site) unless @site.validate_and_save
   end
 
   def render_tree(site, folder)

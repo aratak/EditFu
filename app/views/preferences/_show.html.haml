@@ -44,14 +44,13 @@
                   %li Unlimited Updates
             %small Current
         %small.description Click on a different package to upgrade or downgarde...
-    - f.fields_for @card do |card|
+    - f.fields_for :card, @card do |card|
       .billing.inputs
         %h2 Billing
         .card-number.label-input
           = card.text_field 'number'
           = card.label 'number',  @owner.card_number || 'Card Number'
         .exp-date.label-input
-          .error qqqqqqqqqq
           = card.text_field 'year'
           = card.label 'year'
         .first-name.label-input

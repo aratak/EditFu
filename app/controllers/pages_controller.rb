@@ -29,11 +29,7 @@ class PagesController < ApplicationController
     @page = Page.new params[:page]
     @page.site = find_site
 
-    unless @page.save
-      render :update do |page|
-        show_error_messages(page, 'page', @page)
-      end
-    end
+    render_errors(:page => @page) unless @page.save
   end
 
   def destroy

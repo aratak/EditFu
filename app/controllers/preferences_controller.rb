@@ -11,13 +11,19 @@ class PreferencesController < ApplicationController
   end
 
   def update
+    @owner.update_attributes(params[:preferences][:owner])
     plan = params[:preferences][:owner][:plan]
-    if @owner.update_attributes(params[:preferences][:owner])
-      render :json => @owner.errors
-    elsif @owner.plan != plan
-      if plan == 'free'
-        @owner.set_free_plan
+    @card = CreditCard.new params[:preferences][:card]
+
+    if plan == 'professional' && (plan != @owner.plan || !@card.number.blank?)
+      @card.validate
+      if @owner.errors.empty? && @card.errors.empty?
+        @owner.set_professional_plan @card
       end
+    end
+
+    unless @owner.errors.empty? && @card.errors.empty?
+      render_errors :preferences_owner => @owner, :preferences_card => @card
     end
   end
 

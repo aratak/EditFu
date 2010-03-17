@@ -48,19 +48,26 @@ module ApplicationHelper
     page << 'showPopup();'
   end
 
+  def hide_popup(page, message_key)
+    page << 'hidePopup();'
+    show_message(page, message_key)
+  end
+
   def show_message(page, key)
     message = I18n.t(key)
     page << "showMessage('success', '#{message}');"
   end
 
-  def show_error_messages(page, name, object)
+  def show_error_messages(page, models)
     page << 'clearInputMessages();'
-    object.errors.each do |attr, message|
-      if(attr == :base)
-        page << "showMessage('error', \"#{message}\");"
-      else
-        field = name + '_' + attr
-        page << "showInputMessage('#{field}', \"#{message}\");"
+    models.each do |name, record|
+      record.errors.each do |attr, message|
+        if(attr == :base)
+          page << "showMessage('error', \"#{message}\");"
+        else
+          field = name.to_s + '_' + attr
+          page << "showInputMessage('#{field}', \"#{message}\");"
+        end
       end
     end
   end

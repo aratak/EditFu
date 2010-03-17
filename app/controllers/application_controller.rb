@@ -24,6 +24,12 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def render_errors(models)
+    render :update do |page|
+      show_error_messages page, models
+    end
+  end
+
   def redirect_to_subdomain
     host = desired_host
     if request.host != host

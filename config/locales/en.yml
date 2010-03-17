@@ -20,6 +20,9 @@ en:
   editor:
     updated: "Your changes were updated successfully"
 
+  preferences:
+    updated: "Your pereferences were updated"
+
   admin:
     owner:
       canceled: "{{email}} was canceled."
