@@ -1,8 +1,17 @@
-- if current_user.owner?
-  %h2#trial-period-expired-message Software trial period has expired. 
-  You should switch to ether 
-  #{link_to 'Free', free_preferences_plans_path} or
-  #{link_to 'Professional', professional_preferences_plans_path}
-  plans for using this feature.
-- else
-  %h2#trial-period-expired-message Site owner trial period expired
+= stylesheet_link_tag 'popups/alert-popup'
+
+.alert-popup
+  %h1 Software trial period has expired
+  .text
+    - if current_user.owner?
+      %br
+      You should switch to ether Free or 
+      %br Professional plans for using this feature.
+    - else
+      %br
+      Please inform your site owner about trial period expiration.
+
+  .popup-action-bar
+    = link_to_function "Close", "hidePopup();", :class => 'cancel'
+    - if current_user.owner?
+      = link_to_remote "Switch", :url => preferences_path, :method => :get

@@ -1,0 +1,11 @@
+.alert-popup {
+  width: 333px;
+}
+
+.alert-popup .text {
+  background: #fff200;
+  color: #373d43;
+  font-size: 14px;
+  height: 77px;
+  text-align: center;
+}
