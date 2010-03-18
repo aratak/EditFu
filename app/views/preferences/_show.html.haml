@@ -4,16 +4,18 @@
     - f.fields_for @owner do |owner|
       .account.inputs
         %h2 Account
-        .username.label-input
-          = owner.text_field 'user_name'
-          = owner.label 'user_name'
-        .email.label-input
-          = owner.text_field 'email'
-          = owner.label 'email'
-        .domain.label-input
-          = owner.text_field 'domain_name'
-          = owner.label 'domain_name'
-        .editfu_com .#{BASE_DOMAIN}
+        .inputs-row
+          .username.label-input
+            = owner.text_field 'user_name'
+            = owner.label 'user_name'
+          .email.label-input
+            = owner.text_field 'email'
+            = owner.label 'email'
+        .inputs-row
+          .domain.label-input
+            = owner.text_field 'domain_name'
+            = owner.label 'domain_name'
+          .editfu_com.label-input .#{BASE_DOMAIN}
         .clear
       .plan
         %h2 Plan
@@ -47,18 +49,20 @@
     - f.fields_for :card, @card do |card|
       .billing.inputs
         %h2 Billing
-        .card-number.label-input
-          = card.text_field 'number'
-          = card.label 'number',  @owner.card_number || 'Card Number'
-        .exp-date.label-input
-          = card.text_field 'expiration'
-          = card.label '02/2020'
-        .first-name.label-input
-          = card.text_field 'first_name'
-          = card.label 'first_name'
-        .last-name.label-input
-          = card.text_field 'last_name'
-          = card.label 'last_name'
+        .inputs-row
+          .card-number.label-input
+            = card.text_field 'number'
+            = card.label 'number',  @owner.card_number || 'Card Number'
+          .exp-date.label-input
+            = card.text_field 'expiration'
+            = card.label '02/2020'
+        .inputs-row
+          .first-name.label-input
+            = card.text_field 'first_name'
+            = card.label 'first_name'
+          .last-name.label-input
+            = card.text_field 'last_name'
+            = card.label 'last_name'
         .clear
     .message(style='display: none;')
     .popup-action-bar

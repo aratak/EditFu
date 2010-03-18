@@ -64,6 +64,10 @@
   padding: 10px;
 }
 
+.popup .error.blank {
+  background: #ffffff;
+}
+
 .popup .inputs .label-input input {
   width: 100%;
   line-height: 20px;

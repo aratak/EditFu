@@ -61,13 +61,18 @@ module ApplicationHelper
   def show_error_messages(page, models)
     page << 'clearInputMessages();'
     models.each do |name, record|
+      visited_attrs = []
       record.errors.each do |attr, message|
-        message = message.first if message.kind_of?(Array)
-        if attr == :base
-          page << "showMessage('error', \"#{message}\");"
-        else
-          field = name.to_s + '_' + attr
-          page << "showInputMessage('#{field}', \"#{message}\");"
+        unless visited_attrs.include?(attr)
+          visited_attrs << attr
+          message = message.first if message.kind_of?(Array)
+
+          if attr == :base
+            page << "showMessage('error', \"#{message}\");"
+          else
+            field = name.to_s + '_' + attr
+            page << "showInputMessage('#{field}', \"#{message}\");"
+          end
         end
       end
     end

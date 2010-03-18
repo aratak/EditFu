@@ -28,15 +28,24 @@ function clearInputMessages() {
 function showInputMessage(inputId, message) {
   var input = $(inputId);
   if(input) {
-    var error = input.previous('.error');
-    if(error) {
-      error.remove();
+    var row = input.up('.inputs-row');
+    if(row && !row.down('.error')) {
+      row.select('.label-input').each(function(i) {
+        appendInputError(i, ' blank', '&nbsp;');
+      });
     }
-    var div = $(document.createElement('div'));
-    div.className = 'error';
-    div.innerHTML = message;
-    $(inputId).insert({before: div});
+
+    appendInputError(input.up('.label-input'), '', message);
   }
+}
+
+function appendInputError(input, blank, message) {
+  input.select('.error').invoke('remove');
+
+  var div = $(document.createElement('div'));
+  div.className = 'error' + blank;
+  div.innerHTML = message;
+  input.insert({top: div});
 }
 
 function showPopup() {
