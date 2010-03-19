@@ -1,4 +1,4 @@
-page['head-title'].innerHTML = @editor.user_name
+page << "document.title = '#{@editor.user_name}';"
 page['main'].down('.header .title').innerHTML = @editor.user_name
 page["editor-#{@editor.id}-menu"].down('.text').innerHTML = @editor.user_name
 hide_popup(page, 'editor_settings.updated')
