@@ -1,3 +1,4 @@
+page['head-title'].innerHTML = @site.name
 page['main'].down('.header .title').innerHTML = @site.name
 page["site-#{@site.id}-menu"].down('a').innerHTML = @site.name
 hide_popup(page, 'site.updated')
