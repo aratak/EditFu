@@ -3,4 +3,5 @@ page.insert_html :bottom, "site-#{@page.site.id}-menu-ul",
   :locals => { 
     :page => @page, :selected => nil
   }
+page.insert_html :bottom, 'pages', :partial => 'sites/page', :locals => { :page => @page }
 hide_popup(page, 'page.created')

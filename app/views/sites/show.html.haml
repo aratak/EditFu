@@ -9,7 +9,6 @@
   = link_to_remove @site, 'Remove Site'
 
 %h2 Pages
-- @site.pages.each do |page|
-  .page
-    %span.name= page.path
-    %span.actions= link_to_remove [@site, page]
+#pages
+  - @site.pages.each do |page|
+    = render 'page', :page => page
