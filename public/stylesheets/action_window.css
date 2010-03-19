@@ -25,15 +25,15 @@
   font: 23px impact;
 }
 
-#action-window #main .header .actions {
+#action-window #main .actions {
   font: 12px arial;
 }
 
-#action-window #main .header .actions a {
+#action-window #main .actions a {
   text-decoration: underline;
 }
 
-#action-window #main .header .actions a.important {
+#action-window #main .actions a.important {
   color: #fe7e57;
 }
 

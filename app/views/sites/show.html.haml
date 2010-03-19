@@ -1,22 +1,15 @@
+= stylesheet_link_tag 'site'
+
 - @title = @site.name
-- @hint = 'Some hint...'
+- @hint = 'Choose the pages you wish to deactivate.'
 
-- owner? do
-  #actions
-    = link_to_remote 'Add Page', :url => new_site_page_path(@site), :method => :get, :html => { :href => new_site_page_path(@site) }
-    = link_to_remote 'Edit Site', :url => edit_site_path(@site), :method => :get, :html => { :href => edit_site_path(@site) }
-    = link_to 'Remove Site', @site, :method => :delete, :confirm => 'Are you sure?'
+= content_for :actions do
+  = link_to_remote 'Add Page', :url => new_site_page_path(@site), :method => :get
+  = link_to_remote 'Settings', :url => edit_site_path(@site), :method => :get
+  = link_to_remove @site, 'Remove Site'
 
-%table.card
-  %tr
-    %th Server:
-    %td= h @site.server
-  %tr
-    %th Site Root:
-    %td= h @site.site_root
-  %tr
-    %th Site URL:
-    %td= h @site.site_url
-  %tr
-    %th Login:
-    %td= h @site.login
+%h2 Pages
+- @site.pages.each do |page|
+  .page
+    %span.name= page.path
+    %span.actions= link_to_remove [@site, page]
