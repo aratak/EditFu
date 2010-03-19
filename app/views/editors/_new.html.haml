@@ -1,12 +1,18 @@
-%h2 New Editor
+= stylesheet_link_tag 'popups/new-editor-popup'
 
-- form_for @editor do |form|
-  = form.error_messages
-  %table.card
-    %tr
-      %th= form.label :user_name
-      %td= form.text_field :user_name
-    %tr
-      %th= form.label :email
-      %td= form.text_field :email
-  = submit_tag :submit
+#new-editor-popup
+  %h1 New Editor
+
+  - remote_form_for @editor do |form|
+    .inputs
+      .label-input
+        = form.text_field :user_name
+        = form.label :user_name
+      .label-input
+        = form.text_field :email
+        = form.label :email
+      .clear
+    .message(style='display: none;')
+    .popup-action-bar
+      = form.submit "Save"
+      = link_to_function "Cancel", "hidePopup();", :class => 'cancel'

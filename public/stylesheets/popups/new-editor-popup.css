@@ -1,0 +1,7 @@
+#new-editor-popup {
+  width: 400px;
+}
+
+#new-editor-popup .label-input {
+  margin-right: 0;
+}

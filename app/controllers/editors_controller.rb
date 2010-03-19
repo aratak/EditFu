@@ -12,11 +12,7 @@ class EditorsController < ApplicationController
 
   def create
     @editor = current_user.editors.create params[:editor]
-    if @editor.errors.empty?
-      redirect_to editors_path
-    else
-      render :action => :new
-    end
+    render_errors(:editor => @editor) unless @editor.errors.empty?
   end
 
   def show

@@ -1,0 +1,3 @@
+page.insert_html :bottom, 'editor-menu', 
+  :partial => 'layouts/editor_menu_item', :locals => { :editor => @editor, :selected => false }
+hide_popup(page, 'editor.created')
