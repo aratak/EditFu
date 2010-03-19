@@ -5,7 +5,7 @@
 - @hint = 'Choose the sites you wish to give this editor access to by checking the box.'
 
 = content_for :actions do
-  = link_to 'Settings', '#'
+  = link_to_remote 'Settings', :url => editor_settings_path(@editor), :method => :get
   = link_to 'Delete', @editor, :method => :delete, :confirm => 'Are you sure?', :class => 'important'
 
 - remote_form_for @editor do |form|

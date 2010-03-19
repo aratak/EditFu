@@ -1,7 +1,6 @@
-page.insert_html :bottom, "site-menu-#{@page.site.id}", 
-  :partial => 'layouts/menu_item', 
+page.insert_html :bottom, "site-#{@page.site.id}-menu", 
+  :partial => 'layouts/page_menu_item', 
   :locals => { 
-    :name => 'page', :text => @page.path, 
-    :href => site_page_path(@page.site, @page), :selected => false
+    :page => @page, :selected => nil
   }
 hide_popup(page, 'page.created')

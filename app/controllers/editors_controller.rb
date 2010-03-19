@@ -37,5 +37,4 @@ class EditorsController < ApplicationController
   def find_editor
     @editor = current_user.editors.find params[:id]
   end
-
 end

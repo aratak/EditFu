@@ -20,6 +20,9 @@ en:
   editor:
     updated: "Your changes were updated successfully"
 
+  editor_settings:
+    updated: "Editor settings were updated"
+
   preferences:
     updated: "Your pereferences were updated"
 

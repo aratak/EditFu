@@ -17,6 +17,16 @@ module ApplicationHelper
     File.join(@site.site_url, image_path(name))
   end
 
+  def menu_item(record, opts)
+    name = record.class.name.downcase
+    selected = record == opts[:selected]
+    render :partial => 'layouts/menu_item', :locals => opts.merge({
+      :id => "#{name}-#{record.id}-menu",
+      :css_class => ('selected' if selected),
+      :name => name, :selected => selected
+    })
+  end
+
   def selected_class(selected, classes = '')
     classes << ' selected' if selected
     classes.blank? ? {} : { :class => classes.strip } 

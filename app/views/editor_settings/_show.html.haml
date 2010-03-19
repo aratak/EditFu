@@ -1,0 +1,19 @@
+= stylesheet_link_tag 'popups/editor-settings-popup'
+
+#editor-settings-popup
+  %h1 Editor Settings
+  - remote_form_for @editor, :url => editor_settings_path(@editor) do |form|
+    .inputs
+      .label-input
+        = form.text_field :user_name
+        = form.label :user_name, 'Editor Name'
+      .label-input
+        = form.text_field :email
+        = form.label :email, 'Editor Email'
+
+    .clear
+    .message(style='display: none;')
+    %small.description Click within the content above to edit it
+    .popup-action-bar
+      = form.submit "Save"
+      = link_to_function "Cancel", "hidePopup();", :class => 'cancel'

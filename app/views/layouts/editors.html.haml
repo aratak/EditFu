@@ -4,8 +4,7 @@
       %li
         %ul.menu
           - current_user.editors.each do |editor|
-            = render 'layouts/menu_item', :name => 'editor', :text => editor.user_name, |
-              :href => editor_path(editor), :selected => editor == @editor |
+            = render 'layouts/editor_menu_item', :editor => editor, :selected => @editor
 
   = content_for :tabs do
     = render "layouts/tabs", :tab => "editors"    

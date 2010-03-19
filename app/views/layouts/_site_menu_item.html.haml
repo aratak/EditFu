@@ -1,6 +1,5 @@
 %li
   = link_to site.name, site_path(site)
-  %ul.menu(id="site-menu-#{site.id}")
+  %ul.menu(id="site-#{site.id}-menu")
     - site.pages.each do |page|
-      = render 'layouts/menu_item', :name => 'page', :text => page.path, |
-        :href => site_page_path(site, page), :selected => page == @page |
+      = render 'layouts/page_menu_item', :page => page, :selected => @page

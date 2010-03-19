@@ -1,7 +1,7 @@
-%li{selected_class(selected)}
+%li(id = id class = css_class)
   - link_to href, :class => 'label' do
     - if selected
       %img(src="/images/#{name}-icon.png")
     - else
       %img(src="/images/blank.png" width='14' height='13')
-    = text
+    %span.text= text
