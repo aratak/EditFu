@@ -11,7 +11,7 @@ class EditorsController < ApplicationController
   end
 
   def create
-    @editor = current_user.add_editor params[:editor][:email]
+    @editor = current_user.editors.create params[:editor]
     if @editor.errors.empty?
       redirect_to editors_path
     else

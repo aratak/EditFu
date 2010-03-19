@@ -27,19 +27,6 @@ describe Owner do
     end
   end
 
-  describe "add_editor" do
-    it "should create an editor" do
-      editor = @owner.add_editor('editor@malinator.com')
-
-      editor.user_name.should == 'editor'
-      editor.email.should == 'editor@malinator.com'
-
-      @owner.editors.should include(editor)
-      editor.owner.should == @owner
-      editor.confirmed?.should be_false
-    end
-  end
-
   describe "#destroy" do
     before(:each) do
       2.times do

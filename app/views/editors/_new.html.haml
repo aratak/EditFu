@@ -4,6 +4,9 @@
   = form.error_messages
   %table.card
     %tr
+      %th= form.label :user_name
+      %td= form.text_field :user_name
+    %tr
       %th= form.label :email
       %td= form.text_field :email
   = submit_tag :submit

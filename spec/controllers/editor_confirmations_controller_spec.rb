@@ -5,7 +5,7 @@ describe EditorConfirmationsController do
 
   before :each do
     @owner = Factory.create(:owner)
-    @editor = @owner.add_editor('editor@malinator.com')
+    @editor = Factory.create(:editor, :owner => @owner)
   end
 
   describe "update" do
