@@ -1,4 +1,6 @@
-%h2=@site.name
+- @title = @site.name
+- @hint = 'Some hint...'
+
 - owner? do
   #actions
     = link_to_remote 'Add Page', :url => new_site_page_path(@site), :method => :get, :html => { :href => new_site_page_path(@site) }

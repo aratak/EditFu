@@ -1,4 +1,4 @@
-page.insert_html :bottom, "site-#{@page.site.id}-menu", 
+page.insert_html :bottom, "site-#{@page.site.id}-menu-ul", 
   :partial => 'layouts/page_menu_item', 
   :locals => { 
     :page => @page, :selected => nil

@@ -12,6 +12,7 @@ en:
 
   site:
     created: "Site was created"
+    updated: "Site settings were updated"
 
   page:
     created: "Page was added"
