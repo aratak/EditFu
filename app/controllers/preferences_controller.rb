@@ -1,7 +1,7 @@
 class PreferencesController < ApplicationController
   layout 'application'
   
-  before_filter :authenticate_user!
+  before_filter :authenticate_owner!
   before_filter :set_preferences
 
   def show

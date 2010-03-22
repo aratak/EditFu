@@ -1,7 +1,8 @@
 class SitesController < ApplicationController
   layout 'sites'
-  before_filter :authenticate_user!, :only => [:index, :show]
-  before_filter :authenticate_owner!, :except => [:index, :show, :ls]
+
+  before_filter :authenticate_user!, :only => [:index]
+  before_filter :authenticate_owner!, :except => [:index, :ls]
 
   def index
   end

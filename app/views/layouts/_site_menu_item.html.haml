@@ -1,5 +1,9 @@
 %li(id="site-#{site.id}-menu")
-  = link_to site.name, site_path(site)
+  - if current_user.owner?
+    = link_to site.name, site_path(site)
+  - else
+    = site.name
+
   %ul.menu(id="site-#{site.id}-menu-ul")
     - site.pages.enabled.each do |page|
       = render 'layouts/page_menu_item', :page => page, :selected => @page

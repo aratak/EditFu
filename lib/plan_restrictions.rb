@@ -14,7 +14,7 @@ module PlanRestrictions
   def check_add_page
     show_popup "shared/upgrade",
                :unless => :"can_add_page?", 
-               :for => ["pages/show", "pages/update", "pages/new", "pages/create"]
+               :for => ["pages/new", "pages/create"]
   end
 
   def check_add_editor

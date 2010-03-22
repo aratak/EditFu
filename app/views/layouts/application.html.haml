@@ -20,10 +20,11 @@
         = link_to 'Logout', destroy_user_session_path, :class => 'system-link'
         - link_to '#', :class => 'system-link', :alt => 'Help' do
           %img(src='/images/help.png')
-        = link_to_remote image_tag("preferences.png", :alt => 'Preferences'), | 
-          :url => preferences_path, | 
-          :method => :get, |
-          :html => { :class => 'system-link', :href => preferences_path } |
+        - owner? do
+          = link_to_remote image_tag("preferences.png", :alt => 'Preferences'), | 
+            :url => preferences_path, | 
+            :method => :get, |
+            :html => { :class => 'system-link', :href => preferences_path } |
 
       #source-bar
         = yield :sourceBar
