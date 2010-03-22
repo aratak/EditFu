@@ -27,7 +27,7 @@ class Editor < User
 
   def find_page(site_id, page_id)
     site = Site.find(site_id)
-    page = Page.find(page_id)
+    page = Page.enabled.find(page_id)
     return page if page_ids.include?(page.id) && page.site == site
   end
 
