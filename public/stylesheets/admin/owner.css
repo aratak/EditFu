@@ -1,0 +1,26 @@
+#owner-card {
+  font-family: helvetica;
+}
+
+#owner-card .row {
+  margin-bottom: 20px;
+}
+
+#owner-card .label {
+  font-size: 18px;
+}
+
+#owner-card .value {
+  font-size: 12px;
+  margin-left: 15px;
+}
+
+#owner-card .enabled-row {
+  font-size: 12px;
+  width: 185px;
+  line-height: 20px;
+  padding-left: 5px;
+  margin-bottom: 15px;
+  background: #787878;
+  color: white;
+}

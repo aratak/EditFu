@@ -32,5 +32,4 @@ en:
   admin:
     owner:
       canceled: "{{email}} was canceled."
-      enabled: "User was enabled"
-      disabled: "User was disabled"
+      enabled: "Owner status was changed"

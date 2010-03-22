@@ -1,29 +1,33 @@
-%h2 Owner - #{@owner.domain_name}
+= stylesheet_link_tag 'admin/owner'
 
-#actions
-  = link_to 'Cancel', admin_owner_path(@owner), |
-    :method => :delete, :confirm => "Are you sure?" |
-  - if @owner.enabled? 
-    = link_to 'Disable', disable_admin_owner_path(@owner), :method => :post
-  - else
-    = link_to 'Enable', enable_admin_owner_path(@owner), :method => :post
+= content_for :sourceBar do
+  %ul#top-menu
+    %li
+      %ul.menu#owner-menu
+        - @owners.each do |owner|
+          = menu_item(owner, :text => owner.user_name, :href => admin_owner_path(owner), :selected => @owner)
 
-%table.card
-  %tr
-    %th Domain Name:
-    %td=h @owner.domain_name
-  %tr
-    %th User Name:
-    %td=h @owner.user_name
-  %tr
-    %th Email:
-    %td=h @owner.email
-  %tr
-    %th Plan:
-    %td=h @owner.plan
-  %tr
-    %th Created:
-    %td=h @owner.created_at
-  %tr
-    %th Enabled:
-    %td=h @owner.enabled?
+- @title = @owner.user_name
+- @hint = ''
+
+= content_for :actions do
+  = link_to_remove @owner, 'Delete'
+
+- form_tag enable_admin_owner_path(@owner), :id => 'owner-card' do
+  .enabled-row
+    = check_box_tag :enabled, 1, @owner.enabled
+    = label_tag :enabled, 'Active User'
+  = submit_tag "Update", :class => "update-button"
+
+  .row
+    .label Email Address
+    .value= @owner.email
+  .row
+    .label Registration Date
+    .value= @owner.created_at
+  .row
+    .label Billing Date
+    .value
+  .row
+    .label Package
+    .value= @owner.plan.capitalize

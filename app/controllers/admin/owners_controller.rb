@@ -6,6 +6,7 @@ class Admin::OwnersController < ApplicationController
   end
 
   def show
+    @owners = Owner.all(:order => 'user_name')
     find_owner
   end
 
@@ -17,18 +18,10 @@ class Admin::OwnersController < ApplicationController
   end
 
   def enable
-    find_owner.enabled = true
+    find_owner.enabled = params[:enabled]
     @owner.save!
 
     flash[:success] = I18n.t('admin.owner.enabled')
-    redirect_to admin_owner_path(@owner)
-  end
-
-  def disable
-    find_owner.enabled = false
-    @owner.save!
-
-    flash[:success] = I18n.t('admin.owner.disabled')
     redirect_to admin_owner_path(@owner)
   end
 
