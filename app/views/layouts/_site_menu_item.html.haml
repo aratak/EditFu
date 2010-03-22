@@ -1,8 +1,10 @@
 %li(id="site-#{site.id}-menu")
-  - if current_user.owner?
-    = link_to site.name, site_path(site)
-  - else
-    = site.name
+  %div{:class => (site == @selected_site ? 'selected' : nil)}
+    .label
+      - if current_user.owner?
+        = link_to site.name, site_path(site)
+      - else
+        = site.name
 
   %ul.menu(id="site-#{site.id}-menu-ul")
     - site.pages.enabled.each do |page|

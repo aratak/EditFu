@@ -42,18 +42,15 @@
   text-decoration: none;
 }
 
-#source-bar #top-menu .menu li .label {
+#source-bar #top-menu .label {
   display: block;
   padding: 2px;
   text-decoration: none;
 }
 
-#source-bar #top-menu .menu li.selected {
+#source-bar #top-menu .selected .label {
   border-bottom: solid 2px #c2c2c2;
   border-right: solid 2px #c2c2c2;
   background: white url(/images/selected-page-bg.png) repeat-x bottom;
-}
-
-#source-bar #top-menu .menu .selected .label {
   border: 1px solid #aaaaaa;
 }
