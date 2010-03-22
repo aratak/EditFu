@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100312090000) do
+ActiveRecord::Schema.define(:version => 20100322073622) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -33,9 +33,10 @@ ActiveRecord::Schema.define(:version => 20100312090000) do
   end
 
   create_table "pages", :force => true do |t|
-    t.integer "site_id", :null => false
-    t.string  "path",    :null => false
+    t.integer "site_id",                     :null => false
+    t.string  "path",                        :null => false
     t.text    "content"
+    t.boolean "disabled", :default => false, :null => false
   end
 
   create_table "sites", :force => true do |t|

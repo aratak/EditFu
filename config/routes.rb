@@ -19,7 +19,7 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.resources :sites, :collection => { :ls => :get, :tree => :get } do |site|
-    site.resources :pages
+    site.resources :pages, :collection => { :disable => :post }
     site.resources :images, :only => [:new, :create]
   end
 

@@ -75,5 +75,4 @@ class SitesController < ApplicationController
       head :ftp_error => e.message
     end
   end
-
 end
