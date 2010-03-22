@@ -1,4 +1,4 @@
 .page
   = check_box_tag "page[#{page.id}]", '1', page.disabled
-  %span.name= page.path
+  = label_tag "page_#{page.id}", page.path
   %span.actions= link_to_remove [@site, page]
