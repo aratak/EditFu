@@ -1,18 +1,1 @@
-%h2 Owners
-
-%table.data
-  %tr
-    %th Domain
-    %th Name
-    %th Email
-    %th Plan
-    %th Created
-    %th Enabled
-  - @owners.each do |owner|
-    %tr
-      %td= link_to(owner.domain_name, admin_owner_path(owner))
-      %td=h owner.user_name
-      %td=h owner.email
-      %td=h owner.plan
-      %td=h owner.created_at
-      %td=h owner.enabled?
+There aren't registered owners yet

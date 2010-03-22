@@ -5,6 +5,13 @@ class SitesController < ApplicationController
   before_filter :authenticate_owner!, :except => [:index, :ls]
 
   def index
+    if current_user.owner?
+      @site = current_user.sites.first
+      redirect_to site_path(@site) if @site
+    else
+      @page = current_user.pages.first
+      redirect_to site_page_path(@page.site, @page) if @page
+    end
   end
 
   def show

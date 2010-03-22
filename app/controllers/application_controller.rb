@@ -12,6 +12,14 @@ class ApplicationController < ActionController::Base
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
 
+  def user_root_path
+    if current_user.admin?
+      admin_owners_path
+    else
+      sites_path
+    end
+  end
+
   protected
 
   def authenticate_owner!

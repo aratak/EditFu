@@ -2,7 +2,10 @@ class Admin::OwnersController < ApplicationController
   before_filter :authenticate_admin!
 
   def index
-    @owners = Owner.all(:order => 'user_name')
+    @owner = Owner.all(:order => 'user_name').first
+    if @owner
+      redirect_to admin_owner_path(@owner)
+    end
   end
 
   def show
