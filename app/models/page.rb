@@ -7,7 +7,7 @@ class Page < ActiveRecord::Base
   validates_presence_of :path
   validates_uniqueness_of :path, :scope => :site_id
 
-  named_scope :enabled, :conditions => { :disabled => false }
+  named_scope :enabled, :conditions => { :enabled => true }
 
   def url
     File.join(site.site_url, path)

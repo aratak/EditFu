@@ -1,2 +1,2 @@
 page.replace_html 'top-menu', :partial => 'layouts/site_top_menu'
-show_message(page, 'page.disabled')
+show_message(page, 'page.enabled')

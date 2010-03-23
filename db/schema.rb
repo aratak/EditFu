@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100322073622) do
+ActiveRecord::Schema.define(:version => 20100323091522) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -27,16 +27,16 @@ ActiveRecord::Schema.define(:version => 20100322073622) do
   add_index "audits", ["created_at"], :name => "index_audits_on_created_at"
   add_index "audits", ["user_id", "user_type"], :name => "user_index"
 
-  create_table "editors_pages", :force => true do |t|
+  create_table "editors_pages", :id => false, :force => true do |t|
     t.integer "editor_id"
     t.integer "page_id"
   end
 
   create_table "pages", :force => true do |t|
-    t.integer "site_id",                     :null => false
-    t.string  "path",                        :null => false
+    t.integer "site_id",                    :null => false
+    t.string  "path",                       :null => false
     t.text    "content"
-    t.boolean "disabled", :default => false, :null => false
+    t.boolean "enabled", :default => false, :null => false
   end
 
   create_table "sites", :force => true do |t|

@@ -10,7 +10,7 @@
   = link_to_remove @site, 'Remove Site'
 
 %h2 Pages
-- form_remote_tag :url => disable_site_pages_path(@site), :html => { :id => 'pages_form' } do
+- form_remote_tag :url => enable_site_pages_path(@site), :html => { :id => 'pages_form' } do
   - @site.pages.each do |page|
     = render 'page', :page => page
   = submit_tag "Update", :class => "update-button"

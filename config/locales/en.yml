@@ -17,7 +17,7 @@ en:
   page:
     created: "Page was added"
     updated: "Your changes were updated successfully"
-    disabled: "Page statuses were updated."
+    enabled: "Page statuses were updated."
   
   editor:
     updated: "Your changes were updated successfully"

@@ -45,9 +45,9 @@ class PagesController < ApplicationController
     FtpClient.put_page(@page)
   end
 
-  def disable
+  def enable
     find_site.pages.each do |page|
-      page.disabled = params[:page] && params[:page][page.id.to_s]
+      page.enabled = params[:page] && params[:page][page.id.to_s]
       page.save!
     end
   end
