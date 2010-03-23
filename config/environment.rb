@@ -48,5 +48,7 @@ Rails::Initializer.run do |config|
   # config.i18n.default_locale = :de
 end
 
+ActiveSupport::CoreExtensions::Time::Conversions::DATE_FORMATS.update :default => '%Y-%m-%d %H:%M:%S'
+
 ActiveMerchant::Billing::CreditCard.require_verification_value = false
 PAYMENT_RECURRING_AMOUNT = 100

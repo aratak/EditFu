@@ -16,7 +16,7 @@ describe EditorConfirmationsController do
           :password => '123456', :password_confirmation => '123456'
         }
 
-      response.should redirect_to(root_path)
+      response.should redirect_to(sites_path)
       @editor.reload.confirmed?.should be_true
     end
 
