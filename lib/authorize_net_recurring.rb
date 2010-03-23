@@ -2,7 +2,7 @@ class AuthorizeNetRecurring
   def self.create(gateway, amount, owner, card)
     response = gateway.recurring(amount, card, 
       :interval => { :unit => :months, :length => 1 },
-      :duration => { :start_date => Date.today.next_month , :occurrences => 9999 },
+      :duration => { :start_date => owner.billing_date, :occurrences => 9999 },
       :billing_address => { 
         :first_name => card.first_name, :last_name => card.last_name 
       }

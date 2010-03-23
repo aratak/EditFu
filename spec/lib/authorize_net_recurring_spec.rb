@@ -5,6 +5,7 @@ describe AuthorizeNetRecurring do
     before :each do
       @card = Factory.build :card
       @owner = Factory.build :owner
+      @owner.confirmed_at = Date.today
       @gateway = mock('gateway')
 
       @subscription_id = '12345'

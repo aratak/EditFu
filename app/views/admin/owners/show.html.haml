@@ -25,9 +25,10 @@
   .row
     .label Registration Date
     .value= @owner.created_at
-  .row
-    .label Billing Date
-    .value
+  - if @owner.confirmed?
+    .row
+      .label Billing Date
+      .value #{@owner.billing_day}th of Month
   .row
     .label Package
     .value= @owner.plan.capitalize

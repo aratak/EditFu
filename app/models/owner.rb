@@ -92,6 +92,16 @@ class Owner < User
     end
   end
 
+  def billing_day
+    confirmed_at.try :mday
+  end
+
+  def billing_date
+    today = Date.today
+    this_bd = Date.new(today.year, today.month, billing_day)
+    this_bd.past? ? this_bd.next_month : this_bd
+  end
+
   protected
 
   def before_save
