@@ -4,6 +4,9 @@ class EditorsController < ApplicationController
   before_filter :authenticate_owner!
 
   def index
+    unless current_user.editors.empty?
+      redirect_to editor_path(current_user.editors.first)
+    end
   end
 
   def new
