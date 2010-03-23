@@ -6,7 +6,7 @@
 
 = content_for :actions do
   = link_to_remote 'Settings', :url => editor_settings_path(@editor), :method => :get
-  = link_to_remove @editor
+  = link_to_remove editor_path(@editor)
 
 - remote_form_for @editor do |form|
   %ul.sites

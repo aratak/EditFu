@@ -20,6 +20,12 @@ function clearMessage() {
   return message;
 }
 
+function showConfirmPopup(href) {
+  $('popup').innerHTML = $('confirm-popup').innerHTML;
+  $('popup').down('a.yes').href = href;
+  showPopup();
+}
+
 function clearInputMessages() {
   clearMessage();
   $$('.error').invoke('remove');

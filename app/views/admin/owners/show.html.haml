@@ -11,7 +11,7 @@
 - @hint = ''
 
 = content_for :actions do
-  = link_to_remove @owner, 'Delete'
+  = link_to_remove admin_owner_path(@owner), 'Delete'
 
 - form_tag enable_admin_owner_path(@owner), :id => 'owner-card' do
   .enabled-row

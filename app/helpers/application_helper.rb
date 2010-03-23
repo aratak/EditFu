@@ -54,7 +54,7 @@ module ApplicationHelper
   end
 
   def link_to_remove(path, text = 'Remove')
-    link_to text, path, :method => :delete, :confirm => 'Are you sure?', :class => 'important'
+    link_to_function text, "showConfirmPopup('#{path}')", :class => 'important'
   end
 
   def show_popup(page, *opts)

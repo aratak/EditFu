@@ -18,6 +18,7 @@ en:
     created: "Page was added"
     updated: "Your changes were updated successfully"
     enabled: "Page statuses were updated."
+    destroyed: "Page was removed."
   
   editor:
     updated: "Your changes were updated successfully"

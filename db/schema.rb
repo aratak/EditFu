@@ -33,10 +33,10 @@ ActiveRecord::Schema.define(:version => 20100323091522) do
   end
 
   create_table "pages", :force => true do |t|
-    t.integer "site_id",                    :null => false
-    t.string  "path",                       :null => false
+    t.integer "site_id",                   :null => false
+    t.string  "path",                      :null => false
     t.text    "content"
-    t.boolean "enabled", :default => false, :null => false
+    t.boolean "enabled", :default => true
   end
 
   create_table "sites", :force => true do |t|

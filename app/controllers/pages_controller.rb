@@ -35,6 +35,7 @@ class PagesController < ApplicationController
 
   def destroy
     find_page.destroy
+    flash[:success] = I18n.t('page.destroyed')
     redirect_to site_path(@site)
   end
 
