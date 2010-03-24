@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(:version => 20100323091522) do
   add_index "audits", ["created_at"], :name => "index_audits_on_created_at"
   add_index "audits", ["user_id", "user_type"], :name => "user_index"
 
-  create_table "editors_pages", :id => false, :force => true do |t|
+  create_table "editors_pages", :force => true do |t|
     t.integer "editor_id"
     t.integer "page_id"
   end
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(:version => 20100323091522) do
     t.integer "site_id",                   :null => false
     t.string  "path",                      :null => false
     t.text    "content"
-    t.boolean "enabled", :default => true
+    t.boolean "enabled", :default => true, :null => false
   end
 
   create_table "sites", :force => true do |t|
