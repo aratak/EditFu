@@ -5,6 +5,10 @@ ul.sites, ul.pages {
   font-family: helvetica;
 }
 
+ul.sites .row {
+  padding-left: 10px;
+}
+
 ul.sites li.site {
   margin-bottom: 10px;
 }

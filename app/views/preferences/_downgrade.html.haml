@@ -1,7 +1,19 @@
 #downgrade-popup
   %h1 Plan Downgrade
   - form_remote_tag :url => downgrade_preferences_path, :method => :post do
-    .clear
+    %ul.sites
+      - @owner.sites.each do |site|
+        %li.site
+          .row
+            = radio_button_tag "sites[]", site.id
+            =h site.name
+          %ul.pages
+            - site.pages.each do |page|
+              %li.page
+                .row
+                  = check_box_tag "pages[]", page.id
+                  =h page.path
+
     .message(style='display: none;')
     %small.description Choose 1 site and 3 of its pages you would like to keep.
     
