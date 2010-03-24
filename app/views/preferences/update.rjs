@@ -1,1 +1,5 @@
-hide_popup(page, 'preferences.updated')
+if @plan_changed && @plan == 'free'
+  show_popup page, :partial => 'downgrade'
+else
+  hide_popup page, 'preferences.updated'
+end

@@ -1,0 +1,11 @@
+#downgrade-popup
+  %h1 Plan Downgrade
+  - form_remote_tag :url => downgrade_preferences_path, :method => :post do
+    .clear
+    .message(style='display: none;')
+    %small.description Choose 1 site and 3 of its pages you would like to keep.
+    
+    .popup-action-bar
+      = submit_tag "Downgrade"
+      = link_to_remote 'Return', :url => preferences_path, :method => :get, |
+        :html => { :class => 'cancel' } |

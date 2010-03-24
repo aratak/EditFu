@@ -28,7 +28,10 @@ en:
     updated: "Editor settings were updated"
 
   preferences:
-    updated: "Your pereferences were updated"
+    updated: "Your preferences were updated"
+
+  plan:
+    downgraded: "Your plan was downgraded."
 
   admin:
     owner:

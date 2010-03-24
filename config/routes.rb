@@ -12,7 +12,7 @@ ActionController::Routing::Routes.draw do |map|
       :only => [:show, :update]
   end
 
-  map.resource :preferences do |preferences|
+  map.resource :preferences, :member => { :downgrade => :post } do |preferences|
     preferences.resource :plans, 
       :member => { :free => [:get, :post], :professional => [:get, :post] }
     preferences.resource :card, :only => [:edit, :update]

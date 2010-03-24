@@ -9,14 +9,14 @@ class PreferencesController < ApplicationController
 
   def update
     @owner.update_attributes(params[:preferences][:owner])
-    plan = params[:preferences][:owner][:plan]
+    @plan = params[:preferences][:owner][:plan]
     @card = ExtCreditCard.new params[:preferences][:card]
 
-    plan_changed = plan != @owner.plan
-    if plan == 'professional' && (plan_changed || !@card.number.blank?)
+    @plan_changed = @plan != @owner.plan
+    if @plan == 'professional' && (@plan_changed || !@card.number.blank?)
       @card.valid?
       if @owner.errors.empty? && @card.errors.empty?
-        if plan_changed
+        if @plan_changed
           @owner.set_professional_plan @card
         else
           @owner.set_card @card
@@ -27,6 +27,9 @@ class PreferencesController < ApplicationController
     unless @owner.errors.empty? && @card.errors.empty?
       render_errors :preferences_owner => @owner, :preferences_card => @card
     end
+  end
+
+  def downgrade
   end
 
   private
