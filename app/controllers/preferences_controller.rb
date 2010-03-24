@@ -7,9 +7,6 @@ class PreferencesController < ApplicationController
   def show
   end
 
-  def edit
-  end
-
   def update
     @owner.update_attributes(params[:preferences][:owner])
     plan = params[:preferences][:owner][:plan]
