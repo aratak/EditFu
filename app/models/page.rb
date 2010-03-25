@@ -10,7 +10,7 @@ class Page < ActiveRecord::Base
   named_scope :enabled, :conditions => { :enabled => true }
 
   def url
-    File.join(site.site_url, path)
+    File.join(site.http_url, path)
   end
 
   def sections

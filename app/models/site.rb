@@ -9,6 +9,10 @@ class Site < ActiveRecord::Base
   validates_presence_of :name, :server, :site_root, :site_url, :login, :password
   validates_uniqueness_of :name, :scope => :owner_id
 
+  def http_url
+    'http://' + site_url
+  end
+
   def validate_and_save
     if valid? && check_connection
       save(false)

@@ -14,7 +14,7 @@ module ApplicationHelper
   end
 
   def image_url(name)
-    File.join(@site.site_url, image_path(name))
+    File.join(@site.http_url, image_path(name))
   end
 
   def menu_item(record, opts)
