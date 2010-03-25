@@ -1,9 +1,3 @@
-function hidePopup() {
-  document.body.style.overflow = 'visible';
-  $('popup-hider').up().fade({ duration: 0.2});
-  $('popup').innerHTML = '';
-}
-
 function setInputValue(input, value) {
   toggleInputClass(input, value);
   input.value = value;

@@ -55,8 +55,16 @@ function appendInputError(input, blank, message) {
 }
 
 function showPopup() {
-  document.body.style.overflow = 'hidden';
+  $('all').style.overflow = 'hidden';
+  //document.body.style.overflow = 'hidden';
   $('popup-system').show();
+}
+
+function hidePopup() {
+  $('all').style.overflow = 'visible';
+  //document.body.style.overflow = 'visible';
+  $('popup-hider').up().fade({ duration: 0.2});
+  $('popup').innerHTML = '';
 }
 
 Ajax.Responders.register({
