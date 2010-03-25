@@ -16,6 +16,10 @@ function showMessage(kind, text) {
 
 function clearMessage() {
   var message = $('popup').down('.message') || $('page-message');
+  if(message.effect) {
+    message.effect.cancel();
+  }
+  message.setOpacity(1.0);
   message.hide();
   return message;
 }
