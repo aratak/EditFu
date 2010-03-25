@@ -47,4 +47,12 @@ describe Site do
         'www.yandex.ru'
     end
   end
+
+  describe "validations" do
+    it "should reject site_url with starting http prefix" do
+      @site.site_url = 'http://www.microsoft.com'
+      @site.save
+      @site.errors.on(:site_url).should_not be_blank
+    end
+  end
 end

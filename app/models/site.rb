@@ -8,6 +8,8 @@ class Site < ActiveRecord::Base
 
   validates_presence_of :name, :server, :site_root, :site_url, :login, :password
   validates_uniqueness_of :name, :scope => :owner_id
+  validates_format_of :site_url, :with => /^(?!http:)/, 
+    :message => "Please don't start url with http:// prefix"
 
   def http_url
     'http://' + site_url
