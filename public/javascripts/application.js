@@ -59,8 +59,8 @@ function appendInputError(input, blank, message) {
 }
 
 function showPopup() {
-  $('all').style.overflow = 'hidden';
-  //document.body.style.overflow = 'hidden';
+  // $('all').style.overflow = 'hidden';
+  // document.body.style.overflow = 'hidden';
   $('popup-system').show();
 }
 

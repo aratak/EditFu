@@ -46,10 +46,10 @@
     
       #action-bar
       
-    #popup-system{:style => (@content_for_popup ? nil : 'display: none;')}
-      .popup#popup
-        = yield :popup
-      .popup-hider#popup-hider
+      #popup-system{:style => (@content_for_popup ? nil : 'display: none;')}
+        .popup#popup
+          = yield :popup
+        .popup-hider#popup-hider
 
     - if message_kind
       :javascript
