@@ -30,6 +30,9 @@ class PreferencesController < ApplicationController
   end
 
   def downgrade
+    sites = Site.find params[:sites]
+    pages = Page.find params[:pages]
+    @owner.set_free_plan sites, pages
   end
 
   private

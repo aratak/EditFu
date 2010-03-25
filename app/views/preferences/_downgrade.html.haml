@@ -5,14 +5,14 @@
       - @owner.sites.each do |site|
         %li.site
           .row
-            = radio_button_tag "sites[]", site.id
-            =h site.name
+            = radio_button_tag "sites[]", site.id, false, :id => "sites_#{site.id}"
+            = label_tag "sites_#{site.id}", site.name
           %ul.pages
             - site.pages.each do |page|
               %li.page
                 .row
-                  = check_box_tag "pages[]", page.id
-                  =h page.path
+                  = check_box_tag "pages[]", page.id, false, :id => "pages_#{page.id}"
+                  = label_tag "pages_#{page.id}", page.path
 
     .message(style='display: none;')
     %small.description Choose 1 site and 3 of its pages you would like to keep.
