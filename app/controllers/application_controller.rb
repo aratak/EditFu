@@ -58,10 +58,8 @@ class ApplicationController < ActionController::Base
   def authenticate_user_type!(type)
     authenticate_user!
 
-    if can_redirect?
-      if user_signed_in? && !current_user.kind_of?(type)
-        redirect_to root_path
-      end
+    if user_signed_in? && !current_user.kind_of?(type)
+      redirect_to root_path
     end
   end
   
