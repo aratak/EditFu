@@ -201,15 +201,19 @@ describe Owner do
   end
 
   describe "billing_date" do
+    before :all do 
+      today = Date.new(2010, 3, 23)
+      Date.stub(:today).and_return(today)
+      Date.stub(:current).and_return(today)
+    end
+
     it "should return the current month billing day if it is in future" do
-      Date.stub(:today).and_return(Date.new(2010, 3, 23))
       owner = Factory.create(:owner)
       owner.confirmed_at = DateTime.new(2010, 2, 25)
       owner.billing_date.should == Date.new(2010, 3, 25)
     end
 
     it "should return the next month billing day current month' one is in the past" do
-      Date.stub(:today).and_return(Date.new(2010, 3, 23))
       owner = Factory.create(:owner)
       owner.confirmed_at = DateTime.new(2010, 2, 20)
       owner.billing_date.should == Date.new(2010, 4, 20)
