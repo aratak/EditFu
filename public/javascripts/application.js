@@ -76,7 +76,13 @@ Ajax.Responders.register({
     showMessage('info', 'Processing request...');
   },
 
-  onComplete: function() {
+  onComplete: function(request, transport) {
     $$('.info').invoke('hide');
+    if(transport.status == 200) {
+      var loc = transport.getHeader('X-Location');
+      if(loc) {
+        window.location = loc;
+      }
+    }
   }
 });

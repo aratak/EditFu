@@ -39,9 +39,11 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_to_subdomain
-    host = desired_host
-    if request.host != host
-      redirect_to request.protocol + host + request.port_string + request.request_uri
+    if can_redirect?
+      host = desired_host
+      if request.host != host
+        redirect_to request.protocol + host + request.port_string + request.request_uri
+      end
     end
   end
 
@@ -56,9 +58,14 @@ class ApplicationController < ActionController::Base
   def authenticate_user_type!(type)
     authenticate_user!
 
-    if user_signed_in? && !current_user.kind_of?(type)
-      redirect_to root_path
+    if can_redirect?
+      if user_signed_in? && !current_user.kind_of?(type)
+        redirect_to root_path
+      end
     end
   end
   
+  def can_redirect?
+    request.get? && !request.xhr?
+  end
 end

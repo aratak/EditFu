@@ -61,6 +61,9 @@ Devise.setup do |config|
   #   end
   #   manager.default_strategies.unshift :twitter_oauth
   # end
+  config.warden do |manager|
+    manager.failure_app = FailureApp
+  end
 
   # Configure default_url_options if you are using dynamic segments in :path_prefix
   # for devise_for.
