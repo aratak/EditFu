@@ -17,7 +17,7 @@ config.time_zone = 'Kyev'
 BASE_DOMAIN = 'gryadka.com'
 
 # Don't care if the mailer can't send
-#config.action_mailer.raise_delivery_errors = false
+config.action_mailer.raise_delivery_errors = false
 
 ActionMailer::Base.delivery_method = :smtp
 config.action_mailer.default_url_options = { :host => "#{BASE_DOMAIN}:3000" }
