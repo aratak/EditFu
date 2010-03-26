@@ -37,6 +37,14 @@
   text-align: left;
 }
 
+.popup h1 {
+  font: bold 18px helvetica;
+  color: #ff1200;
+  text-align: center;
+  margin-top: 7px;
+  margin-bottom: 25px;
+}
+
 .popup h2 {
   font-weight: normal;
   font-size: 26px;
@@ -143,108 +151,11 @@
   color: #ff8d84;
 }
 
-/* old popup.css  */
-
-.popup h1 {
-  font: bold 18px helvetica;
-  color: #ff1200;
-  text-align: center;
-  margin-top: 7px;
-  margin-bottom: 25px;
-}
-
-
-.popup .input {
-  margin-bottom: 15px;
-}
-
-.popup .input .box {
-  padding-left: 15px;
-  background: #f1f1f1;
-}
-
-.popup .box.has-hint {
-  padding: 7px 15px 8px 15px;
-}
-
-.popup .input-hint {
-  font: 10px helvetica;
-  color: #b7b7b7;
-  margin-bottom: 8px;
-}
-
-.popup .input .error {
-  padding-left: 15px;
-  height: 35px;
-  background: #ff0000;
-  color: white;
-  font: 14px/35px helvetica;
-}
-
-.popup .label, .popup .input input {
-  font: 24px helvetica;
-}
-
-.popup .input input {
-  width: 100%;
-  height: 29px;
-  margin: 0;
-  margin-left: -2px;
-  padding: 0;
-  padding-top: 4px;
-  border: solid gray 1px;
-  outline: none;
-
-  display: none;
-}
-
-.popup .input .label {
-  line-height: 35px;
-}
-
-.popup .input.active .label {
-  display: none;
-}
-
-.popup .input.active input {
-  display: block;
-}
-
-.popup .action-bar {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 50px;
-  background: #f1f1f1;
-}
-
-.popup .action-bar a {
-  font: bold 20px helvetica;
-  color: #555555;
-  line-height: 50px;
-  float: right;
-  margin-right: 15px;
-}
-
-.popup .action-bar a.cancel {
-  font-weight: normal;
-  color: #ff8d84;
-}
-
-.popup .popup-hint {
-  position: absolute;
-  left: 15px;
-  bottom: 55px;
-  font: 10px helvetica;
-  color: #838383;
-}
-
-
-.popup .fake-file {
+.file-inputs .fake-file {
   position: relative;
 }
 
-.popup .fake-file input {
+.file-inputs .fake-file input {
   position: absolute;
   left: 0;
   top: 0;

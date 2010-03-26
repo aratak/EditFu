@@ -36,23 +36,6 @@ module ApplicationHelper
     ([:info, :success, :warning, :error, :failure] & flash.keys).first
   end
 
-  def popup(opts, &block)
-    locals = { :id => nil, :clazz => nil, :hint => nil, :action => []}.merge(opts)
-    render :layout => 'shared/popup', :locals => locals, &block
-  end
-
-  def popup_input(opts = {}, &block)
-    locals = { :clazz => nil, :hint => nil, :has_hint => nil }.merge(opts)
-    locals[:has_hint] = 'has-hint' if opts.has_key?(:hint)
-    render :layout => 'shared/popup_input', :locals => locals, &block
-  end
-
-  def label_input(label, opts = {}, &block)
-    popup_input(opts) do
-      content_tag(:div, label, :class => 'label') + capture(&block)
-    end
-  end
-
   def link_to_remove(path, text = 'Remove')
     link_to_function text, "showConfirmPopup('#{path}')", :class => 'important'
   end
