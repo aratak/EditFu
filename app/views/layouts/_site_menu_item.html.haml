@@ -7,5 +7,6 @@
         = site.name
 
   %ul.menu(id="site-#{site.id}-menu-ul")
-    - site.pages.enabled.each do |page|
-      = render 'layouts/page_menu_item', :page => page, :selected => @page
+    - current_user.site_pages(site).each do |page|
+      - if page.enabled
+        = render 'layouts/page_menu_item', :page => page, :selected => @page
