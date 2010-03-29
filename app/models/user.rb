@@ -14,6 +14,10 @@ class User < ActiveRecord::Base
     kind_of?(Owner)
   end
 
+  def editor?
+    kind_of?(Editor)
+  end
+
   def admin?
     kind_of?(Admin)
   end

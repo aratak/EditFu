@@ -26,6 +26,10 @@ class ApplicationController < ActionController::Base
     authenticate_user_type!(Owner)
   end
 
+  def authenticate_editor!
+    authenticate_user_type!(Editor)
+  end
+
   def authenticate_admin!
     authenticate_user_type!(Admin)
   end

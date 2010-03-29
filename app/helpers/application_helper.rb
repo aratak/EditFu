@@ -9,6 +9,14 @@ module ApplicationHelper
     yield if user_signed_in? && current_user.admin?
   end
   
+  def pref_path
+    if current_user.owner?
+      preferences_path
+    elsif current_user.editor?
+      simple_preferences_path
+    end
+  end
+
   def image_path(name)
     File.join(@type_dir, name)
   end
