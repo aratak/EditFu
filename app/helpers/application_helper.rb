@@ -11,8 +11,8 @@ module ApplicationHelper
   
   def pref_path
     if current_user.owner?
-      preferences_path
-    elsif current_user.editor?
+      owner_preferences_path
+    else
       simple_preferences_path
     end
   end

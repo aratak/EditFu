@@ -1,5 +1,5 @@
 class SimplePreferencesController < ApplicationController
-  before_filter :authenticate_editor!
+  before_filter :authenticate_user!
 
   def show
   end

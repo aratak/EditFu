@@ -1,4 +1,4 @@
-class PreferencesController < ApplicationController
+class OwnerPreferencesController < ApplicationController
   before_filter :authenticate_owner!
   before_filter :set_preferences
 

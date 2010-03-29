@@ -1,6 +1,6 @@
 #downgrade-popup
   %h1 Plan Downgrade
-  - form_remote_tag :url => downgrade_preferences_path, :method => :post do
+  - form_remote_tag :url => downgrade_owner_preferences_path, :method => :post do
     %ul.sites
       - @owner.sites.each do |site|
         %li.site
@@ -19,5 +19,5 @@
     
     .popup-action-bar
       = submit_tag "Downgrade"
-      = link_to_remote 'Return', :url => preferences_path, :method => :get, |
+      = link_to_remote 'Return', :url => owner_preferences_path, :method => :get, |
         :html => { :class => 'cancel' } |

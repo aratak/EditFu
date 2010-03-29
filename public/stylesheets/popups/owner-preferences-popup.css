@@ -1,0 +1,132 @@
+#owner-preferences-popup {
+  width: 860px;
+}
+
+#owner-preferences-popup .account .username,  
+#owner-preferences-popup .account .domain {
+  width: 32%;
+}
+
+#owner-preferences-popup .account .password {
+  float: right;
+  margin-right: 0;
+  width: 33.5%;
+}
+
+#owner-preferences-popup .account .email,
+#owner-preferences-popup .account .editfu_com {
+  width: 32%;
+}
+
+#owner-preferences-popup .account .editfu_com {
+  margin-left: -0.5ex;
+  float: left;
+  background: none;
+  line-height: 34px;
+  font-size: 20px;
+  color: #b7b7b7;
+}
+
+#owner-preferences-popup .account .domain {
+  clear: left;
+}
+
+#owner-preferences-popup .plan {
+  padding-top: 1em;
+  background: #464646;
+}
+
+#owner-preferences-popup .plan input[type=radio] {
+  position: absolute;
+  z-index: -1;
+  filter: progid:DXImageTransform.Microsoft.Alpha(opacity = 0);
+  -moz-opacity: 0;
+  -khtml-opacity: 0;
+  opacity: 0;
+}
+
+#owner-preferences-popup .plan .plan-wrapper {
+  margin-top: -37px;
+  margin-left: 38%;
+}
+
+#owner-preferences-popup .plan .plan-label {
+  position: relative;
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+  vertical-align: top;
+  margin-bottom: 2em;
+  padding: 0 1em 1em;
+}
+
+#owner-preferences-popup .plan .plan-label.checked {
+  background: #343434;
+}
+
+#owner-preferences-popup .plan .plan-label small {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  bottom: -1.5em;
+  color: #ffffff;
+  font-size: 14px;
+  text-align: center;
+  visibility: hidden;
+}
+
+#owner-preferences-popup .plan .plan-label.checked small {
+  visibility: visible;
+}
+
+#owner-preferences-popup .plan .plan-label label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+
+#owner-preferences-popup .plan .plan-label dl {
+  color: #8f8f8f;
+}
+
+#owner-preferences-popup .plan .plan-label dl dt {
+  font-size: 20px;
+  padding-bottom: 0.5em;
+}
+
+#owner-preferences-popup .plan .plan-label dl dd {
+  margin-left: 0;
+  font-size: 12px;
+}
+
+#owner-preferences-popup .plan .plan-label dl dd ul {
+  padding: 0;
+}
+
+#owner-preferences-popup .plan .plan-label dl dd ul li {
+  list-style-type: none;
+}
+
+#owner-preferences-popup .plan small.description {
+  color: #b7b7b7;
+}
+
+#owner-preferences-popup .billing .card-number {
+  width: 32%;
+}
+
+#owner-preferences-popup .billing .exp-date {
+  width: 16%;
+}
+
+#owner-preferences-popup .billing .first-name {
+  clear: left;
+}
+
+#owner-preferences-popup .billing .first-name,
+#owner-preferences-popup .billing .last-name {
+  width: 24%;
+}

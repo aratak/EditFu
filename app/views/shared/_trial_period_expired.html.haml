@@ -15,4 +15,4 @@
   .popup-action-bar
     = link_to_function "Close", "hidePopup();", :class => 'cancel'
     - if current_user.owner?
-      = link_to_remote "Switch", :url => preferences_path, :method => :get
+      = link_to_remote "Switch", :url => owner_preferences_path, :method => :get
