@@ -1,15 +1,21 @@
 #preferences-popup {
-  width: 760px;
+  width: 860px;
 }
 
 #preferences-popup .account .username,  
 #preferences-popup .account .domain {
-  width: 44%;
+  width: 32%;
+}
+
+#preferences-popup .account .password {
+  float: right;
+  margin-right: 0;
+  width: 33.5%;
 }
 
 #preferences-popup .account .email,
 #preferences-popup .account .editfu_com {
-  width: 44%;
+  width: 32%;
 }
 
 #preferences-popup .account .editfu_com {
@@ -41,7 +47,7 @@
 
 #preferences-popup .plan .plan-wrapper {
   margin-top: -37px;
-  margin-left: 42%;
+  margin-left: 38%;
 }
 
 #preferences-popup .plan .plan-label {
@@ -109,11 +115,11 @@
 }
 
 #preferences-popup .billing .card-number {
-  width: 44%;
+  width: 32%;
 }
 
 #preferences-popup .billing .exp-date {
-  width: 21%;
+  width: 16%;
 }
 
 #preferences-popup .billing .first-name {
@@ -122,5 +128,5 @@
 
 #preferences-popup .billing .first-name,
 #preferences-popup .billing .last-name {
-  width: 33%;
+  width: 24%;
 }
