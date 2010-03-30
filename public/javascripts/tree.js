@@ -5,8 +5,16 @@ var FtpTree = Class.create({
   openedImage: 'opened.png',
 
   initialize: function(site_id) {
+    var tree = this;
     this.site_id = site_id;
     this.root = this.appendNode($('ftp-tree'), "root", "Root/");
+
+    var form = $('popup').down('form');
+    var onsubmit = form.onsubmit;
+    form.onsubmit = function() {
+      tree.onsubmit(form);
+      return onsubmit.apply(this);
+    }
   },
 
   appendBranch: function(parentNode, html) {
@@ -57,7 +65,6 @@ var FtpTree = Class.create({
   onItemClick: function(li) {
     if (li.className == this.selectableClass) {
       this.onItemSelected(li);
-      this.markSelected(li);
     }
 
     if (li.className == 'folder') {
@@ -65,16 +72,20 @@ var FtpTree = Class.create({
     }
   },
 
-  markSelected: function(li) {
-    $('ftp-tree').select('span.selected').each(function(selected) {
-      selected.removeClassName('selected');
-      var icon = selected.up('li').down('.icon');
-      icon.src = icon.src.sub('selected-', '');
-    });
-
-    li.down('span').addClassName('selected');
+  selectItem: function(li, select) {
+    var span = li.down('span');
     var icon = li.down('.icon');
-    icon.src = icon.src.replace(/([^\/]*)$/, 'selected-$1'); 
+    if(span.hasClassName('selected') == select) {
+      return;
+    }
+
+    if(select) { 
+      span.addClassName('selected');
+      icon.src = icon.src.replace(/([^\/]*)$/, 'selected-$1'); 
+    } else {
+      span.removeClassName('selected');
+      icon.src = icon.src.sub('selected-', '');
+    }
   },
 
   toggleFolder: function(li) {
@@ -128,7 +139,7 @@ var FtpTree = Class.create({
       var path = $F('site_site_root').substr(1);
       var selected = tree.findItem(li, path);
       if(selected) {
-        tree.markSelected(selected);
+        tree.selectItem(selected, true);
       } else {
         showMessage('error', "Site root isn't exist on the server.");
       }
@@ -208,10 +219,6 @@ var FtpTree = Class.create({
       basename = 'folder';
     }
     return this.imageFolder + basename + this.imageSuffix;
-  },
-
-  getRoot: function() {
-    return $('ftp-tree').down('li');
   }
 });
 
@@ -231,13 +238,21 @@ var SiteFtpTree = Class.create(FtpTree, {
     this.expandFolder(this.root);
   },
 
-  onItemSelected: function(li) {
-    $('site_site_root').value = this.getItemPath(li);
-    $('site_site_root').fire('custom:change');
-  },
-
   getRequestParams: function() {
     return $('site_form').serialize(true);
+  },
+
+  onItemSelected: function(li) {
+    var tree = this;
+    this.root.select('span.selected').each(function(span) {
+      tree.selectItem(span.up('li'), false);
+    });
+    this.selectItem(li, true);
+  },
+
+  onsubmit: function() {
+    var span = this.root.down('span.selected');
+    $('site_site_root').value = span ? this.getItemPath(span.up('li')) : '';
   }
 });
 
@@ -283,12 +298,20 @@ var PageFtpTree = Class.create(FtpTree, {
     this.loadList(this.siteNode);
   },
 
-  onItemSelected: function(li) {
-    $('page_path').value = this.getItemPathTo(li, this.siteNode);
-    $('page_path').fire('custom:change');
-  },
-
   getRequestParams: function() {
     return { site_id: this.site_id, files: true }
+  },
+
+  onItemSelected: function(li) {
+    this.selectItem(li, !li.down('span').hasClassName('selected'));
+  },
+
+  onsubmit: function() {
+    var span = this.root.down('span.selected');
+    if(!span) {
+      $('page_path').value = '';
+    } else {
+      $('page_path').value = this.getItemPathTo(span.up('li'), this.siteNode);
+    }
   }
 });
