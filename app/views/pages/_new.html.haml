@@ -1,16 +1,16 @@
 #new-page-popup
   %h1 New Page
-  - remote_form_for [@site, @page] do |form|
+  - form_remote_tag :url => site_pages_path(@site) do
     .inputs.tree-input
       .label-input
-        = form.hidden_field :path
+        .path-inputs
         #ftp-tree
 
     .clear
     .message(style='display: none;')
     %small.description Choose the pages you would like to add
     .popup-action-bar
-      = form.submit "Add"
+      = submit_tag "Add"
       = link_to_function "Cancel", "hidePopup();", :class => 'cancel'
 
 :javascript

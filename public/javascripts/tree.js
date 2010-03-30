@@ -307,11 +307,16 @@ var PageFtpTree = Class.create(FtpTree, {
   },
 
   onsubmit: function() {
-    var span = this.root.down('span.selected');
-    if(!span) {
-      $('page_path').value = '';
-    } else {
-      $('page_path').value = this.getItemPathTo(span.up('li'), this.siteNode);
-    }
+    var tree = this;
+    var inputs = $('popup').down('.path-inputs');
+    inputs.innerHTML = '';
+    this.root.select('span.selected').each(function(span) {
+      var path = tree.getItemPathTo(span.up('li'), tree.siteNode);
+      var input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = 'path[]';
+      input.value = path;
+      inputs.insert({ bottom: input });
+    });
   }
 });

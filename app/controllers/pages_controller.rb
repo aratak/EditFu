@@ -23,14 +23,14 @@ class PagesController < ApplicationController
 
   def new
     find_site
-    @page = Page.new 
   end
 
   def create
-    @page = Page.new params[:page]
-    @page.site = find_site
-
-    render_errors(:page => @page) unless @page.save
+    find_site
+    @pages = []
+    params[:path].each do |path|
+      @pages << @site.pages.create(:path => path)
+    end
   end
 
   def destroy
