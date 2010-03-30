@@ -29,8 +29,14 @@ class FtpClient
     remote_dir, remote_name = File.split(remote_path)
 
     open site do |f|
-      images = list(f, remote_dir).map { |file| file[:name] }
-      if images.empty?
+      # Some FTP servers raise error on ls 'not-existent-folder-name' 
+      # and some simply return empty list
+      begin
+        images = list(f, remote_dir).map { |file| file[:name] }
+      rescue Net::FTPError
+      end
+
+      if images.blank?
         mkdir_p f, remote_dir
       else
         remote_name = generate_image_name(remote_name, images)

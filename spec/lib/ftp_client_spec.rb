@@ -55,9 +55,19 @@ describe FtpClient do
       FtpClient.put_image(@site, '/tmp/1.gif', @mce_photo).should == 'photo.gif'
     end
 
-    it "should create image folders if they don't exist yet" do
+    it "should create image folders if they don't exist yet (ls returned empty array)" do
       FtpClient.should_receive(:open).and_yield(@ftp)
       @ftp.should_receive(:ls).and_return []
+      @ftp.should_receive(:mkdir).with(Site::IMAGES_FOLDER)
+      @ftp.should_receive(:mkdir).with(Site::MCE_FOLDER)
+      @ftp.should_receive(:put)
+
+      FtpClient.put_image(@site, '/tmp/1.gif', @mce_photo)
+    end
+
+    it "should create image folders if they don't exist yet (ls raised error)" do
+      FtpClient.should_receive(:open).and_yield(@ftp)
+      @ftp.should_receive(:ls).and_raise(Net::FTPError)
       @ftp.should_receive(:mkdir).with(Site::IMAGES_FOLDER)
       @ftp.should_receive(:mkdir).with(Site::MCE_FOLDER)
       @ftp.should_receive(:put)
