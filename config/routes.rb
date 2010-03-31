@@ -27,5 +27,5 @@ ActionController::Routing::Routes.draw do |map|
 
   map.trial_period_expired "/trial-period-expired", :controller => 'shared', :action => 'trial_period'
 
-  map.root :controller => 'home', :action => 'show'
+  map.root :new_user_session
 end
