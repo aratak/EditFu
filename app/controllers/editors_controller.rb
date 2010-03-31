@@ -1,7 +1,6 @@
 class EditorsController < ApplicationController
-  layout 'editors'
-
   before_filter :authenticate_owner!
+  layout nil
 
   def index
     unless current_user.editors.empty?

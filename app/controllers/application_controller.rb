@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
   before_filter :redirect_to_subdomain if RAILS_ENV != 'test'
+  layout nil
   
   include PlanRestrictions
 

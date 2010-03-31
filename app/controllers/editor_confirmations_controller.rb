@@ -1,5 +1,6 @@
 class EditorConfirmationsController < ApplicationController
   before_filter :find_editor
+  layout 'public'
 
   def edit
   end

@@ -1,34 +1,35 @@
-= javascript_include_tag 'tiny_mce/tiny_mce', 'page', 'popups/image-popup'
-= stylesheet_link_tag 'page', 'popups/image-popup'
+- inside_layout 'sites' do
+  = javascript_include_tag 'tiny_mce/tiny_mce', 'page', 'popups/image-popup'
+  = stylesheet_link_tag 'page', 'popups/image-popup'
 
-- @title = @page.path
-- @hint = 'Edit sections below and then click update to make changes'
+  - @title = @page.path
+  - @hint = 'Edit sections below and then click update to make changes'
 
-= content_for :actions do
-  = link_to 'View', @page.url, :target => '_blank'
-  - if current_user.owner?
-    = link_to_remove site_page_path(@site, @page)
+  = content_for :actions do
+    = link_to 'View', @page.url, :target => '_blank'
+    - if current_user.owner?
+      = link_to_remove site_page_path(@site, @page)
 
-- remote_form_for [@site, @page], :html => { :id => 'page-form' } do |f|
-  - if @sections
-    - @sections.each do |section|
-      .mce-editor
-        = text_area_tag 'sections[]', section, :id => nil, :class => 'mce_area'
+  - remote_form_for [@site, @page], :html => { :id => 'page-form' } do |f|
+    - if @sections
+      - @sections.each do |section|
+        .mce-editor
+          = text_area_tag 'sections[]', section, :id => nil, :class => 'mce_area'
 
-  - if @images
-    - @images.each do |attributes|
-      .image
-        .bar 100 X 100
-        .thumbnail
-          %img{:src => File.join(@site.http_url, attributes['src']), |
-            :alt => attributes['alt'], :onload => 'initImage(this);' } |
-        - attributes.each do |k,v|
-          = hidden_field_tag "images[][#{k}]", v, :id => nil
-  = f.submit "Update", :class => "update-button"
+    - if @images
+      - @images.each do |attributes|
+        .image
+          .bar 100 X 100
+          .thumbnail
+            %img{:src => File.join(@site.http_url, attributes['src']), |
+              :alt => attributes['alt'], :onload => 'initImage(this);' } |
+          - attributes.each do |k,v|
+            = hidden_field_tag "images[][#{k}]", v, :id => nil
+    = f.submit "Update", :class => "update-button"
 
-:javascript
-  initTinyMCE({
-    site_url: '#{@site.http_url}',
-    new_image_path: '#{new_site_image_path(@site)}',
-    document_base_url: '#{@site.http_url}/'
-  });
+  :javascript
+    initTinyMCE({
+      site_url: '#{@site.http_url}',
+      new_image_path: '#{new_site_image_path(@site)}',
+      document_base_url: '#{@site.http_url}/'
+    });

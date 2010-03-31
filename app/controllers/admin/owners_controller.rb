@@ -1,5 +1,6 @@
 class Admin::OwnersController < ApplicationController
   before_filter :authenticate_admin!
+  layout 'member'
 
   def index
     @owner = Owner.all(:order => 'user_name').first

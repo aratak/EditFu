@@ -1,0 +1,49 @@
+.inputs .label-input {
+  float: left;
+  position: relative;
+  margin: 0 10px 5px 0;
+  background: #f1f1f1;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.inputs .label-input input {
+  width: 100%;
+  line-height: 20px;
+  font-size: 20px;
+  color: #b7b7b7;
+  background: #f1f1f1;
+  padding: 5px 10px;
+  border: 1px solid transparent;
+  
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.label-input label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  line-height: 20px;
+  font-size: 20px;
+  padding: 10px;
+  text-transform: uppercase;
+}
+
+.inputs div input:focus + label,
+.inputs div input.with-text + label {
+  z-index: -1;
+}
+
+.label-input .error + input + label {
+  top: 40px;
+}
+
+.inputs div input:focus {
+  background: #ffffff;
+  border: 1px solid #cccccc;
+}

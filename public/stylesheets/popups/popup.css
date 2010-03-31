@@ -53,17 +53,6 @@
   margin: 10px 0;
 }
 
-.popup .inputs .label-input {
-  float: left;
-  position: relative;
-  margin: 0 10px 5px 0;
-  background: #f1f1f1;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
 .popup .error {
   background: #ff0000;
   color: white;
@@ -74,45 +63,6 @@
 
 .popup .error.blank {
   background: #ffffff;
-}
-
-.popup .inputs .label-input input {
-  width: 100%;
-  line-height: 20px;
-  font-size: 20px;
-  color: #b7b7b7;
-  background: #f1f1f1;
-  padding: 5px 10px;
-  border: 1px solid transparent;
-  
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-.popup .label-input label {
-  position: absolute;
-  top: 0;
-  left: 0;
-  line-height: 20px;
-  font-size: 20px;
-  padding: 10px;
-  text-transform: uppercase;
-}
-
-.popup .inputs div input:focus + label,
-.popup .inputs div input.with-text + label {
-  z-index: -1;
-}
-
-.popup .label-input .error + input + label {
-  top: 40px;
-}
-
-.popup .inputs div input:focus {
-  background: #ffffff;
-  border: 1px solid #cccccc;
 }
 
 .popup small.description {

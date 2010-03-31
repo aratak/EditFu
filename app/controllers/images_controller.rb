@@ -1,6 +1,5 @@
 class ImagesController < ApplicationController
   before_filter :authenticate_user!
-  layout 'popup'
 
   def new
     find_site

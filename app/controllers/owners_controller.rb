@@ -1,5 +1,6 @@
 class OwnersController < ApplicationController
   before_filter :authenticate_owner!, :only => :destroy
+  layout 'public'
 
   # GET /owners/new
   def new

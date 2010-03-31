@@ -1,21 +1,18 @@
-%h2 Sign in
-
-- form_for resource_name, resource, :url => session_path(resource_name) do |f|
-  = f.error_messages
-  %table.card
-    %tr
-      %th= f.label :email
-      %td= f.text_field :email
-    %tr
-      %th= f.label :password
-      %td= f.password_field :password
-    %tr
-      %td= f.check_box :remember_me
-      %th= f.label :remember_me
-
-  = f.submit "Sign in" 
-
-= link_to "Want to sign up?", new_owner_path
-%br
-= link_to "Forgot password?", new_password_path(resource_name)
-%br
+- inside_layout 'public' do
+  - form_for :user, resource, :url => session_path(:user) do |f|
+    .inputs
+      .label-input
+        = f.text_field :email
+        = f.label :email
+      .label-input
+        = f.password_field :password
+        = f.label :password
+      = f.submit '', :class => 'submit'
+    #hint
+      %small#signup
+        Not an Editfu Member? 
+        = link_to 'Learn more', '#'
+        or 
+        = link_to 'Sign up.', new_owner_path
+      %small#forgot
+        = link_to 'Forgot Password?', new_password_path(:user)
