@@ -25,6 +25,9 @@
   .row
     .label Registration Date
     .value= @owner.created_at
+  .row
+    .label Last Logged In
+    .value= @owner.last_sign_in_at
   - if @owner.confirmed?
     .row
       .label Billing Date
