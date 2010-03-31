@@ -10,4 +10,6 @@
     %img#art-bg(src='/images/public-bg.jpg')
     %img#logo(src='/images/editfu.png')
     #main
+      - if message_kind
+        %div= flash[message_kind]
       = yield
