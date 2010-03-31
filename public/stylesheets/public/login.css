@@ -1,0 +1,11 @@
+form #hint {
+  margin-top: 10px;
+}
+
+#main small#signup {
+  float: left;
+}
+
+#main small#forgot {
+  float: right;
+}

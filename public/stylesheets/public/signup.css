@@ -1,0 +1,22 @@
+.label-input.password-confirmation, 
+.label-input.password  {
+  margin-right: 0;
+}
+
+.label-input.password-confirmation, 
+small, .submit {
+  float: right;
+}
+
+small#login a {
+  margin-right: 10px;
+  line-height: 35px;
+}
+ 
+small {
+  text-align: right;
+}
+
+#comments {
+  margin-top: 20px;
+}

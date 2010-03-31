@@ -1,3 +1,5 @@
+= stylesheet_link_tag 'public/login'
+
 - form_tag user_session_path, :method => :post do 
   .inputs
     .label-input
@@ -6,7 +8,7 @@
     .label-input
       = password_field_tag 'user[password]'
       = label_tag 'user_password'
-    = submit_tag '', :class => 'submit'
+    = submit_tag 'Login', :class => 'submit'
   #hint
     %small#signup
       Not an Editfu Member? 

@@ -31,7 +31,6 @@
   line-height: 20px;
   font-size: 20px;
   padding: 10px;
-  text-transform: uppercase;
 }
 
 .inputs div input:focus + label,
