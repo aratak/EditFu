@@ -38,6 +38,18 @@
   z-index: -1;
 }
 
+.label-input .error {
+  background: #ff0000;
+  color: white;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 10px;
+}
+
+.label-input .error.blank {
+  background: #ffffff;
+}
+
 .label-input .error + input + label {
   top: 40px;
 }

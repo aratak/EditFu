@@ -53,18 +53,6 @@
   margin: 10px 0;
 }
 
-.popup .error {
-  background: #ff0000;
-  color: white;
-  font-size: 14px;
-  line-height: 20px;
-  padding: 10px;
-}
-
-.popup .error.blank {
-  background: #ffffff;
-}
-
 .popup small.description {
   display: inline-block;
   zoom: 1;
