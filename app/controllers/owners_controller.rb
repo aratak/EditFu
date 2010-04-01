@@ -10,7 +10,7 @@ class OwnersController < ApplicationController
     @owner.require_password
     if @owner.save
       flash[:success] = t('devise.confirmations.send_instructions')
-      head :'X-Location' => root_path
+      send_redirect root_path
     else
       render_errors :owner => @owner
     end

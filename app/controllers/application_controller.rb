@@ -35,6 +35,10 @@ class ApplicationController < ActionController::Base
     authenticate_user_type!(Admin)
   end
 
+  def send_redirect(path)
+    head :'X-Location' => path
+  end
+
   private
 
   def render_errors(models)
