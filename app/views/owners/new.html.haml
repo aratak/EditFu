@@ -24,11 +24,11 @@
       .clear
 
       = submit_tag 'Sign Up', :class => 'submit'
-      %small#login
+      #login.hint
         = link_to 'Already a Member', new_user_session_path
       .clear
 
-      %small#comments
+      #comments.hint
         %p 
           After signing up you will receive an email for verification.
           %br

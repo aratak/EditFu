@@ -36,13 +36,13 @@ input.submit {
   width: 230px;
 }
 
-#main small {
+#main .hint {
   font-family: helvetica;
   font-size: 13px;
   color: white;
 }
 
-#main small a {
+#main .hint a {
   color: #ff0000;
   text-decoration: none;
 }

@@ -4,16 +4,16 @@
 }
 
 .label-input.password-confirmation, 
-small, .submit {
+.hint, .submit {
   float: right;
 }
 
-small#login a {
+#login.hint a {
   margin-right: 10px;
   line-height: 35px;
 }
  
-small {
+.hint {
   text-align: right;
 }
 

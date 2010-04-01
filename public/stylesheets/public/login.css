@@ -2,10 +2,10 @@ form #hint {
   margin-top: 10px;
 }
 
-#main small#signup {
+#main #signup {
   float: left;
 }
 
-#main small#forgot {
+#main #forgot {
   float: right;
 }
