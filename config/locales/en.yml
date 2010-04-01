@@ -3,6 +3,11 @@ en:
     sessions:
       disabled: 'Your account is temporarily disabled by administrator.'
 
+  activerecord:
+    errors:
+      messages:
+        too_short: 'is too short (min length is {{count}})'
+
   credit_card:
     authorize: "Can't authorize credit card. Please check your balance."
 

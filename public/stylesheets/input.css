@@ -2,7 +2,6 @@
   float: left;
   position: relative;
   margin: 0 10px 5px 0;
-  background: #f1f1f1;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -ms-box-sizing: border-box;
@@ -47,7 +46,7 @@
 }
 
 .label-input .error.blank {
-  background: #ffffff;
+  background: transparent;
 }
 
 .label-input .error + input + label {

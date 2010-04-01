@@ -1,51 +1,52 @@
-= stylesheet_link_tag 'public/signup'
+- inside_layout 'public' do
+  = stylesheet_link_tag 'public/signup'
 
-- form_for @owner do |f|
-  = f.error_messages
-  .inputs
-    .label-input
-      = f.text_field :domain_name
-      = f.label :domain_name
-    .label-input
-      = f.text_field :user_name
-      = f.label :user_name
-    .label-input
-      = f.text_field :email
-      = f.label :email
-    .label-input.password
-      = f.text_field :password
-      = f.label :password
-    .clear
+  - remote_form_for @owner do |f|
+    .inputs
+      .inputs-row
+        .label-input
+          = f.text_field :domain_name
+          = f.label :domain_name
+        .label-input
+          = f.text_field :user_name
+          = f.label :user_name
+        .label-input
+          = f.text_field :email
+          = f.label :email
+        .label-input.password
+          = f.text_field :password
+          = f.label :password
+        .clear
 
-    .label-input.password-confirmation
-      = f.text_field :password_confirmation
-      = f.label :password_confirmation
-    .clear
+      .label-input.password-confirmation
+        = f.text_field :password_confirmation
+        = f.label :password_confirmation
+      .clear
 
-    = submit_tag 'Sign Up', :class => 'submit'
-    %small#login
-      = link_to 'Already a Member', new_user_session_path
-    .clear
+      = submit_tag 'Sign Up', :class => 'submit'
+      %small#login
+        = link_to 'Already a Member', new_user_session_path
+      .clear
 
-    %small#comments
-      %p 
-        After signing up you will receive an email for verification.
-        %br
-        Click it and log in.
+      %small#comments
+        %p 
+          After signing up you will receive an email for verification.
+          %br
+          Click it and log in.
 
-      %p 
-        Your signing up for a free 30 day trail and after the
-        %br
-        30 days you can choose which plan you want to keep.
+        %p 
+          Your signing up for a free 30 day trail and after the
+          %br
+          30 days you can choose which plan you want to keep.
 
-      %p
-        No credit card is required till after the trial and 
-        %br
-        only if you decide to continue using EditFu
+        %p
+          No credit card is required till after the trial and 
+          %br
+          only if you decide to continue using EditFu
 
-      %p
-        = link_to 'Learn more', '#'
-        about the
-        = link_to 'features', '#'
-        and
-        = link_to 'pricing', '#'
+        %p
+          = link_to 'Learn more', '#'
+          about the
+          = link_to 'features', '#'
+          and
+          = link_to 'pricing', '#'

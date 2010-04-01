@@ -10,7 +10,7 @@
     %img#art-bg(src='/images/public-bg.jpg')
     %img#logo(src='/images/editfu.png')
     #main
-      #message
+      #page-message.message
         - if message_kind
           = flash[message_kind]
       = yield

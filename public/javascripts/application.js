@@ -15,7 +15,7 @@ function showMessage(kind, text) {
 }
 
 function clearMessage() {
-  var message = $('popup').down('.message') || $('page-message');
+  var message = $$('popup.message').first() || $('page-message');
   if(message.effect) {
     message.effect.cancel();
   }
