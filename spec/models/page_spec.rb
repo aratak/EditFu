@@ -30,6 +30,18 @@ describe Page do
 
       @page.sections.should == ['Hello']
     end
+
+    it "should skip nested sections" do
+      @page.content = <<-EOS
+        <html>
+          <body>
+            <p class='editfu'><b class='editfu'>Hello</b></p>
+          </body>
+        </html>
+      EOS
+
+      @page.sections.should == ['<b class="editfu">Hello</b>']
+    end
   end
 
   describe "sections=" do

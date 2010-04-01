@@ -50,7 +50,18 @@ class Page < ActiveRecord::Base
   end
 
   def elements(img)
-    (document / '.editfu').select { |e| img == (e.pathname == 'img') }
+    nodes = (document / '.editfu')
+    nodes.select do |e| 
+      !nested_node?(e, nodes) && img == (e.pathname == 'img') 
+    end
+  end
+
+  def nested_node?(node, nodes)
+    p = node.parent
+    while p do
+      return true if nodes.include?(p)
+      p = p.parent
+    end
   end
 
   def update_elements(img, values)
