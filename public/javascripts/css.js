@@ -61,7 +61,9 @@ var Behaviours = function() {
 Event.observe(window, 'load', function() {
   Behaviours.labels();
   Behaviours.radioButtons();
-  Behaviours.popup();
+  if($('popup-hider')) {
+    Behaviours.popup();
+  }
   Behaviours.message();
 })
 

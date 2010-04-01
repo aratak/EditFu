@@ -1,0 +1,8 @@
+- inside_layout 'public' do
+  = stylesheet_link_tag 'public/forgot-password'
+  - form_for :user, :url => password_path(:user) do |f|
+    .inputs
+      = f.submit 'Send', :class => 'submit'
+      .label-input
+        = text_field_tag 'user[email]', @user.email
+        = label_tag :user_email
