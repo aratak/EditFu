@@ -200,6 +200,20 @@ describe Owner do
     end
   end
 
+  describe "billing_day" do
+    it "should return mday of confirm_date" do
+      owner = Factory.create(:owner)
+      owner.confirmed_at = DateTime.new(2010, 2, 25)
+      owner.billing_day.should == 25
+    end
+
+    it "should round mday to 1 if it's greater then 28" do
+      owner = Factory.create(:owner)
+      owner.confirmed_at = DateTime.new(2010, 3, 29)
+      owner.billing_day.should == 1
+    end
+  end
+
   describe "billing_date" do
     before :all do 
       today = Date.new(2010, 3, 23)

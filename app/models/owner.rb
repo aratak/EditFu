@@ -93,7 +93,9 @@ class Owner < User
   end
 
   def billing_day
-    confirmed_at.try :mday
+    if confirmed_at
+      confirmed_at.mday > 28 ? 1 : confirmed_at.mday 
+    end
   end
 
   def billing_date
