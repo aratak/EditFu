@@ -70,12 +70,23 @@ function hidePopup() {
 }
 
 Ajax.Responders.register({
-  onCreate: function() {
-    showMessage('info', 'Processing request...');
+  onCreate: function(request) {
+    clearMessage();
+    var actionBar = $$('#popup .popup-action-bar').first() || $('action-bar')
+    if(actionBar && !actionBar.down('.processing')) {
+      var image = $(document.createElement('img'));
+      image.src = '/images/rotation.gif';
+      image.className = 'processing';
+      actionBar.insert({ bottom: image });
+      request.processing = image;
+    }
   },
 
   onComplete: function(request, transport) {
-    $$('.info').invoke('hide');
+    if(request.processing) {
+      request.processing.remove();
+    }
+
     if(transport.status == 200) {
       var loc = transport.getHeader('X-Location');
       if(loc) {

@@ -5,24 +5,4 @@
   position: fixed;
   bottom: 0;
   width: 100%;
-
-  text-align: center;
-}
-
-#action-bar .plus-action {
-  display: block;
-  float: left;
-  margin-left: 16px;
-  margin-top: 13px;
-}
-
-#action-bar .update-action {
-  margin-right: 16px;
-  padding-left: 40px;
-  display: block;
-  float: right;
-  font-family: impact;
-  font-size: 20px;
-  line-height: 50px;
-  background: url(/images/up.png) no-repeat left center;
 }
