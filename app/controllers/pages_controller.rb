@@ -11,7 +11,7 @@ class PagesController < ApplicationController
       @images = @page.images
 
       if @sections.blank? && @images.blank?
-        flash.now[:warning] = "Page hasn't editable content" 
+        flash.now[:warning] = I18n.t('page.no_content')
       end
       @page.save
     rescue FtpClientError => e
@@ -26,8 +26,19 @@ class PagesController < ApplicationController
   def create
     find_site
     @pages = []
+
+    @message = 'page.created'
     params[:path].each do |path|
-      @pages << @site.pages.create(:path => path)
+      page = @site.pages.create(:path => path)
+      if page.errors.empty?
+        begin
+          FtpClient.get_page(page)
+          @message = 'page.suspicious' if page.has_suspicious_sections?
+          @pages << page
+        rescue FtpClientError
+          @message = 'page.no_content'
+        end
+      end
     end
   end
 

@@ -1,11 +1,9 @@
 @pages.each do |p|
-  if p.errors.empty?
-    page.insert_html :bottom, "site-#{p.site.id}-menu-ul", 
-      :partial => 'layouts/page_menu_item', 
-      :locals => { 
-        :page => p, :selected => nil
-      }
-    page.insert_html :bottom, 'pages_form', :partial => 'sites/page', :locals => { :page => p }
-  end
+  page.insert_html :bottom, "site-#{p.site.id}-menu-ul", 
+    :partial => 'layouts/page_menu_item', 
+    :locals => { 
+      :page => p, :selected => nil
+    }
+  page.insert_html :bottom, 'pages_form', :partial => 'sites/page', :locals => { :page => p }
 end
-hide_popup(page, 'page.created')
+hide_popup(page, @message)

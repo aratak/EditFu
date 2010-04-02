@@ -24,6 +24,8 @@ en:
     updated: "Your changes were updated successfully"
     enabled: "Page statuses were updated."
     destroyed: "Page was removed."
+    suspicious: 'Some or all of the selected pages are using the editfu class incorrectly. This may cause some issues.'
+    no_content: "Page hasn't editable content" 
   
   editor:
     updated: "Your changes were updated successfully"
