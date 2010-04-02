@@ -106,6 +106,58 @@ describe Page do
     end
   end
 
+  describe "has_suspicious_sections?" do
+    it "should be true if page contains 'p' section" do
+      @page.content = <<-EOS
+        <html>
+          <body>
+            <p class="editfu"></p>
+          </body>
+        </html>
+      EOS
+
+      @page.has_suspicious_sections?.should be_true
+    end
+
+    it "should be false if page contains only 'div' and 'span' sections" do
+      @page.content = <<-EOS
+        <html>
+          <body>
+            <div class="editfu"></div>
+            <span class="editfu"></span>
+          </body>
+        </html>
+      EOS
+
+      @page.has_suspicious_sections?.should be_false
+    end
+
+    it "should ignore non-section tags" do
+      @page.content = <<-EOS
+        <html>
+          <body>
+            <p></p>
+            <div class="editfu"></div>
+          </body>
+        </html>
+      EOS
+
+      @page.has_suspicious_sections?.should be_false
+    end
+
+    it "should ignore nested sections" do
+      @page.content = <<-EOS
+        <html>
+          <body>
+            <div class="editfu"><p class="editfu"></p></div>
+          </body>
+        </html>
+      EOS
+
+      @page.has_suspicious_sections?.should be_false
+    end
+  end
+
   describe "before_save" do
     it "should strip path and remove start and end slashes" do
       Factory.create(:page, :path => ' /index.html/ ').path.should == 

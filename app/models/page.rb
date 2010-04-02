@@ -37,6 +37,10 @@ class Page < ActiveRecord::Base
     end
   end
 
+  def has_suspicious_sections?
+    elements(false).any? { |e| !['div', 'span'].include?(e.pathname) }
+  end
+
   protected
 
   def before_save
@@ -52,7 +56,7 @@ class Page < ActiveRecord::Base
   def elements(img)
     nodes = (document / '.editfu')
     nodes.select do |e| 
-      !nested_node?(e, nodes) && img == (e.pathname == 'img') 
+      !nested_node?(e, nodes) && (e.pathname == 'img') == img
     end
   end
 
