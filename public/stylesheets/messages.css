@@ -5,35 +5,38 @@
   margin-top: 9px;
 }
 
-.message#page-message {
-  position: fixed;
-  bottom: 50px;
-}
-
 .message {
-  width: 100%;
   font: bold 20px helvetica;
-  text-align: center;
-  height: 50px;
-}
-
-.message div {
-  color: white;
   line-height: 50px;
+  height: 50px;
+  color: white;
 }
 
-.message .success {
+#action-bar .message {
+  width: 100%;
+  text-align: center;
+}
+
+.popup-action-bar .message {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: left;
+  padding-left: 10px;
+}
+
+.message.success {
   background: #60cc97;
 }
 
-.message .warning {
+.message.warning {
   background: #fcdc6b;
 }
 
-.message .info {
+.message.info {
   background: #fcdc6b;
 }
 
-.message .error, .message .failure {
+.message.error, .message.failure {
   background: #eb4250;
 }

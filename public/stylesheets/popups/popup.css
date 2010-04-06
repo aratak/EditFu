@@ -69,6 +69,8 @@
 }
 
 .popup .popup-action-bar input, .popup .popup-action-bar a {
+  position: relative;
+  z-index: 2;
   float: right;
   border: 0;
   height: 44px;

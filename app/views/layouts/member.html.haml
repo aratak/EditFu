@@ -41,8 +41,6 @@
           = yield
           .clear
 
-      #page-message.message(style='display: none;')
-    
       #action-bar
       
       #popup-system{:style => (@content_for_popup ? nil : 'display: none;')}
@@ -58,6 +56,7 @@
       .confirm-popup.alert-popup
         %h1 Confirmation
         .text Are you sure?
+
         .popup-action-bar
           = link_to_function "No", "hidePopup();", :class => 'cancel'
           = link_to 'Yes', '#', :method => :delete, :class => 'yes'

@@ -67,7 +67,7 @@
             = card.text_field 'last_name'
             = card.label 'last_name'
         .clear
-    .message(style='display: none;')
+
     .popup-action-bar
       = f.submit "Save"
       = link_to_function "Cancel", "hidePopup();", :class => 'cancel'

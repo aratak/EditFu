@@ -1,27 +1,17 @@
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
-
 function showMessage(kind, text) {
-  var message = clearMessage();
+  clearMessage();
   if(text && !text.blank()) {
-    var d = document.createElement('div');
-    d.className = kind;
-    d.innerHTML = text;
+    var message = $(document.createElement('div'));
+    message.className = 'message ' + kind;
+    message.innerHTML = text;
   
-    message.update(d);
-    message.show();
+    getActionBar().insert({top: message });
     message.effect = new Effect.Fade(message, {delay: 10, duration: 5});
   }
 }
 
 function clearMessage() {
-  var message = $$('popup.message').first() || $('page-message');
-  if(message.effect) {
-    message.effect.cancel();
-  }
-  message.setOpacity(1.0);
-  message.hide();
-  return message;
+  getActionBar().select('.message').invoke('remove');
 }
 
 function showConfirmPopup(href) {
@@ -67,6 +57,10 @@ function hidePopup() {
   $('all').style.overflow = 'visible';
   $('popup-hider').up().fade({ duration: 0.2});
   $('popup').innerHTML = '';
+}
+
+function getActionBar() {
+  return $$('#popup .popup-action-bar').first() || $('action-bar');
 }
 
 Ajax.Responders.register({

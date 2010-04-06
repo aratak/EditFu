@@ -12,7 +12,7 @@
         = f.password_field 'password'
         = f.label 'password'
       .clear
-    .message(style='display: none;')
+
     .popup-action-bar
       = f.submit "Save"
       = link_to_function "Cancel", "hidePopup();", :class => 'cancel'

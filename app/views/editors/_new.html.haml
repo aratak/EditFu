@@ -12,7 +12,7 @@
         = form.text_field :email
         = form.label :email
       .clear
-    .message(style='display: none;')
+
     .popup-action-bar
       = form.submit "Save"
       = link_to_function "Cancel", "hidePopup();", :class => 'cancel'
