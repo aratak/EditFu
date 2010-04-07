@@ -11,6 +11,8 @@ class SessionsController < ApplicationController
   end
 
   def create
+    sign_out(:user) if signed_in?(:user)
+
     if authenticate(:user)
       flash[:success] = I18n.t("devise.sessions.signed_in")
       sign_in_and_redirect(:user)
