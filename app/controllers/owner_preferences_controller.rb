@@ -21,10 +21,14 @@ class OwnerPreferencesController < ApplicationController
     if @plan == 'professional' && (@plan_changed || !@card.number.blank?)
       @card.valid?
       if @owner.errors.empty? && @card.errors.empty?
-        if @plan_changed
-          @owner.set_professional_plan @card
-        else
-          @owner.set_card @card
+        begin
+          if @plan_changed
+            @owner.set_professional_plan @card
+          else
+            @owner.set_card @card
+          end
+        rescue PaymentSystemError => e
+          render_message e.message
         end
       end
     end

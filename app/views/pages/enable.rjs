@@ -1,4 +1,4 @@
 @selected_site = @site
 page.replace_html "site-#{@site.id}-menu", :partial => 'layouts/site_menu_item',
   :locals => { :site => @site }
-show_message(page, 'page.enabled')
+show_success(page, 'page.enabled')

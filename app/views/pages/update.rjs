@@ -1,1 +1,1 @@
-show_message(page, 'page.updated')
+show_success(page, 'page.updated')

@@ -8,7 +8,7 @@ class AuthorizeNetRecurring
       }
     )
     owner.subscription_id = response.params['subscription_id']
-    raise PaymentSystemError, response.message unless owner.subscription_id
+    raise PaymentSystemError, build_message(response) unless owner.subscription_id
   end
 
   def self.cancel(gateway, owner)
@@ -16,6 +16,16 @@ class AuthorizeNetRecurring
       response = gateway.cancel_recurring(owner.subscription_id)
       raise PaymentSystemError, response.message unless response.success?
       owner.subscription_id = nil
+    end
+  end
+
+  private
+
+  def self.build_message(response)
+    if response.params[:response_reason_code] == 'E00012'
+      'A duplicate subscription already exists.'
+    else
+      response.message
     end
   end
 end

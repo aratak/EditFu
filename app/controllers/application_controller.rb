@@ -41,6 +41,12 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def render_message(message)
+    render :update do |page|
+      show_message page, 'error', message
+    end
+  end
+
   def render_errors(models)
     render :update do |page|
       show_error_messages page, models
