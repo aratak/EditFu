@@ -5,14 +5,8 @@ class SimplePreferencesController < ApplicationController
   end
 
   def update
-    current_user.user_name = params[:preferences][:user_name]
-    current_user.email = params[:preferences][:email]
-    if params[:preferences][:password]
-      current_user.password = params[:preferences][:password]
-      current_user.password_confirmation = params[:preferences][:password]
-    end
-
-    unless current_user.save
+    current_user.require_current_password
+    unless current_user.update_attributes(params[:preferences])
       render_errors :preferences => current_user
     end
   end
