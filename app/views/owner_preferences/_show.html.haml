@@ -24,7 +24,7 @@
         %h2 Plan
         .plan-wrapper
           = owner.radio_button 'plan', 'professional', :class => 'radio'
-          .plan-label
+          .plan-label{selected_class(@owner.plan == 'professional')}
             %label(for='preferences_owner_plan_professional')
             %dl
               %dt Pro $24
@@ -37,7 +37,7 @@
             %small Current
                   
           = owner.radio_button 'plan', 'free', :class => 'radio'
-          .plan-label
+          .plan-label{selected_class(@owner.plan == 'free')}
             %label(for='preferences_owner_plan_free')
             %dl
               %dt Free

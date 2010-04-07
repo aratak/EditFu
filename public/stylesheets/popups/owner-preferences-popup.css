@@ -75,7 +75,7 @@
   visibility: hidden;
 }
 
-#owner-preferences-popup .plan .plan-label.checked small {
+#owner-preferences-popup .plan .plan-label.selected small {
   visibility: visible;
 }
 
