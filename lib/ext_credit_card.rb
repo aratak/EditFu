@@ -1,5 +1,6 @@
 class ExtCreditCard < ActiveMerchant::Billing::CreditCard
   attr_accessor :expiration
+  attr_accessor :zip
 
   def validate
     validate_expiration
@@ -10,6 +11,8 @@ class ExtCreditCard < ActiveMerchant::Billing::CreditCard
 
     e = errors.on(:year)
     errors.add(:expiration, e) if e
+
+    errors.add(:zip, 'is required') if zip.blank?
   end
 
   private

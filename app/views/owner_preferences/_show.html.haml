@@ -66,6 +66,9 @@
           .exp-date.label-input
             = card.text_field 'expiration'
             = card.label 'expiration', '02/2020'
+          .verification-value.label-input
+            = card.text_field 'verification_value'
+            = card.label 'verification_value', 'CVV'
         .inputs-row
           .first-name.label-input
             = card.text_field 'first_name'
@@ -73,6 +76,9 @@
           .last-name.label-input
             = card.text_field 'last_name'
             = card.label 'last_name'
+          .zip.label-input
+            = card.text_field 'zip'
+            = card.label 'zip'
         .clear
 
     .popup-action-bar

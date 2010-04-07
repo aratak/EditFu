@@ -62,5 +62,11 @@ describe ExtCreditCard do
       card.valid?
       card.errors.on(:expiration).should == 'is not a valid month'
     end
+
+    it "should require zip code" do
+      card = ExtCreditCard.new :zip => ''
+      card.valid?
+      card.errors.on(:zip).should == 'is required'
+    end
   end
 end

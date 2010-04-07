@@ -113,6 +113,10 @@
   width: 16%;
 }
 
+#owner-preferences-popup .billing .verification-value {
+  width: 10%;
+}
+
 #owner-preferences-popup .billing .first-name {
   clear: left;
 }
@@ -121,3 +125,8 @@
 #owner-preferences-popup .billing .last-name {
   width: 24%;
 }
+
+#owner-preferences-popup .billing .zip {
+  width: 10%;
+}
+

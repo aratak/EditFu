@@ -50,5 +50,5 @@ end
 
 ActiveSupport::CoreExtensions::Time::Conversions::DATE_FORMATS.update :default => '%Y-%m-%d %H:%M:%S'
 
-ActiveMerchant::Billing::CreditCard.require_verification_value = false
+ActiveMerchant::Billing::CreditCard.require_verification_value = true
 PAYMENT_RECURRING_AMOUNT = 100

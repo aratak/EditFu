@@ -4,7 +4,7 @@ class AuthorizeNetRecurring
       :interval => { :unit => :months, :length => 1 },
       :duration => { :start_date => owner.billing_date, :occurrences => 9999 },
       :billing_address => { 
-        :first_name => card.first_name, :last_name => card.last_name 
+        :first_name => card.first_name, :last_name => card.last_name, :zip => card.zip
       }
     )
     owner.subscription_id = response.params['subscription_id']
