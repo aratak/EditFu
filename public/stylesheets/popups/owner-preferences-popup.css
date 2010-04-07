@@ -2,22 +2,9 @@
   width: 860px;
 }
 
-#owner-preferences-popup .account .username,  
-#owner-preferences-popup .account .domain {
+#owner-preferences-popup .label-input {
   width: 32%;
 }
-
-#owner-preferences-popup .account .password {
-  float: right;
-  margin-right: 0;
-  width: 33.5%;
-}
-
-#owner-preferences-popup .account .email,
-#owner-preferences-popup .account .editfu_com {
-  width: 32%;
-}
-
 #owner-preferences-popup .account .editfu_com {
   margin-left: -0.5ex;
   float: left;
@@ -28,6 +15,10 @@
 }
 
 #owner-preferences-popup .account .domain {
+  clear: left;
+}
+
+#owner-preferences-popup .account .current-password {
   clear: left;
 }
 

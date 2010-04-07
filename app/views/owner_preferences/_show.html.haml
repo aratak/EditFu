@@ -11,14 +11,21 @@
           .email.label-input
             = owner.text_field 'email'
             = owner.label 'email'
-          .password.label-input
-            = owner.password_field 'password'
-            = owner.label 'password'
         .inputs-row
           .domain.label-input
             = owner.text_field 'domain_name'
             = owner.label 'domain_name'
           .editfu_com.label-input .#{BASE_DOMAIN}
+        .inputs-row
+          .current-password.label-input
+            = owner.password_field 'current_password'
+            = owner.label 'current_password'
+          .password.label-input
+            = owner.password_field 'password'
+            = owner.label 'password', 'New password'
+          .password-confirmation.label-input
+            = owner.password_field 'password_confirmation'
+            = owner.label 'password_confirmation', 'Confirm password'
         .clear
       .plan
         %h2 Plan

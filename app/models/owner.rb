@@ -117,6 +117,7 @@ class Owner < User
   end
 
   def validate
+    super 
     if plan_changed?
       if plan == "trial"
         raise "Invalid plan change" if ["free", "professional"].include?(plan_was)

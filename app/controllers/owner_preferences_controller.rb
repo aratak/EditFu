@@ -6,14 +6,9 @@ class OwnerPreferencesController < ApplicationController
   end
 
   def update
-    password = params[:preferences][:owner][:password]
-    unless password.blank?
-      @owner.password = password
-      @owner.password_confirmation = password
-      @owner.save!
-    end
-
+    @owner.require_current_password
     @owner.update_attributes(params[:preferences][:owner])
+
     @plan = params[:preferences][:owner][:plan]
     @card = ExtCreditCard.new params[:preferences][:card]
 
