@@ -98,6 +98,10 @@ class Owner < User
     end
   end
 
+  def prev_billing_date
+    next_billing_date << 1
+  end
+
   def next_billing_date
     today = Date.today
     this_bd = Date.new(today.year, today.month, billing_day)
