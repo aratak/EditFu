@@ -98,7 +98,7 @@ class Owner < User
     end
   end
 
-  def billing_date
+  def next_billing_date
     today = Date.today
     this_bd = Date.new(today.year, today.month, billing_day)
     this_bd.past? ? this_bd.next_month : this_bd
