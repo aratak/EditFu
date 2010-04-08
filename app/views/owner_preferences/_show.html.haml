@@ -85,8 +85,10 @@
           - if @owner.plan == 'professional'
             - if @owner.prev_billing_date
               .label-input.prev-billing-date
+                .label Last billing date
                 = @owner.prev_billing_date
             .label-input.next-billing-date
+              .label Next billing date
               = @owner.next_billing_date
         .clear
 

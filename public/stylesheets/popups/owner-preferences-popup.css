@@ -11,13 +11,13 @@
 #owner-preferences-popup .billing .next-billing-date {
   float: left;
   background: none;
-  line-height: 34px;
   font-size: 20px;
   color: #b7b7b7;
 }
 
 #owner-preferences-popup .account .editfu_com {
   margin-left: -0.5ex;
+  line-height: 34px;
 }
 
 #owner-preferences-popup .account .domain {
@@ -138,7 +138,7 @@
 
 #owner-preferences-popup .billing .prev-billing-date,
 #owner-preferences-popup .billing .next-billing-date {
-  width: 100px;
+  width: 110px;
 }
 
 #owner-preferences-popup .popup-action-bar a.important {

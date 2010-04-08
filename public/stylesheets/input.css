@@ -57,3 +57,7 @@
   background: #ffffff;
   border: 1px solid #cccccc;
 }
+
+.label-input .label {
+  font-size: 12px;
+}
