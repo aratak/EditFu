@@ -82,6 +82,12 @@
           .zip.label-input
             = card.text_field 'zip'
             = card.label 'zip'
+          - if @owner.plan == 'professional'
+            - if @owner.prev_billing_date
+              .label-input.prev-billing-date
+                = @owner.prev_billing_date
+            .label-input.next-billing-date
+              = @owner.next_billing_date
         .clear
 
     .popup-action-bar

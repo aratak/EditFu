@@ -202,37 +202,37 @@ describe Owner do
 
   describe "billing_day" do
     it "should return mday of confirm_date" do
-      owner = Factory.create(:owner)
-      owner.confirmed_at = DateTime.new(2010, 2, 25)
-      owner.billing_day.should == 25
+      @owner.confirmed_at = DateTime.new(2010, 2, 25)
+      @owner.billing_day.should == 25
     end
 
     it "should round mday to 1 if it's greater then 28" do
-      owner = Factory.create(:owner)
-      owner.confirmed_at = DateTime.new(2010, 3, 29)
-      owner.billing_day.should == 1
+      @owner.confirmed_at = DateTime.new(2010, 3, 29)
+      @owner.billing_day.should == 1
     end
   end
 
   describe "billing_date" do
-    before :all do 
+    before :each do 
       today = Date.new(2010, 3, 23)
       Date.stub(:today).and_return(today)
       Date.stub(:current).and_return(today)
     end
 
     it "should return the current month billing day if it is in future" do
-      owner = Factory.create(:owner)
-      owner.confirmed_at = DateTime.new(2010, 2, 25)
-      owner.prev_billing_date.should == Date.new(2010, 2, 25)
-      owner.next_billing_date.should == Date.new(2010, 3, 25)
+      @owner.confirmed_at = DateTime.new(2010, 2, 25)
+      @owner.next_billing_date.should == Date.new(2010, 3, 25)
     end
 
     it "should return the next month billing day current month' one is in the past" do
-      owner = Factory.create(:owner)
-      owner.confirmed_at = DateTime.new(2010, 2, 20)
-      owner.prev_billing_date.should == Date.new(2010, 3, 20)
-      owner.next_billing_date.should == Date.new(2010, 4, 20)
+      @owner.confirmed_at = DateTime.new(2010, 2, 20)
+      @owner.prev_billing_date.should == Date.new(2010, 3, 20)
+      @owner.next_billing_date.should == Date.new(2010, 4, 20)
+    end
+
+    it "should return nil in prev_billing_date if there aren't bills yet" do
+      @owner.confirmed_at = DateTime.new(2010, 3, 1)
+      @owner.prev_billing_date.should be_nil
     end
   end
 end

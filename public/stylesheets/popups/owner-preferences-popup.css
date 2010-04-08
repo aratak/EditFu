@@ -5,13 +5,19 @@
 #owner-preferences-popup .label-input {
   width: 32%;
 }
-#owner-preferences-popup .account .editfu_com {
-  margin-left: -0.5ex;
+
+#owner-preferences-popup .account .editfu_com,
+#owner-preferences-popup .billing .prev-billing-date,
+#owner-preferences-popup .billing .next-billing-date {
   float: left;
   background: none;
   line-height: 34px;
   font-size: 20px;
   color: #b7b7b7;
+}
+
+#owner-preferences-popup .account .editfu_com {
+  margin-left: -0.5ex;
 }
 
 #owner-preferences-popup .account .domain {
@@ -128,6 +134,11 @@
 
 #owner-preferences-popup .billing .zip {
   width: 10%;
+}
+
+#owner-preferences-popup .billing .prev-billing-date,
+#owner-preferences-popup .billing .next-billing-date {
+  width: 100px;
 }
 
 #owner-preferences-popup .popup-action-bar a.important {

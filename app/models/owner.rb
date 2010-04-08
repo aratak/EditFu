@@ -99,7 +99,8 @@ class Owner < User
   end
 
   def prev_billing_date
-    next_billing_date << 1
+    d = next_billing_date << 1
+    d <= confirmed_at.to_date ? nil : d
   end
 
   def next_billing_date
