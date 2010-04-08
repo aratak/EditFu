@@ -73,13 +73,15 @@
   z-index: 2;
   float: right;
   border: 0;
-  height: 44px;
   line-height: 50px;
-  font-size: 20px;
-  text-decoration: none;
   margin: 0;
   padding: 0 10px;
   vertical-align: middle;
+}
+
+.popup .popup-action-bar input, .popup .popup-action-bar a.cancel {
+  height: 44px;
+  font-size: 20px;
 }
 
 .popup .popup-action-bar input {
@@ -90,6 +92,7 @@
 
 .popup .popup-action-bar .cancel {
   color: #ff8d84;
+  text-decoration: none;
 }
 
 .inputs.tree-input .label-input {

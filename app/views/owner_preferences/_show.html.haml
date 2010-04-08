@@ -85,5 +85,7 @@
         .clear
 
     .popup-action-bar
-      = f.submit "Save"
+      = link_to_remove owner_path, 'Cancel My Account'
+
+      = f.submit "Update"
       = link_to_function "Cancel", "hidePopup();", :class => 'cancel'

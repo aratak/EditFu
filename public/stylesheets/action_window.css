@@ -33,8 +33,9 @@
   text-decoration: underline;
 }
 
-#action-window #main .actions a.important {
+a.important {
   color: #fe7e57;
+  text-decoration: underline;
 }
 
 #action-window #main .header .hint {

@@ -130,3 +130,13 @@
   width: 10%;
 }
 
+#owner-preferences-popup .popup-action-bar a.important {
+  font-size: 10px;
+  color: #fe0000;
+  float: left;
+}
+
+#owner-preferences-popup .popup-action-bar .message {
+  padding-left: 115px;
+}
+
