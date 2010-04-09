@@ -12,6 +12,6 @@
 
   %h2 Pages
   - form_remote_tag :url => enable_site_pages_path(@site), :html => { :id => 'pages_form' } do
-    - @site.pages.each do |page|
+    - sort(@site.pages, :path).each do |page|
       = render 'page', :page => page
     = submit_tag "Update", :class => "update-button"
