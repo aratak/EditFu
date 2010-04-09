@@ -24,6 +24,10 @@ var Behaviours = function() {
         });
       });
       
+      $$('.label-input input[type="password"]').each(function(input) {
+          new Form.Element.Observer(input, 0.5, toggleInputClass);
+      });
+
       $$('.label-input input').each(function(input) {
           toggleInputClass(input);
       });
