@@ -14,4 +14,27 @@ class PasswordsController < ApplicationController
       render :new
     end
   end
+
+  def edit
+    @user = User.new
+    @user.reset_password_token = params[:reset_password_token]
+  end
+
+  def update
+    @user = User.find_by_reset_password_token params[:user][:reset_password_token]
+    if !@user
+      render_message 'Invalid confirmation token'
+    else
+      @user.require_password
+      @user.reset_password!(params[:user][:password], params[:user][:password_confirmation])
+
+      if @user.errors.empty?
+        flash[:success] = I18n.t("devise.passwords.updated")
+        sign_in(:user, @user)
+        send_redirect user_root_path
+      else
+        render_errors :user => @user
+      end
+    end
+  end
 end

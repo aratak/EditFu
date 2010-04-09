@@ -1,0 +1,14 @@
+- inside_layout 'public' do
+  = stylesheet_link_tag 'public/forgot-password'
+  - remote_form_for :user, :url => password_path(:user), :html => { :method => :put } do |f|
+    .inputs
+      = f.hidden_field :reset_password_token
+      .inputs-row
+        .label-input.password-confirmation
+          = f.password_field :password_confirmation
+          = f.label :password_confirmation
+        .label-input
+          = f.password_field :password
+          = f.label :password
+      = f.submit 'Change', :class => 'submit'
+    .clear
