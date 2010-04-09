@@ -89,7 +89,7 @@ module ApplicationHelper
 
   def sort(list, column)
     list.sort do |a, b|
-      Natcmp.natcmp(a[column], b[column])
+      String.natcmp(a[column], b[column])
     end
   end
 
