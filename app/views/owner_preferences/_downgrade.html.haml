@@ -14,9 +14,9 @@
                   = check_box_tag "pages[]", page.id, false, :id => "pages_#{page.id}"
                   = label_tag "pages_#{page.id}", page.path
 
-    %small.description Choose 1 site and 3 of its pages you would like to keep.
     
     .popup-action-bar
+      %small.description Choose 1 site and 3 of its pages you would like to keep.
       = submit_tag "Downgrade"
       = link_to_remote 'Return', :url => owner_preferences_path, :method => :get, |
         :html => { :class => 'cancel' } |

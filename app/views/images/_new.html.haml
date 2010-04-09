@@ -1,4 +1,4 @@
-#image-popup(class=@type)
+#image-popup.two-column-popup(class=@type)
   %h1 #{@action} Image
 
   - form_tag site_images_path(@site), :id => 'image-form', :multipart => true, :onsubmit => 'return false;', :method => :post do
@@ -31,5 +31,10 @@
     .clear
 
     .popup-action-bar
+      %small.description
+        - if @type == 'content'
+          Choose a previously uploaded image, a new image, or provide a link to an image to insert into your content.  Give the image a title and click insert.
+        - else
+          Choose a previously uploaded image or a new image to replace the current image with. It’s best to use an image of the same size. Give the image a title then click swap.
       = link_to_function @action, 'doImageAction()'
       = link_to_function "Cancel", "hidePopup();", :class => 'cancel'

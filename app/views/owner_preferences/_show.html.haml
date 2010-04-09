@@ -1,4 +1,4 @@
-#owner-preferences-popup
+#owner-preferences-popup.two-column-popup
   %h1 Preferences
   - remote_form_for :preferences, :url => owner_preferences_path, :html => { :method => :put } do |f|
     - f.fields_for @owner do |owner|
@@ -27,7 +27,7 @@
             = owner.password_field 'password_confirmation'
             = owner.label 'password_confirmation', 'Confirm password'
         .clear
-      .plan
+      .plan.section
         %h2 Plan
         .plan-wrapper
           = owner.radio_button 'plan', 'professional', :class => 'radio'
@@ -86,10 +86,10 @@
             - if @owner.prev_billing_date
               .label-input.prev-billing-date
                 .label Last billing date
-                = @owner.prev_billing_date
+                %span= @owner.prev_billing_date
             .label-input.next-billing-date
               .label Next billing date
-              = @owner.next_billing_date
+              %span= @owner.next_billing_date
         .clear
 
     .popup-action-bar

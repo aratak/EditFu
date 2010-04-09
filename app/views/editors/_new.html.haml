@@ -1,6 +1,6 @@
 = stylesheet_link_tag 'popups/new-editor-popup'
 
-#new-editor-popup
+#new-editor-popup.one-column-popup
   %h1 New Editor
 
   - remote_form_for @editor do |form|
@@ -14,5 +14,7 @@
       .clear
 
     .popup-action-bar
+      %small.description 
+        Enter an editors details then click invite. The editor will receive an invite.
       = form.submit "Save"
       = link_to_function "Cancel", "hidePopup();", :class => 'cancel'

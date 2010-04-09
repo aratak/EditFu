@@ -1,5 +1,17 @@
-#owner-preferences-popup {
-  width: 860px;
+#owner-preferences-popup h1 {
+  margin-bottom: 0;
+}
+
+#owner-preferences-popup .account h2 {
+  padding-top: 0;
+}
+
+#owner-preferences-popup h2 {
+  font-weight: normal;
+  font-size: 26px;
+  color: #b7b7b7;
+  padding: 10px 0 5px 10px;
+  margin: 0;
 }
 
 #owner-preferences-popup .label-input {
@@ -29,7 +41,6 @@
 }
 
 #owner-preferences-popup .plan {
-  padding-top: 1em;
   background: #464646;
 }
 
@@ -141,10 +152,17 @@
   width: 110px;
 }
 
+#owner-preferences-popup .billing .prev-billing-date span,
+#owner-preferences-popup .billing .next-billing-date span {
+  line-height: 20px;
+}
+
 #owner-preferences-popup .popup-action-bar a.important {
   font-size: 10px;
   color: #fe0000;
   float: left;
+  text-decoration: underline;
+  padding-left: 10px;
 }
 
 #owner-preferences-popup .popup-action-bar .message {

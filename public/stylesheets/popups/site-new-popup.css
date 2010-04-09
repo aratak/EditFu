@@ -1,10 +1,10 @@
-#new-site-popup {
-  width: 760px;
-}
-
 #new-site-popup .inputs {
   width: 50%;
   float: left;
+}
+
+#new-site-popup .inputs .label-input input {
+  width: 435px;
 }
 
 #new-site-popup .tree-input {

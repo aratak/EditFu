@@ -10,7 +10,10 @@ function initThumbnail(img) {
     img.width = maxSize;
   }
 
-  img.up('.thumbnail').style.visibility = 'visible';
+  var thumbnail = img.up('.thumbnail');
+  if(thumbnail) {
+    thumbnail.style.visibility = 'visible';
+  }
   img.onclick = selectImage.curry(img, false);
 }
 

@@ -1,4 +1,4 @@
-#new-page-popup
+#new-page-popup.one-column-popup
   %h1 New Page
   - form_remote_tag :url => site_pages_path(@site) do
     .inputs.tree-input
@@ -7,9 +7,8 @@
         #ftp-tree
     .clear
 
-    %small.description Choose the pages you would like to add
-
     .popup-action-bar
+      %small.description Choose the pages you would like to add.
       = submit_tag "Add"
       = link_to_function "Cancel", "hidePopup();", :class => 'cancel'
 

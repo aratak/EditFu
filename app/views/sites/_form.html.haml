@@ -1,4 +1,4 @@
-.site-popup#new-site-popup
+.site-popup.two-column-popup#new-site-popup
   %h1= title
   - remote_form_for @site, :html => { :id => 'site_form' } do |form|
     .inputs.tree-input
@@ -24,9 +24,8 @@
         = form.label :password, 'Password'
     .clear
 
-    %small.description Click within the content above to edit it. To learn more about FTP click here.
-    
     .popup-action-bar
+      %small.description Click within the content above to edit it. To learn more about FTP click here.
       = form.submit "Save"
       = link_to_function "Cancel", "hidePopup();", :class => 'cancel'
 

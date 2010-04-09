@@ -37,23 +37,31 @@
   text-align: left;
 }
 
+#popup .one-column-popup, .alert-popup {
+  width: 333px;
+}
+
+#popup .two-column-popup {
+  width: 890px;
+}
+
 .popup h1 {
   font: bold 18px helvetica;
   color: #ff1200;
   text-align: center;
   margin-top: 7px;
-  margin-bottom: 25px;
+  margin-bottom: 27px;
 }
 
-.popup h2 {
-  font-weight: normal;
-  font-size: 26px;
-  color: #b7b7b7;
-  padding: 0 10px;
-  margin: 10px 0;
+.popup .popup-action-bar {
+  position: relative;
+  height: 50px;
+  background: #f1f1f1;
+  margin-top: 42px;
 }
 
-.popup small.description {
+.popup .inputs small.description,
+.popup .plan small.description {
   display: inline-block;
   zoom: 1;
   *display: inline;
@@ -62,10 +70,11 @@
   font-size: 10px;
 }
 
-.popup .popup-action-bar {
-  position: relative;
-  height: 50px;
-  background: #f1f1f1;
+.popup .popup-action-bar small.description {
+  position: absolute;
+  top: -17px;
+  left: 12px;
+  font-size: 10px;
 }
 
 .popup .popup-action-bar input, .popup .popup-action-bar a {
@@ -75,11 +84,12 @@
   border: 0;
   line-height: 50px;
   margin: 0;
-  padding: 0 10px;
+  padding: 0 10px 0 0;
   vertical-align: middle;
+  text-decoration: none;
 }
 
-.popup .popup-action-bar input, .popup .popup-action-bar a.cancel {
+.popup .popup-action-bar input, .popup .popup-action-bar a {
   height: 44px;
   font-size: 20px;
 }
@@ -123,4 +133,8 @@
 .file-inputs .path {
   font: 12px helvetica;
   vertical-align: middle;
+}
+
+.popup .one-column-popup .label-input {
+  margin-right: 0;
 }

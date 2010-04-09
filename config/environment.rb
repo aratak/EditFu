@@ -49,6 +49,7 @@ Rails::Initializer.run do |config|
 end
 
 ActiveSupport::CoreExtensions::Time::Conversions::DATE_FORMATS.update :default => '%Y-%m-%d %H:%M:%S'
+ActiveSupport::CoreExtensions::Date::Conversions::DATE_FORMATS.update :default => '%m-%d-%Y'
 
 ActiveMerchant::Billing::CreditCard.require_verification_value = true
 PAYMENT_RECURRING_AMOUNT = 100
