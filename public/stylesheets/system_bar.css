@@ -20,13 +20,17 @@
 #system-bar .system-link {
   float: right;
   margin-right: 10px;
-  margin-left: 25px;
+  margin-left: 15px;
   line-height: 50px;
   color: #f3a39d;
   font-family: helvetica;
   font-weight: bold;
   font-size: 14px;
   text-decoration: none;
+}
+
+#system-bar #logout.system-link {
+  margin-left: 35px;
 }
 
 #system-bar .system-link img {
