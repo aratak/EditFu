@@ -63,23 +63,35 @@ function getActionBar() {
   return $$('#popup .popup-action-bar').first() || $('action-bar');
 }
 
-Ajax.Responders.register({
-  onCreate: function(request) {
-    clearMessage();
-    var actionBar = $$('#popup .popup-action-bar').first() || $('action-bar')
-    if(actionBar && !actionBar.down('.processing')) {
-      var image = $(document.createElement('img'));
+function showProcessing(request) {
+  clearMessage();
+  var actionBar = getActionBar();
+  if(actionBar) {
+    var image = actionBar.down('.processing');
+    if(image) {
+      image.refCount++;
+    } else {
+      image = $(document.createElement('img'));
+      image.refCount = 1;
       image.src = '/images/rotation.gif';
       image.className = 'processing';
       actionBar.insert({ bottom: image });
-      request.processing = image;
     }
-  },
+    request.processing = image;
+  }
+}
+
+function hideProcessing(request) {
+  if(request.processing && --request.processing.refCount == 0) {
+    request.processing.remove();
+  }
+}
+
+Ajax.Responders.register({
+  onCreate: showProcessing,
 
   onComplete: function(request, transport) {
-    if(request.processing) {
-      request.processing.remove();
-    }
+    hideProcessing(request);
 
     if(transport.status == 200) {
       var loc = transport.getHeader('X-Location');
@@ -95,8 +107,6 @@ Event.observe(window, 'load', function() {
   if(sourceBar) {
     var selected = sourceBar.down('li.selected');
     if(selected) {
-      sourceBar.scrollTop = sourceBar.scrollHeight;
-      //alert(selected.cumulativeOffset());
       sourceBar.scrollTop = selected.cumulativeOffset().top;
     }
   }

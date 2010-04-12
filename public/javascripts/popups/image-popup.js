@@ -42,13 +42,14 @@ function uploadImage() {
     return;
   }
 
-  AjaxUpload.submit($('image-form'), {
+  var form = $('image-form');
+  AjaxUpload.submit(form, {
     onStart: function() {
-      showMessage('info', 'Uploading image to the server...');
+      showProcessing(form);
     },
 
     onComplete: function(response) {
-      clearMessage();
+      hideProcessing(form);
 
       var tmp = $(document.createElement('div'));
       tmp.innerHTML = response;
