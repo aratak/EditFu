@@ -1,7 +1,7 @@
-#new-page-popup {
-  width: 375px;
-}
-
 #new-page-popup .tree-input .label-input {
   width: 100%;
+}
+
+#new-page-popup #ftp-tree {
+  height: 325px;
 }
