@@ -26,3 +26,8 @@ ul.sites li.page .row {
   font-weight: normal;
   background: none;
 }
+
+#downgrade-popup ul.sites {
+  height: 285px;
+  overflow: scroll;
+}

@@ -2,13 +2,13 @@
   %h1 Plan Downgrade
   - form_remote_tag :url => downgrade_owner_preferences_path, :method => :post do
     %ul.sites
-      - @owner.sites.each do |site|
+      - sort_sites(@owner.sites).each do |site|
         %li.site
           .row
             = radio_button_tag "sites[]", site.id, false, :id => "sites_#{site.id}"
             = label_tag "sites_#{site.id}", site.name
           %ul.pages
-            - site.pages.each do |page|
+            - sort_pages(site.pages).each do |page|
               %li.page
                 .row
                   = check_box_tag "pages[]", page.id, false, :id => "pages_#{page.id}"
