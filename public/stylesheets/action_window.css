@@ -22,7 +22,9 @@
 
 #action-window #main .header .title, 
 #action-window #main .header .nbsp {
-  font: 23px impact;
+  font-family: helvetica;
+  font-weight: bold;
+  font-size: 24px;
 }
 
 #action-window #main .actions {
