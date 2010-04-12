@@ -89,3 +89,15 @@ Ajax.Responders.register({
     }
   }
 });
+
+Event.observe(window, 'load', function() {
+  var sourceBar = $('source-bar');
+  if(sourceBar) {
+    var selected = sourceBar.down('li.selected');
+    if(selected) {
+      sourceBar.scrollTop = sourceBar.scrollHeight;
+      //alert(selected.cumulativeOffset());
+      sourceBar.scrollTop = selected.cumulativeOffset().top;
+    }
+  }
+});
