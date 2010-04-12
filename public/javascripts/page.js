@@ -59,7 +59,7 @@ function initImage(img) {
   }
 
   var bar = image.down('.bar');
-  bar.innerHTML = img.originalHeight + ' X ' + img.originalWidth;
+  bar.innerHTML =  img.originalWidth + ' X ' + img.originalHeight;
 
   image.style.visibility = 'visible';
 }
