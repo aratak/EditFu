@@ -7,6 +7,10 @@
   width: 435px;
 }
 
+#new-site-popup #ftp-tree {
+  margin-top: 0;
+}
+
 #new-site-popup .tree-input {
   float: right;
   width: 50%;
