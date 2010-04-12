@@ -18,14 +18,13 @@
 
 #action-window #main .header {
   position: relative;
-  margin-bottom: 10px;
 }
 
-#action-window #main .header .title, 
-#action-window #main .header .nbsp {
+#action-window #main .header .title {
   font-family: helvetica;
   font-weight: bold;
   font-size: 24px;
+  line-height: 24px;
 }
 
 #action-window #main .actions {
@@ -41,12 +40,8 @@ a.important {
   text-decoration: underline;
 }
 
-#action-window #main .header .hint {
-  position: absolute;
-  right: 0px;
-  bottom: 0px;
+#action-window #main .hint {
   font: 10px arial;
   color: #919191;
+  margin-bottom: 10px;
 }
-
-
