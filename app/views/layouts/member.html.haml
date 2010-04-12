@@ -49,9 +49,7 @@
           = yield :popup
         .popup-hider#popup-hider
 
-    - if message_kind
-      :javascript
-        showMessage("#{message_kind}", "#{flash[message_kind]}");
+    = render 'layouts/message'
 
     #confirm-popup(style='display: none;')
       .confirm-popup.alert-popup

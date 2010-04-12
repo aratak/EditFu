@@ -46,3 +46,7 @@ input.submit {
   color: #ff0000;
   text-decoration: none;
 }
+
+body.public #action-bar {
+  background: none;
+}
