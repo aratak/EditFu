@@ -105,6 +105,14 @@ module ApplicationHelper
     end
   end
 
+  def help_path
+    if current_user.editor?
+      'http://www.takeastep.me/editfu-faq/editing/'
+    elsif current_user.owner?
+      'http://www.takeastep.me/editfu-faq/'
+    end
+  end
+
   private
 
   def classes(*args)

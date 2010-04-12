@@ -18,8 +18,9 @@
         = link_to "", root_path, :class => "logo"
 
         = link_to 'Logout', destroy_user_session_path, :class => 'system-link'
-        - link_to '#', :class => 'system-link', :alt => 'Help' do
-          %img(src='/images/help.png')
+        - unless current_user.admin?
+          - link_to help_path, :class => 'system-link', :alt => 'Help', :target => '_blank' do
+            %img(src='/images/help.png')
         - if user_signed_in?
           = link_to_remote image_tag("preferences.png", :alt => 'Preferences'), | 
             :url => pref_path, | 
