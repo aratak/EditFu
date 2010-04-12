@@ -25,7 +25,7 @@
     .clear
 
     .popup-action-bar
-      %small.description Click within the content above to edit it. To learn more about FTP click here.
+      %small.description= description
       = form.submit "Update"
       = link_to_function "Cancel", "hidePopup();", :class => 'cancel'
 
