@@ -87,6 +87,18 @@ module ApplicationHelper
     end
   end
 
+  def sort_sites(sites)
+    sort sites, :name
+  end
+
+  def sort_pages(pages)
+    sort pages, :path
+  end
+
+  def sort_users(users)
+    sort users, :user_name
+  end
+
   def sort(list, column)
     list.sort do |a, b|
       String.natcmp(a[column], b[column])

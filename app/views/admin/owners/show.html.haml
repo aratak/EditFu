@@ -4,7 +4,7 @@
   %ul#top-menu
     %li
       %ul.menu#owner-menu
-        - sort(@owners, :user_name).each do |owner|
+        - sort_users(@owners).each do |owner|
           = menu_item(owner, :text => owner.user_name, :href => admin_owner_path(owner), :selected => @owner)
 
 - @title = @owner.user_name
