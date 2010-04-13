@@ -31,7 +31,7 @@ function initTinyMCE(settings) {
     theme_advanced_toolbar_location : "top",
     theme_advanced_buttons1: 
       'bold,italic,underline,strikethrough,separator,' + 
-      'undo,redo,separator,bullist,numlist,separator,image',
+      'undo,redo,separator,bullist,numlist,separator,image' + settings.code,
     theme_advanced_buttons2: "",
     theme_advanced_buttons3: "",
     
