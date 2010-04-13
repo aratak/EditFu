@@ -3,6 +3,7 @@
 }
 
 #owner-preferences-popup .account h2 {
+  margin-top: -15px;
   padding-top: 0;
 }
 
@@ -14,7 +15,7 @@
   margin: 0;
 }
 
-#owner-preferences-popup .label-input {
+#owner-preferences-popup .title-input {
   width: 32%;
 }
 
@@ -131,7 +132,7 @@
 }
 
 #owner-preferences-popup .billing .verification-value {
-  width: 10%;
+  width: 15%;
 }
 
 #owner-preferences-popup .billing .first-name {
@@ -144,12 +145,12 @@
 }
 
 #owner-preferences-popup .billing .zip {
-  width: 10%;
+  width: 15%;
 }
 
 #owner-preferences-popup .billing .prev-billing-date,
 #owner-preferences-popup .billing .next-billing-date {
-  width: 110px;
+  width: 120px;
 }
 
 #owner-preferences-popup .billing .prev-billing-date span,

@@ -5,27 +5,38 @@
       .account.inputs
         %h2 Account
         .inputs-row
-          .username.label-input
-            = owner.text_field 'user_name'
-            = owner.label 'user_name'
-          .email.label-input
-            = owner.text_field 'email'
-            = owner.label 'email'
+          .title-input.username
+            .title Update your name
+            .label-input
+              = owner.text_field 'user_name'
+              = owner.label 'user_name'
+          .title-input.email
+            .title Update your email
+            .label-input
+              = owner.text_field 'email'
+              = owner.label 'email'
         .inputs-row
-          .domain.label-input
-            = owner.text_field 'domain_name'
-            = owner.label 'domain_name'
-          .editfu_com.label-input .#{BASE_DOMAIN}
+          .title-input.domain
+            .title Change subdomain name
+            .label-input
+              = owner.text_field 'domain_name'
+              = owner.label 'domain_name'
+          .title-input.editfu_com
+            .label-input .#{BASE_DOMAIN}
         .inputs-row
-          .current-password.label-input
-            = owner.password_field 'current_password'
-            = owner.label 'current_password'
-          .password.label-input
-            = owner.password_field 'password'
-            = owner.label 'password', 'New password'
-          .password-confirmation.label-input
-            = owner.password_field 'password_confirmation'
-            = owner.label 'password_confirmation', 'Confirm password'
+          .title-input.current-password
+            .title Change your password
+            .label-input
+              = owner.password_field 'current_password'
+              = owner.label 'current_password'
+          .title-input.password
+            .label-input
+              = owner.password_field 'password'
+              = owner.label 'password', 'New password'
+          .title-input.password-confirmation
+            .label-input
+              = owner.password_field 'password_confirmation'
+              = owner.label 'password_confirmation', 'Confirm password'
         .clear
       .plan.section
         %h2 Plan
@@ -60,36 +71,52 @@
       .billing.inputs
         %h2 Billing
         .inputs-row
-          .card-number.label-input
-            = card.text_field 'number'
-            = card.label 'number',  @owner.card_number || 'Card Number'
-          .exp-date.label-input
-            = card.text_field 'expiration'
-            = card.label 'expiration', '02/2020'
-          .verification-value.label-input
-            = card.text_field 'verification_value'
-            = card.label 'verification_value', 'CVV'
-          = image_tag 'visa.png'
-          = image_tag 'master-card.png'
-          = image_tag 'cards.png'
+          .title-input.card-number
+            .title Credit card number
+            .label-input
+              = card.text_field 'number'
+              = card.label 'number',  @owner.card_number || 'Card Number'
+          .title-input.exp-date
+            .title Expiration date
+            .label-input
+              = card.text_field 'expiration'
+              = card.label 'expiration', '02/2020'
+          .title-input.verification-value
+            .title Security code
+            .label-input
+              = card.text_field 'verification_value'
+              = card.label 'verification_value', 'CVV'
+          .title-input
+            .label-input
+              = image_tag 'visa.png'
+              = image_tag 'master-card.png'
+              = image_tag 'cards.png'
         .inputs-row
-          .first-name.label-input
-            = card.text_field 'first_name'
-            = card.label 'first_name'
-          .last-name.label-input
-            = card.text_field 'last_name'
-            = card.label 'last_name'
-          .zip.label-input
-            = card.text_field 'zip'
-            = card.label 'zip'
+          .title-input.first-name
+            .title First name
+            .label-input
+              = card.text_field 'first_name'
+              = card.label 'first_name'
+          .title-input.last-name
+            .title Last name
+            .label-input
+              = card.text_field 'last_name'
+              = card.label 'last_name'
+          .title-input.zip
+            .title Zip code
+            .label-input
+              = card.text_field 'zip'
+              = card.label 'zip'
           - if @owner.plan == 'professional'
             - if @owner.prev_billing_date
-              .label-input.prev-billing-date
-                .label Last billing date
-                %span= @owner.prev_billing_date
-            .label-input.next-billing-date
-              .label Next billing date
-              %span= @owner.next_billing_date
+              .title-input.prev-billing-date
+                .label-input
+                  .inner-title Last billing date
+                  %span= @owner.prev_billing_date
+            .title-input.next-billing-date
+              .label-input
+                .inner-title Next billing date
+                %span= @owner.next_billing_date
         .clear
 
     .popup-action-bar

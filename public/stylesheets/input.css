@@ -8,6 +8,29 @@
   box-sizing: border-box;
 }
 
+.title-input {
+  float: left;
+  position: relative;
+  margin-top: 15px;
+}
+
+.title-input .title {
+  position: absolute;
+  top: -15px;
+  line-height: 15px;
+  margin-left: 10px;
+}
+
+.inputs-row .title-input + .title-input .title {
+  margin-left: 0;
+}
+
+.label-input .inner-title,
+.title-input .title {
+  font-size: 12px;
+  color: #b7b7b7;
+}
+
 .inputs .label-input input {
   width: 100%;
   line-height: 20px;
@@ -62,8 +85,4 @@
 .inputs div input:focus {
   background: #ffffff;
   border: 1px solid #cccccc;
-}
-
-.label-input .label {
-  font-size: 12px;
 }
