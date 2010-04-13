@@ -15,12 +15,17 @@
   background: #f1f1f1;
   padding: 5px 10px;
   border: 1px solid transparent;
-  color: #7e7e7e;
+  color: #f1f1f1;
   
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -ms-box-sizing: border-box;
   box-sizing: border-box;
+}
+
+.inputs div input:focus,
+.inputs div input.with-text {
+  color: #7e7e7e;
 }
 
 .label-input label {

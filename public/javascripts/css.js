@@ -21,16 +21,24 @@ var Behaviours = function() {
       $$('.label-input input').each(function(input) {
         Event.observe(input, 'blur', function() {
           toggleInputClass(input);
+          if(input.name.include('email')) {
+            $$('.label-input input[type=password]').each(function(pinput) {
+              toggleInputClass(pinput);
+            });
+          }
         });
       });
       
-      $$('.label-input input[type="password"]').each(function(input) {
-          new Form.Element.Observer(input, 0.5, toggleInputClass);
-      });
-
       $$('.label-input input').each(function(input) {
           toggleInputClass(input);
       });
+
+      new PeriodicalExecuter(function(pe) {
+        pe.stop();
+        $$('.label-input input').each(function(input) {
+            toggleInputClass(input);
+        });
+      }, 0.5);
     },
     
     radioButtons: function() {
