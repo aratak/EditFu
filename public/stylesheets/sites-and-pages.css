@@ -29,5 +29,5 @@ ul.sites li.page .row {
 
 #downgrade-popup ul.sites {
   height: 285px;
-  overflow: scroll;
+  overflow-y: scroll;
 }
