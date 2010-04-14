@@ -1,15 +1,17 @@
-= stylesheet_link_tag 'popups/editor-settings-popup'
-
 #editor-settings-popup.one-column-popup
   %h1 Editor Settings
   - remote_form_for @editor, :url => editor_settings_path(@editor) do |form|
     .inputs
-      .label-input
-        = form.text_field :user_name
-        = form.label :user_name, 'Editor Name'
-      .label-input
-        = form.text_field :email
-        = form.label :email, 'Editor Email'
+      .title-input
+        .title Editors name
+        .label-input
+          = form.text_field :user_name
+          = form.label :user_name, 'Editor Name'
+      .title-input
+        .title Editors email
+        .label-input
+          = form.text_field :email
+          = form.label :email, 'Editor Email'
     .clear
 
     .popup-action-bar
