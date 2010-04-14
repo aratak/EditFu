@@ -12,7 +12,9 @@ var FtpTree = Class.create({
     var form = $('popup').down('form');
     var onsubmit = form.onsubmit;
     form.onsubmit = function() {
-      tree.onsubmit(form);
+      if(tree.root.up('#ftp-tree')) {
+        tree.onsubmit(form);
+      }
       return onsubmit.apply(this);
     }
   },
