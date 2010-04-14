@@ -30,10 +30,11 @@ function initTinyMCE(settings) {
     skin: "editfu",
     theme_advanced_toolbar_location : "top",
     theme_advanced_buttons1: 
-      'bold,italic,underline,strikethrough,separator,' + 
+      'bold,italic,underline,strikethrough,formatselect,separator,' + 
       'undo,redo,separator,bullist,numlist,separator,image' + settings.code,
     theme_advanced_buttons2: "",
     theme_advanced_buttons3: "",
+    theme_advanced_blockformats : "h1,h2,h3,h4,h5,h6",
     
     setup: initMceEditor
   }).toObject());
