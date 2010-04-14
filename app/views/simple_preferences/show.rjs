@@ -1,2 +1,1 @@
-page << "Indent.includeStylesheet('popups/simple-preferences-popup');"
 show_popup page, :partial => 'show'

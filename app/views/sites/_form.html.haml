@@ -4,24 +4,34 @@
     .inputs.tree-input
       .label-input
         = form.hidden_field :site_root
-        %small.description Choose the site root
+        %small.description Choose the site root. This is the folder that contains the website.
         #ftp-tree
     .inputs
-      .label-input
-        = form.text_field(:name)
-        = form.label :name, 'Server Name'
-      .label-input
-        = form.text_field(:server)
-        = form.label :server, 'ftp.mywebsite.com'
-      .label-input
-        = form.text_field(:site_url)
-        = form.label :site_url, 'www.mywebsite.com'
-      .label-input
-        = form.text_field(:login)
-        = form.label :login, 'Login'
-      .label-input
-        = form.password_field(:password)
-        = form.label :password, 'Password'
+      .title-input.first
+        .title FTP server address
+        .label-input
+          = form.text_field(:server)
+          = form.label :server, 'ftp.mywebsite.com'
+      .title-input
+        .title Login
+        .label-input
+          = form.text_field(:login)
+          = form.label :login, 'Login'
+      .title-input
+        .title Password
+        .label-input
+          = form.password_field(:password)
+          = form.label :password, 'Password'
+      .title-input
+        .title Website name
+        .label-input
+          = form.text_field(:name)
+          = form.label :name, 'Server Name'
+      .title-input
+        .title Website address
+        .label-input
+          = form.text_field(:site_url)
+          = form.label :site_url, 'www.mywebsite.com'
     .clear
 
     .popup-action-bar

@@ -11,12 +11,12 @@
       = link_to_remove site_page_path(@site, @page), 'Remove Page'
 
   - remote_form_for [@site, @page], :html => { :id => 'page-form' } do |f|
-    - if @sections
+    - unless @sections.blank?
       - @sections.each do |section|
         .mce-editor
           = text_area_tag 'sections[]', section, :id => nil, :class => 'mce_area'
 
-    - if @images
+    - unless @images.blank? 
       .hint Click any of the images below to swap it out with a different image.
       - @images.each do |attributes|
         .image

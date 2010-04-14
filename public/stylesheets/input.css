@@ -14,6 +14,10 @@
   margin-top: 15px;
 }
 
+.title-input.first {
+  margin-top: 0;
+}
+
 .title-input .title {
   position: absolute;
   top: -15px;
