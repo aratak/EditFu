@@ -1,6 +1,6 @@
 #editor-settings-popup.one-column-popup
   %h1 Editor Settings
-  - remote_form_for @editor, :url => editor_settings_path(@editor) do |form|
+  - remote_form_for @editor do |form|
     .inputs
       .title-input
         .title Editors name

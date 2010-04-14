@@ -21,7 +21,20 @@ class EditorsController < ApplicationController
     find_editor
   end
 
+  def edit
+    find_editor
+  end
+
   def update
+    find_editor
+
+    @editor.user_name = params[:editor][:user_name]
+    @editor.email = params[:editor][:email]
+
+    render_errors(:editor => @editor) unless @editor.save
+  end
+
+  def update_permissions
     find_editor.set_page_ids(params[:pages] || [])
   end
 

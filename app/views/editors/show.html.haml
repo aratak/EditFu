@@ -6,10 +6,10 @@
   - @hint = 'Choose the level of access you wish to give this editor access to by checking the box next to that page or site then click update.'
 
   = content_for :actions do
-    = link_to_remote 'Editor Preferences', :url => editor_settings_path(@editor), :method => :get
+    = link_to_remote 'Editor Preferences', :url => edit_editor_path(@editor), :method => :get
     = link_to_remove editor_path(@editor), 'Delete Editor'
 
-  - remote_form_for @editor do |form|
+  - form_remote_tag :url => update_permissions_editor_path(@editor) do |form|
     %ul.sites
       - sort_sites(current_user.sites).each do |site|
         %li.site
@@ -23,4 +23,4 @@
                   = check_box_tag 'pages[]', page.id, @editor.pages.include?(page), |
                     :id => "pages_#{page.id}", :class => "sites_#{site.id}" |
                   = label_tag "pages_#{page.id}", page.path
-    = form.submit "Update", :class => "update-button"
+    = submit_tag "Update", :class => "update-button"

@@ -7,10 +7,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :owners, :only => [:new, :create]
   map.resource :owner, :only => [:destroy]
 
-  map.resources :editors do |editors|
-    editors.resource :settings, :controller => 'editor_settings', 
-      :only => [:show, :update]
-  end
+  map.resources :editors, :member => { :update_permissions => :post }
 
   map.resource :simple_preferences
   map.resource :owner_preferences, :member => { :downgrade => :post }
