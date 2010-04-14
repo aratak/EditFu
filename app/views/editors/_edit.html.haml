@@ -1,19 +1,7 @@
 #editor-settings-popup.one-column-popup
   %h1 Editor Settings
   - remote_form_for @editor do |form|
-    .inputs
-      .title-input
-        .title Editors name
-        .label-input
-          = form.text_field :user_name
-          = form.label :user_name, 'Editor Name'
-      .title-input
-        .title Editors email
-        .label-input
-          = form.text_field :email
-          = form.label :email, 'Editor Email'
-    .clear
-
+    = render 'form', :form => form
     .popup-action-bar
       %small.description Change editor name or email then click update.
       = form.submit "Update"

@@ -1,16 +1,7 @@
 #new-editor-popup.one-column-popup
   %h1 New Editor
-
   - remote_form_for @editor do |form|
-    .inputs
-      .label-input
-        = form.text_field :user_name
-        = form.label :user_name
-      .label-input
-        = form.text_field :email
-        = form.label :email
-      .clear
-
+    = render 'form', :form => form
     .popup-action-bar
       %small.description 
         Enter an editors details then click invite. The editor will receive an invite.
