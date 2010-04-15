@@ -1,0 +1,20 @@
+.blackbox {
+  width: 415px;
+  height: 200px;
+  background: #4c4b4b;
+}
+
+ol {
+  margin-top: 20px;
+  list-style-position: inside;
+}
+
+ol li {
+  font-size: 14px;
+  color: #e21303;
+}
+
+ol li p {
+  font-size: 12px;
+  color: #000000;
+}
