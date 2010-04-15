@@ -25,14 +25,20 @@
 .editfuSkin .mceStatusbar a.mceResize {display:block; float:right; background:url(../../img/icons.gif) -800px 0; width:20px; height:20px; cursor:se-resize}
 .editfuSkin .mceStatusbar a:hover {text-decoration:underline}
 .editfuSkin table.mceToolbar {margin-left:3px}
-.editfuSkin span.mceIcon, .editfuSkin img.mceIcon {display:block; width:20px; height:20px}
+.editfuSkin span.mceIcon, .editfuSkin img.mceIcon {display:block; width:30px; height:19px}
 .editfuSkin .mceIcon {background:url(../../img/icons.gif) no-repeat 20px 20px}
 .editfuSkin td.mceCenter {text-align:center;}
 .editfuSkin td.mceCenter table {margin:0 auto; text-align:left;}
 .editfuSkin td.mceRight table {margin:0 0 0 auto;}
 
+
+.editfuSkin td.mceToolbar.mceCenter {width:80%;}
+.editfuSkin td.mceToolbar.mceLeft {width:10%;}
+.editfuSkin td.mceToolbar.mceRight {width:10%;}
+
 /* Button */
-.editfuSkin .mceButton {display:block; border:1px solid #F0F0EE; width:20px; height:20px; margin-right:1px}
+.editfuSkin .mceButton {display:block; border:1px solid #F0F0EE; width:30px; height:19px; margin-right:1px}
+
 .editfuSkin a.mceButtonEnabled:hover {border:1px solid #0A246A; background-color:#B2BBD0}
 .editfuSkin a.mceButtonActive, .editfuSkin a.mceButtonSelected {border:1px solid #0A246A; background-color:#C2CBE0}
 .editfuSkin .mceButtonDisabled .mceIcon {opacity:0.3; -ms-filter:'alpha(opacity=30)'; filter:alpha(opacity=30)}
@@ -120,16 +126,18 @@
 .editfuSkin .mce_h5 span.mceText {font-weight:bolder; font-size: .83em}
 .editfuSkin .mce_h6 span.mceText {font-weight:bolder; font-size: .75em}
 
+.editfuSkin span.mce_bold {background: url(img/bold.png) no-repeat center}
+.editfuSkin span.mce_italic {background: url(img/italic.png) no-repeat center}
+.editfuSkin span.mce_underline {background: url(img/underline.png) no-repeat center}
+.editfuSkin span.mce_bullist {background: url(img/bullist.png) no-repeat center}
+.editfuSkin span.mce_numlist {background: url(img/numlist.png) no-repeat center}
+.editfuSkin span.mce_image {background: url(img/image.png) no-repeat center}
+.editfuSkin span.mce_code {background-position:-260px 0}
+.editfuSkin span.mce_undo {background: url(img/undo.png) no-repeat center}
+.editfuSkin span.mce_redo {background: url(img/redo.png) no-repeat center}
+
 /* Theme */
-.editfuSkin span.mce_bold {background-position:0 0}
-.editfuSkin span.mce_italic {background-position:-60px 0}
-.editfuSkin span.mce_underline {background-position:-140px 0}
-.editfuSkin span.mce_strikethrough {background-position:-120px 0}
-.editfuSkin span.mce_undo {background-position:-160px 0}
-.editfuSkin span.mce_redo {background-position:-100px 0}
 .editfuSkin span.mce_cleanup {background-position:-40px 0}
-.editfuSkin span.mce_bullist {background-position:-20px 0}
-.editfuSkin span.mce_numlist {background-position:-80px 0}
 .editfuSkin span.mce_justifyleft {background-position:-460px 0}
 .editfuSkin span.mce_justifyright {background-position:-480px 0}
 .editfuSkin span.mce_justifycenter {background-position:-420px 0}
@@ -143,9 +151,7 @@
 .editfuSkin span.mce_sup {background-position:-620px 0}
 .editfuSkin span.mce_removeformat {background-position:-580px 0}
 .editfuSkin span.mce_newdocument {background-position:-520px 0}
-.editfuSkin span.mce_image {background-position:-380px 0}
 .editfuSkin span.mce_help {background-position:-340px 0}
-.editfuSkin span.mce_code {background-position:-260px 0}
 .editfuSkin span.mce_hr {background-position:-360px 0}
 .editfuSkin span.mce_visualaid {background-position:-660px 0}
 .editfuSkin span.mce_charmap {background-position:-240px 0}

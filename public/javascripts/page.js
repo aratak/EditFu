@@ -23,19 +23,35 @@ function initMceEditor(ed) {
   ed.addButton('image', { title: 'Add Image', cmd: 'efImage' });
 }
 
+function editfuMceLayout(s, tb, o) {
+  var DOM = tinymce.DOM;
+  var ed = this, t = ed.theme, cf = ed.controlManager, to;
+  var tr = DOM.add(tb, 'tr');
+
+  var createToolbar = function (buttons, align) {
+    var td = DOM.add(tr, 'td', {'class' : 'mceToolbar mce' + align});
+    to = cf.createToolbar("toolbar" + align);
+    t._addControls(buttons, to);
+    DOM.setHTML(td, to.renderHTML());
+  }
+  createToolbar('undo,redo', 'Left');
+  createToolbar('formatselect,bold,italic,underline,bullist,numlist', 'Center');
+  createToolbar('image', 'Right');
+  o.deltaHeight -= s.theme_advanced_row_height;
+
+  tr = DOM.add(tb, 'tr');
+  td = DOM.add(tr, 'td', {'class' : 'mceIframeContainer', 'colspan' : '3'});
+  return td;
+}
+
 function initTinyMCE(settings) {
   tinyMCE.init($H(settings).merge({
     mode: "textareas",
     theme: "advanced",
     skin: "editfu",
-    theme_advanced_toolbar_location : "top",
-    theme_advanced_buttons1: 
-      'bold,italic,underline,strikethrough,formatselect,separator,' + 
-      'undo,redo,separator,bullist,numlist,separator,image' + settings.code,
-    theme_advanced_buttons2: "",
-    theme_advanced_buttons3: "",
+    theme_advanced_layout_manager: "CustomLayout",
+    theme_advanced_custom_layout : editfuMceLayout,
     theme_advanced_blockformats : "h1,h2,h3,h4,h5,h6",
-    
     setup: initMceEditor
   }).toObject());
 }
