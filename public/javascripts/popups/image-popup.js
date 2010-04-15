@@ -123,6 +123,7 @@ function swapImage(edited, selected) {
   window.editedImage.style.visibility = 'hidden';
   edited.removeAttribute('height');
   edited.removeAttribute('width');
+  edited.style.width = null;
   edited.src = selected.src;
 
   $$('#image-form input[type="text"]').each(function(imageInput) {

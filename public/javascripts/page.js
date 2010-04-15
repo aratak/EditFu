@@ -71,8 +71,11 @@ function initImage(img) {
 
   if(img.width < 150) {
     img.width = 150;
-  } else if(img.height > 641) {
-    img.height = 641;
+  } else {
+    img.style.width='100%';
+    if(img.height > 641) {
+      img.height = 641;
+    }
   }
 
   var bar = image.down('.bar');
