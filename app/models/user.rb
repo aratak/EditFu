@@ -34,6 +34,14 @@ class User < ActiveRecord::Base
     Mailer.deliver_reset_password_instructions(self)
   end
 
+  def company_url
+    'http://' + company_domain
+  end
+
+  def company_domain
+    "#{subdomain}.#{BASE_DOMAIN}"
+  end
+
   protected
 
   def validate

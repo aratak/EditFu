@@ -1,6 +1,6 @@
 class Mailer < ActionMailer::Base
   def owner_confirmation_instructions(owner)
-    subject      "Account confirmation"
+    subject      "Welcome to EditFu. Now meet the ninjas."
     from         "edit.fu.cms@gmail.com"
     recipients   owner.email
     content_type 'text/html'

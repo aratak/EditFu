@@ -1,6 +1,42 @@
-Welcome #{@owner.email}!
+%p Hey #{@owner.user_name},
+%p Welcome to EditFu. We appreciate you signing up!
 
-You can confirm your account through the link below:
+%h4 Getting Started
+%p 
+  First, confirm your new account here:
+  = link_to 'Confirm my account', |
+    owner_confirmation_url(:confirmation_token => @owner.confirmation_token) |
+%p 
+  Second, you will want to checkout the 
+  = link_to 'FAQ', 'http://www.takeastep.me/editfu-faq/' 
+  or 
+  = link_to 'video tutorials', 'http://www.takeastep.me/editfu-tutorials/'
+  before getting started.
 
-= link_to 'Confirm my account', |
-  owner_confirmation_url(:confirmation_token => @owner.confirmation_token) |
+%h4 Account Information
+%p 
+  Your username is #{@owner.email} and your password is whatever you set it as on sign up. 
+  You can change these once you confirm your account and login to EditFu.
+%p
+  Your company address is 
+  = link_to @owner.company_domain, @owner.company_url
+  You can share this with your clients so that it matches your company branding. 
+  You or your clients can login at www.editfu.com as well.
+
+%h4 Help
+%p 
+  We have a 
+  = link_to 'forum', 'http://www.takeastep.me/editfu-forum/'
+  where you can get help at any point by seeing if anyone else has a similar question
+  or posting your own question.
+%p Email us at support@editfu.com if you need any further assistance.
+%p 
+  You can upgrade, downgrade, or cancel your account at anytime. Go to www.editfu.com and login. 
+  Click on the preferences button and make any changes to your account.
+
+%p
+  Thanks, 
+  %br
+  \-The EditFu Team 
+  %br
+  sales@editfu.com

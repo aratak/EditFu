@@ -66,7 +66,7 @@ class ApplicationController < ActionController::Base
     if !user_signed_in?
       BASE_DOMAIN
     else
-      "#{current_user.subdomain}.#{BASE_DOMAIN}"
+      current_user.company_domain
     end
   end
 
