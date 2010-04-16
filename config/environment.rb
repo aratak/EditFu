@@ -53,3 +53,4 @@ ActiveSupport::CoreExtensions::Date::Conversions::DATE_FORMATS.update :default =
 
 ActiveMerchant::Billing::CreditCard.require_verification_value = true
 PAYMENT_RECURRING_AMOUNT = 100
+PROFESSIONAL_PLAN_AMOUNT = "#{PAYMENT_RECURRING_AMOUNT / 100}.00"

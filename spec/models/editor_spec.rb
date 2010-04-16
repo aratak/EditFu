@@ -1,21 +1,6 @@
 require 'spec_helper'
 
 describe Editor do
-  describe 'save' do
-    it "should deliver email instructions to new editor" do
-      editor = Factory.build(:editor)
-      ActionMailer::Base.deliveries.clear
-      editor.save!
-
-      ActionMailer::Base.deliveries.should_not be_empty
-      email = ActionMailer::Base.deliveries.first
-      email.to.first.should == editor.email
-      email.body.should match("invited by #{editor.owner.email}")
-      email.body.should match("/editors/confirmation")
-      email.body.should match(editor.confirmation_token)
-    end
-  end
-
   describe 'set_page_ids' do
     it "should assign only pages from owner sites" do
       editor = Factory.create(:editor)

@@ -1,6 +1,5 @@
 class Owner < User
   @@plans = %w(trial free professional)
-  PROFESSIONAL_PLAN_AMOUNT = "#{PAYMENT_RECURRING_AMOUNT / 100}.00"
 
   acts_as_audited :only => [:plan]
 
