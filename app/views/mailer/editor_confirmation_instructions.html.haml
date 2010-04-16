@@ -1,7 +1,25 @@
-Welcome #{@editor.email}!
+Hey #{@editor.user_name},
 
-You have been invited by #{@editor.owner.email} to edit his sites.
-You can confirm your account through the link below:
-
-= link_to 'Confirm my account', |
-  edit_editor_confirmation_url(:confirmation_token => @editor.confirmation_token) |
+%p
+  %strong= @editor.owner.user_name
+  has invited you to be an editor for a website.
+%p 
+  You will need to confirm your account by clicking here: 
+  = link_to 'Confirm my account', |
+    edit_editor_confirmation_url(:confirmation_token => @editor.confirmation_token) |
+%p 
+  In the future you can login at
+  = link_to @editor.company_domain, @editor.company_url
+%p 
+  If you need any help with editing content, you can checkout the
+  = link_to 'FAQ', 'http://www.takeastep.me/editfu-faq/' 
+  or the 
+  = link_to 'tutorial videos', 'http://www.takeastep.me/editfu-tutorials/'
+%p 
+  For further assistance contact 
+  %strong= @editor.owner.user_name 
+  at #{@editor.owner.email}.
+%p
+  Thanks,
+  %br
+  \-The EditFu Team

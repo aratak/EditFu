@@ -8,7 +8,7 @@ class Mailer < ActionMailer::Base
   end
 
   def editor_confirmation_instructions(editor)
-    subject      "Account confirmation"
+    subject      "Content editor invitation."
     from         "edit.fu.cms@gmail.com"
     recipients   editor.email
     content_type 'text/html'
