@@ -1,0 +1,21 @@
+%p Your EditFu plan was successfully changed.
+%p The changes are listed below:
+%p(style='color: #7CFC00;')
+  Your plan was changed from 
+  %strong= @user.plan_was.capitalize 
+  to 
+  %strong= @user.plan.capitalize
+  \.
+  %br
+  - if @user.plan == 'professional'
+    Your monthly plan price will now be #{Owner::PROFESSIONAL_PLAN_AMOUNT}.
+%p
+  If you would like to upgrade, downgrade, or cancel your account, 
+  you can do so at anytime by logging into your EditFu account and 
+  clicking on the preferences button.
+%p
+  Thanks, 
+  %br
+  \-The EditFu Team 
+  %br
+  billing@editfu.com

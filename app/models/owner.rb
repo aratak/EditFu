@@ -1,5 +1,6 @@
 class Owner < User
   @@plans = %w(trial free professional)
+  PROFESSIONAL_PLAN_AMOUNT = "#{PAYMENT_RECURRING_AMOUNT / 100}.00"
 
   acts_as_audited :only => [:plan]
 
@@ -70,18 +71,23 @@ class Owner < User
     if plan != "professional"
       self.plan = "professional"
       recurring(card)
+
+      Mailer.deliver_plan_change(self)
       save!
     end
   end
 
   def set_free_plan(sites, pages)
-    (self.sites - sites).each { |site| site.destroy }
-    (self.pages - pages).each { |page| page.destroy }
+    if plan != 'free'
+      (self.sites - sites).each { |site| site.destroy }
+      (self.pages - pages).each { |page| page.destroy }
 
-    cancel_recurring
+      cancel_recurring
 
-    self.plan = "free"
-    self.save
+      self.plan = "free"
+      Mailer.deliver_plan_change(self)
+      self.save
+    end
   end
 
   def set_card(card)

@@ -34,8 +34,9 @@ class OwnerPreferencesController < ApplicationController
   end
 
   def downgrade
-    sites = Site.find params[:sites]
-    pages = Page.find params[:pages]
+    sites = pages = []
+    sites = Site.find(params[:sites]) if params[:sites]
+    pages = Page.find(params[:pages]) if params[:pages]
     @owner.set_free_plan sites, pages
   end
 
