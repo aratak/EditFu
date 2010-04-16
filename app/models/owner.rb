@@ -158,7 +158,7 @@ class Owner < User
   end
 
   def deliver_subdomain_changes
-    Mailer.deliver_admin_subdomain_changes(self)
+    Mailer.deliver_owner_subdomain_changes(self)
     editors.each do |editor|
       Mailer.deliver_editor_subdomain_changes(self, editor)
     end

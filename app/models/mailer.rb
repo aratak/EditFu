@@ -29,7 +29,7 @@ class Mailer < ActionMailer::Base
     subject 'EditFu account cancellation.'
   end
 
-  def admin_subdomain_changes(user)
+  def owner_subdomain_changes(user)
     setup   user
     subject 'EditFu subdomain changes.'
   end
