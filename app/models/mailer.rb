@@ -24,6 +24,11 @@ class Mailer < ActionMailer::Base
     subject 'EditFu credit card changes.'
   end
 
+  def account_cancellation(user)
+    setup   user
+    subject 'EditFu account cancellation.'
+  end
+
   private
 
   def setup(user)

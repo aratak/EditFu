@@ -126,6 +126,7 @@ class Owner < User
 
   def before_destroy
     cancel_recurring
+    Mailer.deliver_account_cancellation(self)
   end
 
   def validate
