@@ -94,6 +94,7 @@ class Owner < User
     if plan == "professional"
       cancel_recurring
       recurring(card)
+      Mailer.deliver_credit_card_changes(self)
       save!
     end
   end

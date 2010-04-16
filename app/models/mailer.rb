@@ -15,8 +15,13 @@ class Mailer < ActionMailer::Base
   end
 
   def plan_change(user)
-    setup user
+    setup   user
     subject 'EditFu plan change.'  
+  end
+
+  def credit_card_changes(user)
+    setup   user
+    subject 'EditFu credit card changes.'
   end
 
   private
