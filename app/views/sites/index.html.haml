@@ -1,2 +1,15 @@
 - inside_layout 'sites' do
-  There aren't sites or pages yet.
+  = stylesheet_link_tag 'nocontent'
+  .blackbox
+
+  %h3 There is no content to edit... Yet!
+  %p
+    There is no content to edit yet. 
+    - if current_user.editor?
+      Contact #{current_user.owner.user_name} ( #{current_user.owner.email} ) 
+      to put some content up so you can get editing. 
+    - else
+      Put some content up so you can get editing. 
+    %br
+    In the meantime watch the tutorial video above, 
+    or go take a long break. You deserve it!
