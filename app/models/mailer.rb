@@ -40,6 +40,16 @@ class Mailer < ActionMailer::Base
     body    :owner => owner, :editor => editor
   end
 
+  def owner_email_changes(user)
+    setup   user
+    subject 'EditFu email address.'
+  end
+
+  def editor_email_changes(user)
+    setup   user
+    subject 'Content editing system email address change.'
+  end
+
   private
 
   def setup(user)

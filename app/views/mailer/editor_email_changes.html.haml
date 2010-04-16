@@ -1,0 +1,18 @@
+%p
+  Your Content editing system email address for 
+  = @user.company_domain
+  was changed successfully from 
+  = @user.email_was
+  to 
+  = @user.email
+%p Please make a note as your email address is also your login.
+%p 
+  If you changed your email address in error, you can change it back by 
+  visiting the preferences section of your account.
+%p
+  If you didn't change your email address and you feel your account has been compromised 
+  please contact admin immediately [ #{@user.owner.email} ].
+%p
+  Thanks,
+  %br
+  \-The EditFu Team

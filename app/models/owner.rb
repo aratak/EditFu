@@ -122,6 +122,7 @@ class Owner < User
       editors.clear
     end
     deliver_subdomain_changes if domain_name_changed?
+    Mailer.deliver_owner_email_changes(self) if email_changed?
   end
 
   def before_destroy

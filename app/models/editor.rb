@@ -42,4 +42,10 @@ class Editor < User
   def enabled?
     owner.enabled?
   end
+
+  protected
+
+  def before_update
+    Mailer.deliver_editor_email_changes(self) if email_changed?
+  end
 end
