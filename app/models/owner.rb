@@ -117,10 +117,11 @@ class Owner < User
 
   protected
 
-  def before_save
+  def before_update
     if plan == "free" && plan_changed?
       editors.clear
     end
+    deliver_subdomain_changes if domain_name_changed?
   end
 
   def before_destroy
@@ -153,5 +154,12 @@ class Owner < User
   def cancel_recurring
     PaymentSystem.cancel_recurring(self) if self.plan == 'professional'
     self.card_number = nil
+  end
+
+  def deliver_subdomain_changes
+    Mailer.deliver_admin_subdomain_changes(self)
+    editors.each do |editor|
+      Mailer.deliver_editor_subdomain_changes(self, editor)
+    end
   end
 end
