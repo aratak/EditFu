@@ -32,7 +32,7 @@ class Editor < User
   end
 
   def send_confirmation_instructions
-    Mailer.deliver_editor_confirmation_instructions(self)
+    Mailer.deliver_editor_invitation(self)
   end
 
   def trial_period_expired?

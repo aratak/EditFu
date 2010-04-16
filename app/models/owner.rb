@@ -63,7 +63,7 @@ class Owner < User
   end
 
   def send_confirmation_instructions
-    Mailer.deliver_owner_confirmation_instructions(self)
+    Mailer.deliver_signup(self)
   end
       
   def set_professional_plan(card)

@@ -1,22 +1,22 @@
 class Mailer < ActionMailer::Base
-  def owner_confirmation_instructions(owner)
-    subject      "Welcome to EditFu. Now meet the ninjas."
-    from         "edit.fu.cms@gmail.com"
-    recipients   owner.email
-    content_type 'text/html'
-    body         :owner => owner
+  def signup(user)
+    setup   user
+    subject "Welcome to EditFu. Now meet the ninjas."
   end
 
-  def editor_confirmation_instructions(editor)
-    subject      "Content editor invitation."
-    from         "edit.fu.cms@gmail.com"
-    recipients   editor.email
-    content_type 'text/html'
-    body         :editor => editor
+  def editor_invitation(user)
+    setup   user
+    subject "Content editor invitation."
   end
 
-  def reset_password_instructions(user)
+  def reset_password(user)
+    setup   user
     subject      "Reset edit-fu password"
+  end
+
+  private
+
+  def setup(user)
     from         "edit.fu.cms@gmail.com"
     recipients   user.email
     content_type 'text/html'

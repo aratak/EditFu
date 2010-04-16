@@ -1,11 +1,11 @@
-%p Hey #{@owner.user_name},
+%p Hey #{@user.user_name},
 %p Welcome to EditFu. We appreciate you signing up!
 
 %h4 Getting Started
 %p 
   First, confirm your new account here:
   = link_to 'Confirm my account', |
-    owner_confirmation_url(:confirmation_token => @owner.confirmation_token) |
+    owner_confirmation_url(:confirmation_token => @user.confirmation_token) |
 %p 
   Second, you will want to checkout the 
   = link_to 'FAQ', 'http://www.takeastep.me/editfu-faq/' 
@@ -15,11 +15,11 @@
 
 %h4 Account Information
 %p 
-  Your username is #{@owner.email} and your password is whatever you set it as on sign up. 
+  Your username is #{@user.email} and your password is whatever you set it as on sign up. 
   You can change these once you confirm your account and login to EditFu.
 %p
   Your company address is 
-  = link_to @owner.company_domain, @owner.company_url
+  = link_to @user.company_domain, @user.company_url
   You can share this with your clients so that it matches your company branding. 
   You or your clients can login at www.editfu.com as well.
 

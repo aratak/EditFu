@@ -1,15 +1,15 @@
-Hey #{@editor.user_name},
+Hey #{@user.user_name},
 
 %p
-  %strong= @editor.owner.user_name
+  %strong= @user.owner.user_name
   has invited you to be an editor for a website.
 %p 
   You will need to confirm your account by clicking here: 
   = link_to 'Confirm my account', |
-    edit_editor_confirmation_url(:confirmation_token => @editor.confirmation_token) |
+    edit_editor_confirmation_url(:confirmation_token => @user.confirmation_token) |
 %p 
   In the future you can login at
-  = link_to @editor.company_domain, @editor.company_url
+  = link_to @user.company_domain, @user.company_url
 %p 
   If you need any help with editing content, you can checkout the
   = link_to 'FAQ', 'http://www.takeastep.me/editfu-faq/' 
@@ -17,8 +17,8 @@ Hey #{@editor.user_name},
   = link_to 'tutorial videos', 'http://www.takeastep.me/editfu-tutorials/'
 %p 
   For further assistance contact 
-  %strong= @editor.owner.user_name 
-  at #{@editor.owner.email}.
+  %strong= @user.owner.user_name 
+  at #{@user.owner.email}.
 %p
   Thanks,
   %br
