@@ -130,6 +130,6 @@ class FtpClient
   def self.translate_ftp_error(e)
     code = e.message[0, 3]
     message = e.message[4, e.message.length]
-    FtpClientError.new(message)
+    FtpClientError.new(message.strip)
   end
 end

@@ -26,7 +26,8 @@
               :alt => attributes['alt'], :onload => 'initImage(this);' } |
           - attributes.each do |k,v|
             = hidden_field_tag "images[][#{k}]", v, :id => nil
-    = f.submit "Publish", :class => "update-button"
+    - if @sections.present? && @images.present?
+      = f.submit "Publish", :class => "update-button"
 
   :javascript
     initTinyMCE({

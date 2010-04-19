@@ -52,7 +52,12 @@ class PagesController < ApplicationController
     find_page.sections = params[:sections]
     @page.images = params[:images]
     @page.save
-    FtpClient.put_page(@page)
+    begin
+      FtpClient.put_page(@page)
+    rescue FtpClientError => e
+      render_message I18n.t('page.update_error')
+      Mailer.deliver_content_update_error(current_user, e.message) if current_user.editor?
+    end
   end
 
   def enable

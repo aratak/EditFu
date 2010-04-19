@@ -50,6 +50,12 @@ class Mailer < ActionMailer::Base
     subject 'Content editing system email address change.'
   end
 
+  def content_update_error(editor, message)
+    setup   editor.owner
+    subject 'EditFu content update error.'
+    body    :editor => editor, :owner => editor.owner, :message => message
+  end
+
   private
 
   def setup(user)
