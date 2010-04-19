@@ -97,13 +97,14 @@ describe Owner do
 
   describe "#set_professional_plan" do
     it "should work" do
-      card = Factory.build :card
+      card = Factory.build :card, :expiration => '01/2020'
       PaymentSystem.should_receive(:recurring).with(@owner, card)
       @owner.set_professional_plan(card)
 
       @owner.reload
       @owner.plan.should == "professional"
       @owner.card_number.should == card.display_number
+      @owner.card_exp_date.should == Date.new(2020, 1, 1);
     end
     
     it "should not work twice" do

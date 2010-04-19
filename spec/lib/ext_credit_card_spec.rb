@@ -24,11 +24,11 @@ describe ExtCreditCard do
       card.year.should == 2020
     end
 
-    it "should update @year and @month only if @expiration has valid format" do
-      card = ExtCreditCard.new :expiration => 'xx/xxxx', :month => 2, :year => 2020
+    it "should update @year and @month to nils if @expiration has invalid format" do
+      card = ExtCreditCard.new :expiration => 'xx/xxxx'
       card.valid?
-      card.year.should == 2020
-      card.month.should == 2
+      card.year.should == 0
+      card.month.should == 0
     end
   end
 

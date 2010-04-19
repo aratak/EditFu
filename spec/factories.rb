@@ -35,8 +35,6 @@ Factory.define :card , :class => ExtCreditCard do |c|
   c.first_name 'John'
   c.last_name 'Doe'
   c.number '1'
-  c.year 2015
-  c.month 1
   c.zip '12345'
   c.verification_value '1'
   c.expiration '01/2030'

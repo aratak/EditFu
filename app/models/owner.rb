@@ -150,6 +150,7 @@ class Owner < User
   def recurring(card)
     PaymentSystem.recurring(self, card)
     self.card_number = card.display_number
+    self.card_exp_date = Date.new(card.year, card.month, 1)
   end
 
   def cancel_recurring

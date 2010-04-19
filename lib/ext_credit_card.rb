@@ -1,6 +1,16 @@
 class ExtCreditCard < ActiveMerchant::Billing::CreditCard
-  attr_accessor :expiration
+  attr_reader :expiration
   attr_accessor :zip
+
+  def expiration=(exp)
+    @expiration = exp
+    if @expiration.blank? || !expiration_format_valid?
+      @month, @year = nil, nil
+    else
+      m, y = @expiration.split '/'
+      @month, @year = m.to_i, y.to_i
+    end
+  end
 
   def validate
     validate_expiration
@@ -16,13 +26,6 @@ class ExtCreditCard < ActiveMerchant::Billing::CreditCard
   end
 
   private
-
-  def before_validate
-    if !@expiration.blank? && expiration_format_valid?
-      @month, @year = @expiration.split '/'
-    end
-    super
-  end
 
   def validate_expiration
     if @expiration.blank?
