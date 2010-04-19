@@ -115,16 +115,10 @@ class Owner < User
     this_bd.past? ? this_bd.next_month : this_bd
   end
 
-  def self.deliver_card_expirations
-    Owner.find_all_by_card_exp_date(15.days.from_now.to_date).each do |owner|
-      Mailer.deliver_card_expiration(owner)
-    end
-  end
-
-  def self.deliver_cards_have_expired
-    Owner.find_all_by_card_exp_date(Date.today).each do |owner|
-      Mailer.deliver_card_has_expired(owner)
-    end
+  def self.deliver_scheduled_messages
+    deliver_card_expirations
+    deliver_cards_have_expired
+    deliver_trial_expirations
   end
 
   protected
@@ -168,6 +162,25 @@ class Owner < User
   def cancel_recurring
     PaymentSystem.cancel_recurring(self) if self.plan == 'professional'
     self.card_number = nil
+  end
+
+  def self.deliver_card_expirations
+    Owner.find_all_by_card_exp_date(15.days.from_now.to_date).each do |owner|
+      Mailer.deliver_card_expiration(owner)
+    end
+  end
+
+  def self.deliver_cards_have_expired
+    Owner.find_all_by_card_exp_date(Date.today).each do |owner|
+      Mailer.deliver_card_has_expired(owner)
+    end
+  end
+
+  def self.deliver_trial_expirations
+    conditions = ["plan = 'trial' AND DATE(confirmed_at) = ?", 30.days.ago.to_date]
+    Owner.all(:conditions => conditions).each do |owner|
+      Mailer.deliver_trial_expiration(owner)
+    end
   end
 
   def deliver_subdomain_changes

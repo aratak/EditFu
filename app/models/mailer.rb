@@ -66,6 +66,11 @@ class Mailer < ActionMailer::Base
     subject 'EditFu billing credit card.'
   end
 
+  def trial_expiration(user)
+    setup   user
+    subject 'EditFu trial.'
+  end
+
   private
 
   def setup(user)
