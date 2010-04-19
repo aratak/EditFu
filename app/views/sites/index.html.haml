@@ -2,14 +2,25 @@
   = stylesheet_link_tag 'nocontent'
   .blackbox
 
-  %h3 There is no content to edit... Yet!
-  %p
-    There is no content to edit yet. 
-    - if current_user.editor?
-      Contact #{current_user.owner.user_name} ( #{current_user.owner.email} ) 
-      to put some content up so you can get editing. 
-    - else
-      Put some content up so you can get editing. 
-    %br
-    In the meantime watch the tutorial video above, 
-    or go take a long break. You deserve it!
+  %ol
+    %li
+      Insert the html element.
+      %p
+        Go through the html for the site you want to edit and add the class ‘editfu’ 
+        to the div or span that contains the content you would like to make 
+        available to EditFu for editing.
+    %li
+      Add the site and pages.
+      %p
+        Click the plus in the lower left hand corner and enter the hosting FTP 
+        information to add the site to EditFu. Next, choose the site in the sad bar 
+        and in this window click the link labeled 
+        %strong Add a Page. 
+        In the list of pages your presented choose each of the pages you would like 
+        to add to EditFu.
+    %li
+      Edit content.
+      %p
+        That’s it! Now click the page you want to edit in the sidebar and update 
+        the content right in this windown. When your done click the publish button 
+        in the lower right hand corner.
