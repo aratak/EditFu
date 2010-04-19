@@ -15,6 +15,8 @@ role :app, "#{deploy_host}"
 role :web, "#{deploy_host}"
 role :db,  "#{deploy_host}", :primary => true
 
+after "deploy:symlink", "deploy:update_crontab"
+
 namespace :deploy do
   task :install_gems do
     run "cd #{current_path} && rake gems:install"
@@ -22,6 +24,10 @@ namespace :deploy do
 
   task :restart do
     run "touch #{current_path}/tmp/restart.txt"
+  end
+
+  task :update_crontab, :roles => :db do
+    run "cd #{release_path} && whenever --update-crontab #{application}"
   end
 end
 

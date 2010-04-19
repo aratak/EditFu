@@ -14,6 +14,7 @@ Rails::Initializer.run do |config|
   config.gem 'devise', :version => "0.6.2"
   config.gem 'acts_as_audited', :lib => false, :version => "1.1.0"
   config.gem "nested_layouts", :source => "http://gemcutter.org" 
+  config.gem 'whenever', :lib => false, :source => 'http://gemcutter.org/'
   
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
