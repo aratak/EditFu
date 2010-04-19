@@ -121,6 +121,12 @@ class Owner < User
     end
   end
 
+  def self.deliver_cards_have_expired
+    Owner.find_all_by_card_exp_date(Date.today).each do |owner|
+      Mailer.deliver_card_has_expired(owner)
+    end
+  end
+
   protected
 
   def before_update

@@ -61,6 +61,11 @@ class Mailer < ActionMailer::Base
     subject 'EditFu billing credit card.'
   end
 
+  def card_has_expired(user)
+    setup   user
+    subject 'EditFu billing credit card.'
+  end
+
   private
 
   def setup(user)
