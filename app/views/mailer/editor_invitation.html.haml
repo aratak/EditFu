@@ -19,7 +19,5 @@ Hey #{@user.user_name},
   For further assistance contact 
   %strong= @user.owner.user_name 
   at #{@user.owner.email}.
-%p
-  Thanks,
-  %br
-  \-The EditFu Team
+
+=render 'signature', :name => 'support'

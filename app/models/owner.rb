@@ -115,6 +115,12 @@ class Owner < User
     this_bd.past? ? this_bd.next_month : this_bd
   end
 
+  def self.deliver_card_expirations
+    Owner.find_all_by_card_exp_date(15.days.from_now.to_date).each do |owner|
+      Mailer.deliver_card_expiration(owner)
+    end
+  end
+
   protected
 
   def before_update
