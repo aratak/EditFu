@@ -12,9 +12,6 @@ class ApplicationController < ActionController::Base
 
   include PlanRestrictions
 
-  # Scrub sensitive parameters from your log
-  # filter_parameter_logging :password
-
   def user_root_path
     if current_user.admin?
       admin_owners_path

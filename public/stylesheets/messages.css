@@ -1,28 +1,33 @@
 #action-bar .processing,
 .popup .popup-action-bar .processing {
   position: absolute;
-  left: 50%;
   margin-top: 9px;
+  left: 50%;
+}
+
+.popup .one-column-popup .popup-action-bar .processing {
+  left: 30%;
 }
 
 .message {
-  font: bold 20px helvetica;
-  line-height: 50px;
+  font: bold 12px helvetica;
   height: 50px;
   color: white;
+  width: 100%;
 }
 
-#action-bar .message {
-  width: 100%;
+.message td {
+  vertical-align: middle;
   text-align: center;
 }
 
 .popup-action-bar .message {
   position: absolute;
-  left: 0;
-  right: 0;
-  text-align: left;
+}
+
+.popup-action-bar .message td {
   padding-left: 10px;
+  padding-right: 170px;
 }
 
 .message.success {

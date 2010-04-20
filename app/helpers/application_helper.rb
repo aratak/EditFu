@@ -76,7 +76,7 @@ module ApplicationHelper
           visited_attrs << attr
           message = message.first if message.kind_of?(Array)
 
-          if attr == :base
+          if attr.to_s == 'base'
             page << "showMessage('error', \"#{message}\");"
           else
             field = name.to_s + '_' + attr

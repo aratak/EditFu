@@ -1,9 +1,9 @@
 function showMessage(kind, text) {
   clearMessage();
   if(text && !text.blank()) {
-    var message = $(document.createElement('div'));
+    var message = $(document.createElement('table'));
     message.className = 'message ' + kind;
-    message.innerHTML = text;
+    message.innerHTML = '<tr><td>' + text + '</tr></td>'
   
     getActionBar().insert({top: message });
     message.effect = new Effect.Fade(message, {delay: 10, duration: 5});
