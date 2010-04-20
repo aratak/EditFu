@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
   before_filter :redirect_to_subdomain if RAILS_ENV != 'test'
   layout nil
   
+  filter_parameter_logging 'password', 'card'
+
   include PlanRestrictions
 
   # Scrub sensitive parameters from your log
