@@ -60,9 +60,14 @@ function uploadImage() {
 
       var thumbnail = tmp.down('.thumbnail');
       if(!thumbnail) {
-        showMessage('error', 'Server error');
+        showMessage('error', 
+          'There was error adding the image to EditFu. ' +
+          'Please try again or review the ' + 
+          '<a href="http://www.takeastep.me/editfu-faq/basics/">FAQ</a> ' +
+          'for directions. <br> If this problem continues contact ' +
+          '<a href="http://www.takeastep.me/editfu-contact-us/">support</a>');
       } else {
-        showMessage('success', 'Image was successfully uploaded.');
+        showMessage('success', 'Image was added to EditFu successfully.');
         
         var img = thumbnail.down('img');
         img.onload = function() {

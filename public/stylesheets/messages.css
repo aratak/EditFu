@@ -10,7 +10,7 @@
 }
 
 .message {
-  font: bold 12px helvetica;
+  font: normal 12px helvetica;
   height: 50px;
   color: white;
   width: 100%;
@@ -19,6 +19,10 @@
 .message td {
   vertical-align: middle;
   text-align: center;
+}
+
+#action-bar .message td {
+  padding: 0 140px;
 }
 
 .popup-action-bar .message {

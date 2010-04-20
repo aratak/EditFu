@@ -8,6 +8,7 @@ class OwnerPreferencesController < ApplicationController
   def update
     @owner.require_current_password
     @owner.update_attributes(params[:preferences][:owner])
+    @message = ['preferences.updated']
 
     @plan = params[:preferences][:owner][:plan]
     @card = ExtCreditCard.new params[:preferences][:card]
@@ -18,6 +19,7 @@ class OwnerPreferencesController < ApplicationController
       if @owner.errors.empty? && @card.errors.empty?
         begin
           if @plan_changed
+            @message = ['plan.upgraded', {:plan_was => @owner.plan.capitalize}]
             @owner.set_professional_plan @card
           else
             @owner.set_card @card

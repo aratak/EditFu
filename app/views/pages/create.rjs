@@ -6,4 +6,4 @@
     }
   page.insert_html :bottom, 'pages_form', :partial => 'sites/page', :locals => { :page => p }
 end
-hide_popup(page, @message)
+hide_popup(page, *@message)

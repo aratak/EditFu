@@ -45,7 +45,7 @@ module ApplicationHelper
   end
 
   def link_to_remove(path, text = 'Remove')
-    link_to_function text, "showConfirmPopup('#{path}')", :class => 'important'
+    link_to_function text, "showConfirmPopup('#{path}')", :class => 'action important'
   end
 
   def show_popup(page, *opts)
@@ -53,13 +53,13 @@ module ApplicationHelper
     page << 'showPopup();'
   end
 
-  def hide_popup(page, message_key)
+  def hide_popup(page, *targs)
     page << 'hidePopup();'
-    show_success(page, message_key)
+    show_success(page, *targs)
   end
 
-  def show_success(page, key)
-    message = I18n.t(key)
+  def show_success(page, *targs)
+    message = I18n.t(*targs)
     show_message(page, 'success', message)
   end
 

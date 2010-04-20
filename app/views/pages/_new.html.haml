@@ -10,7 +10,7 @@
     .popup-action-bar
       %small.description Choose the pages you would like to add.
       = submit_tag "Add"
-      = link_to_function "Cancel", "hidePopup();", :class => 'cancel'
+      = link_to_function "Cancel", "hidePopup();", :class => 'action cancel'
 
 :javascript
   new PageFtpTree(#{@site.id}, "#{@site.site_root}");

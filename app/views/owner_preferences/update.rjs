@@ -3,5 +3,5 @@ if @plan_changed && @plan == 'free'
   page << "Indent.includeJavascript('popups/downgrade-popup');"
   page << "Indent.includeStylesheet('sites-and-pages');"
 else
-  hide_popup page, 'preferences.updated'
+  hide_popup page, *@message
 end

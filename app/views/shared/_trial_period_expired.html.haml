@@ -13,6 +13,7 @@
       Please inform your site owner about trial period expiration.
 
   .popup-action-bar
-    = link_to_function "Close", "hidePopup();", :class => 'cancel'
+    = link_to_function "Close", "hidePopup();", :class => 'action cancel'
     - if current_user.owner?
-      = link_to_remote "Switch", :url => owner_preferences_path, :method => :get
+      = link_to_remote "Switch", :url => owner_preferences_path, :method => :get, |
+        :html => {:class => 'action'} |

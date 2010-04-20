@@ -14,8 +14,8 @@ class PagesController < ApplicationController
         flash.now[:warning] = I18n.t('page.no_content')
       end
       @page.save
-    rescue FtpClientError => e
-      flash.now[:error] = e.message
+    rescue FtpClientError
+      flash.now[:error] = I18n.t(*connection_problem_message)
     end
   end
 
@@ -27,16 +27,16 @@ class PagesController < ApplicationController
     find_site
     @pages = []
 
-    @message = 'page.created'
     params[:path].each do |path|
       page = @site.pages.create(:path => path)
       if page.errors.empty?
+        @message = ['page.created', { :site => @site.name, :page => page.path}]
         begin
           FtpClient.get_page(page)
-          @message = 'page.suspicious' if page.has_suspicious_sections?
+          @message = ['page.suspicious'] if page.has_suspicious_sections?
           @pages << page
         rescue FtpClientError
-          @message = 'page.no_content'
+          @message = connection_problem_message
         end
       end
     end

@@ -1,7 +1,9 @@
 en:
   devise:
     sessions:
+      signed_in: 'Welcome back {{user_name}}.'
       disabled: 'Your account is temporarily disabled by administrator.'
+      invalid: 'Your username or password was incorrect, please try again.'
 
   activerecord:
     errors:
@@ -16,28 +18,43 @@ en:
     page_count: "There are too many remaining pages for free.plan."
 
   site:
-    created: "Site was created"
+    created: "The site <strong>{{name}}</strong> has been added to EditFu. 
+      You can now add pages to this site."
     updated: "Site settings were updated"
+    connection_problem:
+      owner: "We cannot make a connection with the website due to incorrect settings or a
+        server error. Check that all the FTP settings for this site are correct and up-to-date."
+      editor: "We cannot make a connection with the website due to incorrect settings or a
+        server error. Please contact {{owner_name}} 
+        (<a href='{{owner_email}}'>{{owner_email}}</a>)  to resolve this issue."
 
   page:
-    created: "Page was added"
-    updated: "Your changes were updated successfully"
+    created: "<strong>{{page}}</strong> was added to the 
+      site <strong>{{site}}</strong> in the sidebar."
+    updated: "All changes were published successfully."
     enabled: "Page statuses were updated."
     destroyed: "Page was removed."
-    suspicious: 'Some or all of the selected pages are using the editfu class incorrectly. This may cause some issues.'
-    no_content: "Page hasn't editable content" 
-    update_error: 'EditFu content update error'
+    suspicious: 'Some or all of the selected pages are using the editfu class incorrectly. 
+      This may cause some issues.'
+    no_content: "This page does not contain any editable sections. 
+      Please refer to the <a href='http://www.takeastep.me/editfu-faq/basics/'>FAQ</a> 
+      for details on how to include content." 
+    update_error: 'Changes could not be published. Please try again.'
   
   editor:
     permissions_updated: "Your changes were updated successfully"
-    created: "Editor was created"
+    created: "Editor <strong>{{name}}</strong> was created and will be sent an invite. 
+      Click editor preferences for this user if you need to resend an invite."
     updated: "Editor settings were updated"
 
   preferences:
-    updated: "Your preferences were updated"
+    updated: "Your preferences were updated successfully"
 
   plan:
-    downgraded: "Your plan was downgraded."
+    downgraded: "You have successfully downgraded from the <strong>Pro Plan</strong>
+      to the <strong>Free Plan</strong>."
+    upgraded: "You have successfully upgraded from the 
+      <strong>{{plan_was}} Plan</strong> to the <strong>Pro Plan</strong>."
 
   admin:
     owner:

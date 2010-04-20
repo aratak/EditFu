@@ -14,7 +14,8 @@ class SessionsController < ApplicationController
     sign_out(:user) if signed_in?(:user)
 
     if authenticate(:user)
-      flash[:success] = I18n.t("devise.sessions.signed_in")
+      @user = User.find_by_email(params[:user][:email])
+      flash[:success] = I18n.t("devise.sessions.signed_in", :user_name => @user.user_name)
       sign_in_and_redirect(:user)
     else
       message = warden.message || :invalid
