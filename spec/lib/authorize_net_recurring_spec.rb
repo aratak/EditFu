@@ -45,6 +45,32 @@ describe AuthorizeNetRecurring do
     end
   end
 
+  describe 'update' do
+    before :each do
+      @owner = Factory.build :owner, :subscription_id => '12345'
+      @card = Factory.build :card
+      @gateway = mock('gateway')
+    end
+
+    it "should work" do
+      response = ActiveMerchant::Billing::Response.new(true, nil)
+      @gateway.should_receive(:update_recurring).and_return(response)
+
+      lambda {
+        AuthorizeNetRecurring.update(@gateway, @owner, @card)
+      }.should_not change(@owner, :subscription_id)
+    end
+
+    it "should raise error if response isn't success" do
+      response = ActiveMerchant::Billing::Response.new(false, "some error")
+      @gateway.should_receive(:update_recurring).and_return(response)
+
+      lambda {
+        AuthorizeNetRecurring.update(@gateway, @owner, @card)
+      }.should raise_error(PaymentSystemError)
+    end
+  end
+
   describe ".cancel" do
     before :each do
       @owner = Factory.build :owner, :subscription_id => '12345'

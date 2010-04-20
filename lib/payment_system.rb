@@ -7,6 +7,10 @@ class PaymentSystem
     recurring_gateway.create(gateway, PAYMENT_RECURRING_AMOUNT, owner, card)
   end
 
+  def self.update_recurring(owner, card)
+    recurring_gateway.update(gateway, owner, card)
+  end
+
   def self.cancel_recurring(owner)
     recurring_gateway.cancel(gateway, owner)
   end

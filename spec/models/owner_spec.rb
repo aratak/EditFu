@@ -153,13 +153,11 @@ describe Owner do
   end
 
   describe "#set_card" do
-    it "should cancel previous and subscribe new recurrings" do
+    it "should update recurring" do
       card = Factory.build :card
       owner = Factory.create :owner, :plan => 'professional'
 
-      PaymentSystem.should_receive(:cancel_recurring).with(owner)
-      PaymentSystem.should_receive(:recurring).with(owner, card)
-
+      PaymentSystem.should_receive(:update_recurring).with(owner, card)
       owner.set_card card
     end
 
@@ -167,9 +165,7 @@ describe Owner do
       card = Factory.build :card
       owner = Factory.create :owner, :plan => 'free'
 
-      PaymentSystem.should_not_receive(:cancel_recurring)
-      PaymentSystem.should_not_receive(:recurring)
-
+      PaymentSystem.should_not_receive(:update_recurring)
       owner.set_card card
     end
   end

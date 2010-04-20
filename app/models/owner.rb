@@ -69,7 +69,8 @@ class Owner < User
   def set_professional_plan(card)
     if plan != "professional"
       self.plan = "professional"
-      recurring(card)
+      PaymentSystem.recurring(self, card)
+      set_card_fields(card)
 
       Mailer.deliver_plan_change(self)
       save!
@@ -91,8 +92,8 @@ class Owner < User
 
   def set_card(card)
     if plan == "professional"
-      cancel_recurring
-      recurring(card)
+      PaymentSystem.update_recurring(self, card)
+      set_card_fields(card)
       Mailer.deliver_credit_card_changes(self)
       save!
     end
@@ -153,15 +154,17 @@ class Owner < User
     end
   end
 
-  def recurring(card)
-    PaymentSystem.recurring(self, card)
-    self.card_number = card.display_number
-    self.card_exp_date = Date.new(card.year, card.month, 1)
+  def cancel_recurring
+    if self.plan == 'professional'
+      PaymentSystem.cancel_recurring(self) 
+      self.card_number = nil
+      self.card_exp_date = nil
+    end
   end
 
-  def cancel_recurring
-    PaymentSystem.cancel_recurring(self) if self.plan == 'professional'
-    self.card_number = nil
+  def set_card_fields(card)
+    self.card_number = card.display_number
+    self.card_exp_date = Date.new(card.year, card.month, 1)
   end
 
   def self.deliver_card_expirations
