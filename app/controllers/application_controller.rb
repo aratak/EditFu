@@ -42,9 +42,7 @@ class ApplicationController < ActionController::Base
     if current_user.owner?
       ['site.connection_problem.owner']
     else
-      owner = current_user.owner
-      ['site.connection_problem.editor', 
-        {:owner_name => owner.user_name, :owner_email => owner.email}]
+      ['site.connection_problem.editor', {:owner => MessageKeywords.email(current_user.owner)}]
     end
   end
 

@@ -64,7 +64,7 @@ module ApplicationHelper
   end
 
   def show_message(page, kind, message)
-    page << "showMessage('#{kind}', '#{message}');"
+    page << "showMessage('#{kind}', \"#{message}\");"
   end
 
   def show_error_messages(page, models)

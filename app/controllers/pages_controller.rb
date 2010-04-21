@@ -11,7 +11,7 @@ class PagesController < ApplicationController
       @images = @page.images
 
       if @sections.blank? && @images.blank?
-        flash.now[:warning] = I18n.t('page.no_content')
+        flash.now[:warning] = I18n.t('page.no_content', :faq => MessageKeywords.faq)
       end
       @page.save
     rescue FtpClientError
@@ -55,7 +55,14 @@ class PagesController < ApplicationController
     begin
       FtpClient.put_page(@page)
     rescue FtpClientError => e
-      render_message I18n.t('page.update_error')
+      if current_user.owner?
+        message = I18n.t('page.update_error.owner', 
+          :faq => MessageKeywords.faq, :support => MessageKeywords.support)
+      else
+        message = I18n.t('page.update_error.editor', 
+          :owner => MessageKeywords.email(current_user.owner))
+      end
+      render_message message
       Mailer.deliver_content_update_error(current_user, e.message) if current_user.editor?
     end
   end

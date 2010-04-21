@@ -31,7 +31,9 @@ function selectImage(img, skipWarn) {
     clearMessage();
     if(edited.originalHeight != img.originalHeight ||
        edited.originalWidth != img.originalWidth) {
-      showMessage('warning', 'This image is of different diminsions than the image your replacing.');
+      showMessage('warning', 
+          'The chosen image is of different dimensions than the image your replacing. ' +
+          'Be aware this can sometimes lead to design inconsistencies.');
     }
   }
 }

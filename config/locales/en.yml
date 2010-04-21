@@ -28,8 +28,7 @@ en:
       owner: "We cannot make a connection with the website due to incorrect settings or a
         server error. Check that all the FTP settings for this site are correct and up-to-date."
       editor: "We cannot make a connection with the website due to incorrect settings or a
-        server error. Please contact {{owner_name}} 
-        (<a href='{{owner_email}}'>{{owner_email}}</a>)  to resolve this issue."
+        server error. Please contact {{owner}} to resolve this issue."
 
   page:
     created: "<strong>{{page}}</strong> was added to the 
@@ -40,9 +39,13 @@ en:
     suspicious: 'Some or all of the selected pages are using the editfu class incorrectly. 
       This may cause some issues.'
     no_content: "This page does not contain any editable sections.  Please refer to the 
-      <a href='http://www.takeastep.me/editfu-faq/basics/' target='_blank'>FAQ</a> 
-      for details on how to include content." 
-    update_error: 'Changes could not be published. Please try again.'
+      {{faq}} for details on how to include content." 
+    update_error: 
+      owner: 'There was an error while trying to publish your updates. Please try again.
+        If the problem continues double check all the FTP settings and review the {{faq}}
+        Contact {{support}} if you need further assistance.'
+      editor: 'There was an error while trying to publish your updates. Please try again.
+        If this problem continues please contact {{owner}} to resolve this issue.'
   
   editor:
     permissions_updated: "Your changes were updated successfully"
