@@ -36,8 +36,8 @@ en:
     destroyed: "Page was removed."
     suspicious: 'Some or all of the selected pages are using the editfu class incorrectly. 
       This may cause some issues.'
-    no_content: "This page does not contain any editable sections. 
-      Please refer to the <a href='http://www.takeastep.me/editfu-faq/basics/'>FAQ</a> 
+    no_content: "This page does not contain any editable sections.  Please refer to the 
+      <a href='http://www.takeastep.me/editfu-faq/basics/' target='_blank'>FAQ</a> 
       for details on how to include content." 
     update_error: 'Changes could not be published. Please try again.'
   
