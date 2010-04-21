@@ -78,7 +78,9 @@ class FtpClient
     begin
       f = Net::FTP.open site.server
     rescue 
-      raise FtpClientError, "Can't connect to FTP server - check domain name."
+      raise FtpClientError, 
+        "Your FTP server address is incorrect. " +
+        "Please double check that it is correct and try again."
     end
 
     begin
@@ -129,7 +131,12 @@ class FtpClient
 
   def self.translate_ftp_error(e)
     code = e.message[0, 3]
-    message = e.message[4, e.message.length]
-    FtpClientError.new(message.strip)
+    message = 
+      if code == '530'
+        'FTP login was incorrect. Please check your username/password and try again.'
+      else
+        e.message[4, e.message.length].strip
+      end
+    FtpClientError.new(message)
   end
 end
