@@ -36,7 +36,7 @@
 
     .popup-action-bar
       %small.description= description
-      = form.submit "Update"
+      = form.submit submit
       = link_to_function "Cancel", "hidePopup();", :class => 'action cancel'
 
 :javascript

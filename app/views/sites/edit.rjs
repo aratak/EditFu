@@ -1,4 +1,8 @@
 show_popup page, :partial => 'form', 
-  :locals => { :title => 'Edit Site', :description => 'Make any changes to your FTP infomration and click update.' }
+  :locals => { 
+    :title => 'Edit Site', 
+    :description => 'Make any changes to your FTP infomration and click update.',
+    :submit => 'Update'
+  }
 page << "Indent.includeJavascript('tree');"
 page << "Indent.includeStylesheet('tree', 'popups/site-new-popup');"
