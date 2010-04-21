@@ -235,7 +235,7 @@ describe FtpClient do
 
       lambda do
         FtpClient.send :open, @site
-      end.should raise_error(FtpClientError, 'Login incorrect.')
+      end.should raise_error(FtpClientError, /login.*incorrect/)
     end
 
     it "should translate open socket error message" do
@@ -243,7 +243,7 @@ describe FtpClient do
 
       lambda do
         FtpClient.send :open, @site
-      end.should raise_error(FtpClientError, "Can't connect to FTP server - check domain name.")
+      end.should raise_error(FtpClientError, /address is incorrect/)
     end
   end
 end

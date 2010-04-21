@@ -2,13 +2,16 @@ en:
   devise:
     sessions:
       signed_in: 'Welcome back {{user_name}}.'
+      signed_out: 'You have signed out.'
       disabled: 'Your account is temporarily disabled by administrator.'
       invalid: 'Your username or password was incorrect, please try again.'
+      timeout: 'Your EditFu session has expired. Please login again to continue working.'
 
   activerecord:
     errors:
       messages:
         too_short: 'is too short (min length is {{count}})'
+        blank: 'is required'
 
   credit_card:
     authorize: "Can't authorize credit card. Please check your balance."

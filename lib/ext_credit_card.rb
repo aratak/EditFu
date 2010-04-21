@@ -15,6 +15,7 @@ class ExtCreditCard < ActiveMerchant::Billing::CreditCard
   def validate
     validate_expiration
     super
+    translate_messages
 
     e = errors.on(:month)
     errors.add(:expiration, e) if e
@@ -37,5 +38,15 @@ class ExtCreditCard < ActiveMerchant::Billing::CreditCard
 
   def expiration_format_valid?
     @expiration.match /\d\d?\/\d\d\d\d/
+  end
+
+  def translate_messages
+    errors.each do |k, v|
+      v.each_index do |i|
+        if v[i] == "cannot be empty"
+          v[i] = I18n.t('activerecord.errors.messages.blank')
+        end
+      end
+    end
   end
 end

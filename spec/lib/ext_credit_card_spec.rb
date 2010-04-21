@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe ExtCreditCard do
+  before :each do
+    @blank_message = I18n.t('activerecord.errors.messages.blank')
+  end
+
   describe "initialize" do
     it "should call parent constructor and update @expiration attribute" do
       card = ExtCreditCard.new :first_name => 'John', :expiration => '02/2020'
@@ -36,7 +40,7 @@ describe ExtCreditCard do
     it "should validate expiration presense" do
       card = ExtCreditCard.new :expiration => ''
       card.valid?
-      card.errors.on(:expiration).should == 'cannot be empty'
+      card.errors.on(:expiration).should == @blank_message
     end
 
     it "should validate expiration format" do
@@ -66,7 +70,13 @@ describe ExtCreditCard do
     it "should require zip code" do
       card = ExtCreditCard.new :zip => ''
       card.valid?
-      card.errors.on(:zip).should == 'is required'
+      card.errors.on(:zip).should == @blank_message
+    end
+
+    it "should change blank error messages" do
+      card = ExtCreditCard.new :first_name => ''
+      card.valid?
+      card.errors.on(:first_name).should == @blank_message
     end
   end
 end

@@ -3,12 +3,11 @@
 .alert-popup
   %h1 Upgrade
   .text
-    %br
-    This feature is not available in this package. 
-    %br
-    Would you like to upgrade?
+    Please upgrade your plan in the preferences window to use this feature. 
+    For more details on plans visit the 
+    = link_to 'marketing site.', 'http://www.takeastep.me/editfu-pricing/', :target => '_blank'
 
   .popup-action-bar
     = link_to_function "No", "hidePopup();", :class => 'action cancel'
-    = link_to_remote "Yes", :url => owner_preferences_path, :method => :get |
+    = link_to_remote "Yes", :url => owner_preferences_path, :method => :get, |
       :html => {:class => 'action'} |

@@ -12,7 +12,7 @@ describe User do
       @user.password_confirmation = @user.password = "123456"
 
       @user.save.should be_false
-      @user.errors.on(:current_password).should  == "can't be blank"
+      @user.errors.on(:current_password).should  == I18n.t('activerecord.errors.messages.blank')
     end
 
     it "shouldn't require current password if both password and confirmation are blank" do
