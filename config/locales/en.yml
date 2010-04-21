@@ -59,6 +59,16 @@ en:
     upgraded: "You have successfully upgraded from the 
       <strong>{{plan_was}} Plan</strong> to the <strong>Pro Plan</strong>."
 
+  passwords:
+    dont_match: "The new password and confirm password field do not match. 
+      Please reenter and try again."
+    current:
+      invalid: "Your current password is incorrect."
+    blank: 
+      change: "To change a password you must fill in the current, 
+        new, and confirm password fields."
+      new: "You must fill in the new and confirm password fields."
+    
   admin:
     owner:
       canceled: "{{email}} was canceled."

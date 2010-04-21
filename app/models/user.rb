@@ -1,9 +1,13 @@
 class User < ActiveRecord::Base
-  devise :all, :except => :confirmable
+  devise :all, :except => [:confirmable, :validatable]
   include Devise::Models::Confirmable
 
-  validates_presence_of :user_name
-  validates_presence_of :current_password, :if => :current_password_required?
+  EMAIL_REGEX = /\A[\w\.%\+\-]+@(?:[A-Z0-9\-]+\.)+(?:[A-Z]{2,4}|museum|travel)\z/i
+
+  validates_presence_of :email, :user_name
+  validates_uniqueness_of :email
+  validates_format_of :email, :with => EMAIL_REGEX
+  validates_length_of :password, :within => 6..20, :if => :password_required?
 
   attr_reader :current_password
   attr_accessor :current_password
@@ -45,9 +49,24 @@ class User < ActiveRecord::Base
   protected
 
   def validate
-    if current_password_required? 
-      if !current_password.blank? && password_digest_was(current_password) != encrypted_password_was
-        errors.add(:current_password, "doesn't match")
+    super
+
+    if password_required?
+      if current_password_required? && 
+        (current_password.blank? || password.blank? || password_confirmation.blank?)
+        errors.add_to_base I18n.t('passwords.blank.change')
+      elsif password.blank? || password_confirmation.blank?
+        errors.add_to_base I18n.t('passwords.blank.new')
+      end
+
+      if password != password_confirmation
+        errors.add_to_base I18n.t('passwords.dont_match')
+      end
+
+      if current_password_required? 
+        if !current_password.blank? && password_digest_was(current_password) != encrypted_password_was
+          errors.add_to_base I18n.t('passwords.current.invalid')
+        end
       end
     end
   end
