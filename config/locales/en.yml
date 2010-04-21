@@ -11,7 +11,7 @@ en:
     errors:
       messages:
         too_short: 'is too short (min length is {{count}})'
-        blank: 'is required'
+        blank: 'This is a required field.'
 
   credit_card:
     authorize: "Can't authorize credit card. Please check your balance."

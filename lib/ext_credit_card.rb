@@ -23,14 +23,14 @@ class ExtCreditCard < ActiveMerchant::Billing::CreditCard
     e = errors.on(:year)
     errors.add(:expiration, e) if e
 
-    errors.add(:zip, 'is required') if zip.blank?
+    errors.add(:zip, blank_message) if zip.blank?
   end
 
   private
 
   def validate_expiration
     if @expiration.blank?
-      errors.add :expiration, "cannot be empty"
+      errors.add :expiration, blank_message
     elsif !expiration_format_valid?
       errors.add :expiration, "is invalid"
     end
@@ -44,9 +44,13 @@ class ExtCreditCard < ActiveMerchant::Billing::CreditCard
     errors.each do |k, v|
       v.each_index do |i|
         if v[i] == "cannot be empty"
-          v[i] = I18n.t('activerecord.errors.messages.blank')
+          v[i] = blank_message
         end
       end
     end
+  end
+
+  def blank_message
+    I18n.t('activerecord.errors.messages.blank')
   end
 end
