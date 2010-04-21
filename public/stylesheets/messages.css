@@ -38,12 +38,8 @@
   background: #60cc97;
 }
 
-.message.warning {
-  background: #fcdc6b;
-}
-
-.message.info {
-  background: #fcdc6b;
+.message.warning, .message.info {
+  background: #dcab35;
 }
 
 .message.error, .message.failure {
