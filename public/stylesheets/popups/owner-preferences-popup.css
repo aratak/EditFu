@@ -43,6 +43,7 @@
 
 #owner-preferences-popup .plan {
   background: #464646;
+  position: relative;
 }
 
 #owner-preferences-popup .plan input[type=radio] {
@@ -56,7 +57,7 @@
 
 #owner-preferences-popup .plan .plan-wrapper {
   margin-top: -37px;
-  margin-left: 38%;
+  margin-left: 70%;
 }
 
 #owner-preferences-popup .plan .plan-label {
@@ -67,6 +68,7 @@
   vertical-align: top;
   margin-bottom: 2em;
   padding: 0 1em 1em;
+  width: 100px;
 }
 
 #owner-preferences-popup .plan .plan-label.checked {
@@ -120,6 +122,8 @@
 }
 
 #owner-preferences-popup .plan small.description {
+  position: absolute;
+  bottom: 0;
   color: #b7b7b7;
 }
 
