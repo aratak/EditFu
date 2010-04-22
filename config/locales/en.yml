@@ -6,6 +6,9 @@ en:
       disabled: 'Your account is temporarily disabled by administrator.'
       invalid: 'Your username or password was incorrect, please try again.'
       timeout: 'Your EditFu session has expired. Please login again to continue working.'
+      wrong_subdomain: 'Your attempting to login to the wrong companies system. 
+        Based on the email address your using were showing that the 
+        correct company address is {{company}}.  You can also visit {{editfu}} to login.'
 
   activerecord:
     errors:

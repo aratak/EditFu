@@ -4,7 +4,11 @@ class SessionsController < ApplicationController
   def new
     Devise::FLASH_MESSAGES.each do |message|
       if params.try(:[], message) == "true"
-        flash.now[:failure] = I18n.t("devise.sessions.#{message}")
+        flash.now[:error] = I18n.t("devise.sessions.#{message}")
+      elsif wrong_subdomain?
+        flash.now[:error] = I18n.t('devise.sessions.wrong_subdomain', 
+          :company => MessageKeywords.company_domain(current_user),
+          :editfu => MessageKeywords.editfu)
       end
     end
     @user = User.new

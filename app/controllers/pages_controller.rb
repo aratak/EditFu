@@ -1,7 +1,7 @@
 require 'ftp_client'
 
 class PagesController < ApplicationController
-  before_filter :authenticate_user!, :only => [:show, :update]
+  before_filter :authenticate_all!, :only => [:show, :update]
   before_filter :authenticate_owner!, :except => [:show, :update]
 
   def show

@@ -1,5 +1,5 @@
 class SitesController < ApplicationController
-  before_filter :authenticate_user!, :only => [:index]
+  before_filter :authenticate_all!, :only => [:index]
   before_filter :authenticate_owner!, :except => [:index, :ls]
   layout nil
 

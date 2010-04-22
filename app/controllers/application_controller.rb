@@ -5,7 +5,6 @@ class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
-  before_filter :redirect_to_subdomain if RAILS_ENV != 'test'
   layout nil
   
   filter_parameter_logging 'password', 'card'
@@ -21,6 +20,10 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+
+  def authenticate_all!
+    authenticate_user_type!(User)
+  end
 
   def authenticate_owner!
     authenticate_user_type!(Owner)
@@ -38,6 +41,11 @@ class ApplicationController < ActionController::Base
     head :'X-Location' => path
   end
 
+  def wrong_subdomain?
+    user_signed_in? && request.host =~ /(.*)\.#{BASE_DOMAIN}$/ && 
+      current_user.subdomain != $1
+  end
+
   private
 
   def render_message(message)
@@ -52,32 +60,35 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def redirect_to_subdomain
-    if can_redirect?
-      host = desired_host
-      if request.host != host
-        redirect_to request.protocol + host + request.port_string + request.request_uri
-      end
-    end
-  end
-
-  def desired_host
-    if !user_signed_in?
-      BASE_DOMAIN
-    else
-      current_user.company_domain
-    end
-  end
-
   def authenticate_user_type!(type)
     authenticate_user!
 
-    if user_signed_in? && !current_user.kind_of?(type)
+    if correct_subdomain! && user_signed_in? && !current_user.kind_of?(type)
       redirect_to root_path
     end
   end
   
   def can_redirect?
-    request.get? && !request.xhr?
+    RAILS_ENV != 'test' && request.get? && !request.xhr?
+  end
+
+  def company_url
+    request.protocol + current_user.company_domain + request.port_string + request.request_uri
+  end
+
+  def correct_subdomain!
+    if can_redirect?
+      if wrong_subdomain?
+        redirect_to root_path
+        return false
+      elsif request.host == BASE_DOMAIN 
+        if user_signed_in?
+          redirect_to company_url
+          return false
+        end
+      end
+    end
+
+    true
   end
 end
