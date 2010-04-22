@@ -24,8 +24,10 @@ class OwnerPreferencesController < ApplicationController
           else
             @owner.set_card @card
           end
-        rescue PaymentSystemError => e
-          render_message e.message
+        rescue PaymentSystemError
+          render_message I18n.t('plan.payment_error', 
+            :contact_us => MessageKeywords.contact_us('contact us'), 
+            :support => MessageKeywords.support_email)
         end
       end
     end
