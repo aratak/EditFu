@@ -44,8 +44,9 @@ module ApplicationHelper
     ([:info, :success, :warning, :error, :failure] & flash.keys).first
   end
 
-  def link_to_remove(path, text = 'Remove')
-    link_to_function text, "showConfirmPopup('#{path}')", :class => 'action important'
+  def link_to_remove(path, text = 'Remove', question = '')
+    link_to_function text, "showConfirmPopup('#{path}', '#{question}')", 
+      :class => 'action important'
   end
 
   def show_popup(page, *opts)

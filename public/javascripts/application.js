@@ -14,9 +14,12 @@ function clearMessage() {
   getActionBar().select('.message').invoke('remove');
 }
 
-function showConfirmPopup(href) {
+function showConfirmPopup(href, question) {
   $('popup').innerHTML = $('confirm-popup').innerHTML;
   $('popup').down('a.yes').href = href;
+  if(!question.blank()) {
+    $('popup').down('.text').innerHTML = question;
+  }
   showPopup();
 }
 

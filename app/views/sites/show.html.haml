@@ -8,7 +8,8 @@
   = content_for :actions do
     = link_to_remote 'Add Page', :url => new_site_page_path(@site), :method => :get
     = link_to_remote 'Site settings', :url => edit_site_path(@site), :method => :get
-    = link_to_remove site_path(@site), 'Remove this site'
+    = link_to_remove site_path(@site), 'Remove this site', |
+      'Are you sure you want to delete this site?' |
 
   %h2 Pages
   - form_remote_tag :url => enable_site_pages_path(@site), :html => { :id => 'pages_form' } do
