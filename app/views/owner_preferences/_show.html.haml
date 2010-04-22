@@ -64,6 +64,20 @@
                   %li 3 Pages
                   %li No Editors
             %small Current
+
+          - if @owner.plan == 'trial'
+            = owner.radio_button 'plan', 'trial', :class => 'radio'
+            .plan-label.selected
+              %label(for='preferences_owner_plan_trial')
+              %dl
+                %dt Trial
+                %dd
+                  %ul 
+                    %li Unlimited Sites
+                    %li Unlimited Pages
+                    %li Unlimited Editors
+              %small Current
+        .clear
         %small.description Click on a different package to upgrade or downgarde...
     - f.fields_for :card, @card do |card|
       .billing.inputs

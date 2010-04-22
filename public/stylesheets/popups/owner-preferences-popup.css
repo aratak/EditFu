@@ -57,7 +57,8 @@
 
 #owner-preferences-popup .plan .plan-wrapper {
   margin-top: -37px;
-  margin-left: 70%;
+  margin-right: 10px;
+  float: right;
 }
 
 #owner-preferences-popup .plan .plan-label {
@@ -105,7 +106,7 @@
 
 #owner-preferences-popup .plan .plan-label dl dt {
   font-size: 20px;
-  padding-bottom: 0.5em;
+  padding-bottom: 5px;
 }
 
 #owner-preferences-popup .plan .plan-label dl dd {
