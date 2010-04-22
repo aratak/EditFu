@@ -1,6 +1,12 @@
 require 'net/ftp'
 
 class FtpClientError < RuntimeError
+  attr_reader :code
+
+  def initialize(message = nil, code = nil)
+    super message
+    @code = code
+  end
 end
 
 class FtpClient
@@ -137,6 +143,6 @@ class FtpClient
       else
         e.message[4, e.message.length].strip
       end
-    FtpClientError.new(message)
+    FtpClientError.new(message, code)
   end
 end

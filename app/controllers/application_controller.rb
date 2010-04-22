@@ -38,14 +38,6 @@ class ApplicationController < ActionController::Base
     head :'X-Location' => path
   end
 
-  def connection_problem_message
-    if current_user.owner?
-      ['site.connection_problem.owner']
-    else
-      ['site.connection_problem.editor', {:owner => MessageKeywords.email(current_user.owner)}]
-    end
-  end
-
   private
 
   def render_message(message)

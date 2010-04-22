@@ -46,6 +46,11 @@ en:
         Contact {{support}} if you need further assistance.'
       editor: 'There was an error while trying to publish your updates. Please try again.
         If this problem continues please contact {{owner}} to resolve this issue.'
+    not_found:
+      owner: 'This page is missing from the server. Double check that it wasnʼt deleted. 
+        If you meant to remove this page you may want to remove it from EditFu as well.'
+      editor: 'This page is missing from the server. 
+        Please contact {{owner}}  to resolve this issue.'
   
   editor:
     permissions_updated: "Your changes were updated successfully"
