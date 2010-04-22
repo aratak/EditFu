@@ -69,7 +69,8 @@
   vertical-align: top;
   margin-bottom: 2em;
   padding: 0 1em 1em;
-  width: 100px;
+  width: 105px;
+  height: 110px;
 }
 
 #owner-preferences-popup .plan .plan-label.checked {
@@ -120,6 +121,14 @@
 
 #owner-preferences-popup .plan .plan-label dl dd ul li {
   list-style-type: none;
+}
+
+#owner-preferences-popup .plan .plan-label dl dd ul li.begins {
+  color: #acd373;
+}
+
+#owner-preferences-popup .plan .plan-label dl dd ul li.ends {
+  color: #fe6c4f;
 }
 
 #owner-preferences-popup .plan small.description {

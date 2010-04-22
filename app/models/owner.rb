@@ -34,8 +34,12 @@ class Owner < User
     !(plan == "free" && pages.count >= 3)
   end
 
+  def trial_period_end
+    30.days.since(confirmed_at).to_date
+  end
+
   def trial_period_expired?
-    plan == 'trial' && 30.days.since(confirmed_at).past?
+    plan == 'trial' && trial_period_end.past?
   end  
   
   def subdomain
@@ -110,10 +114,17 @@ class Owner < User
     d <= confirmed_at.to_date ? nil : d
   end
 
-  def next_billing_date
-    today = Date.today
-    this_bd = Date.new(today.year, today.month, billing_day)
+  def next_billing_date(date = Date.today)
+    this_bd = Date.new(date.year, date.month, billing_day)
     this_bd.past? ? this_bd.next_month : this_bd
+  end
+
+  def prof_plan_begins_at
+    if plan != 'professional'
+      next_billing_date
+    else
+      next_billing_date(confirmed_at)
+    end
   end
 
   def self.deliver_scheduled_messages

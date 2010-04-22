@@ -51,6 +51,7 @@
                   %li Unlimited Sites
                   %li Unlimited Pages
                   %li Unlimited Editors
+                  %li.begins Begins #{@owner.prof_plan_begins_at}
             %small Current
                   
           = owner.radio_button 'plan', 'free', :class => 'radio'
@@ -76,6 +77,7 @@
                     %li Unlimited Sites
                     %li Unlimited Pages
                     %li Unlimited Editors
+                    %li.ends Ends #{@owner.trial_period_end}
               %small Current
         .clear
         %small.description Click on a different package to upgrade or downgarde...
