@@ -1,6 +1,6 @@
 - inside_layout 'sites' do
   = javascript_include_tag 'tiny_mce/tiny_mce', 'page', 'popups/image-popup'
-  = stylesheet_link_tag 'page', 'popups/image-popup'
+  = stylesheet_link_tag 'page', 'popups/image-popup', 'popups/code-popup'
 
   - @title = @page.path
   - @hint = 'Edit sections below and then click publish to implement the changes to this page on the website.'
@@ -30,6 +30,15 @@
     - if @sections.present? && @images.present?
       = f.submit "Publish", :class => "update-button"
 
+  #code-popup-template(style='display: none;')
+    .code-popup.one-column-popup
+      %h1 HTML Code
+      - form_tag '#', :onsubmit => 'updateHtmlCode(); return false;' do
+        = text_area_tag :code
+        .popup-action-bar
+          = link_to_function "Cancel", "hidePopup();", :class => 'action cancel'
+          = submit_tag 'Update'
+    
   :javascript
     initTinyMCE({
       site_url: '#{@site.http_url}',
