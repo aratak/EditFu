@@ -11,6 +11,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resource :simple_preferences
   map.resource :owner_preferences, :member => { :downgrade => :post }
+  map.resource :identity
 
   map.resources :sites, :collection => { :ls => :get, :tree => :get } do |site|
     site.resources :pages, :collection => { :enable => :post }

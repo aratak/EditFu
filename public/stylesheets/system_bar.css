@@ -17,6 +17,17 @@
   background: url(/images/logo.png) center top no-repeat;
 }
 
+#system-bar .change-branding {
+  font-family: helvetica;
+  font-weight: bold;
+  font-size: 10px;
+  text-decoration: underline;
+  color: #f3a39d;
+  line-height: 50px;
+  position: absolute;
+  left: 55%;
+}
+
 #system-bar .system-link {
   float: right;
   margin-right: 10px;

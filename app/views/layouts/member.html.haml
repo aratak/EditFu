@@ -16,6 +16,9 @@
       #system-bar
         = yield :tabs
         = link_to "", root_path, :class => "logo"
+        - owner? do
+          = link_to_remote "Change branding", |
+            :url => identity_path, :method => :get, :html => { :class => 'change-branding' } |
 
         = link_to 'Logout', destroy_user_session_path, :class => 'system-link', :id => 'logout'
         - unless current_user.admin?

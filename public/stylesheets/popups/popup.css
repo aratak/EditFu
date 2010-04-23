@@ -72,7 +72,7 @@
 
 .popup .popup-action-bar small.description {
   position: absolute;
-  top: -17px;
+  bottom: 55px;
   left: 12px;
   font-size: 10px;
 }

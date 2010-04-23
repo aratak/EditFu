@@ -82,6 +82,9 @@ en:
         new, and confirm password fields."
       new: "You must fill in the new and confirm password fields."
     
+  identity:
+    updated: "Your branding was changed."
+
   admin:
     owner:
       canceled: "{{email}} was canceled."
