@@ -6,9 +6,12 @@
 
     = stylesheet_link_tag 'reset', 'public', 'input', 'action_bar', 'messages'
     = javascript_include_tag :defaults, 'css'
-  %body.public
-    %img#art-bg(src='/images/public-bg.jpg')
-    %img#logo(src='/images/editfu.png')
+  %body.public{:class => (@company_logo.blank? ? nil : 'company')}
+    - if @company_logo.present?
+      #company-logo= @company_logo
+    - else
+      %img#art-bg(src='/images/public-bg.jpg')
+      %img#editfu-logo(src='/images/editfu.png')
     #main
       = yield
     #action-bar

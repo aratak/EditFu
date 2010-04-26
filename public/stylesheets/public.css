@@ -4,16 +4,31 @@ html > body {
   min-width: 800px;
 }
 
+html > body.company {
+  background: #dfdfdf;
+}
+
 #art-bg {
   position: absolute;
   right: 165px;
   bottom: 0;
 }
 
-#logo {
+#editfu-logo {
   position: absolute;
   right: 20px;
   bottom: 110px;
+}
+
+#company-logo {
+  position: absolute;
+  left: 30px;
+  top: 40px;
+  font-family: helvetica;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 30px;
+  color: #000000;
 }
 
 #main {

@@ -1,4 +1,6 @@
 class PasswordsController < ApplicationController
+  before_filter :load_company_logo
+
   def new
     @user = User.new
   end

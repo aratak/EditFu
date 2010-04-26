@@ -19,6 +19,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def request_subdomain
+    request.host =~ /(.*)\.#{BASE_DOMAIN}$/
+    $1
+  end
+
   protected
 
   def authenticate_all!
@@ -42,8 +47,15 @@ class ApplicationController < ActionController::Base
   end
 
   def wrong_subdomain?
-    user_signed_in? && request.host =~ /(.*)\.#{BASE_DOMAIN}$/ && 
-      current_user.subdomain != $1
+    user_signed_in? && current_user.subdomain != request_subdomain
+  end
+
+  def load_company_logo
+    subdomain = request_subdomain
+    if subdomain.present?
+      @company_owner = Owner.find_by_domain_name subdomain
+      @company_logo = @company_owner.identity if @company_owner
+    end
   end
 
   private

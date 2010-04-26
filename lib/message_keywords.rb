@@ -27,12 +27,12 @@ module MessageKeywords
     link_to user.company_domain
   end
 
-  private
-
   def self.email_link(email)
     link_to_blank(email, 'mailto:' + email)
   end
   
+  private
+
   def self.link_to(domain)
     "<a href='http://#{domain}'>#{domain}</a>"
   end

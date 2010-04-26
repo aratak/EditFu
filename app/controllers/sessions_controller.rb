@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   layout 'public'
+  before_filter :load_company_logo
 
   def new
     Devise::FLASH_MESSAGES.each do |message|

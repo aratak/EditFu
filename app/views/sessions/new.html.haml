@@ -11,9 +11,14 @@
     = submit_tag 'Login', :class => 'submit'
   #hint
     #signup.hint
-      Not an Editfu Member? 
-      = link_to 'Learn more', '#'
-      or 
-      = link_to 'Sign up.', new_owner_path
+      - if @company_logo.present?
+        Need a login? Contact admin at 
+        = mail_to @company_owner.email
+        and request one.
+      - else
+        Not an Editfu Member? 
+        = link_to 'Learn more', '#'
+        or 
+        = link_to 'Sign up.', new_owner_path
     #forgot.hint
       = link_to 'Forgot Password?', new_password_path(:user)
