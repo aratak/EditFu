@@ -18,21 +18,21 @@
   text-align: center;
 }
 
-#system-bar .center .logo {
+#system-bar #system-logo {
   position: relative;
   display: inline-block;
   zoom: 1;
   *display: inline;
 }
 
-#system-bar .center .logo a.editfu {
+#system-bar #system-logo a.editfu {
   display: block;
   background: url(/images/logo.png) center top no-repeat;
   width: 55px;
   height: 75px;
 }
 
-#system-bar .center .logo a.company {
+#system-bar #system-logo a.company {
   font-family: helvetica;
   font-weight: bold;
   font-size: 30px;
@@ -41,7 +41,7 @@
   color: #000000;
 }
 
-#system-bar .logo .change-branding {
+#system-bar #system-logo .change-branding {
   font-family: helvetica;
   font-weight: bold;
   font-size: 10px;

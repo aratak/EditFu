@@ -1,1 +1,2 @@
+page.replace_html 'system-logo', :partial => 'layouts/logo'
 hide_popup page, 'identity.updated'
