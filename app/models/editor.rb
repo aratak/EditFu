@@ -43,6 +43,10 @@ class Editor < User
     owner.enabled?
   end
 
+  def hold?
+    owner.hold?
+  end
+
   protected
 
   def before_update

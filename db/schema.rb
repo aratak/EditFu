@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100423134013) do
+ActiveRecord::Schema.define(:version => 20100427105037) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(:version => 20100423134013) do
     t.string   "user_name"
     t.date     "card_exp_date"
     t.string   "identity"
+    t.boolean  "hold"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

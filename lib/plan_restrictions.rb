@@ -1,14 +1,22 @@
 module PlanRestrictions
+  ALL_ACTIONS = ["pages/show", "pages/update", "pages/new", "pages/create", 
+                 "sites/new", "sites/create", "editors/new", "editors/create"]
+
   def self.included m
     return unless m < ActionController::Base
-    m.before_filter :check_trial_period, :check_add_page, :check_add_site, :check_add_editor
+    m.before_filter :check_trial_period, :check_add_page, :check_add_site, :check_add_editor, :check_hold
+  end
+
+  def check_hold
+    show_popup "shared/hold",
+               :if => :"hold?", 
+               :for => ALL_ACTIONS
   end
 
   def check_trial_period
     show_popup "shared/trial_period_expired",
                :if => :"trial_period_expired?", 
-               :for => ["pages/show", "pages/update", "pages/new", "pages/create", 
-                        "sites/new", "sites/create", "editors/new", "editors/create"]
+               :for => ALL_ACTIONS
   end
   
   def check_add_page

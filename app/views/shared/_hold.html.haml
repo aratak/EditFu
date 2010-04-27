@@ -1,0 +1,11 @@
+= stylesheet_link_tag 'popups/alert-popup'
+
+.alert-popup
+  %h1 Account hold
+  .text
+    %br
+    Account hold due to credit cards.
+    %br
+
+  .popup-action-bar
+    = link_to_function "Close", "hidePopup();", :class => 'action cancel'
