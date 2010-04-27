@@ -80,6 +80,8 @@ class ApplicationController < ActionController::Base
     if correct_subdomain! && user_signed_in? && !current_user.kind_of?(type)
       redirect_to new_user_session_path
     end
+
+    session[:'user.return_to'] = request.request_uri if can_redirect?
   end
   
   def can_redirect?
