@@ -52,11 +52,13 @@ function appendInputError(input, blank, message) {
 }
 
 function showPopup() {
+  document.documentElement.style.overflow = 'hidden';
   $('popup-system').show();
   $('popup-system').scrollTo();
 }
 
 function hidePopup() {
+  document.documentElement.style.overflow = null;
   $('all').style.overflow = 'visible';
   $('popup-hider').up().fade({ duration: 0.2});
   $('popup').innerHTML = '';

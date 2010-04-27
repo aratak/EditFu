@@ -53,12 +53,6 @@ var Behaviours = function() {
       });
     },
 
-    popup: function() {
-      Event.observe('popup-hider', 'click', function(e) {
-        hidePopup()
-      })
-    },
-    
     message: function() {
       $$('.message').each(function(message) {
         Event.observe(message, 'click', function() {
@@ -73,9 +67,6 @@ var Behaviours = function() {
 Event.observe(window, 'load', function() {
   Behaviours.labels();
   Behaviours.radioButtons();
-  if($('popup-hider')) {
-    Behaviours.popup();
-  }
   Behaviours.message();
 })
 
