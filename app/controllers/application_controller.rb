@@ -13,15 +13,16 @@ class ApplicationController < ActionController::Base
 
   def user_root_path
     if current_user.admin?
-      admin_owners_path
+      path = admin_owners_path
     else
-      sites_path
+      path = sites_path
     end
+    RAILS_ENV == 'test' ? path: company_url(path)
   end
 
   def request_subdomain
     request.host =~ /(.*)\.#{BASE_DOMAIN}$/
-    $1
+    $1 != 'www' ? $1 : nil
   end
 
   protected
@@ -47,7 +48,8 @@ class ApplicationController < ActionController::Base
   end
 
   def wrong_subdomain?
-    user_signed_in? && current_user.subdomain != request_subdomain
+    rs = request_subdomain
+    user_signed_in? && rs.present? && current_user.subdomain != rs
   end
 
   def load_company_logo
@@ -76,7 +78,7 @@ class ApplicationController < ActionController::Base
     authenticate_user!
 
     if correct_subdomain! && user_signed_in? && !current_user.kind_of?(type)
-      redirect_to root_path
+      redirect_to new_user_session_path
     end
   end
   
@@ -84,18 +86,18 @@ class ApplicationController < ActionController::Base
     RAILS_ENV != 'test' && request.get? && !request.xhr?
   end
 
-  def company_url
-    request.protocol + current_user.company_domain + request.port_string + request.request_uri
+  def company_url(path)
+    request.protocol + current_user.company_domain + request.port_string + path
   end
 
   def correct_subdomain!
     if can_redirect?
       if wrong_subdomain?
-        redirect_to root_path
+        redirect_to new_user_session_path
         return false
       elsif request.host == BASE_DOMAIN 
         if user_signed_in?
-          redirect_to company_url
+          redirect_to company_url(request.request_uri)
           return false
         end
       end

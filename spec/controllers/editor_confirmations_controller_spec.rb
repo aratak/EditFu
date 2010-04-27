@@ -23,7 +23,7 @@ describe EditorConfirmationsController do
     it "should reject site owners" do
       post :update, @owner.attributes
 
-      response.should redirect_to(root_path)
+      response.should redirect_to(new_user_session_url)
       assigns(:editor).should be_nil
     end
 

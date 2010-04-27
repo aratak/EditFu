@@ -13,7 +13,7 @@ class EditorConfirmationsController < ApplicationController
 
     if @editor.valid?
       @editor.confirm!
-      sign_in_and_redirect @editor
+      sign_in_and_redirect :user, @editor
     else
       render :edit
     end
@@ -25,7 +25,7 @@ class EditorConfirmationsController < ApplicationController
     @editor = Editor.find_by_confirmation_token params[:confirmation_token]
     unless @editor 
       flash[:failure] = 'Invalid confirmation token.'
-      redirect_to root_path
+      redirect_to new_user_session_path
     end
   end
 end
