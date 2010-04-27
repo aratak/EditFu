@@ -15,12 +15,15 @@
   margin-left: 15px;
 }
 
-#owner-card .enabled-row {
+#owner-card .status-row {
   font-size: 12px;
   width: 185px;
-  line-height: 20px;
-  padding-left: 5px;
   margin-bottom: 15px;
   background: #787878;
   color: white;
+}
+
+#owner-card .status-row span {
+  margin-left: 20px;
+  line-height: 20px;
 }

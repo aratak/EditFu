@@ -13,10 +13,15 @@
 = content_for :actions do
   = link_to_remove admin_owner_path(@owner), 'Delete'
 
-- form_tag enable_admin_owner_path(@owner), :id => 'owner-card' do
-  .enabled-row
-    = check_box_tag :enabled, 1, @owner.enabled
-    = label_tag :enabled, 'Active User'
+- form_for [:admin, @owner], :html => { :id => 'owner-card' } do |f|
+  .status-row
+    %span.enabled
+      = f.check_box :enabled
+      = f.label :enabled, 'Active User'
+
+    %span.hold
+      = f.check_box :hold
+      = f.label :hold
   = submit_tag "Update", :class => "update-button"
 
   .row

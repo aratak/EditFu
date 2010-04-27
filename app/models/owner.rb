@@ -136,6 +136,10 @@ class Owner < User
   protected
 
   def before_update
+    if hold && hold_changed?
+      Mailer.deliver_hold(self)
+    end
+
     if plan == "free" && plan_changed?
       editors.clear
     end

@@ -21,11 +21,12 @@ class Admin::OwnersController < ApplicationController
     redirect_to admin_owners_path
   end
 
-  def enable
-    find_owner.enabled = params[:enabled]
+  def update
+    find_owner.enabled = params[:owner][:enabled]
+    find_owner.hold = params[:owner][:hold]
     @owner.save!
 
-    flash[:success] = I18n.t('admin.owner.enabled')
+    flash[:success] = I18n.t('admin.owner.updated')
     redirect_to admin_owner_path(@owner)
   end
 

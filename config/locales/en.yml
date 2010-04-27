@@ -88,4 +88,4 @@ en:
   admin:
     owner:
       canceled: "{{email}} was canceled."
-      enabled: "Owner status was changed"
+      updated: "Owner was updated"

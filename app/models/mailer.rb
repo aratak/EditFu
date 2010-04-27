@@ -71,6 +71,11 @@ class Mailer < ActionMailer::Base
     subject 'EditFu trial.'
   end
 
+  def hold(user)
+    setup   user
+    subject 'EditFu account hold'
+  end
+
   private
 
   def setup(user)

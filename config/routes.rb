@@ -19,7 +19,7 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.namespace :admin do |admin|
-    admin.resources :owners, :member => { :enable => :post }
+    admin.resources :owners
     admin.resources :audits
   end
 
