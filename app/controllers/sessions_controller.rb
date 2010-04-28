@@ -21,7 +21,9 @@ class SessionsController < ApplicationController
     if authenticate(:user)
       @user = User.find_by_email(params[:user][:email])
       flash[:success] = I18n.t("devise.sessions.signed_in", :user_name => @user.user_name)
-      sign_in_and_redirect(:user)
+      location = stored_location_for(:user) || 
+        current_user.last_requested_uri || user_root_path
+      redirect_to location
     else
       message = warden.message || :invalid
       flash.now[:failure] = I18n.t("devise.sessions.#{message}")

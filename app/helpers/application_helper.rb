@@ -40,7 +40,7 @@ module ApplicationHelper
   end
 
   def message_kind
-    ([:info, :success, :warning, :error, :failure] & flash.keys).first
+    ([:error, :failure, :warning, :info, :success] & flash.keys).first
   end
 
   def link_to_remove(path, text = 'Remove', question = '')

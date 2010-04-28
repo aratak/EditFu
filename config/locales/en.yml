@@ -9,6 +9,8 @@ en:
       wrong_subdomain: 'Your attempting to login to the wrong companies system. 
         Based on the email address your using were showing that the 
         correct company address is {{company}}.  You can also visit {{editfu}} to login.'
+      permissions: 'You have no permissions to view requested page.
+        Please login with appropriate credentials.'
 
   activerecord:
     errors:

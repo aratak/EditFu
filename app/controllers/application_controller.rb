@@ -78,10 +78,14 @@ class ApplicationController < ActionController::Base
     authenticate_user!
 
     if correct_subdomain! && user_signed_in? && !current_user.kind_of?(type)
+      flash[:warning] = I18n.t('devise.sessions.permissions')
       redirect_to new_user_session_path
     end
 
-    session[:'user.return_to'] = request.request_uri if can_redirect?
+    if can_redirect?
+      current_user.last_requested_uri = request.request_uri
+      current_user.save
+    end
   end
   
   def can_redirect?
