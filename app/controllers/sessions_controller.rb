@@ -19,8 +19,7 @@ class SessionsController < ApplicationController
     sign_out(:user) if signed_in?(:user)
 
     if authenticate(:user)
-      @user = User.find_by_email(params[:user][:email])
-      flash[:success] = I18n.t("devise.sessions.signed_in", :user_name => @user.user_name)
+      flash[:success] = I18n.t("devise.sessions.signed_in", :user_name => current_user.user_name)
       location = stored_location_for(:user) || 
         current_user.last_requested_uri || user_root_path
       redirect_to location
