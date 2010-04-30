@@ -134,6 +134,8 @@
         .clear
 
     .popup-action-bar
-      = link_to_remove owner_path, 'Cancel My Account'
+      = link_to_remove owner_path, |
+        'Cancel My Account', |
+        'Are you sure? This cannot be undone.' |
       = f.submit "Update"
       = link_to_function "Cancel", "hidePopup();", :class => 'action cancel'
