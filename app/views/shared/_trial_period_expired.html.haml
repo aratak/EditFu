@@ -1,19 +1,17 @@
 = stylesheet_link_tag 'popups/alert-popup'
 
 .alert-popup
-  %h1 Software trial period has expired
+  %h1 Trial expired
   .text
     - if current_user.owner?
       %br
-      You should switch to ether Free or 
-      %br 
-      Professional plans for using this feature.
+      The trial has ended. Please choose a plan. 
     - else
       %br
       Please inform your site owner about trial period expiration.
 
   .popup-action-bar
-    = link_to_function "Close", "hidePopup();", :class => 'action cancel'
     - if current_user.owner?
-      = link_to_remote "Switch", :url => owner_preferences_path, :method => :get, |
+      = link_to_remote "Choose", :url => owner_preferences_path, :method => :get, |
         :html => {:class => 'action'} |
+    = link_to_function "Close", "hidePopup();", :class => 'action cancel'
