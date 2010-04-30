@@ -1,5 +1,29 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: #79c7ee;
+}
+
+#all {
+    position: relative;
+    height: 100%;
+    min-height: 100%;
+    width: 968px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+html > body.public.general #all {
+    background: url(/images/public-bg.png) bottom right no-repeat;
+}
+
+html>body #all {
+    height: auto;
+}
+
+
 html > body {
-  background: #82e9ff;
   min-height: 580px;
   min-width: 800px;
 }
