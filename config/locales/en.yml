@@ -67,8 +67,7 @@ en:
     updated: "Your preferences were updated successfully"
 
   plan:
-    downgraded: "You have successfully downgraded from the <strong>Pro Plan</strong>
-      to the <strong>Free Plan</strong>."
+    downgraded: "You have successfully downgraded free plan."
     upgraded: "You have successfully upgraded from the 
       <strong>{{plan_was}} Plan</strong> to the <strong>Pro Plan</strong>."
     payment_error: "Were sorry, but the transaction did not go through due to 
