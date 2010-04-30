@@ -55,10 +55,12 @@ function showPopup() {
   document.documentElement.style.overflow = 'hidden';
   $('popup-system').show();
   $('popup-system').scrollTo();
+  // $$('body').first().setStyle({ minHeight: $('popup').getHeight() + 80 + "px" });
 }
 
 function hidePopup() {
   document.documentElement.style.overflow = null;
+  // $$('body').first().setStyle({ minHeight: "auto" });
   $('all').style.overflow = 'visible';
   $('popup-hider').up().fade({ duration: 0.2});
   $('popup').innerHTML = '';
