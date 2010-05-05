@@ -3,6 +3,8 @@ class EditorsController < ApplicationController
   layout nil
 
   def index
+    return if redirect_from_cookie(:editors_url)
+    
     unless current_user.editors.empty?
       redirect_to editor_path(current_user.editors.first)
     end

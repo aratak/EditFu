@@ -4,6 +4,8 @@ class SitesController < ApplicationController
   layout nil
 
   def index
+    return if redirect_from_cookie(:sites_url);
+    
     if current_user.owner?
       @site = current_user.sites.first
       redirect_to site_path(@site) if @site
