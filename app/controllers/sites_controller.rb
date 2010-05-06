@@ -1,11 +1,10 @@
 class SitesController < ApplicationController
   before_filter :authenticate_all!, :only => [:index]
   before_filter :authenticate_owner!, :except => [:index, :ls]
+  before_filter :redirect_from_cookie, :only => [:index]
   layout nil
 
   def index
-    return if redirect_from_cookie(:sites_url);
-    
     if current_user.owner?
       @site = current_user.sites.first
       redirect_to site_path(@site) if @site

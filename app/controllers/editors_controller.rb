@@ -1,10 +1,9 @@
 class EditorsController < ApplicationController
   before_filter :authenticate_owner!
+  before_filter :redirect_from_cookie, :only => [:index]
   layout nil
 
   def index
-    return if redirect_from_cookie(:editors_url)
-    
     unless current_user.editors.empty?
       redirect_to editor_path(current_user.editors.first)
     end

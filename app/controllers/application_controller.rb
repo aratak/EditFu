@@ -9,9 +9,8 @@ class ApplicationController < ActionController::Base
   
   filter_parameter_logging 'password', 'card'
 
-  after_filter :store_uri_to_cookie
-
   include PlanRestrictions
+  include StoreTabUri
 
   def user_root_path
     if current_user.admin?
@@ -90,30 +89,10 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  def redirect_from_cookie cookie_name
-    cookie_name = cookie_name.to_s
-    should_be_redirected = can_redirect? && cookies[cookie_name].to_s.any? && !(cookies[cookie_name] == request.request_uri)
-    
-    redirect_to cookies[cookie_name] if should_be_redirected
-    should_be_redirected
-  end
-  
-  def store_uri_to_cookie
-    if can_redirect?
-      uri = request.request_uri
-
-      if uri.scan(/^\/sites*/).any?
-        cookies[:sites_url] = request.request_uri
-      elsif uri.scan(/^\/editors*/).any?
-        cookies[:editors_url] = request.request_uri
-      end
-    end
-  end
-
   def can_redirect?
     RAILS_ENV != 'test' && request.get? && !request.xhr?
   end
-
+  
   def company_url(path)
     request.protocol + current_user.company_domain + request.port_string + path
   end
