@@ -232,4 +232,17 @@ describe Owner do
       @owner.prev_billing_date.should be_nil
     end
   end
+  
+  describe "set_default_domain_name" do
+
+    it "should set default domain name" do
+      fail
+    end
+
+    it "shouldn't set existing domain name" do
+      fail
+    end
+
+  end
+  
 end

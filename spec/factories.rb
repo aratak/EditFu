@@ -7,7 +7,7 @@ end
 
 Factory.define :owner, :class => :owner, :parent => :user do |o|
   o.sequence(:user_name) { |s| "owner#{s}" }
-  o.sequence(:domain_name) { |s| "domain#{s}" }
+  o.sequence(:company_name) { |s| "Domain#{s}" }
   o.plan "trial"
 end
 

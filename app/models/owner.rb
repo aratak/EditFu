@@ -2,6 +2,8 @@ class Owner < User
   @@plans = %w(trial free professional)
 
   acts_as_audited :only => [:plan]
+  
+  before_validation_on_create :set_default_domain_name
 
   attr_accessible :domain_name
 
@@ -13,11 +15,24 @@ class Owner < User
   # Validations
   validates_presence_of  :plan, :domain_name
   validates_inclusion_of :plan, :in => @@plans
+  validates_presence_of :company_name
+  validates_length_of :company_name, :within => 3..255
   validates_uniqueness_of :domain_name
   validates_format_of :domain_name, :with => /^\w+$/
   validates_exclusion_of :domain_name, :in => %w(www admin)
 
   # Methods
+  
+  def set_default_domain_name previous_domain_name=nil, count=nil
+    possible_name = previous_domain_name || company_name.to_s.parameterize
+    
+    if (self.class.count(:all, :conditions => { :domain_name => possible_name }) == 0)
+      self.domain_name = "#{possible_name}#{count}"
+    else
+      set_default_domain_name("#{possible_name}", count.to_i+1)
+    end
+  end
+  
   def self.plans
     @@plans
   end

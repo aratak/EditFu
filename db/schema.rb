@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100428080043) do
+ActiveRecord::Schema.define(:version => 20100506140834) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(:version => 20100428080043) do
     t.string   "identity"
     t.boolean  "hold"
     t.string   "last_requested_uri",   :limit => 128
+    t.string   "company_name"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
