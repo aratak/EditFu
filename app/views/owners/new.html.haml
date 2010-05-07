@@ -5,17 +5,25 @@
     .inputs
       .inputs-row
         .label-input
+          %span.hint Subdomain address
           = f.text_field :domain_name
           = f.label :domain_name, 'Company Name'
+          %span.description Company or other unique name.
         .label-input
+          %span.hint Your name
           = f.text_field :user_name
           = f.label :user_name, 'Your Name'
+          %span.description For identification.
         .label-input
+          %span.hint Your email
           = f.text_field :email
           = f.label :email
+          %span.description For login and communication.
         .label-input.password
+          %span.hint Password
           = f.password_field :password
           = f.label :password
+          %span.description
         .clear
 
       .label-input.password-confirmation
