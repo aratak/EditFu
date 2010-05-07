@@ -7,9 +7,9 @@ module StoreTabUri
   end
 
   def redirect_from_cookie cookie_name=nil
-    cookie_name = cookie_name || "#{controller_name}#{COOKIE_SUFFIX}"
+    session_name = session_name || "#{controller_name}#{COOKIE_SUFFIX}"
     
-    redirect_to(cookies[cookie_name.to_s]) and return false if should_be_redirected?(cookie_name)
+    redirect_to(session[session_name.to_s]) and return false if should_be_redirected?(session_name)
     return true
   end
   
@@ -18,14 +18,14 @@ module StoreTabUri
     uri = request.request_uri 
 
     if uri =~ /^\/(sites|editors).*/
-      cookies["#{$1}#{COOKIE_SUFFIX}"] = uri
+      session["#{$1}#{COOKIE_SUFFIX}"] = uri
     end
   end
-
+  
   private
 
-  def should_be_redirected? cookie_name
-    request.get? && !request.xhr? && cookies[cookie_name].to_s.any? && !(cookies[cookie_name] == request.request_uri)
+  def should_be_redirected? session_name
+    request.get? && !request.xhr? && session[session_name].to_s.any? && !(session[session_name] == request.request_uri)
   end
 
 end

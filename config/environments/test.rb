@@ -31,6 +31,7 @@ config.action_mailer.default_url_options = { :host => 'www.edit-fu.com' }
 # config.active_record.schema_format = :sql
 
 config.gem "thoughtbot-factory_girl", :lib => "factory_girl"
+config.gem 'remarkable_rails', :version => '>= 3.1.13'
 
 ActiveMerchant::Billing::Base.mode = :test
 PAYMENT_GATEWAY_NAME = 'bogus'

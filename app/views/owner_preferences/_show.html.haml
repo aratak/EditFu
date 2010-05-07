@@ -15,6 +15,11 @@
             .label-input
               = owner.text_field 'email'
               = owner.label 'email', 'John@gmail.com'
+          .title-input.email
+            .title Your company name
+            .label-input
+              = owner.text_field 'company_name'
+              = owner.label 'company_name', 'My Great Company'
         .inputs-row
           .title-input.domain
             .title Change subdomain name
