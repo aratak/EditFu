@@ -24,9 +24,9 @@ class Owner < User
   # Methods
   
   def set_default_domain_name previous_domain_name=nil, count=nil
-    possible_name = previous_domain_name || company_name.to_s.parameterize
+    possible_name = previous_domain_name || company_name.to_s.parameterize("_")
     
-    if (self.class.count(:all, :conditions => { :domain_name => possible_name }) == 0)
+    if (self.class.count(:all, :conditions => { :domain_name => "#{possible_name}#{count}" }) == 0)
       self.domain_name = "#{possible_name}#{count}"
     else
       set_default_domain_name("#{possible_name}", count.to_i+1)

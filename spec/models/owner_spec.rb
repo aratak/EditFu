@@ -235,12 +235,13 @@ describe Owner do
   
   describe "set_default_domain_name" do
 
-    it "should set default domain name" do
-      fail
-    end
-
-    it "shouldn't set existing domain name" do
-      fail
+    should_validate_presence_of(:domain_name)
+    
+    # should_validate_uniqueness_of(:domain_name)
+    
+    it "should automaticly generate domain name from company name" do
+      owner = Factory.create(:owner, :company_name => "Test company name")
+      owner.domain_name = "test_company_name"
     end
 
   end
