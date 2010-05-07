@@ -1,1 +1,1 @@
-= menu_item page, :text => page.path, :href => site_page_path(page.site, page), :selected => selected
+= menu_item page, :text => truncate(page.path, :length => 25), :href => site_page_path(page.site, page), :selected => selected
