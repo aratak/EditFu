@@ -5,7 +5,7 @@ class Owner < User
   
   before_validation_on_create :set_default_domain_name
 
-  attr_accessible :domain_name
+  attr_accessible :domain_name, :company_name
 
   # Associations
   has_many :sites, :dependent => :destroy
