@@ -1,5 +1,5 @@
-%li(id = id class = css_class)
-  - link_to href, :class => 'label' do
+%li{:id => id, :class => css_class}
+  - link_to href, :class => 'label', :title => text do
     - if selected
       %img(src="/images/#{name}-icon.png")
     - else
