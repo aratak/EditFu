@@ -38,6 +38,7 @@ en:
   page:
     created: "<strong>{{page}}</strong> was added to the 
       site <strong>{{site}}</strong> in the sidebar."
+    already_exist: "<strong>{{page}}</strong> already added."
     updated: "All changes were published successfully."
     enabled: "Page statuses were updated."
     destroyed: "Page was removed."

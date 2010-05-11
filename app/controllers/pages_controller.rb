@@ -38,6 +38,8 @@ class PagesController < ApplicationController
         rescue FtpClientError => e
           @message = ftp_message(e)
         end
+      else
+        @message = ['page.already_exist', { :site => @site.name, :page => page.path}]
       end
     end
   end
