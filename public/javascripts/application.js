@@ -58,9 +58,10 @@ function appendInputError(input, blank, message) {
 }
 
 function showPopup() {
+  window.currentScrollOffsets = document.viewport.getScrollOffsets();
   document.documentElement.style.overflow = 'hidden';
   $('popup-system').show();
-  $('popup-system').scrollTo();
+  // $('popup-system').scrollTo();
   // $$('body').first().setStyle({ minHeight: $('popup').getHeight() + 80 + "px" });
 }
 
@@ -70,6 +71,16 @@ function hidePopup() {
   $('all').style.overflow = 'visible';
   $('popup-hider').up().fade({ duration: 0.2});
   $('popup').innerHTML = '';
+  
+  
+  var left = 0;
+  var top = 0;
+  if(window.currentScrollOffsets != undefined) {
+    left = window.currentScrollOffsets.left;
+    top = window.currentScrollOffsets.top;
+  }
+  
+  window.scrollTo(left, top);
 }
 
 function getActionBar() {
