@@ -96,12 +96,12 @@
 }
 
 .label-input span.hint, .label-input span.description {
-  float: left;
 }
 
 #main .label-input span.hint {
   font-size: 14px;
   color: #383838;
+  float: none;
 }
 
 #main .label-input span.description {
@@ -116,6 +116,7 @@
 
 .new_owner .label-input label {
   bottom: 0;
+  top: auto ! important;
 }
 
 .new_owner .password-confirmation label, .new_owner .password label {

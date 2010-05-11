@@ -48,7 +48,13 @@ function appendInputError(input, blank, message) {
   var div = $(document.createElement('div'));
   div.className = 'error' + blank;
   div.innerHTML = message;
-  input.insert({top: div});
+
+  if (input.select('input')[0]) {
+    input.select('input')[0].insert({before: div});
+  } else {
+    input.insert({top: div});
+  }
+
 }
 
 function showPopup() {
