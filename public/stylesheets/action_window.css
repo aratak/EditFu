@@ -33,6 +33,7 @@
 
 #action-window #main .actions a {
   text-decoration: underline;
+  margin-left: 8px;
 }
 
 a.important {
