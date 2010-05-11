@@ -2,3 +2,5 @@ log
 tmp
 *.swp
 .DS_Store
+/.idea
+
