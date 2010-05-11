@@ -42,7 +42,7 @@ a.important {
 }
 
 #action-window #main .hint {
+  margin: 25px 0px 20px 0;
   font: 10px arial;
   color: #919191;
-  margin-bottom: 10px;
 }
