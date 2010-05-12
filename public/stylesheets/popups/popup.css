@@ -1,5 +1,5 @@
 #popup-system {
-  font-family: helvetica, sant-serif;
+  font-family: helvetica, sans-serif;
   display: block;
   left: 0;
   top: 0;
@@ -94,7 +94,7 @@
 }
 
 .popup .popup-action-bar input, .popup .popup-action-bar a.action {
-  height: 44px;
+  height: 48px;
   font-size: 20px;
 }
 
@@ -105,7 +105,7 @@
 }
 
 .popup .popup-action-bar .cancel {
-  color: #ff8d84;
+  color: #838383;
   text-decoration: none;
 }
 
