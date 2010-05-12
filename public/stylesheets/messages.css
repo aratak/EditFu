@@ -2,11 +2,18 @@
 .popup .popup-action-bar .processing {
   position: absolute;
   margin-top: 9px;
+}
+
+#action-bar .processing {
   left: 50%;
 }
 
+.popup .popup-action-bar .processing {
+  left: 10px;
+}
+
 .popup .one-column-popup .popup-action-bar .processing {
-  left: 30%;
+  left: 10px;
 }
 
 .message {
