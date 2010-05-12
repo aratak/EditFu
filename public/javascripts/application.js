@@ -111,6 +111,29 @@ function hideProcessing(request) {
   }
 }
 
+// container = "div.plan-wrapper"
+// element_class = "> div.plan-label"
+function setElementsHeight(container, element_class ) {
+
+  function getChildMaxHeight(element) {
+    var maxHeight = 0;
+
+    element.childElements().each(function(item) {
+      var itemHeight = parseInt(item.getHeight());
+      if(itemHeight > maxHeight) {maxHeight = itemHeight}
+    });
+
+    return maxHeight;
+  }
+  var maxHeight = getChildMaxHeight($$(container).first());
+
+  $$(container).first().select(element_class).each(function(item) {
+    item.setStyle({
+      height: maxHeight + 'px'
+    });
+  });
+}
+
 Ajax.Responders.register({
   onCreate: showProcessing,
 
