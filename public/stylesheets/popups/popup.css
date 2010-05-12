@@ -88,14 +88,19 @@
   border: 0;
   line-height: 50px;
   margin: 0;
-  padding: 0 10px 0 0;
+
   vertical-align: middle;
   text-decoration: none;
-}
-
-.popup .popup-action-bar input, .popup .popup-action-bar a.action {
   height: 48px;
   font-size: 20px;
+}
+
+.popup .popup-action-bar input {
+  padding: 0 10px 0 0;
+}
+
+.popup .popup-action-bar a.action {
+  padding: 0 15px 0 0; 
 }
 
 .popup .popup-action-bar input {
