@@ -36,8 +36,8 @@
       - form_tag '#', :onsubmit => 'updateHtmlCode(); return false;' do
         = text_area_tag :code
         .popup-action-bar
-          = link_to_function "Cancel", "hidePopup();", :class => 'action cancel'
           = submit_tag 'Update'
+          = link_to_function "Cancel", "hidePopup();", :class => 'action cancel'
     
   :javascript
     initTinyMCE({
