@@ -40,7 +40,7 @@
 }
 
 #ftp-tree span.selectable:hover {
-  background: blue;
+  color: #ff0000;
 }
 
 #ftp-tree span.selected {

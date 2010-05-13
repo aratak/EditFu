@@ -91,7 +91,7 @@
   border: 1px solid #cccccc;
 }
 
-.new_owner .label-input {
+.label-input {
   width: 230px;
 }
 
@@ -110,19 +110,24 @@
   color: #ffffff;
 }
 
-.new_owner .label-input label {
+#new_owner .label-input label {
   margin-bottom: 15px;
 }
 
-.new_owner .label-input label {
+.label-input label {
   bottom: 0;
   top: auto ! important;
 }
 
-.new_owner .password-confirmation label, .new_owner .password label {
+#new_owner .password-confirmation label, #new_owner .password label {
   margin: 0;
 }
 
 .public #main .password-confirmation {
   margin-top: -19px;
+}
+
+.submit-input {
+  margin-top: 20px;
+  float: left;
 }

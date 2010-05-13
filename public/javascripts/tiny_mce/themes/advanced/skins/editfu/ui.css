@@ -132,7 +132,10 @@
 .editfuSkin span.mce_bullist {background: url(img/bullist.png) no-repeat center}
 .editfuSkin span.mce_numlist {background: url(img/numlist.png) no-repeat center}
 .editfuSkin span.mce_image {background: url(img/image.png) no-repeat center}
-.editfuSkin span.mce_code {background-position:-260px 0}
+.editfuSkin span.mce_fullscreen {background: url(img/fullscreen.png) no-repeat center}
+/*.editfuSkin span.mce_code {background-position:-260px 0}*/
+.editfuSkin span.mce_code {background: url(img/code.png) no-repeat center; width: 40px}
+.editfuSkin a.mce_code {width: 40px}
 .editfuSkin span.mce_undo {background: url(img/undo.png) no-repeat center}
 .editfuSkin span.mce_redo {background: url(img/redo.png) no-repeat center}
 
@@ -170,7 +173,7 @@
 .editfuSkin span.mce_rtl {background-position:-40px -20px}
 .editfuSkin span.mce_emotions {background-position:-60px -20px}
 .editfuSkin span.mce_fullpage {background-position:-80px -20px}
-.editfuSkin span.mce_fullscreen {background-position:-100px -20px}
+/*.editfuSkin span.mce_fullscreen {background-position:-100px -20px}*/
 .editfuSkin span.mce_iespell {background-position:-120px -20px}
 .editfuSkin span.mce_insertdate {background-position:-140px -20px}
 .editfuSkin span.mce_inserttime {background-position:-160px -20px}

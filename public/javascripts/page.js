@@ -63,7 +63,7 @@ function editfuMceLayout(s, tb, o) {
   }
   createToolbar('undo,redo', 'Left');
   createToolbar('formatselect,bold,italic,underline,bullist,numlist', 'Center');
-  createToolbar('image' + s.code, 'Right');
+  createToolbar('fullscreen,image' + s.code, 'Right');
   o.deltaHeight -= s.theme_advanced_row_height;
 
   tr = DOM.add(tb, 'tr');
@@ -80,7 +80,9 @@ function initTinyMCE(settings) {
     theme_advanced_layout_manager: "CustomLayout",
     theme_advanced_custom_layout : editfuMceLayout,
     theme_advanced_blockformats : "h1,h2,h3,h4,h5,h6",
-    setup: initMceEditor
+    setup: initMceEditor,
+    plugins: 'fullscreen',
+    height: '400px'
   }).toObject());
 }
 

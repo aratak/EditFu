@@ -68,9 +68,14 @@
   *display: inline;
   vertical-align: top;
   margin-bottom: 2em;
-  padding: 0 1em 1em;
-  width: 105px;
-  height: 110px;
+  padding: 5px 10px 10px;
+  width: 137px;
+  /*height: 110px;*/
+
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 #owner-preferences-popup .plan .plan-label.checked {
@@ -176,6 +181,8 @@
   font-size: 10px;
   color: #fe0000;
   float: left;
+  position: relative;
+  top: -40px;
   text-decoration: underline;
   padding-left: 10px;
 }
