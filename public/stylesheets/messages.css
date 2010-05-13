@@ -25,11 +25,11 @@
 
 .message td {
   vertical-align: middle;
-  text-align: center;
+  text-align: left;
 }
 
 #action-bar .message td {
-  padding: 0 140px;
+  padding: 0 10px;
 }
 
 .popup-action-bar .message {
