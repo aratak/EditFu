@@ -44,6 +44,5 @@
       site_url: '#{@site.http_url}',
       code: '#{current_user.owner? ? ',code' : ''}',
       new_image_path: '#{new_site_image_path(@site)}',
-      document_base_url: '#{@site.http_url}/',
-      height: '400px'
+      document_base_url: '#{@site.http_url}/'
     });
