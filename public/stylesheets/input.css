@@ -119,7 +119,7 @@
   top: auto ! important;
 }
 
-#new_owner .password-confirmation label, .new_owner .password label {
+#new_owner .password-confirmation label, #new_owner .password label {
   margin: 0;
 }
 

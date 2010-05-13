@@ -7,17 +7,17 @@
         .label-input
           %span.hint Company name
           = f.text_field :company_name
-          = f.label :company_name, 'Company Name'
+          = f.label :company_name, 'mygreatcompany'
           %span.description Company or other unique name.
         .label-input
           %span.hint Your name
           = f.text_field :user_name
-          = f.label :user_name, 'Your Name'
+          = f.label :user_name, 'John Doe'
           %span.description For identification.
         .label-input
           %span.hint Your email
           = f.text_field :email
-          = f.label :email
+          = f.label :email, 'john@gmail.com'
           %span.description For login and communication.
         .label-input.password
           %span.hint Password

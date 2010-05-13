@@ -5,11 +5,11 @@
     .label-input
       %span.hint Login with your email
       = text_field_tag 'user[email]', @user.email
-      = label_tag 'user_email'
+      = label_tag 'user_email', 'john@gmail.com'
     .label-input
       %span.hint Your password
       = password_field_tag 'user[password]'
-      = label_tag 'user_password'
+      = label_tag 'user_password', 'password'
     .submit-input
       = submit_tag 'Login', :class => 'submit'
   #hint
