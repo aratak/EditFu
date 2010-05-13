@@ -5,6 +5,7 @@ RAILS_GEM_VERSION = '2.3.3' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
+require File.join(File.dirname(__FILE__), 'gem_support_for_new_rails')
 
 Rails::Initializer.run do |config|
   config.gem 'hpricot', :version => "0.8.2" 

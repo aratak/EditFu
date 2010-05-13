@@ -1,9 +1,6 @@
 require 'spec_helper'
 
-describe Owner do
-  before :each do
-    @owner = Factory.create(:owner)
-  end
+shared_examples_for "general owners tests" do
 
   describe 'save' do
     it "should deliver email instructions to new owner" do
@@ -18,105 +15,8 @@ describe Owner do
       email.body.should match(owner.confirmation_token)
     end
 
-    it "should destroy editors if plan was changed to free" do
-      Factory.create :editor, :owner => @owner
-
-      @owner.plan = "free"
-      @owner.save
-      @owner.editors.should be_empty
-    end
   end
 
-  describe "#destroy" do
-    before(:each) do
-      2.times do
-        Factory(:site, :owner => @owner)
-        Factory(:editor, :owner => @owner)
-      end
-    end
-
-    it "should destroy owner's sites" do
-      @owner.destroy
-      Site.find_all_by_owner_id(@owner.id).should == []
-    end
-
-    it "should destroy owner's editors" do
-      @owner.destroy
-      Editor.find_all_by_owner_id(@owner.id).should == []
-    end
-
-    it "should cancel recurring if plan is professional" do
-      owner = Factory.create :owner, :plan => 'professional'
-      PaymentSystem.should_receive(:cancel_recurring).with(owner)
-      owner.destroy
-    end
-  end
-
-  describe "#validate" do
-    describe "free plan" do
-      it "should work if there are one site and three pages" do
-        site = Factory.create :site, :owner => @owner
-        3.times do
-          Factory.create :page, :site => site
-        end
-
-        @owner.plan = "free"
-        @owner.save.should be_true
-      end
-
-      it "should fail if there are too many sites" do
-        2.times do
-          Factory.create :site, :owner => @owner
-        end
-
-        @owner.plan = "free"
-        @owner.save.should be_false
-      end
-
-      it "should fail if there are too many pages" do
-        site = Factory.create :site, :owner => @owner
-        4.times do
-          Factory.create :page, :site => site
-        end
-
-        @owner.plan = "free"
-        @owner.save.should be_false
-      end
-    end
-
-    describe "trial plan" do
-      it "should not be set after plan was changed to free or professional" do
-        @owner.plan = "free"
-        @owner.save!
-
-        @owner.plan = "trial"
-        lambda { @owner.save }.should raise_error
-      end
-    end
-  end
-
-  describe "#set_professional_plan" do
-    it "should work" do
-      card = Factory.build :card, :expiration => '01/2020'
-      PaymentSystem.should_receive(:recurring).with(@owner, card)
-      @owner.set_professional_plan(card)
-
-      @owner.reload
-      @owner.plan.should == "professional"
-      @owner.card_number.should == card.display_number
-      @owner.card_exp_date.should == Date.new(2020, 1, 1);
-    end
-    
-    it "should not work twice" do
-      card = Factory.build :card
-      @owner.set_professional_plan(card)
-      @owner.card_number = nil
-      @owner.set_professional_plan(card)
-      
-      @owner.card_number.should be_nil
-    end
-  end
-    
   describe "#set_free_plan" do
     it "should work" do
       owner = Factory.create :owner
@@ -167,6 +67,28 @@ describe Owner do
 
       PaymentSystem.should_not_receive(:update_recurring)
       owner.set_card card
+    end
+  end  
+
+  describe "#set_professional_plan" do
+    it "should work" do
+      card = Factory.build :card, :expiration => '01/2020'
+      PaymentSystem.should_receive(:recurring).with(@owner, card)
+      @owner.set_professional_plan(card)
+
+      @owner.reload
+      @owner.plan.should == "professional"
+      @owner.card_number.should == card.display_number
+      @owner.card_exp_date.should == Date.new(2020, 1, 1);
+    end
+    
+    it "should not work twice" do
+      card = Factory.build :card
+      @owner.set_professional_plan(card)
+      @owner.card_number = nil
+      @owner.set_professional_plan(card)
+      
+      @owner.card_number.should be_nil
     end
   end
 
@@ -244,6 +166,122 @@ describe Owner do
       owner.domain_name = "test_company_name"
     end
 
+  end  
+  
+end
+
+
+describe Owner, "" do
+  before :each do
+    @owner = Factory.create(:owner)
+  end
+  it_should_behave_like "general owners tests"
+  
+  describe "#validate" do
+    context "free plan" do
+      it "should work if there are one site and three pages" do
+        site = Factory.create :site, :owner => @owner
+        3.times do
+          Factory.create :page, :site => site
+        end
+
+        @owner.plan = "free"
+        @owner.save.should be_true
+      end
+
+      it "should fail if there are too many sites" do
+        2.times do
+          Factory.create :site, :owner => @owner
+        end
+
+        @owner.plan = "free"
+        @owner.save.should be_false
+      end
+
+      it "should fail if there are too many pages" do
+        site = Factory.create :site, :owner => @owner
+        4.times do
+          Factory.create :page, :site => site
+        end
+
+        @owner.plan = "free"
+        @owner.save.should be_false
+      end
+    end
+
+    context "trial plan" do
+      it "should not be set after plan was changed to free or professional" do
+        @owner.plan = "free"
+        @owner.save!
+
+        @owner.plan = "trial"
+        lambda { @owner.save }.should raise_error
+      end
+    end
+  end
+
+  it "should destroy editors if plan was changed to free" do
+    Factory.create :editor, :owner => @owner
+
+    @owner.plan = "free"
+    @owner.save
+    @owner.editors.should be_empty
+  end
+  
+  describe "#destroy" do
+    before(:each) do
+      2.times do
+        Factory(:site, :owner => @owner)
+        Factory(:editor, :owner => @owner)
+      end
+    end
+
+    it "should destroy owner's sites" do
+      @owner.destroy
+      Site.find_all_by_owner_id(@owner.id).should == []
+    end
+
+    it "should destroy owner's editors" do
+      @owner.destroy
+      Editor.find_all_by_owner_id(@owner.id).should == []
+    end
+
+    it "should cancel recurring if plan is professional" do
+      owner = Factory.create :owner, :plan => 'professional'
+      PaymentSystem.should_receive(:cancel_recurring).with(owner)
+      owner.destroy
+    end
   end
   
 end
+
+describe Owner, "(buddy)" do
+  before :each do
+    @owner = Factory.create(:free_owner)
+  end
+  it_should_behave_like "general owners tests"
+
+  describe "unlimited trial verification" do
+    
+    it "should be +false+ as default" do
+      @owner.should_not be_unlimited_trial
+    end
+
+    it "should be protected from massive update (attr_accessible)" do
+      @owner.update_attributes(:unlimited_trial => true)
+      @owner.should_not be_unlimited_trial
+    end
+    
+    it "should set plan to 'trial', when me toggle to true" do
+      @owner.plan = 'free'
+      @owner.plan.should == 'free'
+      
+      @owner.unlimited_trial = true
+      @owner.plan.should == 'unlimited_trial'
+      @owner.should be_valid
+    end
+    
+  end
+  
+end
+

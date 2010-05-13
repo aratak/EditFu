@@ -82,7 +82,21 @@
                     %li Unlimited Sites
                     %li Unlimited Pages
                     %li Unlimited Editors
-                    %li.ends Ends #{@owner.trial_period_end}
+                    %li.ends 
+                      = "Ends #{@owner.trial_period_end}"
+              %small Current
+          - if @owner.unlimited_trial?
+            .plan-label.selected
+              %label(for='preferences_owner_plan_unlimited_trial')
+              %dl
+                %dt Buddy
+                %dd
+                  %ul 
+                    %li Unlimited Sites
+                    %li Unlimited Pages
+                    %li Unlimited Editors
+                    %li.ends 
+                      = "Never end"
               %small Current
         .clear
         %small.description Click on a different package to upgrade or downgarde...

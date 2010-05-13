@@ -1,5 +1,5 @@
 class Owner < User
-  @@plans = %w(trial free professional)
+  @@plans = %w(trial unlimited_trial free professional)
 
   acts_as_audited :only => [:plan]
   
@@ -22,6 +22,19 @@ class Owner < User
   validates_exclusion_of :domain_name, :in => %w(www admin)
 
   # Methods
+  def unlimited_trial=(val)
+    self.plan = "unlimited_trial"
+  end
+  
+  def unlimited_trial?
+    self.plan == "unlimited_trial"
+  end
+  # alias_method :unlimited_trial, :unlimited_trial?
+  
+  def plan=(val)
+    write_attribute :plan, val
+    
+  end
   
   def set_default_domain_name previous_domain_name=nil, count=nil
     possible_name = previous_domain_name || company_name.to_s.parameterize("_")
@@ -38,19 +51,23 @@ class Owner < User
   end
 
   def can_add_editor?
-    plan != "free"
+    (plan != "free") || unlimited_trial?
   end
 
   def can_add_site?
-    !(plan == "free" && sites.count >= 1)
+    !(plan == "free" && sites.count >= 1) || unlimited_trial?
   end
 
   def can_add_page?
-    !(plan == "free" && pages.count >= 3)
+    !(plan == "free" && pages.count >= 3) || unlimited_trial?
   end
 
   def trial_period_end
-    30.days.since(confirmed_at).to_date
+    unless unlimited_trial?
+      30.days.since(confirmed_at).to_date
+    else
+      100.years.from_now
+    end
   end
 
   def trial_period_expired?
@@ -108,7 +125,7 @@ class Owner < User
       self.save
     end
   end
-
+  
   def set_card(card)
     if plan == "professional"
       PaymentSystem.update_recurring(self, card)
