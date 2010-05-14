@@ -38,12 +38,14 @@ class EditorsController < ApplicationController
 
   def destroy
     @editor.destroy
-    redirect_to editors_path
+    redirect_to(editors_path)
   end
 
   private
 
   def find_editor
-    @editor = current_user.editors.find params[:id]
+    @editor = current_user.editors.find_by_id(params[:id])
+    eraise_uri_redirect(editors_path) and return false unless @editor
+    @editor
   end
 end
