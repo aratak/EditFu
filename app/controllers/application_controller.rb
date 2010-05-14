@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
 
   include PlanRestrictions
   include StoreTabUri
+  include ErrorsStuff       # render_XXX helpers
 
   def user_root_path
     if current_user.admin?
