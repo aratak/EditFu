@@ -1,6 +1,7 @@
 class EditorsController < ApplicationController
   before_filter :authenticate_owner!
   before_filter :redirect_from_cookie, :only => [:index]
+  before_filter :find_editor, :only => [:show, :edit, :update, :update_permissions, :destroy]
   layout nil
 
   def index
@@ -19,16 +20,12 @@ class EditorsController < ApplicationController
   end
 
   def show
-    find_editor
   end
 
   def edit
-    find_editor
   end
 
   def update
-    find_editor
-
     @editor.user_name = params[:editor][:user_name]
     @editor.email = params[:editor][:email]
 
@@ -36,11 +33,11 @@ class EditorsController < ApplicationController
   end
 
   def update_permissions
-    find_editor.set_page_ids(params[:pages] || [])
+    @editor.set_page_ids(params[:pages] || [])
   end
 
   def destroy
-    find_editor.destroy
+    @editor.destroy
     redirect_to editors_path
   end
 
