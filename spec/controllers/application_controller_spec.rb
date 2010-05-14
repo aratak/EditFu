@@ -83,4 +83,40 @@ describe ApplicationController do
     
   end
   
+  describe "#erase session value" do
+    def prepair_controller(controller_name)
+      controller.stub!(:controller_name).and_return(controller_name)
+    end    
+    
+    def prepair_session(controller_name, uri)
+      @session = {"#{controller_name}_uri".to_s => uri.to_s}
+      stub_session
+    end
+    
+    def stub_session
+      @session = @session || {}
+      controller.stub!(:session).and_return(@session)
+    end
+    
+    uris = { :sites => '/sites/1/pages/1', :editors => '/editors/2' }
+    uris.each do |controller_name, uri|
+
+      it "should work for '#{uri}'" do
+        prepair_controller(controller_name)
+        prepair_session(controller_name, uri)
+        request.stub!(:request_uri).and_return(uri)
+
+        controller.eraise_uri_redirect
+
+        @session.should be_empty
+      end
+      
+    end
+    
+    
+
+
+
+  end
+  
 end

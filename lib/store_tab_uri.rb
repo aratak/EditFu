@@ -6,7 +6,7 @@ module StoreTabUri
     m.after_filter :store_uri_to_cookie
   end
 
-  def redirect_from_cookie cookie_name=nil
+  def redirect_from_cookie session_name=nil
     session_name = session_name || "#{controller_name}#{COOKIE_SUFFIX}"
     
     redirect_to(session[session_name.to_s]) and return false if should_be_redirected?(session_name)
@@ -20,6 +20,15 @@ module StoreTabUri
     if uri =~ /^\/(sites|editors).*/
       session["#{$1}#{COOKIE_SUFFIX}"] = uri
     end
+  end
+  
+  def eraise_uri_redirect crash_uri
+    uri = request.request_uri
+    if uri =~ /^\/(sites|editors).*/
+      session.delete "#{$1}#{COOKIE_SUFFIX}"
+      redirect_to(crash_uri) and return(true)
+    end
+    return(false)
   end
   
   private
