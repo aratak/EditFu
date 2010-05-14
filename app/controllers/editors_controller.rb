@@ -45,7 +45,7 @@ class EditorsController < ApplicationController
 
   def find_editor
     @editor = current_user.editors.find_by_id(params[:id])
-    eraise_uri_redirect(editors_path) and return false unless @editor
+    erase_uri_and_redirect(editors_path) and return false unless @editor
     @editor
   end
 end

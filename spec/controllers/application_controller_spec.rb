@@ -106,7 +106,7 @@ describe ApplicationController do
         prepair_session(controller_name, uri)
         request.stub!(:request_uri).and_return(uri)
 
-        controller.eraise_uri_redirect
+        controller.erase_uri_and_redirect
 
         @session.should be_empty
       end

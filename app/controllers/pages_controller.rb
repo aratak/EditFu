@@ -114,7 +114,7 @@ class PagesController < ApplicationController
     @page = current_user.find_page(params[:site_id], params[:id])
     @site = @page.site if @page
       
-    eraise_uri_redirect(sites_path) and return(false) unless @page
+    erase_uri_and_redirect(sites_path) and return(false) unless @page
     return @page
   end
 end
