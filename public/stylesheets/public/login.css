@@ -9,3 +9,40 @@ form #hint {
 #main #forgot {
   float: right;
 }
+
+#main .welcome #logout {
+  background: url(/images/submit.png) no-repeat;
+  border: none;
+  width: 80px;
+  line-height: 32px;
+  color: white;
+  font-family: helvetica;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
+  
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+}
+
+#main .welcome {
+  color: #ffffff;
+  font-size: 18px;
+}
+
+#main .welcome strong {
+  color: #666666;
+  font-weight: normal;
+}
+
+#main .description {
+  color: #ffffff;
+  font-size: 12px;
+  text-align: right;
+  padding-top: 10px;
+}
+
+#main .description a {
+  color: #e70e00;
+}

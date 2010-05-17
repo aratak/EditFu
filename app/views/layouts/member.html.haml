@@ -18,7 +18,7 @@
         .center
           #system-logo= render 'layouts/logo'
 
-        = link_to 'Logout', destroy_user_session_path, :class => 'system-link', :id => 'logout'
+        = render 'shared/logout'
         - unless current_user.admin?
           - link_to help_path, :class => 'system-link', :alt => 'Help', :target => '_blank' do
             %img(src='/images/help.png')

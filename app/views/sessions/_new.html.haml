@@ -1,0 +1,25 @@
+- form_tag user_session_path, :method => :post do 
+  .inputs
+    .label-input
+      %span.hint Login with your email
+      = text_field_tag 'user[email]', @user.email
+      = label_tag 'user_email', 'john@gmail.com'
+    .label-input
+      %span.hint Your password
+      = password_field_tag 'user[password]'
+      = label_tag 'user_password', 'password'
+    .submit-input
+      = submit_tag 'Login', :class => 'submit'
+  #hint
+    #signup.hint
+      - if @company_logo.present?
+        Need a login? Contact admin at 
+        = mail_to @company_owner.email
+        and request one.
+      - else
+        Not an Editfu Member? 
+        = link_to 'Learn more', '#'
+        or 
+        = link_to 'Sign up.', new_owner_path
+    #forgot.hint
+      = link_to 'Forgot Password?', new_password_path(:user)
