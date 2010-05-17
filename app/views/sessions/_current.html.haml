@@ -2,8 +2,8 @@
   = "Welcome, <strong>#{current_user.full_name}</strong>"
   = render 'shared/logout'
 .description 
-  = "For the start working, go to"
-  = link_to("sites", sites_path)
+  = "To start work, go to"
+  = "the #{link_to("sites", sites_path)}"
   = "or"
-  = link_to("sites", editors_path)
+  = link_to("editors", editors_path)
   
