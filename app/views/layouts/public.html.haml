@@ -3,6 +3,7 @@
   %head
     %title= @title
     %meta{ 'http-equiv' => 'Content-Type', :content => 'text/html; charset=UTF-8' }
+    = render 'layouts/favicon'
 
     = stylesheet_link_tag 'reset', 'public', 'input', 'action_bar', 'messages'
     = javascript_include_tag :defaults, 'css'
