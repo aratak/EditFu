@@ -95,7 +95,7 @@ class Owner < User
   end
 
   def find_page(site_id, page_id)
-    find_site(site_id).pages.find page_id
+    pages.find :first, :conditions => { :id => page_id, :site_id => site_id }
   end
 
   def send_confirmation_instructions

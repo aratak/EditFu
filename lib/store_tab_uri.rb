@@ -13,9 +13,9 @@ module StoreTabUri
     return true
   end
   
-  def store_uri_to_cookie
+  def store_uri_to_cookie uri=nil
     return false unless request.get? && !request.xhr?
-    uri = request.request_uri 
+    uri = uri || request.request_uri 
 
     if uri =~ /^\/(sites|editors).*/
       session["#{$1}#{COOKIE_SUFFIX}"] = uri
