@@ -22,7 +22,11 @@ class SessionsController < ApplicationController
       flash[:success] = I18n.t("devise.sessions.signed_in", :user_name => current_user.user_name)
       location = stored_location_for(:user) || current_user.last_requested_uri || user_root_path
       store_uri_to_cookie(location)
-      redirect_to :controller => "#{$1}" if location =~ /^\/(sites|editors).*/
+      if location =~ /^\/(sites|editors).*/
+        redirect_to :controller => "#{$1}" 
+      else
+        redirect_to :controller => :sites
+      end
     else
       message = warden.message || :invalid
       flash.now[:failure] = I18n.t("devise.sessions.#{message}")
