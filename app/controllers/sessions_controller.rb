@@ -25,7 +25,7 @@ class SessionsController < ApplicationController
       if location =~ /^\/(sites|editors).*/
         redirect_to :controller => "#{$1}" 
       else
-        redirect_to :controller => :sites
+        redirect_to user_root_path
       end
     else
       message = warden.message || :invalid
