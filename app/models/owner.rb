@@ -91,7 +91,7 @@ class Owner < User
   end
 
   def find_site(site_id)
-    sites.find site_id
+    sites.find_by_id site_id
   end
 
   def find_page(site_id, page_id)

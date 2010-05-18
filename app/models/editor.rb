@@ -25,7 +25,7 @@ class Editor < User
   end
 
   def find_site(site_id)
-    site = Site.find(site_id)
+    site = Site.find_by_id(site_id)
     return site if sites.include?(site)
   end
 

@@ -1,6 +1,7 @@
 class SitesController < ApplicationController
   before_filter :authenticate_all!, :only => [:index]
   before_filter :authenticate_owner!, :except => [:index, :ls]
+  before_filter :find_site, :only => [:show, :edit, :update, :destroy]
   before_filter :redirect_from_cookie, :only => [:index]
   layout nil
 
@@ -15,7 +16,6 @@ class SitesController < ApplicationController
   end
 
   def show
-    find_site
   end
 
   def new
@@ -30,16 +30,15 @@ class SitesController < ApplicationController
   end
 
   def edit
-    find_site
   end
 
   def update
-    find_site.attributes= params[:site]
+    @site.attributes= params[:site]
     validate_and_save
   end
 
   def destroy
-    find_site.destroy
+    @site.destroy
     redirect_to sites_path
   end
 
@@ -69,6 +68,9 @@ class SitesController < ApplicationController
 
   def find_site
     @site = current_user.find_site(params[:id])
+    erase_uri_and_redirect(sites_path) and return(false) unless @site
+    
+    return @site
   end
 
   def validate_and_save
