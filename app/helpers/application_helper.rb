@@ -8,6 +8,10 @@ module ApplicationHelper
     yield if user_signed_in? && current_user.admin?
   end
   
+  def editor?
+    yield if user_signed_in? && current_user.editor?
+  end
+  
   def pref_path
     if current_user.owner?
       owner_preferences_path
