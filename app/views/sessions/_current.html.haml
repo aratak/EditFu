@@ -3,11 +3,11 @@
   = render 'shared/logout'
 .description 
   = "To start work, go to"
-  - owner? or editor? do
+  - if current_user.owner? or current_user.editor?
     = "#{link_to("sites", sites_path)}"
-  - owner? do
+  - if current_user.owner?
     = "or #{link_to("editors", editors_path)}"
-  - admin? do
+  - if current_user.admin?
     = "#{link_to("owners", admin_owners_path)}"
   
   
