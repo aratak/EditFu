@@ -67,7 +67,7 @@ describe ApplicationController do
         prepair_controller(:sites)
         prepair_session(:sites, uri)
         request.stub!(:request_uri).and_return(uri)
-        controller.should_not_receive(:redirect_to).with(uri).and_return(true)
+        controller.should_not_receive(:redirect_to).with(uri)
         controller.redirect_from_cookie.should == true
       end
 
@@ -75,7 +75,7 @@ describe ApplicationController do
         prepair_controller(:sites)
         stub_session
         request.stub!(:request_uri).and_return(controller_name)
-        controller.should_not_receive(:redirect_to).with(uri).and_return(true)
+        controller.should_not_receive(:redirect_to).with(uri)
         controller.redirect_from_cookie.should == true
       end
     
@@ -105,6 +105,7 @@ describe ApplicationController do
         prepair_controller(controller_name)
         prepair_session(controller_name, uri)
         request.stub!(:request_uri).and_return(uri)
+        controller.stub!(:redirect_to).and_return(true)
 
         controller.erase_uri_and_redirect
 
@@ -112,10 +113,6 @@ describe ApplicationController do
       end
       
     end
-    
-    
-
-
 
   end
   

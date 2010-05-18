@@ -22,7 +22,8 @@ module StoreTabUri
     end
   end
   
-  def erase_uri_and_redirect crash_uri
+  def erase_uri_and_redirect crash_uri=nil
+    crash_uri = crash_uri || root_path
     uri = request.request_uri
     if uri =~ /^\/(sites|editors).*/
       session.delete "#{$1}#{COOKIE_SUFFIX}"
