@@ -8,8 +8,7 @@
   = content_for :actions do
     = link_to 'View actual page', @page.url, :target => '_blank'
     - if current_user.owner?
-      = link_to_remove site_page_path(@site, @page), 'Remove Page', |
-        'Are you sure you want to delete this page?' |
+      = link_to_remove site_page_path(@site, @page), 'Remove Page', "Are you sure you want to remove \"#{@page.path}\""
 
   - remote_form_for [@site, @page], :html => { :id => 'page-form' } do |f|
     - unless @sections.blank?

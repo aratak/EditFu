@@ -154,8 +154,7 @@
         .clear
 
     .popup-action-bar
-      = link_to_remove owner_path, |
-        'Cancel My Account', |
-        'Are you sure? This cannot be undone.' |
+      = link_to_remove owner_path, 'Cancel My Account', |
+        'Are you sure you want to cancel this EditFu account? This cannot be undone. The sites connected to EdtiFu will not be affected. All editors, ftp data, and other account information related to EditFu databases will be deleted. We suggest you simply downgrade to the free account. To use EditFu again in the future you will have to create a new account.' |
       = f.submit "Update"
       = link_to_function "Cancel", "hidePopup();", :class => 'action cancel'

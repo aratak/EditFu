@@ -38,6 +38,7 @@ class EditorsController < ApplicationController
 
   def destroy
     @editor.destroy
+    flash[:success] = I18n.t("editor.destroyed")
     redirect_to(editors_path)
   end
 
