@@ -109,12 +109,12 @@
             .title Credit card number
             .label-input
               = card.text_field 'number'
-              = card.label 'number',  @owner.card_number || '1234 5678 9123 4567'
+              = card.label 'number',  @owner.card_number || '1234 5678 9123 4567', :class => ("filled" if @owner.card_number)
           .title-input.exp-date
             .title Expiration date
             .label-input
               = card.text_field 'expiration'
-              = card.label 'expiration', '02/2020'
+              = card.label 'expiration', @owner.card_exp_date ||'02/2020', :class => ("filled" if @owner.card_exp_date)
           .title-input.verification-value
             .title Security code
             .label-input

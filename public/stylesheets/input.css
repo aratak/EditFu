@@ -92,7 +92,11 @@
 }
 
 .label-input {
-  width: 230px;
+  width: 275px;
+}
+
+.label-input label.filled {
+  color: #7E7E7E;
 }
 
 .label-input span.hint, .label-input span.description {
@@ -117,6 +121,7 @@
 .label-input label {
   bottom: 0;
   top: auto ! important;
+  white-space: nowrap;
 }
 
 #new_owner .password-confirmation label, #new_owner .password label {
