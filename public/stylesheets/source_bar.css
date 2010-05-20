@@ -55,6 +55,10 @@
   border: 1px solid #aaaaaa;
 }
 
+#source-bar #site-2-menu > div > .label a {
+  margin-left: 4px;
+}
+
 #source-bar #top-menu .selected .label img {
   margin-left: 4px;
   margin-right: -4px;

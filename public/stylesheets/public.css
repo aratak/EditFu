@@ -88,6 +88,10 @@ input.submit {
   text-shadow: 1px 1px 1px #75c5f6;
 }
 
+#main .label-input .hint {
+  text-shadow: none;
+}
+
 body.public #action-bar {
   background: none;
 }
