@@ -23,7 +23,11 @@ class Owner < User
 
   # Methods
   def unlimited_trial=(val)
-    self.plan = "unlimited_trial"
+    if(val == 1) {
+      self.plan = "unlimited_trial"
+    } else {
+      self.plan = "trial"
+    }
   end
   
   def unlimited_trial?
