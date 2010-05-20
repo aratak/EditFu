@@ -49,6 +49,12 @@
   width: 890px;
 }
 
+
+#popup .code-popup.two-column-popup.html_code .withtextarea textarea {
+  height: 400px;
+}
+
+
 .popup h1 {
   font: bold 18px helvetica;
   color: #ff1200;

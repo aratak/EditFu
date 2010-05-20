@@ -30,7 +30,7 @@
       = f.submit "Publish", :class => "update-button"
 
   #code-popup-template(style='display: none;')
-    .code-popup.two-column-popup
+    .code-popup.two-column-popup.html_code
       %h1 HTML Code
       - form_tag '#', :onsubmit => 'updateHtmlCode(); return false;', :class => "withtextarea"  do
         = text_area_tag :code
