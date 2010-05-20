@@ -40,7 +40,7 @@ en:
       site <strong>{{site}}</strong> in the sidebar."
     already_exist: "<strong>{{page}}</strong> already added."
     updated: "All changes were published successfully."
-    enabled: "Page statuses were updated."
+    enabled: "Page status was updated successfully."
     destroyed: "Page was successfully removed."
     suspicious: 'Some or all of the selected pages are using the editfu class incorrectly. 
       This may cause some issues.'
