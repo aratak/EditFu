@@ -3,6 +3,7 @@ require 'ftp_client'
 class PagesController < ApplicationController
   before_filter :authenticate_all!, :only => [:show, :update]
   before_filter :authenticate_owner!, :except => [:show, :update]
+  before_filter :find_site, :only => [:new, :create, :enable]
   before_filter :find_page, :only => [:show, :destroy, :update]
 
   def show
@@ -21,17 +22,15 @@ class PagesController < ApplicationController
   end
 
   def new
-    find_site
   end
 
   def create
-    find_site
     @pages = []
+    has_errors = false
 
     params[:path].each do |path|
       page = @site.pages.create(:path => path)
       if page.errors.empty?
-        @message = ['page.created', { :site => @site.name, :page => page.path}]
         begin
           FtpClient.get_page(page)
           @message = ['page.suspicious'] if page.has_suspicious_sections?
@@ -40,9 +39,19 @@ class PagesController < ApplicationController
           @message = ftp_message(e)
         end
       else
+        has_errors = true
         @message = ['page.already_exist', { :site => @site.name, :page => page.path}]
       end
     end
+    
+    unless has_errors
+      if @pages.size > 1 
+        @message = ['page.multicreated', { :site => @site.name }]
+      else
+        @message = ['page.created', { :site => @site.name, :page => @pages.first.path }]
+      end
+    end
+    
   end
 
   def destroy
@@ -64,7 +73,7 @@ class PagesController < ApplicationController
   end
 
   def enable
-    find_site.pages.each do |page|
+    @site.pages.each do |page|
       page.enabled = params[:page] && params[:page][page.id.to_s]
       page.save!
     end
