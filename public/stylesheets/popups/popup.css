@@ -92,13 +92,13 @@
   z-index: 2;
   float: right;
   border: 0;
-  line-height: 50px;
   margin: 0;
+  vertical-align: baseline;
 
-  vertical-align: middle;
   text-decoration: none;
-  height: 48px;
   font-size: 20px;
+  height: 48px;
+  line-height: 50px;
 }
 
 .popup .popup-action-bar input {
@@ -106,7 +106,13 @@
 }
 
 .popup .popup-action-bar a.action {
-  padding: 0 15px 0 0; 
+  padding: 0 15px 0 0;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  .popup .popup-action-bar a.action {
+    padding-top: 1px; 
+  }
 }
 
 .popup .popup-action-bar input {
