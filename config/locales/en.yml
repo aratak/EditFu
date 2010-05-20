@@ -62,7 +62,7 @@ en:
     permissions_updated: "Editor settings were updated successfully."
     created: "Editor <strong>{{name}}</strong> was created and will be sent an invite. 
       Click editor preferences for this user if you need to resend an invite."
-    updated: "Editor settings were updated"
+    updated: "Editor settings were updated."
     destroyed: "Editor was successfully deleted."
 
   preferences:
@@ -73,7 +73,7 @@ en:
     upgraded: "You have successfully upgraded from the 
       <strong>{{plan_was}} Plan</strong> to the <strong>Pro Plan</strong>."
     payment_error: "Were sorry, but the transaction did not go through due to 
-      an authorization issue. Please try again in a few minutes or {{contact_us}} at {{support}}"
+      an authorization issue. Please try again in a few minutes or {{contact_us}} at {{support}}."
 
   passwords:
     dont_match: "The new password and confirm password field do not match. 
@@ -91,4 +91,4 @@ en:
   admin:
     owner:
       canceled: "{{email}} was canceled."
-      updated: "Owner was updated"
+      updated: "Owner was updated."
