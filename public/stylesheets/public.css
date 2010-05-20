@@ -79,11 +79,13 @@ input.submit {
   font-family: helvetica;
   font-size: 13px;
   color: white;
+  text-shadow: 1px 1px 1px #333333;
 }
 
 #main .hint a {
   color: #ff0000;
   text-decoration: none;
+  text-shadow: 1px 1px 1px #75c5f6;
 }
 
 body.public #action-bar {
