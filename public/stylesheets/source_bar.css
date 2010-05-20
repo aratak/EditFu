@@ -54,3 +54,9 @@
   background: white url(/images/selected-page-bg.png) repeat-x bottom;
   border: 1px solid #aaaaaa;
 }
+
+#source-bar #top-menu .selected .label img {
+  margin-left: 4px;
+  margin-right: -4px;
+}
+
