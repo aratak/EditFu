@@ -45,6 +45,10 @@ class User < ActiveRecord::Base
   def company_domain
     "#{subdomain}.#{BASE_DOMAIN}"
   end
+  
+  def full_name
+    user_name || email
+  end
 
   protected
 

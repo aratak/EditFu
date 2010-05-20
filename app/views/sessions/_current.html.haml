@@ -1,0 +1,13 @@
+.welcome
+  = "Welcome, <strong>#{current_user.full_name}</strong>"
+  = render 'shared/logout'
+.description 
+  = "To start work, go to"
+  - if current_user.owner? or current_user.editor?
+    = "#{link_to("sites", sites_path)}"
+  - if current_user.owner?
+    = "or #{link_to("editors", editors_path)}"
+  - if current_user.admin?
+    = "#{link_to("owners", admin_owners_path)}"
+  
+  

@@ -3,10 +3,11 @@ require 'ftp_client'
 class PagesController < ApplicationController
   before_filter :authenticate_all!, :only => [:show, :update]
   before_filter :authenticate_owner!, :except => [:show, :update]
+  before_filter :find_page, :only => [:show, :destroy, :update]
 
   def show
     begin
-      FtpClient.get_page(find_page)
+      FtpClient.get_page(@page)
       @sections = @page.sections
       @images = @page.images
 
@@ -45,13 +46,13 @@ class PagesController < ApplicationController
   end
 
   def destroy
-    find_page.destroy
+    @page.destroy
     flash[:success] = I18n.t('page.destroyed')
     redirect_to site_path(@site)
   end
 
   def update
-    find_page.sections = params[:sections]
+    @page.sections = params[:sections]
     @page.images = params[:images]
     @page.save
     begin
@@ -112,6 +113,8 @@ class PagesController < ApplicationController
   def find_page
     @page = current_user.find_page(params[:site_id], params[:id])
     @site = @page.site if @page
-    @page
+      
+    erase_uri_and_redirect(sites_path) and return(false) unless @page
+    return @page
   end
 end

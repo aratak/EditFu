@@ -3,6 +3,7 @@
   %head
     %title= @title || 'Edit-Fu'
     %meta{ 'http-equiv' => 'Content-Type', :content => 'text/html; charset=UTF-8' }
+    = render 'layouts/favicon'
 
     = stylesheet_link_tag 'reset', 'layout', 'messages', 'source_bar', 'system_bar', 'action_window', 'action_bar'
     = stylesheet_link_tag 'input', 'popups/popup', 'popups/owner-preferences-popup', 'popups/alert-popup'
@@ -18,7 +19,7 @@
         .center
           #system-logo= render 'layouts/logo'
 
-        = link_to 'Logout', destroy_user_session_path, :class => 'system-link', :id => 'logout'
+        = render 'shared/logout'
         - unless current_user.admin?
           - link_to help_path, :class => 'system-link', :alt => 'Help', :target => '_blank' do
             %img(src='/images/help.png')
@@ -52,7 +53,7 @@
 
     #confirm-popup(style='display: none;')
       .confirm-popup.alert-popup
-        %h1 Confirmation
+        %h1 Confirm
         .text Are you sure?
 
         .popup-action-bar

@@ -11,6 +11,12 @@ Factory.define :owner, :class => :owner, :parent => :user do |o|
   o.plan "trial"
 end
 
+Factory.define :free_owner, :class => :owner, :parent => :user do |o|
+  o.sequence(:user_name) { |s| "free_owner#{s}" }
+  o.sequence(:company_name) { |s| "Free Domain #{s}" }
+  o.plan "free"
+end
+
 Factory.define :editor, :class => :editor, :parent => :user do |e|
   e.sequence(:user_name) { |s| "editor#{s}" }
   e.owner { |e| e.association(:owner) }
@@ -20,7 +26,7 @@ Factory.define :site do |s|
   s.sequence(:name) { |s| "site#{s}" }
   s.server { |s| "ftp.#{s.name}.com" }
   s.site_root { |s| "/var/www/#{s.name}" }
-  s.site_url { |s| "www.{s.name}.com" }
+  s.site_url { |s| "www.#{s.name}.com" }
   s.login { |s| s.name }
   s.password { |s| s.login }
   s.owner { |s| s.association(:owner) }

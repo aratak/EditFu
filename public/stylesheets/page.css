@@ -29,3 +29,12 @@
 .image .thumbnail img {
   display: block;
 }
+
+.withtextarea {
+  padding: 0 3px;
+}
+
+#popup .code-popup .withtextarea textarea {
+  margin: 0;
+  width: 99%;
+}

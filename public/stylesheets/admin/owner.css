@@ -17,10 +17,13 @@
 
 #owner-card .status-row {
   font-size: 12px;
-  width: 185px;
   margin-bottom: 15px;
   background: #787878;
   color: white;
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+  padding-right: 20px;
 }
 
 #owner-card .status-row span {

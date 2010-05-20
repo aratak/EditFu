@@ -7,8 +7,7 @@
 
   = content_for :actions do
     = link_to_remote 'Editor Preferences', :url => edit_editor_path(@editor), :method => :get
-    = link_to_remove editor_path(@editor), 'Delete Editor', |
-      "Are you sure you want to remove <strong>#{@editor.user_name}</strong>?" |
+    = link_to_remove editor_path(@editor), 'Delete Editor', "re you sure you want to delete the editor <strong>#{@editor.user_name}</strong>?"
 
   - form_remote_tag :url => update_permissions_editor_path(@editor) do |form|
     %ul.sites
