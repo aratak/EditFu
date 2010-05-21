@@ -26,7 +26,8 @@ class PagesController < ApplicationController
 
   def create
     @pages = []
-    has_errors = false
+    @has_errors = false
+    @message = []
 
     params[:path].each do |path|
       page = @site.pages.create(:path => path)
@@ -36,19 +37,21 @@ class PagesController < ApplicationController
           @message = ['page.suspicious'] if page.has_suspicious_sections?
           @pages << page
         rescue FtpClientError => e
+          @has_errors = true
           @message = ftp_message(e)
         end
+
+        if @message.empty?
+          if @pages.size > 1 
+            @message = ['page.multicreated', { :site => @site.name }]
+          else
+            @message = ['page.created', { :site => @site.name, :page => @pages.first.path }]
+          end
+        end
+
       else
-        has_errors = true
+        @has_errors = true
         @message = ['page.already_exist', { :site => @site.name, :page => page.path}]
-      end
-    end
-    
-    unless has_errors
-      if @pages.size > 1 
-        @message = ['page.multicreated', { :site => @site.name }]
-      else
-        @message = ['page.created', { :site => @site.name, :page => @pages.first.path }]
       end
     end
     

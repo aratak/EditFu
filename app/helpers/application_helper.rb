@@ -62,9 +62,19 @@ module ApplicationHelper
     show_success(page, *targs)
   end
 
+  def hide_popup_with_errors(page, *targs)
+    page << 'hidePopup();'
+    show_error(page, *targs)
+  end
+
   def show_success(page, *targs)
     message = I18n.t(*targs)
     show_message(page, 'success', message)
+  end
+
+  def show_error(page, *targs)
+    message = I18n.t(*targs)
+    show_message(page, 'error', message)
   end
 
   def show_message(page, kind, message)

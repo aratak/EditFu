@@ -5,5 +5,12 @@
       :page => p, :selected => nil
     }
   page.insert_html :bottom, 'pages_form', :partial => 'sites/page', :locals => { :page => p }
+
 end
-hide_popup(page, *@message)
+
+if @has_errors
+  hide_popup_with_errors(page, *@message)
+else
+  hide_popup(page, *@message)
+end
+
