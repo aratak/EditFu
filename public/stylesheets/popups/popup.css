@@ -43,6 +43,10 @@
   -moz-box-shadow: 0 0 20px #000000;
   -webkit-box-shadow: 0 0 20px #000000;
   box-shadow: 0 0 20px #000000;
+  
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
 }
 
 #popup .one-column-popup, .alert-popup {
@@ -72,6 +76,10 @@
   height: 50px;
   background: #f1f1f1;
   margin-top: 42px;
+
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
 }
 
 .popup .inputs small.description,
