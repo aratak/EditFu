@@ -95,6 +95,7 @@ function swapOutImage() {
 
 function initImage(img) {
   var image = img.up('.image');
+  if(image == undefined) { return true }
 
   img.originalHeight = img.height;
   img.originalWidth = img.width;
