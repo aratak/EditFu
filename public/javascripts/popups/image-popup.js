@@ -32,7 +32,7 @@ function selectImage(img, skipWarn) {
     if(edited.originalHeight != img.originalHeight ||
        edited.originalWidth != img.originalWidth) {
       showMessage('warning', 
-          'The chosen image is of different dimensions than the image your replacing. ' +
+          'The chosen image is of different dimensions than the image your replacing. <br />' +
           'Be aware this can sometimes lead to design inconsistencies.');
     }
   }
