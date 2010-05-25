@@ -1,0 +1,44 @@
+body {
+  font-family: Helvetica, Verdana, sans-serif;
+}
+
+.all {
+  width: 600px;
+  white-space: nowrap;
+  margin: 0 auto;
+}
+
+.logo, #text {
+  margin-top: 20px;
+  white-space: normal;
+  vertical-align: top;
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+}
+
+h1 {
+  color: #de1f26;
+  font-weight: normal;
+  font-size: 40pt;
+  
+  text-shadow: 2px 2px 0px #000000;
+}
+
+p {
+  font-size: 20pt;
+  color: #383838;
+}
+
+small {
+  display: block;
+}
+
+a {
+  color: #E70E00 ! important;
+
+  margin-bottom: 1em;
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+}
