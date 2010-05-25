@@ -10,6 +10,20 @@ function showMessage(kind, text) {
   }
 }
 
+function showBodyMessage(kind, text) {
+  $('action-bar').select('.message').invoke('remove');
+  if(text && !text.blank()) {
+    var message = $(document.createElement('table'));
+    message.className = 'message ' + kind;
+    message.innerHTML = '<tr><td>' + text + '</tr></td>'
+  
+    $('action-bar').insert({top: message });
+    message.effect = new Effect.Fade(message, {delay: 10, duration: 5});
+  }
+  
+  
+}
+
 function clearMessage() {
   getActionBar().select('.message').invoke('remove');
 }
