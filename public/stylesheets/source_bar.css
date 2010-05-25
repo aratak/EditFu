@@ -44,7 +44,7 @@
 
 #source-bar #top-menu .label {
   display: block;
-  padding: 2px;
+  padding: 2px 2px 2px 6px;
   text-decoration: none;
 }
 
@@ -56,10 +56,10 @@
 }
 
 #source-bar #site-2-menu > div > .label a {
-  margin-left: 4px;
+
 }
 
 #source-bar #top-menu .selected .label img {
-  margin-left: 4px;
+
 }
 
