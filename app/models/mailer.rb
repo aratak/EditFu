@@ -70,6 +70,11 @@ class Mailer < ActionMailer::Base
     setup   user
     subject 'EditFu trial.'
   end
+  
+  def trial_expiration_reminder(user)
+    setup   user
+    subject 'EditFu trial reminder.'
+  end
 
   def hold(user)
     setup   user

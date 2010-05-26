@@ -166,6 +166,7 @@ class Owner < User
   def self.deliver_scheduled_messages
     deliver_card_expirations
     deliver_cards_have_expired
+    deliver_trial_expiration_reminder
     deliver_trial_expirations
   end
 
@@ -234,6 +235,13 @@ class Owner < User
     conditions = ["plan = 'trial' AND DATE(confirmed_at) = ?", 30.days.ago.to_date]
     Owner.all(:conditions => conditions).each do |owner|
       Mailer.deliver_trial_expiration(owner)
+    end
+  end
+  
+  def self.deliver_trial_expiration_reminder
+    conditions = ["plan = 'trial' AND DATE(confirmed_at) = ?", 27.days.ago.to_date]
+    Owner.all(:conditions => conditions).each do |owner|
+      Mailer.deliver_trial_expiration_reminder(owner)
     end
   end
 
