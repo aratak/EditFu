@@ -157,7 +157,7 @@ class Owner < User
 
   def prof_plan_begins_at
     if plan != 'professional'
-      next_billing_date
+      nil
     else
       next_billing_date(confirmed_at)
     end

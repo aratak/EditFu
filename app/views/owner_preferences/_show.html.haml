@@ -56,7 +56,8 @@
                   %li Unlimited Sites
                   %li Unlimited Pages
                   %li Unlimited Editors
-                  %li.begins Begins #{@owner.prof_plan_begins_at}
+                  - if @owner.prof_plan_begins_at
+                    %li.begins Begins #{@owner.prof_plan_begins_at}
             %small Current
                   
           = owner.radio_button 'plan', 'free', :class => 'radio'
