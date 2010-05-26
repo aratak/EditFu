@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
   layout 'public'
   before_filter :load_company_logo
+  before_filter :redirect_from_error, :only => [:new]
 
   def new
     Devise::FLASH_MESSAGES.each do |message|
@@ -33,4 +34,19 @@ class SessionsController < ApplicationController
     flash[:success] = I18n.t("devise.sessions.signed_out") if signed_in?(:user)
     sign_out_and_redirect(:user) and reset_session
   end
+  
+  private
+  
+  def redirect_from_error
+    return true unless user_signed_in? && params[:redirect]
+    # return true if params[:redirect] == ""
+    
+    if current_user.kind_of?(Admin) 
+      redirect_to(owners_parh) and return(false)
+    else
+      redirect_to(sites_path) and return(false)
+    end
+    
+  end
+  
 end
