@@ -94,4 +94,7 @@ input.submit {
 
 body.public #action-bar {
   background: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
