@@ -2,6 +2,3 @@
   = link_to current_user.identity, root_path, :class => 'company'
 - else
   = link_to "", root_path, :class => 'editfu'
-- owner? do
-  = link_to_remote "Change branding", |
-    :url => identity_path, :method => :get, :html => { :class => 'change-branding' } |
