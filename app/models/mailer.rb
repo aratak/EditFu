@@ -11,7 +11,7 @@ class Mailer < ActionMailer::Base
 
   def reset_password(user)
     setup   user
-    subject "Reset edit-fu password"
+    subject "EditFu password reset"
   end
 
   def plan_change(user)
