@@ -40,20 +40,22 @@ class PagesController < ApplicationController
           @has_errors = true
           @message = ftp_message(e)
         end
-
-        if @message.empty?
-          if @pages.size > 1 
-            @message = ['page.multicreated', { :site => @site.name }]
-          else
-            @message = ['page.created', { :site => @site.name, :page => @pages.first.path }]
-          end
-        end
-
       else
         @has_errors = true
-        @message = ['page.already_exist', { :site => @site.name, :page => page.path}]
       end
     end
+    
+
+    if @has_errors
+      @message = ['page.already_exist', { :site => @site.name, :page => page.path}]
+    elsif @message.empty?
+      if @pages.size > 1 
+        @message = ['page.multicreated', { :site => @site.name }]
+      else
+        @message = ['page.created', { :site => @site.name, :page => @pages.first.path }]
+      end
+    end
+    
     
   end
 
