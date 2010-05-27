@@ -1,9 +1,10 @@
 #owner-preferences-popup.two-column-popup
-  %h1 Preferences
+  %h1 
+    = link_to_function "Account preferences", nil
+    = link_to_function "Plan & Billing", nil
   - remote_form_for :preferences, :url => owner_preferences_path, :html => { :method => :put } do |f|
     - f.fields_for @owner do |owner|
       .account.inputs
-        %h2 Account
         .inputs-row
           .title-input.username
             .title Update your name
@@ -15,11 +16,6 @@
             .label-input
               = owner.text_field 'email'
               = owner.label 'email', 'John@gmail.com'
-          .title-input.email
-            .title Your company name
-            .label-input
-              = owner.text_field 'company_name'
-              = owner.label 'company_name', 'My Great Company'
         .inputs-row
           .title-input.domain
             .title Change subdomain name
@@ -42,7 +38,19 @@
             .label-input
               = owner.password_field 'password_confirmation'
               = owner.label 'password_confirmation', 'Confirm password'
+        .inputs-row
+          .title-input.email
+            .title Your company name
+            .label-input
+              = owner.text_field 'company_name'
+              = owner.label 'company_name', 'My Great Company'
+            %small.description
+              Place your company name above to give EditFu your own branding. <br />
+              %a{ :href => "#", :style => "text-decoration: line-through;" }
+                Return the default EditFu logo
         .clear
+      .plan_and_billing
+        CHANGE ME!!!
       .plan.section
         %h2 Plan
         .plan-wrapper
@@ -57,7 +65,7 @@
                   %li Unlimited Pages
                   %li Unlimited Editors
             %small Current
-                  
+                
           = owner.radio_button 'plan', 'free', :class => 'radio'
           .plan-label{selected_class(@owner.plan == 'free')}
             %label(for='preferences_owner_plan_free')
