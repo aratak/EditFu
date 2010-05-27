@@ -5,3 +5,4 @@ if @plan_changed && @plan == 'free'
 else
   hide_popup page, *@message
 end
+page.replace_html 'system-logo', :partial => 'layouts/logo'

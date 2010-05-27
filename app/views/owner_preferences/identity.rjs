@@ -1,0 +1,4 @@
+page.replace_html 'system-logo', :partial => 'layouts/logo'
+page["preferences_owner_company_name"].value = ""
+page.visual_effect :highlight, "preferences_owner_company_name"
+page << "showMessage('success', 'Company name has been reseted')"
