@@ -20,6 +20,14 @@ class User < ActiveRecord::Base
   def require_current_password
     @current_password_required = true
   end
+  
+  def identity
+    read_attribute :company_name
+  end
+
+  def identity= val
+    write_attribute :company_name, val
+  end
 
   def owner?
     kind_of?(Owner)
