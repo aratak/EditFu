@@ -1,0 +1,45 @@
+.account.inputs
+  .inputs-row
+    .title-input.username
+      .title Update your name
+      .label-input
+        = owner.text_field 'user_name'
+        = owner.label 'user_name', 'John Doe'
+    .title-input.email
+      .title Update your email
+      .label-input
+        = owner.text_field 'email'
+        = owner.label 'email', 'John@gmail.com'
+  .inputs-row
+    .title-input.current-password
+      .title Change your password
+      .label-input
+        = owner.password_field 'current_password'
+        = owner.label 'current_password'
+    .title-input.password
+      .label-input
+        = owner.password_field 'password'
+        = owner.label 'password', 'New password'
+    .title-input.password-confirmation
+      .label-input
+        = owner.password_field 'password_confirmation'
+        = owner.label 'password_confirmation', 'Confirm password'
+  .inputs-row
+    .title-input.domain
+      .title Change subdomain name
+      .label-input
+        = owner.text_field 'domain_name'
+        = owner.label 'domain_name', 'mycompany'
+    .title-input.editfu_com
+      .label-input .#{BASE_DOMAIN}
+  .clear
+  .inputs-row
+    .title-input.email
+      .title Your company name
+      .label-input
+        = owner.text_field 'company_name'
+        = owner.label 'company_name', 'My Great Company'
+      %small.description
+        Place your company name above to give EditFu your own branding. 
+        = link_to_remote "Return the default EditFu logo", :url => identity_owner_preferences_path, :method => :post, :html => { :class => :red }
+  .clear

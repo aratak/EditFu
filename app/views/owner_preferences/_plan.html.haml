@@ -1,0 +1,55 @@
+.plan.section
+  %h2 Plan
+  .plan-wrapper
+    = owner.radio_button 'plan', 'professional', :class => 'radio'
+    .plan-label{selected_class(@owner.plan == 'professional')}
+      %label(for='preferences_owner_plan_professional')
+      %dl
+        %dt Pro $24
+        %dd
+          %ul 
+            %li Unlimited Sites
+            %li Unlimited Pages
+            %li Unlimited Editors
+      %small Current
+          
+    = owner.radio_button 'plan', 'free', :class => 'radio'
+    .plan-label{selected_class(@owner.plan == 'free')}
+      %label(for='preferences_owner_plan_free')
+      %dl
+        %dt Free
+        %dd
+          %ul 
+            %li 1 Site
+            %li 3 Pages
+            %li No Editors
+      %small Current
+
+    - if @owner.plan == 'trial'
+      = owner.radio_button 'plan', 'trial', :class => 'radio'
+      .plan-label.selected
+        %label(for='preferences_owner_plan_trial')
+        %dl
+          %dt Trial
+          %dd
+            %ul 
+              %li Unlimited Sites
+              %li Unlimited Pages
+              %li Unlimited Editors
+              %li.ends 
+                = "Ends #{@owner.trial_period_end}"
+        %small Current
+    - if @owner.unlimited_trial?
+      .plan-label.selected
+        %label(for='preferences_owner_plan_unlimited_trial')
+        %dl
+          %dt Buddy
+          %dd
+            %ul 
+              %li Unlimited Sites
+              %li Unlimited Pages
+              %li Unlimited Editors
+              %li.ends 
+                = "Never end"
+        %small Current
+  .clear
