@@ -80,6 +80,11 @@ a:visited {
     color: #636363;
 }
 
+a.red {
+  color: #FE0000;
+  text-decoration: underline;
+}
+
 h1 {
     font-size: 1.6em;
     margin: 0 0 0.5em 0;
