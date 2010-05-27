@@ -15,8 +15,8 @@ class Owner < User
   # Validations
   validates_presence_of  :plan, :domain_name
   validates_inclusion_of :plan, :in => @@plans
-  validates_presence_of :company_name
-  validates_length_of :company_name, :within => 3..255
+  # validates_presence_of :company_name
+  validates_length_of :company_name, :within => 3..255, :allow_blank => true
   validates_uniqueness_of :domain_name
   validates_format_of :domain_name, :with => /^\w+$/
   validates_exclusion_of :domain_name, :in => %w(www admin)
