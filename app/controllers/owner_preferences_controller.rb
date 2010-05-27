@@ -43,6 +43,10 @@ class OwnerPreferencesController < ApplicationController
     pages = Page.find(params[:pages]) if params[:pages]
     @owner.set_free_plan sites, pages
   end
+  
+  def identity
+    current_user.update_attribute :identity, nil
+  end
 
   private
 

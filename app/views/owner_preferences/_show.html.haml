@@ -45,12 +45,11 @@
               = owner.text_field 'company_name'
               = owner.label 'company_name', 'My Great Company'
             %small.description
-              Place your company name above to give EditFu your own branding. <br />
-              %a{ :href => "#", :style => "text-decoration: line-through;" }
-                Return the default EditFu logo
+              Place your company name above to give EditFu your own branding. 
+              = link_to_remote "Return the default EditFu logo", :url => identity_owner_preferences_path, :method => :post, :html => { :class => :red }
         .clear
       .plan_and_billing
-        CHANGE ME!!!
+
       .plan.section
         %h2 Plan
         .plan-wrapper
