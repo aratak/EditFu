@@ -28,6 +28,10 @@ html > body {
   min-width: 800px;
 }
 
+html > body {
+  background: url(/images/bg-gradient.png) bottom repeat-x;
+}
+
 html > body.company {
   background: #dfdfdf;
 }
