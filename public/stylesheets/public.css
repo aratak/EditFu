@@ -119,6 +119,7 @@ body.public #action-bar {
   box-sizing: border-box;
 
   background: #ffffff;
+  background: -webkit-gradient(radial, 200 50, 0, 200 50, 300, from(#ffffff), to(#acd8eb));
   position: absolute;
   z-index: 2;
   
@@ -132,7 +133,7 @@ body.public #action-bar {
   
   color: #000;
   text-shadow: 1px 1px 1px #79c7ef;
-  
+
 }
 
 .text_of_terms_of_service .terms_cross {
