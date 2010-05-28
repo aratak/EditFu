@@ -30,6 +30,12 @@
         = f.password_field :password_confirmation
         = f.label :password_confirmation
       .clear
+      .label-input.terms_of_service
+        = f.check_box :terms_of_service
+        = f.label :terms_of_service, "I accept" 
+        = link_to_function("terms of service", "$('text_of_terms_of_service').toggle();")
+        = render "terms_of_service"
+      .clear
 
       = submit_tag 'Sign Up', :class => 'submit'
       #login.hint

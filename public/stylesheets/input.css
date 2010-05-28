@@ -133,6 +133,30 @@
   margin-top: -19px;
 }
 
+.public #main .terms_of_service {
+  float: right;
+  padding: 0px 5px;
+  position: relative;
+}
+
+.public #main .terms_of_service input {
+  width: 20px;
+}
+
+.public #main .terms_of_service a {
+  color: #FF0000;
+}
+
+
+.public #main .terms_of_service label {
+  color: #666666;
+  font-size: 15px;
+  margin: 0;
+  z-index: 1 ! important;
+  position: static;
+  padding: 0;
+}
+
 .submit-input {
   margin-top: 20px;
   float: left;
