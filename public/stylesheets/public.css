@@ -107,7 +107,7 @@ body.public #action-bar {
   position: absolute;
   bottom: 1;
   right: 0;
-  width: 300px;
+  width: 800px;
   
   margin-top: 10px;
   
@@ -134,6 +134,14 @@ body.public #action-bar {
   color: #000;
   text-shadow: 1px 1px 1px #79c7ef;
 
+}
+
+.text_of_terms_of_service .text {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 400px;
+  width: 100%;
+  padding-right: 20px;
 }
 
 .text_of_terms_of_service .terms_cross {
