@@ -1,7 +1,7 @@
 
 Event.observe(window, 'load', function() {
 
-  var elements = $$('.hint', 'label:not([for~=owner_terms_of_service])', 'div.label', '.description');
+  var elements = $$('.hint:not(#comments)', 'label:not([for~=owner_terms_of_service])', 'div.label', '.description');
   elements.invoke('setStyle', { opacity: '0' });
   var move_count = 0;
   var visible = false;

@@ -7,6 +7,8 @@ function toggleInputClass(input, value) {
   if(!value) {
     value = input.getValue();
   }
+  value = value || '';
+  
   if(value.blank()) {
     input.removeClassName('with-text');
   } else {

@@ -43,7 +43,10 @@
         = link_to 'Already a Member', new_user_session_path
       .clear
 
-      #comments.hint
+      = link_to_function "What am I signing up for?", :class => 'hint' do |page|
+        - page << "$('comments').show();"
+        - page << "new Effect.Opacity('comments',  { from: 0, to: 1, duration: 0.5 });"
+      #comments.hint{ :style => 'opacity: 0; display: none;' }
         %p 
           After signing up you will receive an email for verification.
           %br
