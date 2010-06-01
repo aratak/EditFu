@@ -33,8 +33,8 @@
       .label-input.terms_of_service
         = f.check_box :terms_of_service
         = f.label :terms_of_service, "I accept" 
-        = link_to_function("terms of service", "$('text_of_terms_of_service').toggle(500);")
-        = render "terms_of_service"
+        = link_to_remote "terms of service", :url => terms_of_service_owners_path, :method => :get
+        %span#terms
       .clear
 
       = submit_tag 'Sign Up', :class => 'submit'

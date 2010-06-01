@@ -9,7 +9,7 @@ Event.observe(window, 'load', function() {
   $$('input[type=text]', 'input[type=password]')[0].focus();
   
   
-  $(document).observe('mousemove', function() {
+  function appear() {
     if(move_count > 5 && !visible) {
       elements.each(function(element) {
         new Effect.Opacity(element,  { from: 0, to: 1, duration: 0.5 });
@@ -18,7 +18,11 @@ Event.observe(window, 'load', function() {
     } else {
       move_count += 1
     }
-  })
+  }
+  
+  
+  $(document).observe('mousemove', appear)
+  $(document).observe('click', appear)
 
 
 

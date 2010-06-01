@@ -144,6 +144,14 @@ body.public #action-bar {
   padding-right: 20px;
 }
 
+.text_of_terms_of_service ol li {
+  margin-left: 2em;
+}
+
+.text_of_terms_of_service ol li ol li {
+  list-style: lower-latin;
+}
+
 .text_of_terms_of_service .terms_cross {
   background: url(/images/terms_cross.png) left top no-repeat;
   width: 30px;

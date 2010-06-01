@@ -22,4 +22,11 @@ class OwnersController < ApplicationController
     flash[:success] = "Your acccount was canceled."
     redirect_to root_url
   end
+  
+  def terms_of_service
+    render :update do |page|
+      page['terms'].replace_html :partial => 'owners/terms_of_service'
+      page['text_of_terms_of_service'].show(500)
+    end
+  end
 end

@@ -4,7 +4,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :editor_confirmation, :as => 'editors/confirmation'
   map.resource :owner_confirmation, :as => 'owners/confirmation'
 
-  map.resources :owners, :only => [:new, :create]
+  map.resources :owners, :only => [:new, :create], :collection => { "terms_of_service" => :get }
   map.resource :owner, :only => [:destroy]
 
   map.resources :editors, :member => { :update_permissions => :post }
