@@ -1,0 +1,11 @@
+!!! transitional
+%html
+  %head
+    %title= @title || 'Edit-Fu'
+    %meta{ 'http-equiv' => 'Content-Type', :content => 'text/html; charset=UTF-8' }
+    = render 'layouts/favicon'
+    
+    = stylesheet_links
+
+  %body
+    = yield

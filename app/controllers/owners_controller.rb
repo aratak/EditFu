@@ -24,9 +24,17 @@ class OwnersController < ApplicationController
   end
   
   def terms_of_service
-    render :update do |page|
-      page['terms'].replace_html :partial => 'owners/terms_of_service'
-      page['text_of_terms_of_service'].show(500)
+    
+    respond_to do |format|
+      format.html
+      format.js  { 
+        render :update do |page|
+          page['terms'].replace_html :partial => 'owners/terms_of_service'
+          page['text_of_terms_of_service'].show(500)
+        end
+      }
     end
+    
+    
   end
 end

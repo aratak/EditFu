@@ -33,7 +33,8 @@
       .label-input.terms_of_service
         = f.check_box :terms_of_service
         = f.label :terms_of_service, "I accept" 
-        = link_to_remote "terms of service", :url => terms_of_service_owners_path, :method => :get
+        = link_to_remote "terms of service", :url => terms_of_service_owners_path, :method => :get, :html => { :href => terms_of_service_owners_path }
+        = link_to image_tag("popup.png", :alt => 'Open in popup'), terms_of_service_owners_path, :target => "_blank"
         %span#terms
       .clear
 
