@@ -42,17 +42,20 @@ class PagesController < ApplicationController
         end
       else
         @has_errors = true
+        @page_with_error = page
       end
     end
     
 
-    if @has_errors
-      @message = ['page.already_exist', { :site => @site.name, :page => page.path}]
-    elsif @message.empty?
-      if @pages.size > 1 
-        @message = ['page.multicreated', { :site => @site.name }]
-      else
-        @message = ['page.created', { :site => @site.name, :page => @pages.first.path }]
+    if @message.empty?
+      if @has_errors
+        @message = ['page.already_exist', { :site => @site.name, :page => @page_with_error.path}]
+      else 
+        if @pages.size > 1 
+          @message = ['page.multicreated', { :site => @site.name }]
+        else
+          @message = ['page.created', { :site => @site.name, :page => @pages.first.path }]
+        end
       end
     end
     
