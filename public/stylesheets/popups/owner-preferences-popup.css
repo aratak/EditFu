@@ -237,3 +237,12 @@
   text-decoration: none;
 }
 
+#owner-preferences-popup h5 {
+  padding: 0 10px;
+  color: #B7B7B7;
+  font-weight: normal;
+  
+  box-shadow: 0px 1px 2px #cccccc;
+  -moz-box-shadow: 0px 1px 2px #cccccc;
+  -webkit-box-shadow: 0px 1px 2px #cccccc;
+}
