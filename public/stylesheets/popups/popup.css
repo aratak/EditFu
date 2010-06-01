@@ -9,7 +9,7 @@
   position: fixed;
   overflow-x: auto;
   background: url(/images/1.png);
-  z-index: 300;
+  z-index: 200001;
 }
 
 .popup-hider {
