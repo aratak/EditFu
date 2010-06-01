@@ -14,6 +14,16 @@ html, body {
     margin-left: auto;
 }
 
+a {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+a:hover {
+  position: relative;
+  z-index: 2;
+}
+
 html > body.public.general #all {
     background: url(/images/public-bg.png) bottom right no-repeat;
 }
