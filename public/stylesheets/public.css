@@ -14,7 +14,7 @@ html, body {
     margin-left: auto;
 }
 
-a {
+a.clear_link {
   padding-top: 10px;
   padding-bottom: 10px;
 }
