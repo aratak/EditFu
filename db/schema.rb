@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100526142151) do
+ActiveRecord::Schema.define(:version => 20100602114027) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(:version => 20100526142151) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                :limit => 100,                      :null => false
+    t.string   "email",                :limit => 100,                   :null => false
     t.string   "encrypted_password",   :limit => 40
     t.string   "password_salt",        :limit => 20
     t.string   "confirmation_token",   :limit => 20
@@ -68,15 +68,15 @@ ActiveRecord::Schema.define(:version => 20100526142151) do
     t.datetime "updated_at"
     t.string   "domain_name"
     t.integer  "owner_id"
-    t.string   "type",                 :limit => 10,                       :null => false
-    t.string   "plan",                                :default => "trial"
+    t.string   "type",                 :limit => 10,                    :null => false
     t.string   "card_number",          :limit => 20
     t.string   "subscription_id",      :limit => 13
-    t.boolean  "enabled",                             :default => true,    :null => false
+    t.boolean  "enabled",                             :default => true, :null => false
     t.string   "user_name"
     t.date     "card_exp_date"
     t.string   "company_name"
     t.boolean  "hold"
+    t.integer  "plan_id"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
