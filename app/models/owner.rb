@@ -24,17 +24,17 @@ class Owner < User
   validates_acceptance_of :terms_of_service, :on => :create, :allow_nil => false, :message => 'Read and accept it!'
 
   # Methods
-  def unlimited_trial=(val)
-    if(val==1)||(val==true)
-      self.plan = "unlimited_trial"
-    else
-      self.plan = "trial"
-    end
-  end
-  
-  def unlimited_trial?
-    self.plan == "unlimited_trial"
-  end
+  # def unlimited_trial=(val)
+  #   if(val==1)||(val==true)
+  #     self.plan = "unlimited_trial"
+  #   else
+  #     self.plan = "trial"
+  #   end
+  # end
+  #   
+  # def unlimited_trial?
+  #   self.plan == "unlimited_trial"
+  # end
   # alias_method :unlimited_trial, :unlimited_trial?
   
   def plan=(val)

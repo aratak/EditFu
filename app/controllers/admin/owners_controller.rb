@@ -24,7 +24,7 @@ class Admin::OwnersController < ApplicationController
   def update
     find_owner.enabled = params[:owner][:enabled]
     find_owner.hold = params[:owner][:hold]
-    find_owner.unlimited_trial = params[:owner][:unlimited_trial]
+    # find_owner.unlimited_trial = params[:owner][:unlimited_trial]
     @owner.save!
 
     flash[:success] = I18n.t('admin.owner.updated')
