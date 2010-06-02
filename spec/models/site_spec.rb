@@ -56,3 +56,18 @@ describe Site do
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: sites
+#
+#  id        :integer(4)      not null, primary key
+#  name      :string(255)     not null
+#  server    :string(255)     not null
+#  site_root :string(255)     not null
+#  login     :string(255)
+#  password  :string(255)
+#  owner_id  :integer(4)
+#  site_url  :string(50)
+#
+

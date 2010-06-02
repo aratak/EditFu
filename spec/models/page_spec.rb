@@ -165,3 +165,15 @@ describe Page do
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: pages
+#
+#  id      :integer(4)      not null, primary key
+#  site_id :integer(4)      not null
+#  path    :string(255)     not null
+#  content :text
+#  enabled :boolean(1)      default(TRUE), not null
+#
+
