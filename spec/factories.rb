@@ -8,13 +8,13 @@ end
 Factory.define :owner, :class => :owner, :parent => :user do |o|
   o.sequence(:user_name) { |s| "owner#{s}" }
   o.sequence(:company_name) { |s| "Domain#{s}" }
-  o.plan "trial"
+  o.plan Plan::TRIAL
 end
 
 Factory.define :free_owner, :class => :owner, :parent => :user do |o|
   o.sequence(:user_name) { |s| "free_owner#{s}" }
   o.sequence(:company_name) { |s| "Free Domain #{s}" }
-  o.plan "free"
+  o.plan Plan::FREE
 end
 
 Factory.define :editor, :class => :editor, :parent => :user do |e|
