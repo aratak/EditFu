@@ -5,8 +5,12 @@ Event.observe(window, 'load', function() {
   elements.invoke('setStyle', { opacity: '0' });
   var move_count = 0;
   var visible = false;
+
+
+  if ($$('input[type=text]', 'input[type=password]').lenght > 0) {
+    $$('input[type=text]', 'input[type=password]')[0].focus();
+  }
   
-  $$('input[type=text]', 'input[type=password]')[0].focus();
   
   
   function appear() {
