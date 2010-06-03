@@ -1,7 +1,7 @@
 class PlanId < ActiveRecord::Migration
   PLANS = {
     :trial => Plan::TRIAL.id, 
-    :unlimited_trial => Plan::UNLIMITEDTRIAL.id, 
+    :unlimited_trial => Plan::UNLIMITED_TRIAL.id, 
     :free => Plan::FREE.id, 
     :professional => Plan::PROFESSIONAL.id
   }
