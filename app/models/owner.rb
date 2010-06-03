@@ -302,7 +302,6 @@ end
 #  domain_name          :string(255)
 #  owner_id             :integer(4)
 #  type                 :string(10)      not null
-#  plan                 :string(255)     default("trial")
 #  card_number          :string(20)
 #  subscription_id      :string(13)
 #  enabled              :boolean(1)      default(TRUE), not null
@@ -310,5 +309,6 @@ end
 #  card_exp_date        :date
 #  company_name         :string(255)
 #  hold                 :boolean(1)
+#  plan_id              :integer(4)
 #
 
