@@ -6,14 +6,27 @@
   = f.error_messages
   .inputs
     .label-input
+      %span.hint Login with your email
       = f.text_field :user_name
       = f.label :user_name
       
     .label-input
+      %span.hint Your password
       = f.password_field :password
       = f.label :password
 
     .label-input
+      %span.hint Password confirmation
       = f.password_field :password_confirmation
       = f.label :password_confirmation
-    = submit_tag :submit, :class => 'submit'
+
+    .submit-input
+      = submit_tag :submit, :class => 'submit'
+      
+    .clear
+    #hint.hint
+      = link_to 'Learn more', 'http://www.takeastep.me/editfu/', :target => "_blank"
+      about the
+      = link_to 'features', 'http://www.takeastep.me/editfu-features-benefits/', :target => "_blank"
+      and
+      = link_to 'pricing', 'http://www.takeastep.me/editfu-pricing/', :target => "_blank"
