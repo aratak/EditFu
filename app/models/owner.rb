@@ -52,13 +52,8 @@ class Owner < User
     end    
   end
   
-
   def trial_period_end
-    unless plan.unlimited_trial?
-      30.days.since(confirmed_at).to_date
-    else
-      100.years.from_now
-    end
+    30.days.since(confirmed_at).to_date
   end
 
   def trial_period_expired?
