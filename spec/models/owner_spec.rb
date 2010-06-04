@@ -32,7 +32,7 @@ shared_examples_for "general owners tests" do
       owner.set_free_plan([site], pages[1..2])
 
       owner.reload
-      owner.plan.should == "free"
+      owner.plan.should == Plan::FREE
       owner.card_number.should be_nil
 
       owner.sites.should == [site]
@@ -40,7 +40,7 @@ shared_examples_for "general owners tests" do
     end
 
     it "should cancel recurring if previous plan was professional" do
-      owner = Factory.create :owner, :plan => 'professional'
+      owner = Factory.create :owner, :plan => Plan::PROFESSIONAL
       PaymentSystem.should_receive(:cancel_recurring).with(owner)
 
       owner.set_free_plan([], [])
@@ -55,7 +55,7 @@ shared_examples_for "general owners tests" do
   describe "#set_card" do
     it "should update recurring" do
       card = Factory.build :card
-      owner = Factory.create :owner, :plan => 'professional'
+      owner = Factory.create :owner, :plan => Plan::PROFESSIONAL
 
       PaymentSystem.should_receive(:update_recurring).with(owner, card)
       owner.set_card card
@@ -63,7 +63,7 @@ shared_examples_for "general owners tests" do
 
     it "should not call PaymentSystem if plan is not professional" do
       card = Factory.build :card
-      owner = Factory.create :owner, :plan => 'free'
+      owner = Factory.create :owner, :plan => Plan::FREE
 
       PaymentSystem.should_not_receive(:update_recurring)
       owner.set_card card
@@ -77,7 +77,7 @@ shared_examples_for "general owners tests" do
       @owner.set_professional_plan(card)
 
       @owner.reload
-      @owner.plan.should == "professional"
+      @owner.plan.should == Plan::PROFESSIONAL
       @owner.card_number.should == card.display_number
       @owner.card_exp_date.should == Date.new(2020, 1, 1);
     end
@@ -98,7 +98,7 @@ shared_examples_for "general owners tests" do
       Time.stub(:now).and_return { now.to_time }
 
       trial = Factory.create :owner
-      free = Factory.create :owner, :plan => 'free'
+      free = Factory.create :owner, :plan => Plan::FREE
       trial.confirm!
       free.confirm!
 
@@ -113,7 +113,7 @@ shared_examples_for "general owners tests" do
       trial.trial_period_expired?.should be_true
       free.trial_period_expired?.should be_false
 
-      trial.plan = "professional"
+      trial.plan = Plan::PROFESSIONAL
       trial.save
       trial.trial_period_expired?.should be_false
     end
@@ -185,7 +185,7 @@ describe Owner, "" do
           Factory.create :page, :site => site
         end
 
-        @owner.plan = "free"
+        @owner.plan = Plan::FREE
         @owner.save.should be_true
       end
 
@@ -194,7 +194,7 @@ describe Owner, "" do
           Factory.create :site, :owner => @owner
         end
 
-        @owner.plan = "free"
+        @owner.plan = Plan::FREE
         @owner.save.should be_false
       end
 
@@ -204,17 +204,17 @@ describe Owner, "" do
           Factory.create :page, :site => site
         end
 
-        @owner.plan = "free"
+        @owner.plan = Plan::FREE
         @owner.save.should be_false
       end
     end
 
     context "trial plan" do
       it "should not be set after plan was changed to free or professional" do
-        @owner.plan = "free"
+        @owner.plan = Plan::FREE
         @owner.save!
 
-        @owner.plan = "trial"
+        @owner.plan = Plan::TRIAL
         lambda { @owner.save }.should raise_error
       end
     end
@@ -223,7 +223,7 @@ describe Owner, "" do
   it "should destroy editors if plan was changed to free" do
     Factory.create :editor, :owner => @owner
 
-    @owner.plan = "free"
+    @owner.plan = Plan::FREE
     @owner.save
     @owner.editors.should be_empty
   end
@@ -247,7 +247,7 @@ describe Owner, "" do
     end
 
     it "should cancel recurring if plan is professional" do
-      owner = Factory.create :owner, :plan => 'professional'
+      owner = Factory.create :owner, :plan => Plan::PROFESSIONAL
       PaymentSystem.should_receive(:cancel_recurring).with(owner)
       owner.destroy
     end
@@ -255,35 +255,35 @@ describe Owner, "" do
   
 end
 
-describe Owner, "(buddy)" do
-  before :each do
-    @owner = Factory.create(:free_owner)
-  end
-  it_should_behave_like "general owners tests"
-
-  describe "unlimited trial verification" do
-    
-    it "should be +false+ as default" do
-      @owner.should_not be_unlimited_trial
-    end
-
-    it "should be protected from massive update (attr_accessible)" do
-      @owner.update_attributes(:unlimited_trial => true)
-      @owner.should_not be_unlimited_trial
-    end
-    
-    it "should set plan to 'trial', when me toggle to true" do
-      @owner.plan = 'free'
-      @owner.plan.should == 'free'
-      
-      @owner.unlimited_trial = true
-      @owner.plan.should == 'unlimited_trial'
-      @owner.should be_valid
-    end
-    
-  end
-  
-end
+#describe Owner, "(buddy)" do
+#  before :each do
+#    @owner = Factory.create(:free_owner)
+#  end
+#  it_should_behave_like "general owners tests"
+#
+#  describe "unlimited trial verification" do
+#
+#    it "should be +false+ as default" do
+#      @owner.should_not be_unlimited_trial
+#    end
+#
+#    it "should be protected from massive update (attr_accessible)" do
+#      @owner.update_attributes(:unlimited_trial => true)
+#      @owner.should_not be_unlimited_trial
+#    end
+#
+#    it "should set plan to 'trial', when me toggle to true" do
+#      @owner.plan = 'free'
+#      @owner.plan.should == 'free'
+#
+#      @owner.unlimited_trial = true
+#      @owner.plan.should == 'unlimited_trial'
+#      @owner.should be_valid
+#    end
+#
+#  end
+#
+#end
 
 
 

@@ -9,12 +9,14 @@ Factory.define :owner, :class => :owner, :parent => :user do |o|
   o.sequence(:user_name) { |s| "owner#{s}" }
   o.sequence(:company_name) { |s| "Domain#{s}" }
   o.plan Plan::TRIAL
+  o.terms_of_service "1"
 end
 
 Factory.define :free_owner, :class => :owner, :parent => :user do |o|
   o.sequence(:user_name) { |s| "free_owner#{s}" }
   o.sequence(:company_name) { |s| "Free Domain #{s}" }
   o.plan Plan::FREE
+  o.terms_of_service "1"
 end
 
 Factory.define :editor, :class => :editor, :parent => :user do |e|

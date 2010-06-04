@@ -26,24 +26,6 @@ class Owner < User
 
   validates_acceptance_of :terms_of_service, :on => :create, :allow_nil => false, :message => 'Read and accept it!'
 
-  # Methods
-  # def unlimited_trial=(val)
-  #   if(val==1)||(val==true)
-  #     self.plan = "unlimited_trial"
-  #   else
-  #     self.plan = "trial"
-  #   end
-  # end
-  #   
-  # def unlimited_trial?
-  #   self.plan == "unlimited_trial"
-  # end
-  # alias_method :unlimited_trial, :unlimited_trial?
-  #
-  # def plan=(val)
-  #   write_attribute :plan, val
-  # end
-  
   def set_default_domain_name previous_domain_name=nil, count=nil
     possible_name = previous_domain_name || company_name.to_s.parameterize("_")
     
@@ -53,7 +35,8 @@ class Owner < User
       set_default_domain_name("#{possible_name}", count.to_i+1)
     end
   end
-  
+
+  # return
   def self.plans
     Plan::ALLOWS.keys
   end
@@ -71,18 +54,15 @@ class Owner < User
   
 
   def trial_period_end
-    # unless unlimited_trial?
-    #   30.days.since(confirmed_at).to_date
-    # else
-    #   100.years.from_now
-    # end
-    
-    100.years.from_now
+    unless plan.unlimited_trial?
+      30.days.since(confirmed_at).to_date
+    else
+      100.years.from_now
+    end
   end
 
   def trial_period_expired?
-    # plan == 'trial' && trial_period_end.past?
-    false
+    plan.trial? && trial_period_end.past?
   end  
   
   def subdomain
@@ -114,42 +94,36 @@ class Owner < User
   end
       
   def set_professional_plan(card)
-    raise "should be fixed"
-    
-    # if plan != "professional"
-    #   self.plan = "professional"
-    #   PaymentSystem.recurring(self, card)
-    #   set_card_fields(card)
-    # 
-    #   Mailer.deliver_plan_change(self)
-    #   save!
-    # end
+    if !plan.professional?
+      self.plan = Plan::PROFESSIONAL
+      PaymentSystem.recurring(self, card)
+      set_card_fields(card)
+     
+      Mailer.deliver_plan_change(self)
+      save!
+    end
   end
   
   def set_free_plan(sites, pages)
-    raise "should be fixed"
+    if !plan.free?
+      (self.sites - sites).each { |site| site.destroy }
+      (self.pages - pages).each { |page| page.destroy }
 
-    # if plan != 'free'
-    #   (self.sites - sites).each { |site| site.destroy }
-    #   (self.pages - pages).each { |page| page.destroy }
-    # 
-    #   cancel_recurring
-    # 
-    #   self.plan = "free"
-    #   Mailer.deliver_plan_change(self)
-    #   self.save
-    # end
+      cancel_recurring
+
+      self.plan = Plan::FREE
+      Mailer.deliver_plan_change(self)
+      self.save
+    end
   end
   
   def set_card(card)
-    raise "should be fixed"
-
-    # if plan == "professional"
-    #   PaymentSystem.update_recurring(self, card)
-    #   set_card_fields(card)
-    #   Mailer.deliver_credit_card_changes(self)
-    #   save!
-    # end
+    if plan.professional?
+      PaymentSystem.update_recurring(self, card)
+      set_card_fields(card)
+      Mailer.deliver_credit_card_changes(self)
+      save!
+    end
   end
 
   def billing_day
@@ -169,13 +143,11 @@ class Owner < User
   end
 
   def prof_plan_begins_at
-    raise "should be fixed"
-
-    # if plan != 'professional'
-    #   next_billing_date
-    # else
-    #   next_billing_date(confirmed_at)
-    # end
+    if !plan.professional?
+      next_billing_date
+    else
+      next_billing_date(confirmed_at)
+    end
   end
 
   def self.deliver_scheduled_messages
@@ -188,13 +160,11 @@ class Owner < User
   protected
 
   def before_update
-    raise "should be fixed"
-
     if hold && hold_changed?
       Mailer.deliver_hold(self)
     end
 
-    if plan == "free" && plan_changed?
+    if plan.free? && plan_id_changed?
       editors.clear
     end
     deliver_subdomain_changes if domain_name_changed?
@@ -207,13 +177,11 @@ class Owner < User
   end
 
   def validate
-    # raise "should be fixed"
-
     super 
-    if plan_changed?
-      if plan == Plan::TRIAL
-        raise "Invalid plan change" if ["free", "professional"].include?(plan_was)
-      elsif plan == Plan::FREE
+    if plan_id_changed?
+      if plan.trial?
+        raise "Invalid plan change" if [Plan::FREE.id, Plan::PROFESSIONAL.id].include?(plan_id_was)
+      elsif plan.free?
         if sites.count { |r| !r.destroyed? } > 1
           errors.add_to_base I18n.t("free_plan.site_count")
         end
@@ -226,9 +194,7 @@ class Owner < User
   end
 
   def cancel_recurring
-    raise "should be fixed"
-
-    if self.plan == 'professional'
+    if plan.professional?
       PaymentSystem.cancel_recurring(self) 
       self.card_number = nil
       self.card_exp_date = nil
@@ -253,9 +219,7 @@ class Owner < User
   end
 
   def self.deliver_trial_expirations
-    raise "should be fixed"
-
-    conditions = ["plan = 'trial' AND DATE(confirmed_at) = ?", 30.days.ago.to_date]
+    conditions = ["plan = '?' AND DATE(confirmed_at) = ?", Plan::TRIAL.id, 30.days.ago.to_date]
     Owner.all(:conditions => conditions).each do |owner|
       Mailer.deliver_trial_expiration(owner)
     end
@@ -264,7 +228,7 @@ class Owner < User
   def self.deliver_trial_expiration_reminder
     raise "should be fixed"
 
-    conditions = ["plan = 'trial' AND DATE(confirmed_at) = ?", 27.days.ago.to_date]
+    conditions = ["plan = '?' AND DATE(confirmed_at) = ?", Plan::TRIAL.id, 27.days.ago.to_date]
     Owner.all(:conditions => conditions).each do |owner|
       Mailer.deliver_trial_expiration_reminder(owner)
     end
@@ -277,6 +241,7 @@ class Owner < User
     end
   end
 end
+
 
 # == Schema Information
 #

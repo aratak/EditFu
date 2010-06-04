@@ -2,12 +2,12 @@
 %p The changes are listed below:
 %p
   Your plan was changed from 
-  %strong= @user.plan_was.capitalize 
+  %strong= Plan.find(@user.plan_id_was).name
   to 
-  %strong= @user.plan.capitalize
+  %strong= @user.plan.name
   \.
   %br
-  - if @user.plan == 'professional'
+  - if @user.plan.professional?
     Your monthly plan price will now be #{PROFESSIONAL_PLAN_AMOUNT}.
 %p
   If you would like to upgrade, downgrade, or cancel your account, 
