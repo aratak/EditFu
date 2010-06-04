@@ -9,6 +9,10 @@
           = f.text_field :company_name
           = f.label :company_name, 'mygreatcompany'
           %span.description Company or other unique name.
+        .label-input.subdomain
+          = f.text_field :domain_name
+          #fake_domain_name
+          = ".#{BASE_DOMAIN}"
         .label-input
           %span.hint Your name
           = f.text_field :user_name

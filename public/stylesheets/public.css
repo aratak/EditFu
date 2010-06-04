@@ -138,7 +138,7 @@ body.public #action-bar {
   background: #ffffff;
   background: -webkit-gradient(radial, 200 50, 0, 200 50, 300, from(#ffffff), to(#acd8eb));
   position: absolute;
-  z-index: 2;
+  z-index: 4;
   
   box-shadow: 6px 6px 10px #609ebe;
   -moz-box-shadow: 6px 6px 10px #609ebe;

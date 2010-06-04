@@ -3,7 +3,7 @@ class Owner < User
 
   # acts_as_audited :only => [:plan]
   
-  before_validation_on_create :set_default_domain_name
+  # before_validation_on_create :set_default_domain_name
 
   attr_accessible :domain_name, :company_name, :terms_of_service
 
@@ -25,16 +25,6 @@ class Owner < User
   validates_exclusion_of :domain_name, :in => %w(www admin)
 
   validates_acceptance_of :terms_of_service, :on => :create, :allow_nil => false, :message => 'Read and accept it!'
-
-  def set_default_domain_name previous_domain_name=nil, count=nil
-    possible_name = previous_domain_name || company_name.to_s.parameterize("_")
-    
-    if (self.class.count(:all, :conditions => { :domain_name => "#{possible_name}#{count}" }) == 0)
-      self.domain_name = "#{possible_name}#{count}"
-    else
-      set_default_domain_name("#{possible_name}", count.to_i+1)
-    end
-  end
 
   # return
   def self.plans
