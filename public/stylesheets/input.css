@@ -133,6 +133,45 @@
   margin-top: -19px;
 }
 
+.public #main .subdomain {
+  position: absolute;
+  right: 230px;
+  top: 141px;
+  width: auto;
+  color: #ffffff;
+  text-shadow: 1px 1px 0 #000000;
+}
+
+.public #main .subdomain input {
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  min-width: 10px;
+  padding: 1px;
+  
+  background: transparent;
+  border: 1px solid #CCCCCC;
+  color: #ffffff;
+  text-shadow: 1px 1px 0 #000000;
+}
+
+.public #main .subdomain input:focus {
+  background: #f1f1f1;
+  color: #7e7e7e;
+  text-shadow: 1px 1px 0 #f1f1f1;
+}
+
+.public #main .subdomain input:hover {
+  background: #f1f1f1;
+}
+
+.public #main .subdomain #fake_domain_name {
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  position: absolute;
+  visibility: hidden;
+  padding: 3px;
+}
+
 .public #main .terms_of_service {
   float: right;
   padding: 0px 5px;

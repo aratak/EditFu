@@ -12,6 +12,42 @@ Event.observe(window, 'load', function() {
   }
   
   
+  if ($('owner_domain_name')) {
+    
+    $('owner_company_name').observe('keyup', function() {
+      $('owner_domain_name').value = createDomainName( $('owner_company_name').value );
+      setSameDomainInputWidth();
+    })
+    
+    $('owner_domain_name').observe('keyup', setSameDomainInputWidth)
+
+    $('owner_company_name').observe('click', function() {
+      $('owner_domain_name').value = createDomainName( $('owner_company_name').value );
+      setSameDomainInputWidth();
+    })
+
+    $('owner_company_name').observe('blur', function() {
+      $('owner_domain_name').value = createDomainName( $('owner_company_name').value );
+      setSameDomainInputWidth();
+    })
+
+    
+    setSameDomainInputWidth();
+    
+  }
+  
+  
+  function createDomainName(val) {
+    var q = new String(val);
+    return q.replace(/\W/g, "")
+  }
+  
+  function setSameDomainInputWidth() {
+    $('fake_domain_name').innerHTML = $('owner_domain_name').value;
+    $('owner_domain_name').setStyle({ width: $('fake_domain_name').getWidth()   + 'px' })
+  }
+  
+  
   
   function appear() {
     if(move_count > 5 && !visible) {
