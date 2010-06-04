@@ -7,7 +7,7 @@ Event.observe(window, 'load', function() {
   var visible = false;
 
 
-  if ($$('input[type=text]', 'input[type=password]').lenght > 0) {
+  if ($$('input[type=text]', 'input[type=password]').size() > 0) {
     $$('input[type=text]', 'input[type=password]')[0].focus();
   }
   
