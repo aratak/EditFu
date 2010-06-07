@@ -20,10 +20,16 @@ class Plan < ActiveHash::Base
   
   # define predicatds 
   #   plan.free?, plan.trial?, etc. 
+  #   plan.not_free?, plan.not_trial?
   all.each do |p|
     define_method(:"#{p.name.underscore}?") do
       self.name == p.name
     end    
+
+    define_method(:"not_#{p.name.underscore}?") do
+      self.name != p.name
+    end    
+
   end
   
   # return string variant of price
@@ -55,6 +61,11 @@ class Plan < ActiveHash::Base
       can_add?(i, user)
     end    
   end
+  
+  def can_be_changed_to new_plan, owner, options={}
+    raise "not yet implemented"
+  end
+  
   
   private
   

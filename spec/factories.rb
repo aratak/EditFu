@@ -8,6 +8,7 @@ end
 Factory.define :owner, :class => :owner, :parent => :user do |o|
   o.sequence(:user_name) { |s| "owner#{s}" }
   o.sequence(:company_name) { |s| "Domain#{s}" }
+  o.sequence(:domain_name) { |s| "domain_#{s}" }
   o.plan Plan::TRIAL
   o.terms_of_service "1"
 end

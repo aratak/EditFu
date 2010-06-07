@@ -12,11 +12,23 @@ shared_examples_for "general plans tests" do
       @plan.send("#{@plan.name.underscore}?").should be_true
     end
 
+    it "should has true predicat" do
+      @plan.send("not_#{@plan.name.underscore}?").should be_false
+    end
+
+
     it "should return false" do
       @false_predicats.each do |predicat|
         @plan.send(predicat).should be_false
       end
     end
+
+    it "should return false" do
+      @false_predicats.each do |predicat|
+        @plan.send("not_#{predicat}").should be_true
+      end
+    end
+
     
   end
 

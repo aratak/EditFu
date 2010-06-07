@@ -13,7 +13,7 @@ class Owner < User
   has_many :editors, :dependent => :destroy
   belongs_to :plan
   
-  include Permissions
+  include PlanChanges
 
   # Validations
   validates_presence_of  :domain_name #, :plan

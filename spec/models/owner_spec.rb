@@ -286,6 +286,55 @@ end
 #end
 
 
+describe Owner, "and plan relation" do
+  
+  should_belong_to :plan
+  
+  describe "'plan_was'/'plan_changed' method" do
+    before :each do
+      @owner = Factory.create(:owner, :plan => Plan::TRIAL)
+    end
+    
+    it "'plan_was' should be" do
+      @owner.should be_respond_to(:plan_was)
+    end
+    
+    it "'plan_changed?' should be" do
+      @owner.should be_respond_to(:"plan_changed?")
+    end
+    
+    
+    it "should recive the previous plan" do
+      @owner.plan = Plan::PROFESSIONAL
+      @owner.plan_was.should == Plan::TRIAL
+    end
+    
+    it "should retive the current plan after save" do
+      @owner.plan = Plan::PROFESSIONAL
+      @owner.save(false)
+      @owner.plan_was.should == Plan::PROFESSIONAL
+    end
+    
+    it "should be true after changing" do
+      @owner.plan = Plan::PROFESSIONAL
+      @owner.plan_changed?.should be_true
+    end
+    
+    it "should be false after changing and saving" do
+      @owner.plan = Plan::PROFESSIONAL
+      @owner.save
+      @owner.plan_changed?.should be_false
+    end
+    
+  end
+  
+  # it "should has 'plan_was' method" do
+  #   @plan.should be_respond_to(:"plan_was")
+  # end
+  
+end
+
+
 
 # == Schema Information
 #
