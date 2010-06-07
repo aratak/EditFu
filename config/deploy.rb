@@ -1,12 +1,16 @@
+set :stages, %w(staging production)
+set :default_stage, "staging"
+require 'capistrano/ext/multistage'
+
 set :application, 'edit-fu'
-set :rails_env, "production"
 
 set :use_sudo, false
 set :user, 'deploy'
 
 set :scm, :git
 set :repository,  "dev.anahoret.com:/var/git/#{application}.git"
-set :deploy_to, "/var/www/rails/#{application}"
+# moved to deploy/{environment}.rb
+# set :deploy_to, "/var/www/rails/#{application}"
 set :deploy_via, :copy
 set :copy_strategy, :export
 
