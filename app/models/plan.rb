@@ -2,6 +2,8 @@ class Plan < ActiveHash::Base
   include ActiveHash::Enum
   fields :name, :price
   enum_accessor :name
+  
+  include PlanChanges
 
   # there are list of all plans
   create :id => 1, :name => "Trial", :price => BigDecimal.new("0")
@@ -18,15 +20,25 @@ class Plan < ActiveHash::Base
     :editor => [      TRIAL, UNLIMITEDTRIAL,         PROFESSIONAL]
   }
   
+  # return underscored name
+  #   Plan::FREE.identificator == "free"
+  #   Plan::TRIAL.identificator == "trial"
+  #   Plan::UNLIMITEDTRIAL.identificator == "unlimitedtrial"
+  # etc.
+  def identificator
+    self.name.underscore
+  end
+  
   # define predicatds 
   #   plan.free?, plan.trial?, etc. 
   #   plan.not_free?, plan.not_trial?
   all.each do |p|
-    define_method(:"#{p.name.underscore}?") do
+    
+    define_method(:"#{p.identificator}?") do
       self.name == p.name
     end    
 
-    define_method(:"not_#{p.name.underscore}?") do
+    define_method(:"not_#{p.identificator}?") do
       self.name != p.name
     end    
 
@@ -61,11 +73,6 @@ class Plan < ActiveHash::Base
       can_add?(i, user)
     end    
   end
-  
-  def can_be_changed_to new_plan, owner, options={}
-    raise "not yet implemented"
-  end
-  
   
   private
   

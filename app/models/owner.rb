@@ -13,7 +13,7 @@ class Owner < User
   has_many :editors, :dependent => :destroy
   belongs_to :plan
   
-  include PlanChanges
+  before_update :plan_change_validation, :if => :"plan_changed?"
 
   # Validations
   validates_presence_of  :domain_name #, :plan
@@ -41,6 +41,21 @@ class Owner < User
       self.plan.send(:"can_add_#{perm}?", self)
     end    
   end
+  
+  # return the previous plan
+  def plan_was
+    Plan.find plan_id_was
+  end
+  
+  # got true if plan has been changed but not saved yet
+  def plan_changed?
+    plan_id_changed?
+  end
+  
+  def plan_change_validation options={}
+    plan_was.can_be_changed_to(self.plan, self, options)
+  end  
+
   
   def trial_period_end
     30.days.since(confirmed_at).to_date

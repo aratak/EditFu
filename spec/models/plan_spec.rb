@@ -60,6 +60,11 @@ describe Plan do
       
       end
 
+      it "should has identificator method" do
+        @plan.should be_respond_to(:"identificator")
+        @plan.identificator.should == @plan.name.underscore
+      end
+
     end
   end
   
@@ -129,5 +134,133 @@ describe Plan do
     
   end
   
+  
+  # 
+  # Plan changing form to:
+  #   Plan::TRIAL
+  #   Plan::FREE
+  #   Plan::SINGLE
+  #   Plan::UNLIMITEDTRIAL
+  #   Plan::PROFESSIONAL
+  # from any other plan
+  #
+  describe "change" do
+    
+    before :each do
+      @owner = Factory.create(:owner)
+    end
+    
+    Plan.all.each do |plan|
+
+      context "to Trial from #{plan.name}" do
+
+        before :each do
+          @owner.stub(:plan).and_return(Plan::TRIAL)
+        end
+
+        it "shouldn't change from #{plan.name}" do
+          plan.can_be_changed_to(Plan::TRIAL, @owner).should be_false
+        end
+      
+      end
+
+      context "to Single from #{plan.name}" do
+        
+        before :each do
+          @plan = plan
+          @owner.stub(:plan).and_return(Plan::SINGLE)
+          10.times { Factory.create(:site, :owner => @owner) }
+        end
+        
+        it "is possible" do
+          @owner.stub(:edotors).and_return([])
+          @plan.can_be_changed_to(Plan::SINGLE, @owner).should be_true
+        end
+        
+        it "is impossible" do
+          Factory.create(:editor, :owner => @owner)
+          @plan.can_be_changed_to(Plan::SINGLE, @owner).should be_false
+        end
+        
+      end
+
+      context "to Free from #{plan.name}" do
+        
+        before :each do
+          @plan = plan
+          @owner.stub(:plan).and_return(Plan::FREE)
+        end
+        
+        it "is possible (with two sites)" do
+          2.times { Factory.create(:site, :owner => @owner) }
+          @owner.stub(:edotors).and_return([])
+        
+          @plan.can_be_changed_to(@owner.plan, @owner).should be_true
+        end
+
+        it "is possible (without sites)" do
+          @owner.stub(:sites).and_return([])
+          @owner.stub(:edotors).and_return([])
+        
+          @plan.can_be_changed_to(@owner.plan, @owner).should be_true
+        end
+
+        
+        it "is impossible (with editor and 4 sites)" do
+          4.times { Factory.create(:site, :owner => @owner) }
+          Factory.create(:editor, :owner => @owner)
+          @plan.can_be_changed_to(@owner.plan, @owner).should be_false
+        end
+
+        it "is impossible (with editor and 2 sites)" do
+          2.times { Factory.create(:site, :owner => @owner) }
+          Factory.create(:editor, :owner => @owner)
+          @plan.can_be_changed_to(@owner.plan, @owner).should be_false
+        end
+
+        it "is impossible (without editor and 4 sites)" do
+          4.times { Factory.create(:site, :owner => @owner) }
+          @owner.stub(:edotors).and_return([])
+          @plan.can_be_changed_to(Plan::FREE, @owner).should be_false
+        end
+        
+      end
+
+      context "to Unlimitedtrial from #{plan.name}" do
+
+        before :each do
+          @plan = plan
+          @owner.stub(:plan).and_return(Plan::UNLIMITEDTRIAL)
+          
+          10.times { Factory.create(:site, :owner => @owner) }
+          10.times { Factory.create(:editor, :owner => @owner) }
+        end
+        
+        it "is always possible" do
+          @plan.can_be_changed_to(@owner.plan, @owner).should be_true
+        end
+        
+      end
+
+      context "to Professional" do
+        
+        before :each do
+          @plan = plan
+          @owner.stub(:plan).and_return(Plan::PROFESSIONAL)
+          
+          
+          10.times { Factory.create(:site, :owner => @owner) }
+          10.times { Factory.create(:editor, :owner => @owner) }
+        end
+        
+        it "is always possible" do
+          @plan.can_be_changed_to(@owner.plan, @owner).should be_true
+        end
+        
+      end
+      
+    end
+    
+  end
   
 end
