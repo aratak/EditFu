@@ -2,7 +2,7 @@
 %p The changes are listed below:
 %p
   Your plan was changed from 
-  %strong= Plan.find(@user.plan_id_was).name
+  %strong= @user.plan_was.name
   to 
   %strong= @user.plan.name
   \.

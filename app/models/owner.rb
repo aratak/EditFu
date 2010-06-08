@@ -180,7 +180,7 @@ class Owner < User
     super 
     if plan_id_changed?
       if plan.trial?
-        raise "Invalid plan change" if [Plan::FREE.id, Plan::PROFESSIONAL.id].include?(plan_id_was)
+        raise "Invalid plan change" if [Plan::FREE, Plan::PROFESSIONAL].include?(plan_was)
       elsif plan.free?
         if sites.count { |r| !r.destroyed? } > 1
           errors.add_to_base I18n.t("free_plan.site_count")
