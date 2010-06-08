@@ -255,37 +255,6 @@ describe Owner, "" do
   
 end
 
-#describe Owner, "(buddy)" do
-#  before :each do
-#    @owner = Factory.create(:free_owner)
-#  end
-#  it_should_behave_like "general owners tests"
-#
-#  describe "unlimited trial verification" do
-#
-#    it "should be +false+ as default" do
-#      @owner.should_not be_unlimited_trial
-#    end
-#
-#    it "should be protected from massive update (attr_accessible)" do
-#      @owner.update_attributes(:unlimited_trial => true)
-#      @owner.should_not be_unlimited_trial
-#    end
-#
-#    it "should set plan to 'trial', when me toggle to true" do
-#      @owner.plan = 'free'
-#      @owner.plan.should == 'free'
-#
-#      @owner.unlimited_trial = true
-#      @owner.plan.should == 'unlimited_trial'
-#      @owner.should be_valid
-#    end
-#
-#  end
-#
-#end
-
-
 describe Owner, "and plan relation" do
   
   should_belong_to :plan
