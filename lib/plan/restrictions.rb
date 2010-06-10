@@ -1,4 +1,4 @@
-module PlanRestrictions
+module Plan::Restrictions
   ALL_ACTIONS = ["pages/show", "pages/update", "pages/new", "pages/create", 
                  "sites/new", "sites/create", "editors/new", "editors/create"]
 
