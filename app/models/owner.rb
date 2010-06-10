@@ -5,7 +5,10 @@ class Owner < User
   
   # before_validation_on_create :set_default_domain_name
 
+
   attr_accessible :domain_name, :company_name, :terms_of_service
+  
+  concerned_with :migrations
 
   # Associations
   has_many :sites, :dependent => :destroy
@@ -13,6 +16,7 @@ class Owner < User
   has_many :editors, :dependent => :destroy
   belongs_to :plan
   
+  # include Plan::Migrations
   before_update :plan_change_validation, :if => :"plan_changed?"
 
   # Validations
@@ -26,37 +30,8 @@ class Owner < User
 
   validates_acceptance_of :terms_of_service, :on => :create, :allow_nil => false, :message => 'Read and accept it!'
 
-  # return
-  def self.plans
-    Plan::ALLOWS.keys
-  end
 
-  # define permissions methods
-  #   can_add_editor?
-  #   can_add_site?
-  #   can_add_page?
-  #
-  self.plans.each do |perm|
-    define_method(:"can_add_#{perm}?") do
-      self.plan.send(:"can_add_#{perm}?", self)
-    end    
-  end
-  
-  # return the previous plan
-  def plan_was
-    Plan.find plan_id_was
-  end
-  
-  # got true if plan has been changed but not saved yet
-  def plan_changed?
-    plan_id_changed?
-  end
-  
-  def plan_change_validation options={}
-    plan_was.can_be_changed_to(self.plan, self, options)
-  end  
 
-  
   def trial_period_end
     30.days.since(confirmed_at).to_date
   end
@@ -93,39 +68,6 @@ class Owner < User
     Mailer.deliver_signup(self)
   end
       
-  def set_professional_plan(card)
-    if !plan.professional?
-      self.plan = Plan::PROFESSIONAL
-      PaymentSystem.recurring(self, card)
-      set_card_fields(card)
-     
-      Mailer.deliver_plan_change(self)
-      save!
-    end
-  end
-  
-  def set_free_plan(sites, pages)
-    if !plan.free?
-      (self.sites - sites).each { |site| site.destroy }
-      (self.pages - pages).each { |page| page.destroy }
-
-      cancel_recurring
-
-      self.plan = Plan::FREE
-      Mailer.deliver_plan_change(self)
-      self.save
-    end
-  end
-  
-  def set_card(card)
-    if plan.professional?
-      PaymentSystem.update_recurring(self, card)
-      set_card_fields(card)
-      Mailer.deliver_credit_card_changes(self)
-      save!
-    end
-  end
-
   def billing_day
     if confirmed_at
       confirmed_at.mday > 28 ? 1 : confirmed_at.mday 
@@ -164,9 +106,6 @@ class Owner < User
       Mailer.deliver_hold(self)
     end
 
-    if plan.free? && plan_id_changed?
-      editors.clear
-    end
     deliver_subdomain_changes if domain_name_changed?
     Mailer.deliver_owner_email_changes(self) if email_changed?
   end
@@ -176,35 +115,23 @@ class Owner < User
     Mailer.deliver_account_cancellation(self)
   end
 
-  def validate
-    super 
-    if plan_id_changed?
-      if plan.trial?
-        raise "Invalid plan change" if [Plan::FREE, Plan::PROFESSIONAL].include?(plan_was)
-      elsif plan.free?
-        if sites.count { |r| !r.destroyed? } > 1
-          errors.add_to_base I18n.t("free_plan.site_count")
-        end
+  # def validate
+  #   super 
+    # if plan_id_changed?
+    #   if plan.trial?
+    #     raise "Invalid plan change" if [Plan::FREE, Plan::PROFESSIONAL].include?(plan_was)
+    #   elsif plan.free?
+    #     if sites.count { |r| !r.destroyed? } > 1
+    #       errors.add_to_base I18n.t("free_plan.site_count")
+    #     end
+    # 
+    #     if pages.count { |r| !r.destroyed? } > 3
+    #       errors.add_to_base I18n.t("free_plan.page_count")
+    #     end
+    #   end
+    # end
+  # end
 
-        if pages.count { |r| !r.destroyed? } > 3
-          errors.add_to_base I18n.t("free_plan.page_count")
-        end
-      end
-    end
-  end
-
-  def cancel_recurring
-    if plan.professional?
-      PaymentSystem.cancel_recurring(self) 
-      self.card_number = nil
-      self.card_exp_date = nil
-    end
-  end
-
-  def set_card_fields(card)
-    self.card_number = card.display_number
-    self.card_exp_date = Date.new(card.year, card.month, 1)
-  end
 
   def self.deliver_card_expirations
     Owner.find_all_by_card_exp_date(15.days.from_now.to_date).each do |owner|
@@ -226,8 +153,6 @@ class Owner < User
   end
   
   def self.deliver_trial_expiration_reminder
-    raise "should be fixed"
-
     conditions = ["plan = '?' AND DATE(confirmed_at) = ?", Plan::TRIAL.id, 27.days.ago.to_date]
     Owner.all(:conditions => conditions).each do |owner|
       Mailer.deliver_trial_expiration_reminder(owner)
@@ -240,6 +165,7 @@ class Owner < User
       Mailer.deliver_editor_subdomain_changes(self, editor)
     end
   end
+  
 end
 
 
