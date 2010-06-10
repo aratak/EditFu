@@ -1,9 +1,9 @@
 .plan.section
   %h5 Plan
   .plan-wrapper
-    = owner.radio_button 'plan', 'professional', :class => 'radio'
-    .plan-label{selected_class(@owner.plan == 'professional')}
-      %label(for='preferences_owner_plan_professional')
+    = owner.radio_button 'plan_id', Plan::PROFESSIONAL.id, :class => 'radio'
+    .plan-label{selected_class(@owner.plan.professional?)}
+      %label{ :for => Plan::PROFESSIONAL.label_tag_name }
       %dl
         %dt Pro $24
         %dd
@@ -13,9 +13,9 @@
             %li Unlimited Editors
       %small Current
           
-    = owner.radio_button 'plan', 'free', :class => 'radio'
-    .plan-label{selected_class(@owner.plan == 'free')}
-      %label(for='preferences_owner_plan_free')
+    = owner.radio_button 'plan_id', Plan::FREE.id, :class => 'radio'
+    .plan-label{selected_class(@owner.plan.free?)}
+      %label{:for => Plan::FREE.label_tag_name }
       %dl
         %dt Free
         %dd
@@ -25,10 +25,10 @@
             %li No Editors
       %small Current
 
-    - if @owner.plan == 'trial'
-      = owner.radio_button 'plan', 'trial', :class => 'radio'
+    - if @owner.plan.trial?
+      = owner.radio_button 'plan_id', Plan::TRIAL.id, :class => 'radio'
       .plan-label.selected
-        %label(for='preferences_owner_plan_trial')
+        %label{:for => Plan::TRIAL.label_tag_name }
         %dl
           %dt Trial
           %dd
@@ -39,9 +39,9 @@
               %li.ends 
                 = "Ends #{@owner.trial_period_end}"
         %small Current
-    - if @owner.unlimited_trial?
+    - if @owner.plan.unlimited_trial?
       .plan-label.selected
-        %label(for='preferences_owner_plan_unlimited_trial')
+        %label{:for => Plan::UNLIMITEDTRIAL.label_tag_name }
         %dl
           %dt Buddy
           %dd
