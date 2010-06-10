@@ -159,7 +159,7 @@ describe Plan do
         end
 
         it "shouldn't change from #{plan.name}" do
-          plan.can_be_changed_to(Plan::TRIAL, @owner).should be_false
+          plan.changes_to(Plan::TRIAL, @owner).should be_false
         end
       
       end
@@ -174,12 +174,12 @@ describe Plan do
         
         it "is possible" do
           @owner.stub(:edotors).and_return([])
-          @plan.can_be_changed_to(Plan::SINGLE, @owner).should be_true
+          @plan.changes_to(Plan::SINGLE, @owner).should be_true
         end
         
         it "is impossible" do
           Factory.create(:editor, :owner => @owner)
-          @plan.can_be_changed_to(Plan::SINGLE, @owner).should be_false
+          @plan.changes_to(Plan::SINGLE, @owner).should be_false
         end
         
       end
@@ -191,37 +191,43 @@ describe Plan do
           @owner.stub(:plan).and_return(Plan::FREE)
         end
         
-        it "is possible (with two sites)" do
-          2.times { Factory.create(:site, :owner => @owner) }
+        it "is possible (with one sites)" do
+          Factory.create(:site, :owner => @owner)
           @owner.stub(:edotors).and_return([])
         
-          @plan.can_be_changed_to(@owner.plan, @owner).should be_true
+          @plan.changes_to(@owner.plan, @owner).should be_true
         end
 
         it "is possible (without sites)" do
           @owner.stub(:sites).and_return([])
           @owner.stub(:edotors).and_return([])
         
-          @plan.can_be_changed_to(@owner.plan, @owner).should be_true
+          @plan.changes_to(@owner.plan, @owner).should be_true
+        end
+
+        it "is impossible (with 2 sites)" do
+          2.times { Factory.create(:site, :owner => @owner) }
+          @owner.stub(:edotors).and_return([])
+          @plan.changes_to(@owner.plan, @owner).should be_false
         end
 
         
         it "is impossible (with editor and 4 sites)" do
           4.times { Factory.create(:site, :owner => @owner) }
           Factory.create(:editor, :owner => @owner)
-          @plan.can_be_changed_to(@owner.plan, @owner).should be_false
+          @plan.changes_to(@owner.plan, @owner).should be_false
         end
 
-        it "is impossible (with editor and 2 sites)" do
-          2.times { Factory.create(:site, :owner => @owner) }
+        it "is impossible (with editor and 1 sites)" do
+          Factory.create(:site, :owner => @owner)
           Factory.create(:editor, :owner => @owner)
-          @plan.can_be_changed_to(@owner.plan, @owner).should be_false
+          @plan.changes_to(@owner.plan, @owner).should be_false
         end
 
         it "is impossible (without editor and 4 sites)" do
           4.times { Factory.create(:site, :owner => @owner) }
           @owner.stub(:edotors).and_return([])
-          @plan.can_be_changed_to(Plan::FREE, @owner).should be_false
+          @plan.changes_to(Plan::FREE, @owner).should be_false
         end
         
       end
@@ -237,7 +243,7 @@ describe Plan do
         end
         
         it "is always possible" do
-          @plan.can_be_changed_to(@owner.plan, @owner).should be_true
+          @plan.changes_to(@owner.plan, @owner).should be_true
         end
         
       end
@@ -254,7 +260,7 @@ describe Plan do
         end
         
         it "is always possible" do
-          @plan.can_be_changed_to(@owner.plan, @owner).should be_true
+          @plan.changes_to(@owner.plan, @owner).should be_true
         end
         
       end
