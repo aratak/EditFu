@@ -24,7 +24,7 @@ class Owner
   
   # return the previous plan
   def plan_was
-    Plan.find plan_id_was
+    Plan.find(plan_id_was)
   end
   
   # got true if plan has been changed but not saved yet
@@ -37,36 +37,29 @@ class Owner
   end
   
   def plan_change_validation options={}
-    railse "plan_change_validation"
     plan_was.changes_to(self.plan, self, options)
   end  
-  
-  # # can be defined:
-  # #  _set_professional_plan_from_free_plan
-  # #  _set_professional_plan
-  # def plan_changes
-  #   specific_changes_method = :"_set_#{self.plan.identificator}_plan_from_#{self.plan_was.identificator}_plan"
-  #   general_changes_method = :"_set_#{self.plan.identificator}_plan"
-  #   
-  #   return send(specific_changes_method, owner, options) if respond_to?(specific_changes_method, true)
-  #   return send(general_changes_method, owner, options) if respond_to?(general_changes_method, true)
+
+  # def plan= value
+  #   write_attribute :plan_id, value.id and return if new_record?
+  #   raise NoMethodError, "Method shouldn't be called. Use 'set_plan' instead. "
+  # end
+  # 
+  # def plan
+  #   Plan.find(self.plan_id)
   # end
   
-  
-  def plan= *params
-    raise NoMethodError, "Method shouldn't be called. Use 'set_plan' instead. "
-  end
-  
-  def set_plan *params
-    value = params.first.kind_of?(Plan) ? params.shift : Plan.find(params.shift)
-    self.set_card(params[:preferences][:card]) if self.plan.professional? && value.professional?
-    return nil if self.invalid? or (self.plan == value)
-
-    general_changes_method = :"_set_#{value.identificator}_plan?"
-    write_attribute(:plan, value) if !respond_to?(general_changes_method, true) || send(general_changes_method, *params)
+  def set_plan value, *params
+    new_plan = value.kind_of?(Plan) ? value : Plan.find(value)
+    return nil if self.invalid? or (self.plan == new_plan)
+    general_changes_method = :"_set_#{new_plan.identificator}_plan?"
+    self.plan = new_plan if !respond_to?(general_changes_method, true) || send(general_changes_method, *params)
+    # write_attribute(:plan_id, new_plan.id) 
+    self.plan_changed?
   end
   
   def set_card(card)
+    # return false unless self.plan.professional?
     card = ExtCreditCard.new(card) unless card.kind_of?(ExtCreditCard)
     return false if card.invalid?
     recurring_method = plan_changed? ? :update_recurring : :recurring
@@ -79,7 +72,7 @@ class Owner
   private
   
   def cancel_recurring
-    if plan.professional?
+    if plan_was && plan_was.professional?
       PaymentSystem.cancel_recurring(self) 
       self.card_number = nil
       self.card_exp_date = nil
@@ -91,48 +84,26 @@ class Owner
     self.card_exp_date = Date.new(card.year, card.month, 1)
   end
   
-  # @owner.require_current_password
-  # @owner.update_attributes(params[:preferences][:owner])
-  # @message = ['preferences.updated']
-  # 
-  # @plan = params[:preferences][:owner][:plan]
-  # @card = ExtCreditCard.new params[:preferences][:card]
-  #
-  # @plan_changed = @plan != @owner.plan
-  # if @plan == 'professional' && (@owner.plan_changed? || !@card.number.blank?)
-  #   @card.valid?
-  #   if @owner.errors.empty? && @card.errors.empty?
-  #     begin
-  #       if @owner.plan_changed?
-  #         @owner.set_plan(Plan::PROFESSIONAL, params)
-  #         @message = ['plan.upgraded', {:plan_was => @owner.plan_was.name}]
-  #       else
-  #         @owner.set_card @card
-  #       end
-  #     rescue PaymentSystemError
-  #       render_message I18n.t('plan.payment_error', 
-  #         :contact_us => MessageKeywords.contact_us('contact us'), 
-  #         :support => MessageKeywords.support_email)
-  #     end
-  #   end
-  # end
-  # 
-  # unless @owner.errors.empty? && @card.errors.empty?
-  #   render_errors :preferences_owner => @owner, :preferences_card => @card
-  # end
-  
-  def _set_professional_plan?(params)
+  def _set_professional_plan?(*params)
     Mailer.deliver_plan_change(self)
     true
   end
   
-  def _set_free_plan?(params)
+  def _set_free_plan?(*params)
+    cgi_params = params.first || {}
     sites = pages = []
-    sites = Site.find(params[:sites]) if params[:sites]
-    pages = Page.find(params[:pages]) if params[:pages]
     
-    (self.sites - sites).each { |site| site.destroy }
-    (self.pages - pages).each { |page| page.destroy }
+    if cgi_params[:sites]
+      sites = Site.find(cgi_params[:sites]) 
+      (self.sites - sites).each { |site| site.destroy }
+    end
+    
+    if cgi_params[:pages]
+      pages = Page.find(cgi_params[:pages])      
+      (self.pages - pages).each { |page| page.destroy }
+    end
+    
+    self.editors.clear
 
     cancel_recurring
 
@@ -141,3 +112,33 @@ class Owner
   end
   
 end
+# 
+# @owner.require_current_password
+# @owner.update_attributes(params[:preferences][:owner])
+# @message = ['preferences.updated']
+# 
+# @plan = params[:preferences][:owner][:plan]
+# @card = ExtCreditCard.new params[:preferences][:card]
+#
+# @plan_changed = @plan != @owner.plan
+# if @plan == 'professional' && (@owner.plan_changed? || !@card.number.blank?)
+#   @card.valid?
+#   if @owner.errors.empty? && @card.errors.empty?
+#     begin
+#       if @owner.plan_changed?
+#         @owner.set_plan(Plan::PROFESSIONAL, params)
+#         @message = ['plan.upgraded', {:plan_was => @owner.plan_was.name}]
+#       else
+#         @owner.set_card @card
+#       end
+#     rescue PaymentSystemError
+#       render_message I18n.t('plan.payment_error', 
+#         :contact_us => MessageKeywords.contact_us('contact us'), 
+#         :support => MessageKeywords.support_email)
+#     end
+#   end
+# end
+# 
+# unless @owner.errors.empty? && @card.errors.empty?
+#   render_errors :preferences_owner => @owner, :preferences_card => @card
+# end
