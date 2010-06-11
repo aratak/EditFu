@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   
   filter_parameter_logging 'password', 'card'
 
-  include Plan::Restrictions
+  include PlanRestrictions
   include StoreTabUri
   include ErrorsStuff       # render_XXX helpers
 
