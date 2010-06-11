@@ -44,11 +44,13 @@ class Plan
   def _change_to_free owner, options={}
     sites_condition = (owner.sites.count <= 1)
     editors_condition = owner.editors.empty?
+    pages_condition = (owner.pages.count <= 3)
     
     owner.errors.add_to_base I18n.t("free_plan.sites_error") unless sites_condition
     owner.errors.add_to_base I18n.t("free_plan.editors_error") unless editors_condition
+    owner.errors.add_to_base I18n.t("free_plan.pages_error") unless pages_condition
     
-    sites_condition && editors_condition
+    sites_condition && editors_condition && pages_condition
   end
   
 end
