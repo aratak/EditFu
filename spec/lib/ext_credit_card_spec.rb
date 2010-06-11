@@ -12,6 +12,13 @@ describe ExtCreditCard do
       card.expiration.should == '02/2020'
     end
   end
+  
+  describe "invalid? method" do
+    it "should be" do
+      card = ExtCreditCard.new :first_name => 'John', :expiration => '02/2020'
+      card.should be_respond_to(:invalid?)
+    end
+  end
 
   describe "before_validate" do
     it "should parse @expiration attribute and update @year and @month" do

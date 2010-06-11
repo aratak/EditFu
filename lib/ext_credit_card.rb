@@ -25,6 +25,10 @@ class ExtCreditCard < ActiveMerchant::Billing::CreditCard
 
     errors.add(:zip, blank_message) if zip.blank?
   end
+  
+  def invalid?
+    !valid?
+  end
 
   private
 
