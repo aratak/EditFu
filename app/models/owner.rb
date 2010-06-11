@@ -16,9 +16,6 @@ class Owner < User
   has_many :editors, :dependent => :destroy
   belongs_to :plan
   
-  # include Plan::Migrations
-  before_update :plan_change_validation, :if => :"plan_changed?"
-
   # Validations
   validates_presence_of  :domain_name #, :plan
   validates_associated :plan 
