@@ -29,7 +29,7 @@ class Plan < ActiveHash::Base
     end    
 
     define_method(:"not_#{p.identificator}?") do
-      self.name != p.name
+      !self.send(:"#{p.identificator}?")
     end    
 
   end
