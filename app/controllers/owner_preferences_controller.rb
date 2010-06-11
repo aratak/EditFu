@@ -11,15 +11,18 @@ class OwnerPreferencesController < ApplicationController
     @message = ['preferences.updated']
     
     begin
-      @owner.set_card(params[:preferences][:card]) 
       @owner.set_plan(params[:preferences][:owner][:plan_id], params) if params[:preferences][:owner][:plan_id]
+      @owner.set_card(params[:preferences][:card])  if params[:preferences][:card]
     rescue PaymentSystemError
       render_message I18n.t('plan.payment_error', 
                             :contact_us => MessageKeywords.contact_us('contact us'), 
                             :support => MessageKeywords.support_email)
     end
 
-    @owner.save
+    unless @card.valid? && @owner.save?
+      render_errors :preferences_owner => @owner, :preferences_card => @card
+    end
+    
     
     # @owner.require_current_password
     # @owner.update_attributes(params[:preferences][:owner])

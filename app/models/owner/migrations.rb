@@ -51,18 +51,24 @@ class Owner
   
   def set_plan value, *params
     new_plan = value.kind_of?(Plan) ? value : Plan.find(value)
-    return nil if self.invalid? or (self.plan == new_plan)
+    return nil if (self.plan == new_plan)
     general_changes_method = :"_set_#{new_plan.identificator}_plan?"
     self.plan = new_plan if !respond_to?(general_changes_method, true) || send(general_changes_method, *params)
-    # write_attribute(:plan_id, new_plan.id) 
-    self.plan_changed?
+    
+    if plan_changed?
+      Mailer.deliver_plan_change(self)
+      true
+    else
+      false
+    end
   end
   
   def set_card(card)
-    # return false unless self.plan.professional?
+    return false unless self.plan.professional?
+    
     card = ExtCreditCard.new(card) unless card.kind_of?(ExtCreditCard)
     return false if card.invalid?
-    recurring_method = plan_changed? ? :update_recurring : :recurring
+    recurring_method = plan_changed? ? :recurring : :update_recurring
     PaymentSystem.send(recurring_method, self, card)
     set_card_fields(card)
     Mailer.deliver_credit_card_changes(self)
@@ -85,7 +91,6 @@ class Owner
   end
   
   def _set_professional_plan?(*params)
-    Mailer.deliver_plan_change(self)
     true
   end
   
