@@ -5,6 +5,7 @@ TAGS
 REVISION
 *.tmproj
 *~
+*.swp
 .settings
 .project
 .tasks-cache
