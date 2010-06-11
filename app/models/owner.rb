@@ -30,8 +30,6 @@ class Owner < User
 
   validates_acceptance_of :terms_of_service, :on => :create, :allow_nil => false, :message => 'Read and accept it!'
 
-
-
   def trial_period_end
     30.days.since(confirmed_at).to_date
   end
