@@ -76,6 +76,7 @@ en:
       <strong>{{plan_was}} Plan</strong> to the <strong>Pro Plan</strong>."
     payment_error: "Were sorry, but the transaction did not go through due to 
       an authorization issue. Please try again in a few minutes or {{contact_us}} at {{support}}."
+    trial_set_error: "You can't set Trial plan again."
 
   passwords:
     dont_match: "The new password and confirm password field do not match. 
