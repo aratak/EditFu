@@ -1,31 +1,6 @@
 class Owner < User
-  # @@plans = %w(trial unlimited_trial free professional)
 
-  # acts_as_audited :only => [:plan]
-  
-  # before_validation_on_create :set_default_domain_name
-
-
-  attr_accessible :domain_name, :company_name, :terms_of_service
-  
-  concerned_with :migrations
-
-  # Associations
-  has_many :sites, :dependent => :destroy
-  has_many :pages, :through => :sites
-  has_many :editors, :dependent => :destroy
-  belongs_to :plan
-  
-  # Validations
-  validates_presence_of  :domain_name #, :plan
-  validates_associated :plan 
-  # validates_presence_of :company_name
-  validates_length_of :company_name, :within => 3..255, :allow_blank => true
-  validates_uniqueness_of :domain_name
-  validates_format_of :domain_name, :with => /^\w+$/
-  validates_exclusion_of :domain_name, :in => %w(www admin)
-
-  validates_acceptance_of :terms_of_service, :on => :create, :allow_nil => false, :message => 'Read and accept it!'
+  concerned_with :associations, :validations, :migrations
 
   def trial_period_end
     30.days.since(confirmed_at).to_date
@@ -34,30 +9,9 @@ class Owner < User
   def trial_period_expired?
     plan.trial? && trial_period_end.past?
   end  
+
+  alias_attribute :subdomain, :domain_name
   
-  def subdomain
-    domain_name.downcase
-  end
-  
-  def site_pages(site)
-    site.pages
-  end
-
-  def add_editor(email)
-    editor_name = email.to_s.gsub(/@.*/, "")
-    editor = Editor.new :user_name => editor_name, :email => email
-    editor.owner = self
-    editor.save
-    editor
-  end
-
-  def find_site(site_id)
-    sites.find_by_id site_id
-  end
-
-  def find_page(site_id, page_id)
-    pages.find :first, :conditions => { :id => page_id, :site_id => site_id }
-  end
 
   def send_confirmation_instructions
     Mailer.deliver_signup(self)
