@@ -64,7 +64,7 @@ class Owner
   end
   
   def set_card(card)
-    return false unless self.plan.professional?
+    return false if self.plan.not_professional?
     
     card = ExtCreditCard.new(card) unless card.kind_of?(ExtCreditCard)
     return false if card.invalid?
@@ -72,6 +72,7 @@ class Owner
     PaymentSystem.send(recurring_method, self, card)
     set_card_fields(card)
     Mailer.deliver_credit_card_changes(self)
+    true
   end
   
 
