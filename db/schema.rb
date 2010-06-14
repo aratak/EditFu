@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(:version => 20100602114027) do
     t.date     "card_exp_date"
     t.string   "company_name"
     t.boolean  "hold"
-    t.integer  "plan_id"
+    t.integer  "plan_id",                             :default => 1
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

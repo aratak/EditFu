@@ -7,7 +7,7 @@ class PlanId < ActiveRecord::Migration
   }
 
   def self.up
-    add_column :users, :plan_id, :integer
+    add_column :users, :plan_id, :integer, :default => PLANS[:trial]
     PLANS.each do |key, val|
       Owner.update_all "plan_id = #{val}", "plan = '#{key}'"
     end
