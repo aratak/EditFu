@@ -12,14 +12,14 @@ class OwnerPreferencesController < ApplicationController
     
     begin
       @owner.set_plan(params[:preferences][:owner][:plan_id], params) if params[:preferences][:owner][:plan_id]
-      @owner.set_card(params[:preferences][:card])  if params[:preferences][:card]
+      @owner.set_card(params[:preferences][:card]) if params[:preferences][:card]
     rescue PaymentSystemError
       render_message I18n.t('plan.payment_error', 
                             :contact_us => MessageKeywords.contact_us('contact us'), 
                             :support => MessageKeywords.support_email)
     end
 
-    unless @card.valid? && @owner.save?
+    unless @owner.save
       render_errors :preferences_owner => @owner, :preferences_card => @card
     end
     
