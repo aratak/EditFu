@@ -30,6 +30,10 @@ class Page < ActiveRecord::Base
       result
     end
   end
+  
+  def empty?
+    sections.empty? && images.empty?
+  end
 
   def images=(elements)
     update_elements(true, elements) do |img, attributes| 

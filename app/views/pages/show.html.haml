@@ -26,9 +26,9 @@
               :alt => attributes['alt'], :onload => 'initImage(this);' } |
           - attributes.each do |k,v|
             = hidden_field_tag "images[][#{k}]", v, :id => nil
-    - if @sections.present? && @images.present?
+    - unless @page.empty?
       = f.submit "Publish", :class => "update-button"
-
+  
   #code-popup-template(style='display: none;')
     .code-popup.two-column-popup.html_code
       %h1 HTML Code
