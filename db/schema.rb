@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(:version => 20100615090017) do
     t.string  "subscription_id"
   end
 
-  create_table "editors_pages", :force => true do |t|
+  create_table "editors_pages", :id => false, :force => true do |t|
     t.integer "editor_id"
     t.integer "page_id"
   end

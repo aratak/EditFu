@@ -1,6 +1,6 @@
 class CreateEditorsPages < ActiveRecord::Migration
   def self.up
-    create_table :editors_pages do |t|
+    create_table :editors_pages, :id => false do |t|
       t.references :editor
       t.references :page
     end
