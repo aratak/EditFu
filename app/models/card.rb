@@ -1,7 +1,8 @@
 class Card < ActiveRecord::Base
 
   attr_accessor :first_name, :last_name, :expiration, 
-                :number, :verification_value, :zip, :credit_card
+                :number, :verification_value, :zip, 
+                :credit_card
 
   belongs_to :owner
 
@@ -14,7 +15,7 @@ class Card < ActiveRecord::Base
 
 
   after_update :update_recurring
-  after_save :recurring
+  after_create :recurring
   
   after_save :set_card_fields
   after_save :deliver_credit_card_changes
