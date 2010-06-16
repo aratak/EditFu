@@ -8,10 +8,10 @@ class Owner < User
 
   alias_attribute :subdomain, :domain_name
   accepts_nested_attributes_for :card, :reject_if => :has_no_payment_plan?
-  attr_accessible :domain_name, :company_name, :terms_of_service
+  attr_accessible :domain_name, :company_name, :terms_of_service, :card_attributes
 
   validates_presence_of  :domain_name
-  validate :card_presence, :if => :has_payment_plan?
+  # validate :card_presence, :if => :has_payment_plan?
   validates_associated :plan 
   validates_associated :card
   validates_length_of :company_name, :within => 3..255, :allow_blank => true
