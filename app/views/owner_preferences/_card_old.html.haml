@@ -1,4 +1,4 @@
-- owner.fields_for :card_attributes, @owner.card do |card|
+- f.fields_for :card, @card do |card|
   .billing.inputs
     %h5 Billing
     .inputs-row
@@ -6,12 +6,12 @@
         .title Credit card number
         .label-input
           = card.text_field 'number'
-          = card.label 'number' #,  @owner.card_number || '1234 5678 9123 4567', :class => ("filled" if @owner.card_present?)
+          = card.label 'number',  @owner.card_number || '1234 5678 9123 4567', :class => ("filled" if @owner.card_number)
       .title-input.exp-date
         .title Expiration date
         .label-input
           = card.text_field 'expiration'
-          = card.label 'expiration' #, '02/2020', :class => ("filled" if @owner.card_present?)
+          = card.label 'expiration', @owner.card_exp_date ||'02/2020', :class => ("filled" if @owner.card_exp_date)
       .title-input.verification-value
         .title Security code
         .label-input
@@ -38,7 +38,7 @@
         .label-input
           = card.text_field 'zip'
           = card.label 'zip', '10005'
-      - if @owner.plan.professional?
+      - if @owner.plan == 'professional'
         - if @owner.prev_billing_date
           .title-input.prev-billing-date
             .label-input

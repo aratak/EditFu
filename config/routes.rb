@@ -10,7 +10,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :editors, :member => { :update_permissions => :post }
 
   map.resource :simple_preferences
-  map.resource :owner_preferences, :member => { :downgrade => :post }, :collection => { :identity => :post }
+  map.resource :owner_preferences, :member => { :downgrade => :post, :billing_update => :put }, :collection => { :identity => :post }
 
   map.resources :sites, :collection => { :ls => :get, :tree => :get } do |site|
     site.resources :pages, :collection => { :enable => :post }

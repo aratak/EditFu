@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100602114027) do
+ActiveRecord::Schema.define(:version => 20100615090017) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -26,6 +26,13 @@ ActiveRecord::Schema.define(:version => 20100602114027) do
   add_index "audits", ["auditable_id", "auditable_type"], :name => "auditable_index"
   add_index "audits", ["created_at"], :name => "index_audits_on_created_at"
   add_index "audits", ["user_id", "user_type"], :name => "user_index"
+
+  create_table "cards", :force => true do |t|
+    t.integer "owner_id"
+    t.string  "display_number"
+    t.string  "display_expiration_date"
+    t.string  "subscription_id"
+  end
 
   create_table "editors_pages", :force => true do |t|
     t.integer "editor_id"

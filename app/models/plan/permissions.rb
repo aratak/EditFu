@@ -5,8 +5,7 @@ class Plan
     :site   => [      TRIAL, UNLIMITEDTRIAL,         PROFESSIONAL],
     :editor => [      TRIAL, UNLIMITEDTRIAL,         PROFESSIONAL]
   }
-
-
+  
   # the general method for each can_add_#{permission}?
   #
   #   can_add?(:page, Owner.first)

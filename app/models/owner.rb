@@ -1,39 +1,81 @@
 class Owner < User
 
-  concerned_with :associations, :validations, :migrations
+  has_many :sites, :dependent => :destroy
+  has_many :pages, :through => :sites
+  has_many :editors, :dependent => :destroy
+  belongs_to :plan
+  has_one :card, :dependent => :destroy
+
+  alias_attribute :subdomain, :domain_name
+  accepts_nested_attributes_for :card, :reject_if => :has_no_payment_plan?
+  attr_accessible :domain_name, :company_name, :terms_of_service
+
+  validates_presence_of  :domain_name
+  validate :card_presence, :if => :has_payment_plan?
+  validates_associated :plan 
+  validates_associated :card
+  validates_length_of :company_name, :within => 3..255, :allow_blank => true
+  validates_uniqueness_of :domain_name
+  validates_format_of :domain_name, :with => /^\w+$/
+  validates_exclusion_of :domain_name, :in => %w(www admin dev staging)
+  validates_acceptance_of :terms_of_service, :on => :create, :allow_nil => false, :message => 'Read and accept it!'
+  # validates_presence_of :card_number, :if => :plan_is_professional?
+
+  concerned_with :card_relation, :associations, :delivers, :plan_migrations, :plan_relation
+
+  def holded?
+    hold && hold_changed?
+  end
+  
+  def unholded?
+    !holded?
+  end
+
+  def has_payment_plan?
+    condition = Plan::PAYMENTS.include?(self.plan)
+    # self.build_card if condition && self.card.nil?
+    condition
+  end
+  
+  def has_no_payment_plan?
+    !has_payment_plan?
+  end
+  
+  def card_presence
+    errors.add "card_number", "is required" if self.card.nil?
+  end
 
   def trial_period_end
+    logger.warn("the method 'trial_period_end' will be deplicated")
     30.days.since(confirmed_at).to_date
   end
 
   def trial_period_expired?
+    logger.warn("the method 'trial_period_end' will be deplicated")
     plan.trial? && trial_period_end.past?
   end  
 
-  alias_attribute :subdomain, :domain_name
-  
-
-  def send_confirmation_instructions
-    Mailer.deliver_signup(self)
-  end
-      
   def billing_day
+    logger.warn("the method 'trial_period_end' will be deplicated")
     if confirmed_at
       confirmed_at.mday > 28 ? 1 : confirmed_at.mday 
     end
   end
 
   def prev_billing_date
+    logger.warn("the method 'trial_period_end' will be deplicated")
     d = next_billing_date << 1
     d <= confirmed_at.to_date ? nil : d
   end
 
   def next_billing_date(date = Date.today)
+    logger.warn("the method 'trial_period_end' will be deplicated")
     this_bd = Date.new(date.year, date.month, billing_day)
     this_bd.past? ? this_bd.next_month : this_bd
   end
 
   def prof_plan_begins_at
+    logger.warn("the method 'trial_period_end' will be deplicated")
     if !plan.professional?
       next_billing_date
     else
@@ -41,80 +83,6 @@ class Owner < User
     end
   end
 
-  def self.deliver_scheduled_messages
-    deliver_card_expirations
-    deliver_cards_have_expired
-    deliver_trial_expiration_reminder
-    deliver_trial_expirations
-  end
-
-  protected
-
-  def before_update
-    if hold && hold_changed?
-      Mailer.deliver_hold(self)
-    end
-
-    deliver_subdomain_changes if domain_name_changed?
-    Mailer.deliver_owner_email_changes(self) if email_changed?
-  end
-
-  def before_destroy
-    cancel_recurring
-    Mailer.deliver_account_cancellation(self)
-  end
-
-  # def validate
-  #   super 
-    # if plan_id_changed?
-    #   if plan.trial?
-    #     raise "Invalid plan change" if [Plan::FREE, Plan::PROFESSIONAL].include?(plan_was)
-    #   elsif plan.free?
-    #     if sites.count { |r| !r.destroyed? } > 1
-    #       errors.add_to_base I18n.t("free_plan.site_count")
-    #     end
-    # 
-    #     if pages.count { |r| !r.destroyed? } > 3
-    #       errors.add_to_base I18n.t("free_plan.page_count")
-    #     end
-    #   end
-    # end
-  # end
-
-
-  def self.deliver_card_expirations
-    Owner.find_all_by_card_exp_date(15.days.from_now.to_date).each do |owner|
-      Mailer.deliver_card_expiration(owner)
-    end
-  end
-
-  def self.deliver_cards_have_expired
-    Owner.find_all_by_card_exp_date(Date.today).each do |owner|
-      Mailer.deliver_card_has_expired(owner)
-    end
-  end
-
-  def self.deliver_trial_expirations
-    conditions = ["plan = '?' AND DATE(confirmed_at) = ?", Plan::TRIAL.id, 30.days.ago.to_date]
-    Owner.all(:conditions => conditions).each do |owner|
-      Mailer.deliver_trial_expiration(owner)
-    end
-  end
-  
-  def self.deliver_trial_expiration_reminder
-    conditions = ["plan = '?' AND DATE(confirmed_at) = ?", Plan::TRIAL.id, 27.days.ago.to_date]
-    Owner.all(:conditions => conditions).each do |owner|
-      Mailer.deliver_trial_expiration_reminder(owner)
-    end
-  end
-
-  def deliver_subdomain_changes
-    Mailer.deliver_owner_subdomain_changes(self)
-    editors.each do |editor|
-      Mailer.deliver_editor_subdomain_changes(self, editor)
-    end
-  end
-  
 end
 
 

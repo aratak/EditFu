@@ -59,6 +59,7 @@ class Editor < User
 end
 
 
+
 # == Schema Information
 #
 # Table name: users
@@ -90,6 +91,6 @@ end
 #  card_exp_date        :date
 #  company_name         :string(255)
 #  hold                 :boolean(1)
-#  plan_id              :integer(4)
+#  plan_id              :integer(4)      default(1)
 #
 

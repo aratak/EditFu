@@ -21,6 +21,7 @@ en:
 
   credit_card:
     authorize: "Can't authorize credit card. Please check your balance."
+    updated: "Your credit card has successfully been updated."
 
   free_plan:
     site_count: "There are too many remaining sites for free plan. Please delete all but one."

@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   layout nil
   
-  filter_parameter_logging 'password', 'card'
+  filter_parameter_logging 'password' #, 'card'
 
   include PlanRestrictions
   include StoreTabUri
@@ -71,6 +71,7 @@ class ApplicationController < ActionController::Base
   end
 
   def render_errors(models)
+    models.delete_if {|key, value| !value }
     render :update do |page|
       show_error_messages page, models
     end

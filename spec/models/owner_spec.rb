@@ -77,15 +77,19 @@ shared_examples_for "general owners tests" do
   describe "#set_card" do
     it "should update recurring" do
       card = Factory.build :card
-      owner = Factory.create :owner, :plan => Plan::PROFESSIONAL
+      owner = Factory.create :owner
+      owner.set_plan Plan::PROFESSIONAL
+      owner.set_card(card)
 
+      card2 = Factory.build :card
       PaymentSystem.should_receive(:update_recurring).with(owner, card)
-      owner.set_card card
+      owner.set_card(card2).should be(card2)
     end
 
     it "should not call PaymentSystem if plan is not professional" do
       card = Factory.build :card
-      owner = Factory.create :owner, :plan => Plan::FREE
+      owner = Factory.create :owner
+      owner.set_plan Plan::FREE
 
       PaymentSystem.should_not_receive(:update_recurring)
       owner.set_card card
@@ -220,6 +224,28 @@ describe Owner, "" do
         @owner.save.should be_false
       end
     end
+
+    context "professional plan" do
+      before :each do
+        @card = Factory.build :card
+        @owner.confirmed_at = Date.today
+        @gateway = mock('gateway')
+      end
+
+      it "should has been set with card" do
+        @owner.set_plan(Plan::PROFESSIONAL)
+        @owner.set_card(@card).should == @card
+        @owner.valid?.should be_true
+      end
+      
+      it "shouldnt has been set without card" do
+        @owner.set_plan(Plan::PROFESSIONAL)
+        @owner.destroy_card
+        @owner.valid?.should be_false
+      end
+      
+    end
+    
   end
 
   it "should destroy editors if plan was changed to free" do
@@ -249,7 +275,16 @@ describe Owner, "" do
     end
 
     it "should cancel recurring if plan is professional" do
-      owner = Factory.create :owner, :plan => Plan::PROFESSIONAL
+      owner = Factory.create :owner
+      card = Factory.build :card
+      owner.set_plan(Plan::PROFESSIONAL)
+      owner.set_card(card)
+      owner.save(false)
+      
+      owner.card.should_not be_nil
+      owner.plan.should be(Plan::PROFESSIONAL)
+      
+      
       PaymentSystem.should_receive(:cancel_recurring).with(owner)
       owner.destroy
     end
@@ -263,7 +298,7 @@ describe Owner, "and plan relation" do
   
   describe "'plan_was'/'plan_changed' method" do
     before :each do
-      @owner = Factory.create(:owner, :plan => Plan::TRIAL)
+      @owner = Factory.create(:owner)
     end
     
     it "'plan_was' should be" do
@@ -273,7 +308,6 @@ describe Owner, "and plan relation" do
     it "'plan_changed?' should be" do
       @owner.should be_respond_to(:"plan_changed?")
     end
-    
     
     it "should recive the previous plan" do
       @owner.set_plan Plan::FREE
@@ -296,6 +330,43 @@ describe Owner, "and plan relation" do
       @owner.save
       @owner.plan_changed?.should be_false
     end
+    
+    it "should have 'plan_was?' method" do
+      @owner.should be_respond_to(:"plan_was?")
+    end
+    
+    it "should have 'plan_changed_to?' method" do
+      @owner.should be_respond_to(:"plan_changed_to?")
+    end
+    
+    Plan.all.each do |p|
+      before :each do
+        @owner.set_plan Plan::FREE
+        @plan = p
+      end
+
+      it "'plan_changed_to?' should be correct" do
+        @owner.stub!(:plan).and_return @plan 
+      end
+
+      it "'plan_was?' method should be correct" do
+        if @owner.plan_was == @plan 
+          @owner.plan_was?(@plan).should be_true 
+        else
+          @owner.plan_was?(@plan).should be_false
+        end
+      end
+
+      it "should have 'plan_was_#{p.identificator}?' method" do
+        @owner.should be_respond_to(:"plan_was_#{@plan.identificator}?")
+      end
+
+      it "'plan_was_#{p.identificator}?' should be correct" do
+        @owner.send(:"plan_was_#{@plan.identificator}?").should be_equal(@owner.plan_was?(@plan))
+      end
+
+    end
+    
     
   end
   

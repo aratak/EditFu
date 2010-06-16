@@ -1,10 +1,5 @@
 class Owner
-  
-  has_many :sites, :dependent => :destroy
-  has_many :pages, :through => :sites
-  has_many :editors, :dependent => :destroy
-  belongs_to :plan
-  
+
   def site_pages(site)
     site.pages
   end

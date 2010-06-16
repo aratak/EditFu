@@ -16,7 +16,7 @@ class Plan < ActiveHash::Base
   end
   
   def label_tag_name
-    "preferences_owner_plan_id_#{self.id}"
+    "owner_plan_id_#{self.id}"
   end
   
   # define predicatds 

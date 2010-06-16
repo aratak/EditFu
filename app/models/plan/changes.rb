@@ -9,20 +9,6 @@ class Plan
     return true
   end
 
-  # if plan_id_changed?
-  #   if plan.trial?
-  #     raise "Invalid plan change" if [Plan::FREE, Plan::PROFESSIONAL].include?(plan_was)
-  #   elsif plan.free?
-  #     if sites.count { |r| !r.destroyed? } > 1
-  #       errors.add_to_base I18n.t("free_plan.site_count")
-  #     end
-  # 
-  #     if pages.count { |r| !r.destroyed? } > 3
-  #       errors.add_to_base I18n.t("free_plan.page_count")
-  #     end
-  #   end
-  # end
-  
 
   private
   

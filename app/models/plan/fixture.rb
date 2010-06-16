@@ -7,5 +7,10 @@ class Plan
   create :id => 4, :name => "Single", :price => BigDecimal.new("3")
   create :id => 5, :name => "Professional", :price => BigDecimal.new("15")
   
+  PAYMENTS = [SINGLE, PROFESSIONAL]
+
+  def self.payments_plan_ids
+    PAYMENTS.map { |p| p.id }
+  end
   
 end
