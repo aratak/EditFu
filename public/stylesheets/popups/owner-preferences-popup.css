@@ -63,7 +63,7 @@
   vertical-align: top;
   margin-bottom: 2em;
   padding: 5px 10px 5px 25px;
-  width: 137px;
+  min-width: 137px;
   /*height: 110px;*/
 
   -moz-box-sizing: border-box;
