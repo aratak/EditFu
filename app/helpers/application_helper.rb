@@ -128,11 +128,9 @@ module ApplicationHelper
   
   def xhr_flash(page)
     page.replace_html 'messages', ''
-    page.insert_html :bottom, 'messages', :partial => 'layouts/flash/error'  unless flash[:error].nil?
-    page.insert_html :bottom, 'messages', :partial => 'layouts/flash/notice' unless flash[:notice].nil?
-    page.insert_html :bottom, 'messages', :partial => 'layouts/flash/info'   unless flash[:info].nil?
-    page.visual_effect :highlight, 'messages'
-
+    controller.send(:flash).each do |key, msg|
+      page.insert_html :bottom, 'messages', :partial => 'layouts/flash/one', :locals => { :key => key, :msg => msg }
+    end
     flash.clear
   end  
   
