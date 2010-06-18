@@ -65,6 +65,7 @@ en:
     permissions_updated: "Editor settings were updated successfully."
     created: "Editor <strong>{{name}}</strong> was created and will be sent an invite. 
       Click editor preferences for this user if you need to resend an invite."
+    wrong: "Some editors fields is wrong. Check it, please."
     updated: "Editor settings were updated."
     destroyed: "Editor was successfully deleted."
 
