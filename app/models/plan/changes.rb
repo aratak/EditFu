@@ -14,8 +14,8 @@ class Plan
   
   # should change only without editors
   def _change_to_single owner, options={}
-    condition = owner.editors.empty?
-    owner.errors.add_to_base I18n.t("single_plan.editors_error") unless condition
+    condition = owner.sites.count <= 1
+    owner.errors.add_to_base I18n.t("single_plan.sites_error") unless condition
     condition
   end
   
