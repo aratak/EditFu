@@ -40,11 +40,22 @@ Factory.define :page do |p|
   p.site { |p| p.association(:site) }
 end
 
-Factory.define :card , :class => ExtCreditCard do |c|
+Factory.define :card do |c|
   c.first_name 'John'
   c.last_name 'Doe'
   c.number '1'
   c.zip '12345'
   c.verification_value '1'
   c.expiration '01/2030'
+  c.association :owner
 end
+
+# Factory.define :card , :class => ExtCreditCard do |c|
+#   c.first_name 'John'
+#   c.last_name 'Doe'
+#   c.number '1'
+#   c.zip '12345'
+#   c.verification_value '1'
+#   c.expiration '01/2030'
+# end
+
