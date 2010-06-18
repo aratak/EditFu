@@ -34,11 +34,11 @@ class PagesController < ApplicationController
       if page.errors.empty?
         begin
           FtpClient.get_page(page)
-          @message = ['page.suspicious'] if page.has_suspicious_sections?
+          flash[:success] = ['page.suspicious'] if page.has_suspicious_sections?
           @pages << page
         rescue FtpClientError => e
           @has_errors = true
-          @message = ftp_message(e)
+          flash[:error] = ftp_message(e)
         end
       else
         @has_errors = true
@@ -49,16 +49,15 @@ class PagesController < ApplicationController
 
     if @message.empty?
       if @has_errors
-        @message = ['page.already_exist', { :site => @site.name, :page => @page_with_error.path}]
+        flash[:error] = ['page.already_exist', { :site => @site.name, :page => @page_with_error.path}]
       else 
         if @pages.size > 1 
-          @message = ['page.multicreated', { :site => @site.name }]
+          flash[:success] = ['page.multicreated', { :site => @site.name }]
         else
-          @message = ['page.created', { :site => @site.name, :page => @pages.first.path }]
+          flash[:success] = ['page.created', { :site => @site.name, :page => @pages.first.path }]
         end
       end
     end
-    
     
   end
 
@@ -85,6 +84,7 @@ class PagesController < ApplicationController
       page.enabled = params[:page] && params[:page][page.id.to_s]
       page.save!
     end
+    flash[:success] = I18n.t('page.enabled')
   end
 
   private

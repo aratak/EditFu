@@ -1,4 +1,3 @@
 @selected_site = @site
-page.replace_html "site-#{@site.id}-menu", :partial => 'layouts/site_menu_item',
-  :locals => { :site => @site }
-show_success(page, 'page.enabled')
+page.replace_html "site-#{@site.id}-menu", :partial => 'layouts/site_menu_item', :locals => { :site => @site }
+xhr_flash page
