@@ -1,6 +1,6 @@
 class Plan < ActiveHash::Base
   include ActiveHash::Enum
-  fields :name, :price
+  fields :name, :price, :display_name
   enum_accessor :name
   CURRENCY = "$"
   
@@ -37,7 +37,7 @@ class Plan < ActiveHash::Base
   # return string variant of price
   # with '$' symbol as prefix
   def str_price
-    "#{CURRENCY} #{self.price}"
+    "#{CURRENCY} #{self.price}" if payment?
   end
   
 end
