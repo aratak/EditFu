@@ -1,17 +1,16 @@
-- inside_layout 'sites' do
-  = stylesheet_link_tag 'site'
+= stylesheet_link_tag 'site'
 
-  - @title = @site.name
-  - @hint = 'Choose the pages you wish to deactivate by clicking the box next to that page. You can also remove the page completely. Click update when your done.'
-  - @selected_site = @site
+- @title = @site.name
+- @hint = 'Choose the pages you wish to deactivate by clicking the box next to that page. You can also remove the page completely. Click update when your done.'
+- @selected_site = @site
 
-  = content_for :actions do
-    = link_to_remote 'Add Page', :url => new_site_page_path(@site), :method => :get
-    = link_to_remote 'Site settings', :url => edit_site_path(@site), :method => :get
-    = link_to_remove site_path(@site), 'Remove this site', "Are you sure you want to remove the site \"#{@site.name}\"?"
+= content_for :actions do
+  = link_to_remote 'Add Page', :url => new_site_page_path(@site), :method => :get
+  = link_to_remote 'Site settings', :url => edit_site_path(@site), :method => :get
+  = link_to_remove site_path(@site), 'Remove this site', "Are you sure you want to remove the site \"#{@site.name}\"?"
 
-  %h2 Pages
-  - form_remote_tag :url => enable_site_pages_path(@site), :html => { :id => 'pages_form' } do
-    - sort_pages(@site.pages).each do |page|
-      = render 'page', :page => page
-    = submit_tag "Update", :class => "update-button"
+%h2 Pages
+- form_remote_tag :url => enable_site_pages_path(@site), :html => { :id => 'pages_form' } do
+  - sort_pages(@site.pages).each do |page|
+    = render 'page', :page => page
+  = submit_tag "Update", :class => "update-button"

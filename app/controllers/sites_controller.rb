@@ -3,16 +3,8 @@ class SitesController < ApplicationController
   before_filter :authenticate_owner!, :except => [:index, :ls]
   before_filter :find_site, :only => [:show, :edit, :update, :destroy]
   before_filter :redirect_from_cookie, :only => [:index]
-  layout nil
 
   def index
-    # if current_user.owner?
-    #   @site = current_user.sites.first
-    #   redirect_to site_path(@site) if @site
-    # else
-    #   @page = current_user.pages.first
-    #   redirect_to site_page_path(@page.site, @page) if @page
-    # end
   end
 
   def show
@@ -26,7 +18,11 @@ class SitesController < ApplicationController
     @site = Site.new params[:site]
     @site.owner = current_user
 
-    validate_and_save
+    if @site.validate_and_save
+      flash[:success] = I18n.t('site.created', :name => @site.name)
+    else
+      render :action => :new
+    end
   end
 
   def edit
@@ -34,11 +30,16 @@ class SitesController < ApplicationController
 
   def update
     @site.attributes= params[:site]
-    validate_and_save
+    if @site.validate_and_save
+      flash[:success] = I18n.t('site.updated')
+    else
+      render :action => :edit
+    end
   end
 
   def destroy
     @site.destroy
+    flash[:success] = I18n.t('site.destroyed')
     redirect_to sites_path
   end
 

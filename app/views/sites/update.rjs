@@ -1,4 +1,4 @@
-page << "document.title = '#{@site.name}';"
-page['main'].down('.header .title').innerHTML = @site.name
+page.call 'setTitle', @site.name
 page["site-#{@site.id}-menu"].down('a').innerHTML = @site.name
-hide_popup(page, 'site.updated')
+page.call 'hidePopup'
+xhr_flash page
