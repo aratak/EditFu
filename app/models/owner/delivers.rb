@@ -1,9 +1,10 @@
 class Owner
 
-  before_update :deliver_subdomain_changes, :if => :domain_name_changed?
-  before_update :deliver_hold, :if => :holded?
-  before_update :deliver_owner_email_changes, :if => :email_changed?
-  before_update :deliver_plan_changed, :if => :plan_changed?
+  before_update :deliver_changes,               :if => :valid?
+  # before_update :deliver_subdomain_changes,     :if => :domain_name_changed?
+  # before_update :deliver_hold,                  :if => :holded?
+  # before_update :deliver_owner_email_changes,   :if => :email_changed?
+  # before_update :deliver_plan_changed,          :if => :plan_changed?
   before_destroy :account_cancellation
 
 
@@ -19,6 +20,14 @@ class Owner
   end
   
   protected
+  
+  
+  def deliver_changes
+    deliver_subdomain_changes     if domain_name_changed?
+    deliver_hold                  if holded?
+    deliver_owner_email_changes   if email_changed?
+    deliver_plan_changed          if plan_changed?
+  end
   
   
   def deliver_plan_changed
