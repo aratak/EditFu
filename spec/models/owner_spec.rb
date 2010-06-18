@@ -76,20 +76,24 @@ shared_examples_for "general owners tests" do
 
   describe "#set_card" do
     it "should update recurring" do
-      card = Factory.build :card
       owner = Factory.create :owner
       owner.set_plan Plan::PROFESSIONAL
-      owner.set_card(card)
+      card = Factory.create :card, :owner => owner
+      owner.reload
+      cardid = card.id
+      # owner.set_card(card)
 
-      card2 = Factory.build :card
-      PaymentSystem.should_receive(:update_recurring).with(owner, card)
-      owner.set_card(card2).should be(card2)
+      card2_attrs = Factory.attributes_for(:card) #Factory.create :card, :owner => owner
+      owner.card.update_attributes(card2_attrs)
+      PaymentSystem.should_receive(:update_recurring) #.with(owner, card.credit_card)
+      owner.save
+      owner.card.id.should be(cardid)
     end
 
     it "should not call PaymentSystem if plan is not professional" do
-      card = Factory.build :card
       owner = Factory.create :owner
       owner.set_plan Plan::FREE
+      card = Factory.build :card, :owner => owner
 
       PaymentSystem.should_not_receive(:update_recurring)
       owner.set_card card
@@ -227,8 +231,9 @@ describe Owner, "" do
 
     context "professional plan" do
       before :each do
-        @card = Factory.build :card
+        @card = Factory.build :card, :owner => @owner
         @owner.confirmed_at = Date.today
+        @owner.reload
         @gateway = mock('gateway')
       end
 
@@ -275,12 +280,12 @@ describe Owner, "" do
     end
 
     it "should cancel recurring if plan is professional" do
-      owner = Factory.create :owner
-      card = Factory.build :card
+      owner = Factory.create(:owner)
+      card = Factory.create(:card, :owner => owner)
       owner.set_plan(Plan::PROFESSIONAL)
-      owner.set_card(card)
       owner.save(false)
-      
+      owner.reload
+
       owner.card.should_not be_nil
       owner.plan.should be(Plan::PROFESSIONAL)
       
