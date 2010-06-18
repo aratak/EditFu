@@ -1,1 +1,2 @@
 show_success(page, 'editor.permissions_updated')
+xhr_flash(page)

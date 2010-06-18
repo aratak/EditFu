@@ -2,12 +2,8 @@ class EditorsController < ApplicationController
   before_filter :authenticate_owner!
   before_filter :redirect_from_cookie, :only => [:index]
   before_filter :find_editor, :only => [:show, :edit, :update, :update_permissions, :destroy]
-  layout nil
 
   def index
-    # unless current_user.editors.empty?
-    #   redirect_to editor_path(current_user.editors.first)
-    # end
   end
 
   def new
@@ -16,7 +12,13 @@ class EditorsController < ApplicationController
 
   def create
     @editor = current_user.editors.create params[:editor]
-    render_errors(:editor => @editor) unless @editor.errors.empty?
+    
+    if @editor.errors.empty?
+      flash[:notice] = I18n.t('editor.created', :name => @editor.email)
+    else
+      flash[:notice] = I18n.t('editor.wrong')
+      render :action => :new
+    end
   end
 
   def show
@@ -29,7 +31,13 @@ class EditorsController < ApplicationController
     @editor.user_name = params[:editor][:user_name]
     @editor.email = params[:editor][:email]
 
-    render_errors(:editor => @editor) unless @editor.save
+    if @editor.save
+      flash[:notice] = I18n.t('editor.updated')
+    else
+      flash[:error] = I18n.t('editor.wrong')
+      render :action => :edit
+    end
+    
   end
 
   def update_permissions

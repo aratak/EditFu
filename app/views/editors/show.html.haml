@@ -1,26 +1,25 @@
-- inside_layout 'editors' do
-  = javascript_include_tag 'editor'
-  = stylesheet_link_tag 'sites-and-pages'
+= javascript_include_tag 'editor'
+= stylesheet_link_tag 'sites-and-pages'
 
-  - @title = @editor.user_name
-  - @hint = 'Choose the level of access you wish to give this editor access to by checking the box next to that page or site then click update.'
+- @title = @editor.user_name
+- @hint = 'Choose the level of access you wish to give this editor access to by checking the box next to that page or site then click update.'
 
-  = content_for :actions do
-    = link_to_remote 'Editor Preferences', :url => edit_editor_path(@editor), :method => :get
-    = link_to_remove editor_path(@editor), 'Delete Editor', "re you sure you want to delete the editor <strong>#{@editor.user_name}</strong>?"
+= content_for :actions do
+  = link_to_remote 'Editor Preferences', :url => edit_editor_path(@editor), :method => :get
+  = link_to_remove editor_path(@editor), 'Delete Editor', "re you sure you want to delete the editor <strong>#{@editor.user_name}</strong>?"
 
-  - form_remote_tag :url => update_permissions_editor_path(@editor) do |form|
-    %ul.sites
-      - sort_sites(current_user.sites).each do |site|
-        %li.site
-          .row
-            = check_box_tag "sites[#{site.id}]"
-            = site.name
-          %ul.pages
-            - sort_pages(site.pages).each do |page|
-              %li.page
-                .row
-                  = check_box_tag 'pages[]', page.id, @editor.pages.include?(page), |
-                    :id => "pages_#{page.id}", :class => "sites_#{site.id}" |
-                  = label_tag "pages_#{page.id}", page.path
-    = submit_tag "Update", :class => "update-button"
+- form_remote_tag :url => update_permissions_editor_path(@editor) do |form|
+  %ul.sites
+    - sort_sites(current_user.sites).each do |site|
+      %li.site
+        .row
+          = check_box_tag "sites[#{site.id}]"
+          = site.name
+        %ul.pages
+          - sort_pages(site.pages).each do |page|
+            %li.page
+              .row
+                = check_box_tag 'pages[]', page.id, @editor.pages.include?(page), |
+                  :id => "pages_#{page.id}", :class => "sites_#{site.id}" |
+                = label_tag "pages_#{page.id}", page.path
+  = submit_tag "Update", :class => "update-button"

@@ -59,7 +59,6 @@ module ApplicationHelper
 
   def hide_popup(page, *targs)
     page << 'hidePopup();'
-    show_success(page, *targs) if targs.any?
   end
 
   def hide_popup_with_errors(page, *targs)

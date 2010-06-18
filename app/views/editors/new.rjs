@@ -1,1 +1,2 @@
 show_popup page, :partial => 'new'
+xhr_flash(page)
