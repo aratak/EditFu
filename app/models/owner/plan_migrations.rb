@@ -35,6 +35,16 @@ class Owner
     true
   end
   
+  def _set_single_plan?(*params)
+    cgi_params = params.first || {}
+    if cgi_params[:sites]
+      sites = Site.find(cgi_params[:sites]) 
+      (self.sites - sites).each { |site| site.destroy }
+    end
+    
+    true
+  end
+  
   def _set_free_plan?(*params)
     cgi_params = params.first || {}
     sites = pages = []
