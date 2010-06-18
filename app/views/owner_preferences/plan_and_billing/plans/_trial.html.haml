@@ -1,0 +1,2 @@
+- if @owner.plan.trial?
+  = render 'owner_preferences/plan_and_billing/plans/general_plan', :plan => Plan::TRIAL, :form => form

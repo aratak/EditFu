@@ -1,0 +1,6 @@
+= form.radio_button 'plan_id', plan.id, :class => 'radio'
+.plan-label
+  %label{ :for => plan.label_tag_name }
+  %dl
+    %dt= "#{plan.display_name} #{plan.str_price}"
+    %dd= "#{plan.description}"

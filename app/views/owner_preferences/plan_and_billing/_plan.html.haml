@@ -1,55 +1,9 @@
 .plan.section
   %h5 Plan
   .plan-wrapper
-    = owner.radio_button 'plan_id', Plan::PROFESSIONAL.id, :class => 'radio'
-    .plan-label{selected_class(@owner.plan.professional?)}
-      %label{ :for => Plan::PROFESSIONAL.label_tag_name }
-      %dl
-        %dt Pro $24
-        %dd
-          %ul 
-            %li Unlimited Sites
-            %li Unlimited Pages
-            %li Unlimited Editors
-      %small Current
-          
-    = owner.radio_button 'plan_id', Plan::FREE.id, :class => 'radio'
-    .plan-label{selected_class(@owner.plan.free?)}
-      %label{:for => Plan::FREE.label_tag_name }
-      %dl
-        %dt Free
-        %dd
-          %ul 
-            %li 1 Site
-            %li 3 Pages
-            %li No Editors
-      %small Current
-
-    - if @owner.plan.trial?
-      = owner.radio_button 'plan_id', Plan::TRIAL.id, :class => 'radio'
-      .plan-label.selected
-        %label{:for => Plan::TRIAL.label_tag_name }
-        %dl
-          %dt Trial
-          %dd
-            %ul 
-              %li Unlimited Sites
-              %li Unlimited Pages
-              %li Unlimited Editors
-              %li.ends 
-                = "Ends #{@owner.trial_period_end}"
-        %small Current
-    - if @owner.plan.unlimited_trial?
-      .plan-label.selected
-        %label{:for => Plan::UNLIMITEDTRIAL.label_tag_name }
-        %dl
-          %dt Buddy
-          %dd
-            %ul 
-              %li Unlimited Sites
-              %li Unlimited Pages
-              %li Unlimited Editors
-              %li.ends 
-                = "Never end"
-        %small Current
+    = render 'owner_preferences/plan_and_billing/plans/professional', :form => owner
+    = render 'owner_preferences/plan_and_billing/plans/single', :form => owner
+    = render 'owner_preferences/plan_and_billing/plans/free', :form => owner
+    = render 'owner_preferences/plan_and_billing/plans/trial', :form => owner
+    = render 'owner_preferences/plan_and_billing/plans/unlimited_trial', :form => owner
   .clear
