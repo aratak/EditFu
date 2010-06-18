@@ -36,6 +36,7 @@ en:
         server error. Check that all the FTP settings for this site are correct and up-to-date."
       editor: "We cannot make a connection with the website due to incorrect settings or a
         server error. Please contact {{owner}} to resolve this issue."
+    destroyed: "Site was successfully deleted."
 
   page:
     created: "<strong>{{page}}</strong> was added to the 
