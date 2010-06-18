@@ -14,25 +14,35 @@ class Card < ActiveRecord::Base
   validates_presence_of :zip
 
 
-  after_update :update_recurring
-  after_create :recurring
+  before_validation_on_update :update_recurring
+  before_validation_on_create :recurring
+  before_validation :set_credit_card
   
-  after_save :set_card_fields
+  # before_save :set_card_fields
   after_save :deliver_credit_card_changes
   before_destroy :cancel_recurring
 
   
-  def initialize(val)
-    super
-    self.credit_card = val.kind_of?(ExtCreditCard) ? val : ExtCreditCard.new(val)
+  def set_credit_card
+    self.credit_card = ExtCreditCard.new(attributes_for_credit_card)
   end
   
   def recurring
-    PaymentSystem.recurring self.owner, self.credit_card
+    begin
+      PaymentSystem.recurring self.owner, self.credit_card
+      set_card_fields
+    rescue PaymentSystemError
+      errors.add_to_base "is invalid"
+    end    
   end
   
   def update_recurring
-    PaymentSystem.update_recurring self.owner, self.credit_card
+    begin
+      PaymentSystem.update_recurring self.owner, self.credit_card
+      set_card_fields
+    rescue PaymentSystemError
+      errors.add_to_base "is invalid"
+    end    
   end
   
   def set_card_fields
@@ -41,18 +51,27 @@ class Card < ActiveRecord::Base
   end
   
   def cancel_recurring
-    PaymentSystem.cancel_recurring(self)
+    PaymentSystem.cancel_recurring(self.owner)
   end
 
   
   def deliver_credit_card_changes
-    Mailer.deliver_credit_card_changes(self)
+    Mailer.deliver_credit_card_changes(self.owner)
   end
 
   private
-  
+
   def validate
-    errors.add_to_base "is invalid" if self.credit_card.invalid?
+    errors.add_to_base "is invalid" if credit_card.invalid?
+  end
+
+  def attributes_for_credit_card
+    result = {}
+    [:first_name, :last_name, :expiration, 
+    :number, :verification_value, :zip].map do |attr_name|
+      result[attr_name] = self.send(attr_name)
+    end
+    result
   end
 
 

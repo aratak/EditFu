@@ -4,14 +4,13 @@ class Owner < User
   has_many :pages, :through => :sites
   has_many :editors, :dependent => :destroy
   belongs_to :plan
-  has_one :card, :dependent => :destroy
+  has_one :card, :dependent => :destroy, :autosave => true
 
   alias_attribute :subdomain, :domain_name
   accepts_nested_attributes_for :card, :reject_if => :has_no_payment_plan?
   attr_accessible :domain_name, :company_name, :terms_of_service, :card_attributes
 
   validates_presence_of  :domain_name
-  # validate :card_presence, :if => :has_payment_plan?
   validates_associated :plan 
   validates_associated :card
   validates_length_of :company_name, :within => 3..255, :allow_blank => true
@@ -32,18 +31,14 @@ class Owner < User
   end
 
   def has_payment_plan?
-    condition = Plan::PAYMENTS.include?(self.plan)
-    # self.build_card if condition && self.card.nil?
-    condition
+    Plan::PAYMENTS.include?(self.plan)
   end
   
   def has_no_payment_plan?
     !has_payment_plan?
   end
   
-  def card_presence
-    errors.add "card_number", "is required" if self.card.nil?
-  end
+
 
   def trial_period_end
     logger.warn("the method 'trial_period_end' will be deplicated")
