@@ -5,7 +5,7 @@
     %meta{ 'http-equiv' => 'Content-Type', :content => 'text/html; charset=UTF-8' }
     = render 'layouts/favicon'
 
-    = stylesheet_link_tag 'reset', 'public', 'input', 'action_bar', 'messages'
+    = stylesheet_link_tag 'reset', 'public', 'input', 'action_bar', 'messages', 'flash'
     = javascript_include_tag :defaults, 'css', 'public'
   %body.public{:class => (@company_logo.blank? ? 'general' : 'company')}
     #all
@@ -16,4 +16,4 @@
       #main
         = yield
       #action-bar
-      = render 'layouts/message'
+    = render 'layouts/flash'

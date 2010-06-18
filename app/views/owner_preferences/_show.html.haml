@@ -11,21 +11,5 @@
       - page[:account_preferences].remove_class_name('active');
       - page[:account_preferences_link].remove_class_name('active');
 
-  #account_preferences.active
-    - remote_form_for :owner, :url => owner_preferences_path, :html => { :method => :put } do |owner|
-      /# - f.fields_for @owner do |owner|
-      =render 'owner_preferences/account_preferences', :owner => owner
-      .popup-action-bar
-        = link_to_remove owner_path, 'Cancel My Account', |
-          'Are you sure you want to cancel this EditFu account? This cannot be undone. The sites connected to EdtiFu will not be affected. All editors, ftp data, and other account information related to EditFu databases will be deleted. We suggest you simply downgrade to the free account. To use EditFu again in the future you will have to create a new account.' |
-        = owner.submit "Update"
-        = link_to_function "Cancel", "hidePopup();", :class => 'action cancel'
-      
-  #plan_and_billing
-    - remote_form_for :owner, :url => billing_update_owner_preferences_path, :html => { :method => :put } do |owner|
-      /# - f.fields_for @owner do |owner|
-      =render 'owner_preferences/plan', :owner => owner
-      =render 'owner_preferences/card', :owner => owner
-      .popup-action-bar
-        = owner.submit "Update"
-        = link_to_function "Cancel", "hidePopup();", :class => 'action cancel'
+  = render 'owner_preferences/account_preferences/index'
+  = render 'owner_preferences/plan_and_billing/index'

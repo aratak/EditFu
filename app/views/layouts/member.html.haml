@@ -5,7 +5,7 @@
     %meta{ 'http-equiv' => 'Content-Type', :content => 'text/html; charset=UTF-8' }
     = render 'layouts/favicon'
 
-    = stylesheet_link_tag 'reset', 'layout', 'messages', 'source_bar', 'system_bar', 'action_window', 'action_bar'
+    = stylesheet_link_tag 'reset', 'layout', 'messages', 'source_bar', 'system_bar', 'action_window', 'action_bar', 'flash'
     = stylesheet_link_tag 'input', 'popups/popup', 'popups/owner-preferences-popup', 'popups/alert-popup'
     = stylesheet_links
 
@@ -49,13 +49,6 @@
           = yield :popup
         .popup-hider#popup-hider
 
-    = render 'layouts/message'
-
-    #confirm-popup(style='display: none;')
-      .confirm-popup.alert-popup
-        %h1 Confirm
-        .text Are you sure?
-
-        .popup-action-bar
-          = link_to 'Remove', '#', :method => :delete, :class => 'action yes'
-          = link_to_function "Cancel", "hidePopup();", :class => 'action cancel'
+    =# render 'layouts/message'
+    = render 'layouts/confirm_popup'
+    = render 'layouts/flash'

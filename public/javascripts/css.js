@@ -3,44 +3,64 @@ function setInputValue(input, value) {
   input.value = value;
 }
 
-function toggleInputClass(input, value) {
-  if(!value) {
-    value = input.getValue();
-  }
-  value = value || '';
-  
-  if(value.blank()) {
-    input.removeClassName('with-text');
-  } else {
-    input.addClassName('with-text');
-  }
+function hideFlash(item) {
+  $(item).up().hide()
 }
+
+// function toggleInputClass(input, value) {
+//   if(!value) {
+//     value = input.getValue();
+//   }
+//   value = value || '';
+//   
+//   if(value.blank()) {
+//     input.removeClassName('with-text');
+//   } else {
+//     input.addClassName('with-text');
+//   }
+// }
 
 var Behaviours = function() {
   return {
 
+    // labels: function() {
+    //   $$('.label-input input').each(function(input) {
+    //     Event.observe(input, 'blur', function() {
+    //       toggleInputClass(input);
+    //       if(input.name.include('email')) {
+    //         $$('.label-input input[type=password]').each(function(pinput) {
+    //           toggleInputClass(pinput);
+    //         });
+    //       }
+    //     });
+    //   });
+    //   
+    //   $$('.label-input input').each(function(input) {
+    //       toggleInputClass(input);
+    //   });
+    // 
+    //   new PeriodicalExecuter(function(pe) {
+    //     pe.stop();
+    //     $$('.label-input input').each(function(input) {
+    //         toggleInputClass(input);
+    //     });
+    //   }, 0.5);
+    // },
+    
     labels: function() {
-      $$('.label-input input').each(function(input) {
-        Event.observe(input, 'blur', function() {
-          toggleInputClass(input);
-          if(input.name.include('email')) {
-            $$('.label-input input[type=password]').each(function(pinput) {
-              toggleInputClass(pinput);
-            });
-          }
-        });
-      });
+      // $$('.inputs-row').each(function(item){
+      //   console.log( $(item).down('.label-input .fieldWithErrors') )
+      // })
       
-      $$('.label-input input').each(function(input) {
-          toggleInputClass(input);
-      });
-
-      new PeriodicalExecuter(function(pe) {
-        pe.stop();
-        $$('.label-input input').each(function(input) {
-            toggleInputClass(input);
-        });
-      }, 0.5);
+      $$('.fieldWithErrors').each(function(item) {
+        // var h = $(item).getHeight()
+        $(item).up('.inputs-row').select('.title-input > .label-input > input').invoke('setStyle', {position: 'relative', top: '30px'})
+        
+        // .each(function(item) {
+        //   console.log( $(item) )
+        // })
+      })
+      
     },
     
     radioButtons: function() {

@@ -20,15 +20,13 @@
     .inputs.url-inputs
       %small.description or paste a link to an image.
       .label-input
-        = text_field_tag :src, nil
-        = label_tag :src, 'www.flickr.com/user/image.jpg'
+        = text_field_tag :src, nil, :placeholder => 'www.flickr.com/user/image.jpg'
     .clear
 
     .inputs.alt-input
       %small.description Provide an alternate text title for this image.
       .label-input
-        = text_field_tag :alt
-        = label_tag :alt, 'Image Title'
+        = text_field_tag :alt, :placeholder => 'Image Title'
     .clear
 
     .popup-action-bar

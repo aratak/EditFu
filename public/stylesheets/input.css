@@ -42,7 +42,7 @@
   background: #f1f1f1;
   padding: 5px 9px;
   border: 1px solid transparent;
-  color: #f1f1f1;
+/*  color: #f1f1f1;*/
   
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -51,7 +51,7 @@
 }
 
 .inputs div input:focus,
-.inputs div input.with-text {
+.inputs div input {
   color: #7e7e7e;
 }
 

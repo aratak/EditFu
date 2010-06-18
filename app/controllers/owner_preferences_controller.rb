@@ -8,15 +8,33 @@ class OwnerPreferencesController < ApplicationController
   def update
     @owner.require_current_password
     @owner.update_attributes(params[:owner])
-    render_errors(:owner => @owner) unless @owner.save
-    @message = ['preferences.updated']
+    
+    if @owner.save
+      flash[:notice] = 'Preferences were updated successfully.' 
+    else
+      render :update do |page|
+        page[:account_preferences].replace :partial => 'owner_preferences/account_preferences/index'
+        page[:account_preferences].add_class_name :active
+        xhr_flash(page)
+      end
+    end
+
   end
   
   def billing_update
-    # @owner.build_card
     @owner.set_plan(params[:owner][:plan_id])
     @owner.update_attributes(params[:owner])
-    render_errors(:owner => @owner) unless @owner.save
+
+    if @owner.save
+      flash[:notice] = 'Preferences were updated successfully.' 
+    else
+      render :update do |page|
+        flash[:error] = 'Card is invalid.' 
+        page[:plan_and_billing].replace :partial => 'owner_preferences/plan_and_billing/index'
+        page[:plan_and_billing].add_class_name :active
+        xhr_flash(page)
+      end
+    end
   end
 
   def downgrade
@@ -35,20 +53,22 @@ class OwnerPreferencesController < ApplicationController
   end
 end
 
+#####################################################
+# 
 # @owner.require_current_password
 # @owner.update_attributes(params[:preferences][:owner])
 # @message = ['preferences.updated']
 # 
 # @plan = params[:preferences][:owner][:plan]
 # @card = ExtCreditCard.new params[:preferences][:card]
-#
+# 
 # @plan_changed = @plan != @owner.plan
 # if @plan == 'professional' && (@owner.plan_changed? || !@card.number.blank?)
 #   @card.valid?
 #   if @owner.errors.empty? && @card.errors.empty?
 #     begin
 #       if @owner.plan_changed?
-#         @owner.set_plan(Plan::PROFESSIONAL, params)
+#         @owner.set_plan('professional', params)
 #         @message = ['plan.upgraded', {:plan_was => @owner.plan_was.name}]
 #       else
 #         @owner.set_card @card

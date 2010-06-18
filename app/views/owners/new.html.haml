@@ -6,8 +6,8 @@
       .inputs-row
         .label-input
           %span.hint Company name
-          = f.text_field :company_name
-          = f.label :company_name, 'mygreatcompany'
+          = f.error_for :company_name
+          = f.text_field :company_name, :placeholder => 'mygreatcompany'
           %span.description Company or other unique name.
         .label-input.subdomain
           = f.text_field :domain_name
@@ -15,24 +15,24 @@
           = ".#{BASE_DOMAIN}"
         .label-input
           %span.hint Your name
-          = f.text_field :user_name
-          = f.label :user_name, 'John Doe'
+          = f.error_for :user_name
+          = f.text_field :user_name, :placeholder => 'John Doe'
           %span.description For identification.
         .label-input
           %span.hint Your email
-          = f.text_field :email
-          = f.label :email, 'john@gmail.com'
+          = f.error_for :email
+          = f.text_field :email, :placeholder => 'john@gmail.com'
           %span.description For login and communication.
         .label-input.password
           %span.hint Password
-          = f.password_field :password
-          = f.label :password
+          = f.error_for :password
+          = f.password_field :password, :placeholder => "Password"
           %span.description
         .clear
 
       .label-input.password-confirmation
-        = f.password_field :password_confirmation
-        = f.label :password_confirmation
+        = f.error_for :password_confirmation
+        = f.password_field :password_confirmation, :placeholder => "Password confirmation"
       .clear
       .label-input.terms_of_service
         = f.check_box :terms_of_service

@@ -1,0 +1,49 @@
+div.flash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 200002;
+}
+
+div.flash span {
+    background-image: url(/images/flash/bg.png);
+    background-repeat: repeat-x;
+    color: #333333;
+    white-space: nowrap;
+    overflow: hidden;
+    
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+
+    line-height: 2.5em;
+    display: block;
+    padding: 0 1em;
+    position: relative;
+}
+
+div.flash a.close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 2.7em;
+    width: 2em;
+    
+    background: url(/images/flash/close.png) center center no-repeat;
+}
+
+.flash_error {
+    background-position: 0 -33px;
+}
+
+.flash_alert {
+    background-position: 0 0;
+    text-shadow: 1px 1px 0 #aaaaaa;
+}
+
+.flash_notice {
+    background-position: 0 -66px;
+    text-shadow: 1px 1px 0 #aaaaaa;
+}

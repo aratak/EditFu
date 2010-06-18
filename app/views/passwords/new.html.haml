@@ -4,8 +4,8 @@
     .inputs
       = f.submit 'Send', :class => 'submit'
       .label-input
-        = text_field_tag 'user[email]', @user.email
-        = label_tag :user_email
+        = f.error_for :user_email
+        = text_field_tag 'user[email]', @user.email, :placeholder => "User email"
       .label
         Forgot your password? <br /> Enter your email address:
     .clear

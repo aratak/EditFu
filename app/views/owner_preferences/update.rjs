@@ -1,8 +1,12 @@
-if @plan_changed && @plan == 'free'
-  show_popup page, :partial => 'downgrade'
-  page << "Indent.includeJavascript('popups/downgrade-popup');"
-  page << "Indent.includeStylesheet('sites-and-pages');"
-else
-  hide_popup page, *@message
-end
+# if @plan_changed && @plan == 'free'
+#   show_popup page, :partial => 'downgrade'
+#   page << "Indent.includeJavascript('popups/downgrade-popup');"
+#   page << "Indent.includeStylesheet('sites-and-pages');"
+# else
+#   hide_popup page, *@message
+# end
+
+# hide_popup page, *@message
+
+page << 'hidePopup();'
 page.replace_html 'system-logo', :partial => 'layouts/logo'

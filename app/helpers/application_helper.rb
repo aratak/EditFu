@@ -126,7 +126,17 @@ module ApplicationHelper
       'http://www.takeastep.me/editfu-faq/'
     end
   end
+  
+  def xhr_flash(page)
+    page.replace_html 'messages', ''
+    page.insert_html :bottom, 'messages', :partial => 'layouts/flash/error'  unless flash[:error].nil?
+    page.insert_html :bottom, 'messages', :partial => 'layouts/flash/notice' unless flash[:notice].nil?
+    page.insert_html :bottom, 'messages', :partial => 'layouts/flash/info'   unless flash[:info].nil?
+    page.visual_effect :highlight, 'messages'
 
+    flash.clear
+  end  
+  
   private
 
   def classes(*args)

@@ -1,0 +1,6 @@
+#messages.messages.flash{:style => 'display: none; '}
+  - unless controller.send(:flash).nil?
+    - controller.send(:flash).each do |key, msg|
+      = render "layouts/flash/one", :key => key, :msg => msg
+    :javascript
+      setTimeout(function() { $('messages').slideDown('slow'); }, 1000)

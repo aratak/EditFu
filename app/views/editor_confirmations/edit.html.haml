@@ -7,18 +7,18 @@
   .inputs
     .label-input
       %span.hint Login with your email
-      = f.text_field :user_name
-      = f.label :user_name
+      = f.error_for :user_name
+      = f.text_field :user_name, :placeholder => "User name"
       
     .label-input
       %span.hint Your password
-      = f.password_field :password
-      = f.label :password
+      = f.error_for :password
+      = f.password_field :password, :placeholder => "Password"
 
     .label-input
       %span.hint Password confirmation
-      = f.password_field :password_confirmation
-      = f.label :password_confirmation
+      = f.error_for :password_confirmation
+      = f.password_field :password_confirmation, :placeholder => "Password confirmation"
 
     .submit-input
       = submit_tag :submit, :class => 'submit'

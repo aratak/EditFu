@@ -1,0 +1,8 @@
+#confirm-popup(style='display: none;')
+  .confirm-popup.alert-popup
+    %h1 Confirm
+    .text Are you sure?
+
+    .popup-action-bar
+      = link_to 'Remove', '#', :method => :delete, :class => 'action yes'
+      = link_to_function "Cancel", "hidePopup();", :class => 'action cancel'

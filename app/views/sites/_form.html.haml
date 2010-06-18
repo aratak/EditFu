@@ -10,28 +10,28 @@
       .title-input.first
         .title FTP server address
         .label-input
-          = form.text_field(:server)
-          = form.label :server, 'ftp.mywebsite.com'
+          = form.error_for :server
+          = form.text_field :server, :placeholder => 'ftp.mywebsite.com'
       .title-input
         .title Login
         .label-input
-          = form.text_field(:login)
-          = form.label :login, 'jdoe'
+          = form.error_for :login
+          = form.text_field :login, :placeholder => 'jdoe'
       .title-input
         .title Password
         .label-input
-          = form.password_field(:password)
-          = form.label :password, 'Password'
+          = form.error_for :password
+          = form.password_field :password, :placeholder => 'jdoe'
       .title-input
         .title Website name
         .label-input
-          = form.text_field(:name)
-          = form.label :name, 'My Great Website'
+          = form.error_for :name
+          = form.text_field :name, :placeholder => 'My Great Website'
       .title-input
         .title Website address
         .label-input
-          = form.text_field(:site_url)
-          = form.label :site_url, 'www.mywebsite.com'
+          = form.error_for :site_url
+          = form.text_field :site_url, :placeholder => 'www.mywebsite.com'
     .clear
 
     .popup-action-bar
