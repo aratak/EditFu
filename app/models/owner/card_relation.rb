@@ -14,9 +14,13 @@ class Owner
     !card.nil?
   end
 
-  def subscription_id
-    card.subscription_id unless card.nil?
-  end
+  # def subscription_id
+  #   card.subscription_id unless card.nil?
+  # end
+  # 
+  # def subscription_id= val
+  #   card.subscription_id = val unless card.nil?
+  # end
 
 
 end
