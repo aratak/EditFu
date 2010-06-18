@@ -128,7 +128,7 @@ module ApplicationHelper
   
   def xhr_flash(page)
     page.replace_html 'messages', ''
-    controller.send(:flash).each do |key, msg|
+    flash.each do |key, msg|
       page.insert_html :bottom, 'messages', :partial => 'layouts/flash/one', :locals => { :key => key, :msg => msg }
     end
     flash.clear
