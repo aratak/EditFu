@@ -13,4 +13,8 @@ class Plan
     PAYMENTS.map { |p| p.id }
   end
   
+  def payment?
+    PAYMENTS.include? self
+  end
+  
 end

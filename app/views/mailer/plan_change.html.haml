@@ -7,8 +7,8 @@
   %strong= @user.plan.name
   \.
   %br
-  - if @user.plan.professional?
-    Your monthly plan price will now be #{PROFESSIONAL_PLAN_AMOUNT}.
+  - if @user.plan.payment?
+    Your monthly plan price will now be #{@user.plan.str_price}.
 %p
   If you would like to upgrade, downgrade, or cancel your account, 
   you can do so at anytime by logging into your EditFu account and 

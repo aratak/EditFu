@@ -38,7 +38,7 @@
         .label-input
           = owner.error_for :'card.zip'
           = card.text_field 'zip', :placeholder => '10005'
-      - if @owner.plan.professional?
+      - if @owner.plan.payment?
         - if @owner.prev_billing_date
           .title-input.prev-billing-date
             .label-input
