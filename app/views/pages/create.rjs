@@ -7,6 +7,6 @@
   page.insert_html :bottom, 'pages_form', :partial => 'sites/page', :locals => { :page => p }
 end
 
-hide_popup(page, *@message) unless @has_errors
+page.call 'hidePopup' unless @has_errors
 xhr_flash page
 
