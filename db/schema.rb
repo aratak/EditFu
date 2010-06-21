@@ -77,7 +77,6 @@ ActiveRecord::Schema.define(:version => 20100615090017) do
     t.integer  "owner_id"
     t.string   "type",                 :limit => 10,                    :null => false
     t.string   "card_number",          :limit => 20
-    t.string   "subscription_id",      :limit => 13
     t.boolean  "enabled",                             :default => true, :null => false
     t.string   "user_name"
     t.date     "card_exp_date"
