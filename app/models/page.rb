@@ -3,7 +3,7 @@ require 'hpricot'
 class Page < ActiveRecord::Base
   IMAGE_ATTRIBUTES = ['src', 'alt']
 
-  belongs_to :site
+  belongs_to :site, :autosave => true, :validate => true
   validates_presence_of :path
   validates_uniqueness_of :path, :scope => :site_id
 
