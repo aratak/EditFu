@@ -4,7 +4,7 @@ class Owner < User
   has_many :pages, :through => :sites
   has_many :editors, :dependent => :destroy
   belongs_to :plan
-  has_one :card, :dependent => :destroy, :autosave => true
+  has_one :card, :dependent => :destroy, :autosave => true, :inverse_of => :owner
 
   alias_attribute :subdomain, :domain_name
   accepts_nested_attributes_for :card, :reject_if => :has_no_payment_plan?
@@ -12,7 +12,7 @@ class Owner < User
 
   validates_presence_of  :domain_name
   validates_associated :plan 
-  validates_associated :card
+  validates_associated :card, :if => :has_payment_plan?
   validates_length_of :company_name, :within => 3..255, :allow_blank => true
   validates_uniqueness_of :domain_name
   validates_format_of :domain_name, :with => /^\w+$/
@@ -37,7 +37,7 @@ class Owner < User
   def has_no_payment_plan?
     !has_payment_plan?
   end
-  
+  alias_method :hasnt_payment_plan?, :has_no_payment_plan?
 
 
   def trial_period_end
