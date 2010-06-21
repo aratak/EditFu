@@ -24,8 +24,8 @@ en:
     updated: "Your credit card has successfully been updated."
 
   free_plan:
-    site_count: "There are too many remaining sites for free plan. Please delete all but one."
-    page_count: "There are too many remaining pages for free.plan."
+    sites_error: "There are too many remaining sites for free plan. Please delete all but one."
+    pages_error: "There are too many remaining pages for free plan."
 
   site:
     created: "The site <strong>{{name}}</strong> has been added to EditFu. 
