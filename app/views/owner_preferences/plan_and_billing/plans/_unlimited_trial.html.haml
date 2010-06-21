@@ -1,2 +1,2 @@
-- if @owner.plan.unlimited_trial?
+- if @owner.plan_was.unlimited_trial?
   = render 'owner_preferences/plan_and_billing/plans/general_plan', :plan => Plan::UNLIMITEDTRIAL, :form => form
