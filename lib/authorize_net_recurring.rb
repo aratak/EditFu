@@ -1,20 +1,20 @@
 class AuthorizeNetRecurring
   def self.create(gateway, amount, owner, card)
-    response = gateway.recurring(amount, card, 
+    response = gateway.recurring(amount, card.credit_card, 
       :interval => { :unit => :months, :length => 1 },
       :duration => { :start_date => owner.next_billing_date.strftime('%Y-%m-%d'), :occurrences => 9999 },
       :billing_address => { 
         :first_name => card.first_name, :last_name => card.last_name, :zip => card.zip
       }
     )
-    owner.subscription_id = response.params['subscription_id']
-    raise PaymentSystemError, build_message(response) unless owner.subscription_id
+    card.subscription_id = response.params['subscription_id']
+    raise PaymentSystemError, build_message(response) unless card.subscription_id
   end
 
   def self.update(gateway, owner, card)
     response = gateway.update_recurring(
-      :subscription_id => owner.subscription_id,
-      :credit_card => card,
+      :subscription_id => card.subscription_id,
+      :credit_card => card.credit_card,
       :billing_address => { 
         :first_name => card.first_name, :last_name => card.last_name, :zip => card.zip
       }
@@ -23,10 +23,10 @@ class AuthorizeNetRecurring
   end
 
   def self.cancel(gateway, owner)
-    if owner.subscription_id
-      response = gateway.cancel_recurring(owner.subscription_id)
+    if owner.card.subscription_id
+      response = gateway.cancel_recurring(owner.card.subscription_id)
       raise PaymentSystemError, response.message unless response.success?
-      owner.subscription_id = nil
+      owner.card.subscription_id = nil
     end
   end
 
