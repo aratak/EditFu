@@ -1,6 +1,6 @@
 class Owner
   
-  before_update :plan_change_validation, :if => :"plan_changed?"
+  validate :plan_change_validation, :if => :plan_changed?
   
   def self.permissions
     Plan::ALLOWS.keys
@@ -31,9 +31,9 @@ class Owner
   
   private
   
-  def _set_professional_plan?(*params)
-    true
-  end
+  # def _set_professional_plan?(*params)
+  #   true
+  # end
   
   def _set_single_plan?(*params)
     cgi_params = params.first || {}
