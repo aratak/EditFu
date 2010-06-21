@@ -1,1 +1,5 @@
-= content_tag :span, "#{msg}" + link_to_function("", "hideFlash(this)", :class => :close), :class => "flash_#{key}"
+= content_tag :span, "#{msg}" + link_to_function("", "hideFlash(this)", :class => :close, :id => "close_flash_#{key}"), :class => "flash_#{key}"
+:javascript
+  window.setTimeout(function() { 
+    hideFlash( $('close_flash_#{key}') );
+  }, 5000);  

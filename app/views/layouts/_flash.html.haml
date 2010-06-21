@@ -2,5 +2,14 @@
   - unless controller.send(:flash).nil?
     - controller.send(:flash).each do |key, msg|
       = render "layouts/flash/one", :key => key, :msg => msg
-    :javascript
-      $('messages').slideDown('slow');
+:javascript
+  Event.observe(window, 'load', function() {
+    if(!$('messages').empty()) { $('messages').slideDown('slow'); }
+  })
+
+  Ajax.Responders.register({
+    onComplete: function() {
+      if(!$('messages').empty()) { $('messages').slideDown('slow'); }
+    }
+  });
+  
