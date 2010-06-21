@@ -2,7 +2,7 @@ class Plan
 
   ALLOWS = {
     :page   => [FREE, TRIAL, UNLIMITEDTRIAL, SINGLE, PROFESSIONAL],
-    :site   => [      TRIAL, UNLIMITEDTRIAL,         PROFESSIONAL],
+    :site   => [FREE, TRIAL, UNLIMITEDTRIAL, SINGLE, PROFESSIONAL],
     :editor => [      TRIAL, UNLIMITEDTRIAL,         PROFESSIONAL]
   }
   
@@ -42,6 +42,10 @@ class Plan
 
   def _can_add_page? user
     !(self == FREE) || (user.pages.count < 3)
+  end
+  
+  def _can_add_site? user
+    !([FREE, SINGLE].include?(self)) || (user.sites.count < 1)
   end
   
 end
