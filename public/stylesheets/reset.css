@@ -32,6 +32,10 @@ html {
     line-height: 1.4em;
 }
 
+input[type=submit], input[type=image], input[type=button] {
+  cursor: pointer;
+}
+
 input:link, textarea:link {
     padding: 0.2em;
     border: 1px solid #90586A;
@@ -78,6 +82,12 @@ a:hover {
 
 a:visited {
     color: #636363;
+}
+
+a:active, a:focus,
+input:active, input:focus {
+    outline: none;
+    -moz-outline-style: none;
 }
 
 a.red {
