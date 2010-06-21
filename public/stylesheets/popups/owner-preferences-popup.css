@@ -109,13 +109,12 @@
   text-shadow: 0 0 1px #aaaaaa;
   font-size: 14px;
   text-align: center;
-  visibility: hidden;
 }
 
-#owner-preferences-popup .plan .plan-label.selected small {
+/*#owner-preferences-popup .plan .plan-label.selected small {
   visibility: visible;
 }
-
+*/
 #owner-preferences-popup .plan .plan-label label {
   position: absolute;
   left: 0;
