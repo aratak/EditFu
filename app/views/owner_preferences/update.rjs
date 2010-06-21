@@ -8,5 +8,6 @@
 
 # hide_popup page, *@message
 
-page << 'hidePopup();'
+page.call 'hidePopup'
 page.replace_html 'system-logo', :partial => 'layouts/logo'
+xhr_flash page
