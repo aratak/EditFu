@@ -29,7 +29,7 @@ class OwnerPreferencesController < ApplicationController
       flash[:notice] = 'Preferences were updated successfully.' 
     else
       render :update do |page|
-        flash[:error] = 'Card is invalid.' 
+        flash[:error] = @owner.errors.first[1] # 'Card is invalid.' 
         page[:plan_and_billing].replace :partial => 'owner_preferences/plan_and_billing/index'
         page[:plan_and_billing].add_class_name :active
         xhr_flash(page)
