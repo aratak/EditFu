@@ -6,7 +6,7 @@
         .title Credit card number
         .label-input
           = owner.error_for :'card.number'
-          = card.text_field 'number', :placeholder => (@owner.card_number || '1234 5678 9123 4567')
+          = card.text_field 'number', :placeholder => '1234 5678 9123 4567'
       .title-input.exp-date
         .title Expiration date
         .label-input
