@@ -4,3 +4,5 @@
   %dl
     %dt= "#{plan.display_name} #{plan.str_price}"
     %dd= "#{plan.description}"
+  - if @owner.plan_was == plan
+    %small Current
