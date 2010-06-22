@@ -41,36 +41,36 @@ class Owner < User
 
 
   def trial_period_end
-    logger.warn("the method 'trial_period_end' will be deplicated")
+    ActiveSupport::Deprecation.warn("the method 'trial_period_end' will be deplicated")
     30.days.since(confirmed_at).to_date
   end
 
   def trial_period_expired?
-    logger.warn("the method 'trial_period_end' will be deplicated")
+    ActiveSupport::Deprecation.warn("the method 'trial_period_end' will be deplicated")
     plan.trial? && trial_period_end.past?
   end  
 
   def billing_day
-    logger.warn("the method 'trial_period_end' will be deplicated")
+    ActiveSupport::Deprecation.warn("the method 'trial_period_end' will be deplicated")
     if confirmed_at
       confirmed_at.mday > 28 ? 1 : confirmed_at.mday 
     end
   end
 
   def prev_billing_date
-    logger.warn("the method 'trial_period_end' will be deplicated")
+    ActiveSupport::Deprecation.warn("the method 'trial_period_end' will be deplicated")
     d = next_billing_date << 1
     d <= confirmed_at.to_date ? nil : d
   end
 
   def next_billing_date(date = Date.today)
-    logger.warn("the method 'trial_period_end' will be deplicated")
+    ActiveSupport::Deprecation.warn("the method 'trial_period_end' will be deplicated")
     this_bd = Date.new(date.year, date.month, billing_day)
     this_bd.past? ? this_bd.next_month : this_bd
   end
 
   def prof_plan_begins_at
-    logger.warn("the method 'trial_period_end' will be deplicated")
+    ActiveSupport::Deprecation.warn("the method 'trial_period_end' will be deplicated")
     if !plan.professional?
       next_billing_date
     else
