@@ -103,7 +103,14 @@ function hidePopup() {
 }
 
 function getActionBar() {
-  return $$('#popup .popup-action-bar').first() || $('action-bar');
+  
+  var popupActionBars = $$('#popup .popup-action-bar');
+  
+  if(popupActionBars.size() > 1) {
+    popupActionBars =  $$('#popup .active .popup-action-bar');
+  }
+  
+  return popupActionBars.first() || $('action-bar');
 }
 
 function showProcessing(request) {
