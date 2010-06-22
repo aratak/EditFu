@@ -32,7 +32,7 @@ class Card < ActiveRecord::Base
       PaymentSystem.recurring(self.owner, self)
       set_card_fields
     rescue PaymentSystemError
-      errors.add_to_base "is invalid"
+      errors.add :credit_card, "is invalid"
     end    
   end
   
@@ -41,7 +41,7 @@ class Card < ActiveRecord::Base
       PaymentSystem.update_recurring(self.owner, self)
       set_card_fields
     rescue PaymentSystemError
-      errors.add_to_base "is invalid"
+      errors.add :credit_card, "is invalid"
     end    
   end
   
@@ -62,7 +62,7 @@ class Card < ActiveRecord::Base
   private
 
   def validate
-    errors.add_to_base "is invalid" if credit_card.invalid?
+    errors.add :credit_card, "is invalid" if credit_card.invalid?
   end
 
   def attributes_for_credit_card
