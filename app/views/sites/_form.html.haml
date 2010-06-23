@@ -35,6 +35,7 @@
     .clear
 
     .popup-action-bar
+      - description = description || ""
       %small.description= description
       = form.submit submit, :onclick => "return $$('#ftp-tree .selected').size() > 0"
       = link_to_function "Cancel", "hidePopup();", :class => 'action cancel'
