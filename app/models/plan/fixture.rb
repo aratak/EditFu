@@ -8,6 +8,7 @@ class Plan
   create :id => 5, :name => "Professional",     :price => BigDecimal.new("15"),   :display_name => "Pro"
   
   PAYMENTS = [SINGLE, PROFESSIONAL]
+  UNPAYMENTS = Plan.all - PAYMENTS
 
   def self.payments_plan_ids
     PAYMENTS.map { |p| p.id }
