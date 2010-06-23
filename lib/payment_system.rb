@@ -3,16 +3,16 @@ class PaymentSystem
     gateway.authorize(PAYMENT_RECURRING_AMOUNT, card).success?
   end
 
-  def self.recurring(owner, card)
-    recurring_gateway.create(gateway, PAYMENT_RECURRING_AMOUNT, owner, card)
+  def self.recurring(card)
+    recurring_gateway.create(gateway, PAYMENT_RECURRING_AMOUNT, card)
   end
 
-  def self.update_recurring(owner, card)
-    recurring_gateway.update(gateway, owner, card)
+  def self.update_recurring(card)
+    recurring_gateway.update(gateway, card)
   end
 
-  def self.cancel_recurring(owner)
-    recurring_gateway.cancel(gateway, owner)
+  def self.cancel_recurring(card)
+    recurring_gateway.cancel(gateway, card)
   end
 
   private
