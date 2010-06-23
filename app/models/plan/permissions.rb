@@ -36,8 +36,12 @@ class Plan
     user.owner? && !deny_plans(thing)
   end
   
+  def allowed_plans thing
+    ALLOWS[thing.to_sym].include?(self)
+  end
+  
   def deny_plans thing
-    !ALLOWS[thing.to_sym].include?(self)
+    !allowed_plans(thing)
   end
 
   def _can_add_page? user
@@ -45,7 +49,7 @@ class Plan
   end
   
   def _can_add_site? user
-    !([FREE, SINGLE].include?(self)) || (user.sites.count < 1)
+    !([FREE].include?(self)) || (user.sites.count < 1)
   end
   
 end
