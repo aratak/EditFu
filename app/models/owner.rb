@@ -20,7 +20,7 @@ class Owner < User
   validates_acceptance_of :terms_of_service, :on => :create, :allow_nil => false, :message => 'Read and accept it!'
   # validates_presence_of :card_number, :if => :plan_is_professional?
 
-  concerned_with :card_relation, :associations, :delivers, :plan_migrations, :plan_relation
+  concerned_with :associations, :delivers, :plan_migrations, :plan_relation
 
   def holded?
     hold && hold_changed?
@@ -30,14 +30,6 @@ class Owner < User
     !holded?
   end
 
-  def has_payment_plan?
-    Plan::PAYMENTS.include?(self.plan)
-  end
-  
-  def has_no_payment_plan?
-    !has_payment_plan?
-  end
-  alias_method :hasnt_payment_plan?, :has_no_payment_plan?
 
 
   def trial_period_end
