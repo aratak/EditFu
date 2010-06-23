@@ -49,7 +49,7 @@ class OwnerPreferencesController < ApplicationController
 
   def set_preferences
     @owner = current_user
-    @card = ExtCreditCard.new
+    # @card = ExtCreditCard.new
   end
 end
 
