@@ -10,10 +10,6 @@ class Plan
   PAYMENTS = [SINGLE, PROFESSIONAL]
   UNPAYMENTS = Plan.all - PAYMENTS
 
-  def self.payments_plan_ids
-    PAYMENTS.map { |p| p.id }
-  end
-  
   def payment?
     PAYMENTS.include? self
   end
