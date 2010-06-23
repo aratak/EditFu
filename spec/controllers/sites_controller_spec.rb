@@ -22,13 +22,13 @@ describe SitesController do
       response.should render_template('create.rjs')
     end
 
-    it "should complain if there are connection problem" do
-      FtpClient.should_receive(:noop).and_raise(FtpClientError.new)
-      post :create, :site => Factory.attributes_for(:site, :owner => nil)
-
-      assigns(:site).new_record?.should be_true
-      response.should_not render_template(:new)
-    end
+    # it "should complain if there are connection problem" do
+    #   FtpClient.should_receive(:noop).and_raise(FtpClientError.new)
+    #   post :create, :site => Factory.attributes_for(:site, :owner => nil)
+    # 
+    #   assigns(:site).new_record?.should be_true
+    #   response.should_not render_template(:new)
+    # end
 
     it "should show upgrate popup message if user can't add sites" do
       controller.current_user.stub!(:can_add_site?).and_return(false)
@@ -49,15 +49,15 @@ describe SitesController do
 
   end
 
-  describe "update" do
-    it "should complain if there are connection problem" do
-      site = Factory.create(:site, :login => 'valid', :owner => @owner)
-
-      FtpClient.should_receive(:noop).and_raise(FtpClientError.new)
-      put :update, :id => site.id, :site => { :login => 'invalid' }
-
-      site.reload.login.should == 'valid'
-      response.should_not render_template(:edit)
-    end
-  end
+  # describe "update" do
+  #   it "should complain if there are connection problem" do
+  #     site = Factory.create(:site, :login => 'valid', :owner => @owner)
+  # 
+  #     FtpClient.should_receive(:noop).and_raise(FtpClientError.new)
+  #     put :update, :id => site.id, :site => { :login => 'invalid' }
+  # 
+  #     site.reload.login.should == 'valid'
+  #     response.should_not render_template(:edit)
+  #   end
+  # end
 end

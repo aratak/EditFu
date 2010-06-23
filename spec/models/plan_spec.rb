@@ -36,6 +36,10 @@ shared_examples_for "general plans tests" do
     @plan.str_price == "$ #{@plan.price}"
   end
   
+  it "should has description" do
+    @plan.description.should_not be_nil
+  end
+  
 end
 
 
@@ -119,16 +123,26 @@ describe Plan do
       end
 
       [Plan::FREE, Plan::SINGLE].each do |plan|
+
         it "denied plans '#{plan.name}'" do
           @owner.stub(:plan).and_return(plan)
           plan.can_add_editor?(@owner).should be_false
         end
+        
+        # it "denied plans '#{plan.name}'" do
+        #   @owner.stub!(:plan).and_return(plan)
+        #   @owner.stub!(:pages).and_return([1,2])
+        #   plan.can_add_site?(@owner).should be_false
+        # end
 
-        it "denied plans '#{plan.name}'" do
-          @owner.stub(:plan).and_return(plan)
-          plan.can_add_site?(@owner).should be_false
-        end
       end
+      
+      # [Plan::FREE].each do |plan|
+      #   it "denied plans '#{plan.name}'" do
+      #     @owner.stub(:plan).and_return(plan)
+      #     plan.can_add_site?(@owner).should be_false
+      #   end
+      # end
 
     end
     
@@ -169,16 +183,21 @@ describe Plan do
         before :each do
           @plan = plan
           @owner.stub(:plan).and_return(Plan::SINGLE)
-          10.times { Factory.create(:site, :owner => @owner) }
+          10.times { Factory.create(:editor, :owner => @owner) }
         end
         
         it "is possible" do
-          @owner.stub(:edotors).and_return([])
+          @owner.stub(:sites).and_return([])
           @plan.changes_to(Plan::SINGLE, @owner).should be_true
         end
         
-        it "is impossible" do
-          Factory.create(:editor, :owner => @owner)
+        it "is possible (with one site)" do
+          Factory.create(:site, :owner => @owner)
+          @plan.changes_to(Plan::SINGLE, @owner).should be_true
+        end
+
+        it "is impossible (with one site)" do
+          2.times { Factory.create(:site, :owner => @owner) }
           @plan.changes_to(Plan::SINGLE, @owner).should be_false
         end
         

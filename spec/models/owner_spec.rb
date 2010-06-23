@@ -78,15 +78,16 @@ shared_examples_for "general owners tests" do
     it "should update recurring" do
       owner = Factory.create :owner
       owner.set_plan Plan::PROFESSIONAL
-      card = Factory.create :card, :owner => owner
+      card = Factory.create :card
+      owner.card = card
       owner.reload
       cardid = card.id
       # owner.set_card(card)
 
       card2_attrs = Factory.attributes_for(:card) #Factory.create :card, :owner => owner
+      PaymentSystem.should_receive(:update_recurring).with(card)
       owner.card.update_attributes(card2_attrs)
-      PaymentSystem.should_receive(:update_recurring) #.with(owner, card.credit_card)
-      owner.save
+      # owner.save
       owner.card.id.should be(cardid)
     end
 
@@ -96,7 +97,7 @@ shared_examples_for "general owners tests" do
       card = Factory.build :card, :owner => owner
 
       PaymentSystem.should_not_receive(:update_recurring)
-      owner.set_card card
+      owner.card = card
     end
   end  
 
@@ -175,10 +176,53 @@ shared_examples_for "general owners tests" do
       owner.domain_name = "test_company_name"
     end
 
-  end  
+  end
+  
+  describe "payment plan" do
+    
+    context "should has method 'has_payment_plan?'" do
+
+      Plan::UNPAYMENTS.each do |plan|
+        it "and should return false" do
+          owner = Factory.build(:owner)
+          owner.stub!(:plan).and_return(plan)
+          owner.has_payment_plan?.should be_false
+        end
+      end
+
+      Plan::PAYMENTS.each do |plan|
+        it "and should return true" do
+          owner = Factory.build(:owner)
+          owner.stub!(:plan).and_return(plan)
+          owner.has_payment_plan?.should be_true
+        end
+      end
+
+    end
+
+    context "should has method 'has_no_payment_plan?'" do
+
+      Plan::UNPAYMENTS.each do |plan|
+        it "and should return true" do
+          owner = Factory.build(:owner)
+          owner.stub!(:plan).and_return(plan)
+          owner.has_no_payment_plan?.should be_true
+        end
+      end
+
+      Plan::PAYMENTS.each do |plan|
+        it "and should return false" do
+          owner = Factory.build(:owner)
+          owner.stub!(:plan).and_return(plan)
+          owner.has_no_payment_plan?.should be_false
+        end
+      end
+
+    end
+    
+  end
   
 end
-
 
 describe Owner, "" do
   before :each do
@@ -231,7 +275,8 @@ describe Owner, "" do
 
     context "professional plan" do
       before :each do
-        @card = Factory.build :card, :owner => @owner
+        @card = Factory.build :card
+        @owner.card = @card
         @owner.confirmed_at = Date.today
         @owner.reload
         @gateway = mock('gateway')
@@ -239,13 +284,14 @@ describe Owner, "" do
 
       it "should has been set with card" do
         @owner.set_plan(Plan::PROFESSIONAL)
-        @owner.set_card(@card).should == @card
+        @owner.card = @card
         @owner.valid?.should be_true
+        @owner.card.should == @card
       end
       
       it "shouldnt has been set without card" do
         @owner.set_plan(Plan::PROFESSIONAL)
-        @owner.destroy_card
+        @owner.card.destroy
         @owner.valid?.should be_false
       end
       
@@ -281,16 +327,16 @@ describe Owner, "" do
 
     it "should cancel recurring if plan is professional" do
       owner = Factory.create(:owner)
-      card = Factory.create(:card, :owner => owner)
       owner.set_plan(Plan::PROFESSIONAL)
-      owner.save(false)
+      owner.card = Factory.build(:card)
+      owner.save
       owner.reload
 
       owner.card.should_not be_nil
       owner.plan.should be(Plan::PROFESSIONAL)
       
       
-      PaymentSystem.should_receive(:cancel_recurring).with(owner)
+      PaymentSystem.should_receive(:cancel_recurring).with(owner.card)
       owner.destroy
     end
   end
@@ -375,9 +421,52 @@ describe Owner, "and plan relation" do
     
   end
   
-  # it "should has 'plan_was' method" do
-  #   @plan.should be_respond_to(:"plan_was")
-  # end
+  describe "should be able to" do
+    before :each do
+      @owner = Factory.create(:owner)
+    end
+    
+    it "add editor" do
+      proc { 
+        @owner.add_editor("user@mailinator.com").should_not be_nil
+      }.should change(@owner.editors, :count).by(1)
+    end
+    
+    it "find site" do
+      site = Factory.create(:site, :owner => @owner)
+      @owner.find_site(site.id).should == site
+    end
+
+    it "not find site" do
+      another_owner = Factory.create(:owner)
+      site = Factory.create(:site, :owner => another_owner)
+      @owner.find_site(site.id).should be_nil
+    end
+    
+    it "find page" do
+      site = Factory.create(:site, :owner => @owner)
+      page = Factory.create(:page, :site => site)
+      @owner.find_page(site.id, page.id).should == page
+    end
+
+    context "not find page" do
+      
+      before :each do
+        @site = Factory.create(:site, :owner => @owner)
+        @page = Factory.create(:page, :site => @site)
+
+        @another_owner = Factory.create(:owner)
+        @another_site = Factory.create(:site, :owner => @another_owner)
+        @another_page = Factory.create(:page, :site => @another_site)
+      end
+      
+      it { @owner.find_page(@another_site.id, @page.id).should be_nil }
+      it { @owner.find_page(@site.id, @another_page.id).should be_nil }
+      it { @owner.find_page(@another_site.id, @another_page.id).should be_nil }
+    end
+    
+  end
+
   
 end
 
