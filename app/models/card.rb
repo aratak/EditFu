@@ -31,6 +31,7 @@ class Card < ActiveRecord::Base
   private
 
   def set_display_card_fields
+    return false if first_name.nil? || first_name.empty?
     self.display_number = self.credit_card.display_number
     self.display_expiration_date = Date.new(credit_card.year, credit_card.month, 1)
   end
