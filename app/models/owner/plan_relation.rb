@@ -1,9 +1,16 @@
 class Owner
   
-  # return all plans
-  def self.plans
-    Plan.all
+  # current plan is payment
+  def has_payment_plan?
+    Plan::PAYMENTS.include?(self.plan)
   end
+  
+  # curent plans is not payment
+  def has_no_payment_plan?
+    !has_payment_plan?
+  end
+  alias_method :hasnt_payment_plan?, :has_no_payment_plan?
+  
   
   # return the previous plan
   def plan_was
@@ -29,24 +36,24 @@ class Owner
   #   owner.plan_was_not_free?, owner.plan_was_not_trial? ...
   #   owner.plan_wasnt_free?, owner.plan_wasnt_trial? ...
   # etc...
-  Plan.all.each do |p|
+  Plan.all.each do |pl|
     
-    define_method(:"plan_is_#{p.identificator}?") do
-      plan == p
+    define_method(:"plan_is_#{pl.identificator}?") do
+      plan == pl
     end
     
-    define_method(:"plan_changed_to_#{p.identificator}?") do
-      plan_changed_to?(p)
+    define_method(:"plan_changed_to_#{pl.identificator}?") do
+      plan_changed_to?(pl)
     end
     
-    define_method(:"plan_was_#{p.identificator}?") do
-      plan_was?(p)
+    define_method(:"plan_was_#{pl.identificator}?") do
+      plan_was?(pl)
     end
 
-    define_method(:"plan_was_not_#{p.identificator}?") do
-      !self.send(:"plan_was_#{p.identificator}?")
+    define_method(:"plan_was_not_#{pl.identificator}?") do
+      !self.send(:"plan_was_#{pl.identificator}?")
     end
-    alias_method :"plan_wasnt_#{p.identificator}?", :"plan_was_not_#{p.identificator}?"
+    alias_method :"plan_wasnt_#{pl.identificator}?", :"plan_was_not_#{pl.identificator}?"
 
   end
   
