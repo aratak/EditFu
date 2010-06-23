@@ -60,6 +60,7 @@ end
 
 
 
+
 # == Schema Information
 #
 # Table name: users
@@ -85,7 +86,6 @@ end
 #  owner_id             :integer(4)
 #  type                 :string(10)      not null
 #  card_number          :string(20)
-#  subscription_id      :string(13)
 #  enabled              :boolean(1)      default(TRUE), not null
 #  user_name            :string(255)
 #  card_exp_date        :date

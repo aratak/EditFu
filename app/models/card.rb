@@ -76,6 +76,7 @@ class Card < ActiveRecord::Base
 
 
 end
+
 # == Schema Information
 #
 # Table name: cards
@@ -84,5 +85,6 @@ end
 #  owner_id                :integer(4)
 #  display_number          :string(255)
 #  display_expiration_date :string(255)
+#  subscription_id         :string(255)
 #
 

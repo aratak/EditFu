@@ -3,7 +3,7 @@ class AddCard < ActiveRecord::Migration
     create_table :cards do |t|
       t.integer :owner_id
       t.string :display_number
-      t.string :display_expiration_date
+      t.date   :display_expiration_date
       t.string :subscription_id
     end
     

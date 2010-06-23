@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(:version => 20100615090017) do
   create_table "cards", :force => true do |t|
     t.integer "owner_id"
     t.string  "display_number"
-    t.string  "display_expiration_date"
+    t.date    "display_expiration_date"
     t.string  "subscription_id"
   end
 
