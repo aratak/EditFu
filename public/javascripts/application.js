@@ -1,11 +1,12 @@
 function showMessage(kind, text) {
+  alert(1)
   clearMessage();
   if(text && !text.blank()) {
-    var message = $(document.createElement('table'));
-    message.className = 'message ' + kind;
-    message.innerHTML = '<tr><td>' + text + '</tr></td>'
+    var message = $(document.createElement('span'));
+    message.className = 'flash_ ' + kind;
+    message.innerHTML = text + "<a onclick='hideFlash(this); return false;' id='close_flash_" + kind + "' href='#' class='close'></a>"
   
-    getActionBar().insert({top: message });
+    $('messages').insert({top: message });
     message.effect = new Effect.Fade(message, {delay: 10, duration: 5});
   }
 }
@@ -20,7 +21,6 @@ function showBodyMessage(kind, text) {
     $('action-bar').insert({top: message });
     message.effect = new Effect.Fade(message, {delay: 10, duration: 5});
   }
-  
   
 }
 
