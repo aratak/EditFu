@@ -28,6 +28,10 @@ class Card < ActiveRecord::Base
     Mailer.deliver_credit_card_changes(self.owner)
   end
 
+  def price
+    owner.plan.price
+  end
+
   private
 
   def set_display_card_fields
