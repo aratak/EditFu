@@ -23,7 +23,7 @@ after "deploy:symlink", "deploy:update_crontab"
 
 namespace :deploy do
   task :install_gems do
-    run "cd #{current_path} && rake gems:install"
+    run "cd #{current_path} && rake RAILS_ENV=#{rails_env} gems:install"
   end
 
   task :restart do
