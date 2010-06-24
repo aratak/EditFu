@@ -37,7 +37,7 @@ class Plan < ActiveHash::Base
   # return string variant of price
   # with '$' symbol as prefix
   def str_price
-    "#{CURRENCY} #{self.price}" if payment?
+    "#{CURRENCY} #{self.price_in_dollars}" if payment?
   end
   
 end
