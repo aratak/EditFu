@@ -1,10 +1,10 @@
 class PaymentSystem
-  def self.authorized?(card)
-    gateway.authorize(PAYMENT_RECURRING_AMOUNT, card).success?
-  end
+  # def self.authorized?(card)
+  #   gateway.authorize(PAYMENT_RECURRING_AMOUNT, card).success?
+  # end
 
   def self.recurring(card)
-    recurring_gateway.create(gateway, PAYMENT_RECURRING_AMOUNT, card)
+    recurring_gateway.create(gateway, card.price, card)
   end
 
   def self.update_recurring(card)
