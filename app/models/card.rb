@@ -29,7 +29,7 @@ class Card < ActiveRecord::Base
   end
 
   def price
-    owner.plan.price
+    self.owner.plan.price unless owner.nil?
   end
 
   private
