@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100615090017) do
+ActiveRecord::Schema.define(:version => 20100624123811) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -54,6 +54,15 @@ ActiveRecord::Schema.define(:version => 20100615090017) do
     t.string  "password"
     t.integer "owner_id"
     t.string  "site_url",  :limit => 50
+  end
+
+  create_table "subscriptions", :force => true do |t|
+    t.integer  "owner_id"
+    t.date     "start_at"
+    t.date     "end_at"
+    t.integer  "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|

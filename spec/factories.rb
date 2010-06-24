@@ -50,6 +50,17 @@ Factory.define :card do |c|
   c.association :owner
 end
 
+Factory.define :subscription do |s|
+  s.start_at Date.today
+  s.end_at 1.month.from_now.to_date
+  s.price 300
+  
+  s.association :owner
+end
+
+
+
+
 # Factory.define :card , :class => ExtCreditCard do |c|
 #   c.first_name 'John'
 #   c.last_name 'Doe'

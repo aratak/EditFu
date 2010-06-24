@@ -346,6 +346,7 @@ end
 describe Owner, "and plan relation" do
   
   should_belong_to :plan
+  should_have_many :subscriptions
   
   describe "'plan_was'/'plan_changed' method" do
     before :each do

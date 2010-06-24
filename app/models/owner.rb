@@ -4,6 +4,7 @@ class Owner < User
   has_many :pages, :through => :sites
   has_many :editors, :dependent => :destroy
   belongs_to :plan
+  has_many :subscriptions
   has_one :card, :dependent => :destroy, :autosave => true, :inverse_of => :owner
 
   alias_attribute :subdomain, :domain_name
