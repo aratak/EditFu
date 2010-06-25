@@ -15,11 +15,16 @@ class Card < ActiveRecord::Base
   validates_presence_of :verification_value
   validates_presence_of :zip
   
-  after_validation :set_credit_card
-  after_validation_on_create :recurring
-  after_validation_on_update :update_recurring
-  after_validation :subscription_validation
+  # after_validation :set_credit_card
+  # after_validation_on_create :recurring
+  # after_validation_on_update :update_recurring
+  # after_validation :subscription_validation
 
+  before_save :set_credit_card
+  before_create :recurring
+  before_update :update_recurring
+  before_save :subscription_validation
+  
   before_save :set_display_card_fields
   after_save :deliver_credit_card_changes
   before_destroy :cancel_recurring
@@ -42,22 +47,19 @@ class Card < ActiveRecord::Base
 
   def set_credit_card
     self.credit_card = ExtCreditCard.new(attributes_for_credit_card)
-    credit_card_validation
+    # credit_card_validation
+    # send(new_record? ? :recurring : :update_recurring)
+    # set_display_card_fields
   end
-  
   
   def credit_card_validation
     errors.add :credit_card, "is invalid" if self.credit_card.invalid?
   end
   
-  def subscription_validation
-    errors.add(:subscription_id, "Required.") if self.subscription_id.nil? || self.subscription_id.empty?
-  end
-  
-  
   def recurring
     begin
       PaymentSystem.recurring(self)
+      # subscription_validation
       true
     rescue PaymentSystemError
       errors.add :credit_card, "is invalid"
@@ -68,6 +70,7 @@ class Card < ActiveRecord::Base
   def update_recurring
     begin
       PaymentSystem.update_recurring(self)
+      # subscription_validation
       true
     rescue PaymentSystemError
       errors.add :credit_card, "is invalid"
@@ -77,8 +80,12 @@ class Card < ActiveRecord::Base
   
   def cancel_recurring
     PaymentSystem.cancel_recurring(self)
+    true
   end
-  
+
+  def subscription_validation
+    errors.add(:subscription_id, "Required.") if self.subscription_id.nil? || self.subscription_id.empty?
+  end
 
 
   def attributes_for_credit_card

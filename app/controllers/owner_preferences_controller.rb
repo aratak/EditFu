@@ -23,7 +23,7 @@ class OwnerPreferencesController < ApplicationController
   
   def billing_update
     @owner.set_plan(params[:owner][:plan_id])
-    @owner.update_attributes(params[:owner])
+    @owner.attributes = params[:owner]
 
     if @owner.save
       flash[:notice] = 'Preferences were updated successfully.' 
