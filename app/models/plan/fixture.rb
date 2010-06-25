@@ -14,6 +14,10 @@ class Plan
     PAYMENTS.include? self
   end
   
+  def payment_style_class
+    payment? ? :payment : :unpayment
+  end
+  
   def description
     av = ActionView::Base.new(Rails::Configuration.new.view_path)
     av.render :partial => "plans/description/#{self.identificator}"

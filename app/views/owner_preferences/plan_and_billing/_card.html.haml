@@ -1,51 +1,11 @@
-- owner.fields_for :card_attributes, @owner.card do |card|
-  .billing.inputs
-    %h5 Billing
-    .inputs-row
-      .title-input.card-number
-        .title Credit card number
-        .label-input
-          = owner.error_for :'card.number'
-          = card.text_field 'number', :placeholder => '1234 5678 9123 4567'
-      .title-input.exp-date
-        .title Expiration date
-        .label-input
-          = owner.error_for :'card.expiration'
-          = card.text_field 'expiration', :placeholder => '02/2020'
-      .title-input.verification-value
-        .title Security code
-        .label-input
-          = owner.error_for :'card.verification_value'
-          = card.text_field 'verification_value', :placeholder => '123'
-      .title-input
-        .label-input
-          = image_tag 'visa.png'
-          = image_tag 'master-card.png'
-          = image_tag 'cards.png'
-    .inputs-row
-      .title-input.first-name
-        .title First name
-        .label-input
-          = owner.error_for :'card.first_name'
-          = card.text_field 'first_name', :placeholder => 'John'
-      .title-input.last-name
-        .title Last name
-        .label-input
-          = owner.error_for :'card.last_name'
-          = card.text_field 'last_name', :placeholder => 'Doe'
-      .title-input.zip
-        .title Zip code
-        .label-input
-          = owner.error_for :'card.zip'
-          = card.text_field 'zip', :placeholder => '10005'
-      - if @owner.plan.payment?
-        - if @owner.prev_billing_date
-          .title-input.prev-billing-date
-            .label-input
-              .inner-title Last billing date
-              %span= @owner.prev_billing_date
-        .title-input.next-billing-date
-          .label-input
-            .inner-title Next billing date
-            %span= @owner.next_billing_date
-    .clear
+#billing_inputs.billing.inputs{:style => (!(@owner.card.nil? || @owner.card.new_record?) ? "display: none;" : "display: block;" ) }
+  = render "owner_preferences/plan_and_billing/card_form", :owner => owner
+  - unless @owner.card.nil? || @owner.card.new_record?
+    %small.change_card
+      = link_to_function "cancel", "hideCardForm()", :class => :red, :id => 'change_card_link'
+
+- unless @owner.card.nil? || @owner.card.new_record?
+  #billing_view.billing.view{:style => "display: block;"}
+    = render "owner_preferences/plan_and_billing/card_view", :owner => owner
+    %small.change_card
+      = link_to_function "change card", "showCardForm()", :class => :red, :id => 'cancel_card_link'

@@ -168,11 +168,57 @@ function toggleEditor(id) {
   }
 }
 
+function showCardForm() {
+  $("billing_inputs").show();
+  $$("billing_inputs input").invoke("show");
+
+  if( $('billing_view') != null ) {
+    $("billing_view").hide();
+    $$("billing_view input").invoke("hide");
+  }
+}
+
+function hideCardForm() {
+  $("billing_inputs").hide();
+  $$("billing_inputs input").invoke("hide");
+  
+  if( $('billing_view') != null ) {
+    $("billing_view").show();
+    $$("billing_view input").invoke("show");
+  }
+}
+
+function bindPlanAndCardForm() {
+  
+  $$('input.unpayment').each(function(item) {
+    $(item).observe('change', function() { 
+      hideCardForm() 
+    })
+  })
+  
+  if( $('billing_view') == null ) {
+    $$('input.payment').each(function(item) {
+      $(item).observe('change', function() { 
+        showCardForm() 
+      })
+    })
+  }
+  
+  $$('input.unpayment').each(function(item) {
+    if ($(item).checked == true) {
+      hideCardForm()
+    }
+  })
+
+}
+
+
 Ajax.Responders.register({
   onCreate: showProcessing,
 
   onComplete: function(request, transport) {
     hideProcessing(request);
+    bindPlanAndCardForm();
 
     if(transport.status == 200) {
       var loc = transport.getHeader('X-Location');
@@ -192,3 +238,5 @@ Event.observe(window, 'load', function() {
     }
   }
 });
+
+
