@@ -16,6 +16,8 @@ config.time_zone = 'Kyev'
 
 BASE_DOMAIN = 'gryadka.com'
 
+config.gem "inaction_mailer", :lib => 'inaction_mailer/force_load', :source => 'http://gemcutter.org'
+
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = false
 
