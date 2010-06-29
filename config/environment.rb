@@ -55,6 +55,8 @@ end
 ActiveSupport::CoreExtensions::Time::Conversions::DATE_FORMATS.update :default => '%Y-%m-%d %H:%M:%S'
 ActiveSupport::CoreExtensions::Date::Conversions::DATE_FORMATS.update :default => '%m-%d-%Y'
 
+ExceptionNotification::Notifier.view_paths = ActionView::Base.process_view_paths(ExceptionNotification::Notifier.view_paths)
+
 ActiveMerchant::Billing::CreditCard.require_verification_value = true
 # PAYMENT_RECURRING_AMOUNT = 100
 # PROFESSIONAL_PLAN_AMOUNT = "#{PAYMENT_RECURRING_AMOUNT / 100}.00"
