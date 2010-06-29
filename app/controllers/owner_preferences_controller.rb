@@ -3,7 +3,6 @@ class OwnerPreferencesController < ApplicationController
   before_filter :set_preferences
 
   def show
-    zdfg
   end
 
   def update
