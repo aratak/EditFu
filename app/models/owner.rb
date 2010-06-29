@@ -8,12 +8,12 @@ class Owner < User
   has_one :card, :dependent => :destroy, :autosave => true, :inverse_of => :owner
 
   alias_attribute :subdomain, :domain_name
-  accepts_nested_attributes_for :card, :reject_if => :has_no_payment_plan?
+  accepts_nested_attributes_for :card, :reject_if => :card_shouldnt_be_changed
   attr_accessible :domain_name, :company_name, :terms_of_service, :card_attributes
 
   validates_presence_of  :domain_name
   validates_associated :plan 
-  validates_associated :card, :if => :has_payment_plan?
+  validates_associated :card, :if => :card_should_be_changed
   validates_length_of :company_name, :within => 3..255, :allow_blank => true
   validates_uniqueness_of :domain_name
   validates_format_of :domain_name, :with => /^\w+$/
@@ -29,6 +29,14 @@ class Owner < User
   
   def unholded?
     !holded?
+  end
+  
+  def card_should_be_changed
+    has_payment_plan?
+  end
+
+  def card_shouldnt_be_changed
+    !card_should_be_changed
   end
 
 
