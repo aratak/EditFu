@@ -1,5 +1,5 @@
 - css_class = css_class.nil? ? '' : css_class
-#plan_and_billing{:class => css_class}
+#plan_and_billing{:class => css_class, :style => "display: none;"}
   - remote_form_for :owner, :url => billing_update_owner_preferences_path, :html => { :method => :put } do |owner|
     = render 'owner_preferences/plan_and_billing/plan', :owner => owner
     = render 'owner_preferences/plan_and_billing/card', :owner => owner

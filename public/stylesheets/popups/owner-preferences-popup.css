@@ -209,7 +209,7 @@
 }
 
 #owner-preferences-popup #account_preferences, #owner-preferences-popup #plan_and_billing {
-  display: none;
+/*  display: none;*/
 }
 
 #owner-preferences-popup #plan_and_billing.active, #owner-preferences-popup #account_preferences.active {

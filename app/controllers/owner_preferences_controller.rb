@@ -14,7 +14,7 @@ class OwnerPreferencesController < ApplicationController
     else
       render :update do |page|
         page[:account_preferences].replace :partial => 'owner_preferences/account_preferences/index'
-        page[:account_preferences].add_class_name :active
+        page[:account_preferences].show
         xhr_flash(page)
       end
     end
@@ -31,7 +31,7 @@ class OwnerPreferencesController < ApplicationController
       render :update do |page|
         flash[:error] = @owner.errors.full_messages.first # @owner.errors.first[1]
         page[:plan_and_billing].replace :partial => 'owner_preferences/plan_and_billing/index'
-        page[:plan_and_billing].add_class_name :active
+        page[:plan_and_billing].show
         xhr_flash(page)
       end
     end
