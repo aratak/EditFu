@@ -170,21 +170,20 @@ function toggleEditor(id) {
 
 function showCardForm() {
   $("billing_inputs").show();
-  $$("billing_inputs input").invoke("show");
+  $$("#billing_inputs input").each(function(item) { $(item).enable(); })
+  
 
   if( $('billing_view') != null ) {
     $("billing_view").hide();
-    $$("billing_view input").invoke("hide");
   }
 }
 
 function hideCardForm() {
+  $$("#billing_inputs input").each(function(item) { $(item).disable(); })
   $("billing_inputs").hide();
-  $$("billing_inputs input").invoke("hide");
   
   if( $('billing_view') != null ) {
     $("billing_view").show();
-    $$("billing_view input").invoke("show");
   }
 }
 
