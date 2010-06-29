@@ -165,23 +165,26 @@ function toggleEditor(id) {
   }
 }
 
+var cardPreferencesDuration = 0.2;
+var cardPreferencesButtonDuration = 0.5
+
 function showCardForm() {
   if( $('billing_view') != null ) {
-    $("billing_view").blindUp({ duration: 0.1 });
+    $("billing_view").blindUp({ duration: cardPreferencesDuration });
   }
 
-  $("billing_inputs").blindDown({ duration: 0.1 });
+  $("billing_inputs").blindDown({ duration: cardPreferencesDuration });
   $$("#billing_inputs input").each(function(item) { $(item).enable(); })
 }
 
 function hideCardForm() {
   if( $('billing_view') != null ) {
-    $("billing_view").blindDown({ duration: 0.1 });
-    $('cancel_card_link').fade({ duration: 0.5 });
+    $("billing_view").blindDown({ duration: cardPreferencesDuration });
+    $('cancel_card_link').fade({ duration: cardPreferencesButtonDuration });
   }
 
   $$("#billing_inputs input").each(function(item) { $(item).disable(); })
-  $("billing_inputs").blindUp({ duration: 0.1 });
+  $("billing_inputs").blindUp({ duration: cardPreferencesDuration });
 }
 
 function bindPlanAndCardForm() {
@@ -205,7 +208,7 @@ function bindPlanAndCardForm() {
   } else {
     $$('input.payment').each(function(item) {
       $(item).observe('change', function() { 
-        $('cancel_card_link').appear({ duration: 0.5 });
+        $('cancel_card_link').appear({ duration: cardPreferencesButtonDuration });
       })
     })
   }
