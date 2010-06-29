@@ -1,5 +1,4 @@
 function showMessage(kind, text) {
-  alert(1)
   clearMessage();
   if(text && !text.blank()) {
     var message = $(document.createElement('span'));
