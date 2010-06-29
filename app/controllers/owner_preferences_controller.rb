@@ -7,7 +7,7 @@ class OwnerPreferencesController < ApplicationController
 
   def update
     @owner.require_current_password
-    @owner.update_attributes(params[:owner])
+    @owner.attributes = params[:owner]
     
     if @owner.save
       flash[:notice] = 'Preferences were updated successfully.' 
