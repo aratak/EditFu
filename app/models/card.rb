@@ -8,12 +8,12 @@ class Card < ActiveRecord::Base
 
   belongs_to :owner
 
-  validates_presence_of :first_name
-  validates_presence_of :last_name
-  validates_presence_of :expiration
-  validates_presence_of :number
-  validates_presence_of :verification_value
-  validates_presence_of :zip
+  validates_presence_of :first_name, :on => :create
+  validates_presence_of :last_name, :on => :create
+  validates_presence_of :expiration, :on => :create
+  validates_presence_of :number, :on => :create
+  validates_presence_of :verification_value, :on => :create
+  validates_presence_of :zip, :on => :create
   
   # after_validation :set_credit_card
   # after_validation_on_create :recurring
