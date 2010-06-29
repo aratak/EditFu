@@ -80,8 +80,6 @@ function showPopup() {
   window.currentScrollOffsets = document.viewport.getScrollOffsets();
   document.documentElement.style.overflow = 'hidden';
   $('popup-system').show();
-  // $('popup-system').scrollTo();
-  // $$('body').first().setStyle({ minHeight: $('popup').getHeight() + 80 + "px" });
 }
 
 function hidePopup() {
@@ -169,22 +167,22 @@ function toggleEditor(id) {
 }
 
 function showCardForm() {
-  $("billing_inputs").show();
-  $$("#billing_inputs input").each(function(item) { $(item).enable(); })
-  
-
   if( $('billing_view') != null ) {
-    $("billing_view").hide();
+    $("billing_view").blindUp({ duration: 0.1 });
   }
+
+  $("billing_inputs").blindDown({ duration: 0.1 });
+  $$("#billing_inputs input").each(function(item) { $(item).enable(); })
 }
 
 function hideCardForm() {
-  $$("#billing_inputs input").each(function(item) { $(item).disable(); })
-  $("billing_inputs").hide();
-  
   if( $('billing_view') != null ) {
-    $("billing_view").show();
+    $("billing_view").blindDown({ duration: 0.1 });
+    $('cancel_card_link').fade({ duration: 0.5 });
   }
+
+  $$("#billing_inputs input").each(function(item) { $(item).disable(); })
+  $("billing_inputs").blindUp({ duration: 0.1 });
 }
 
 function bindPlanAndCardForm() {
@@ -193,22 +191,26 @@ function bindPlanAndCardForm() {
     $(item).observe('change', function() { 
       hideCardForm() 
     })
+
+    if ($(item).checked == true) {
+      hideCardForm();
+    }
   })
   
   if( $('billing_view') == null ) {
     $$('input.payment').each(function(item) {
       $(item).observe('change', function() { 
-        showCardForm() 
+        showCardForm();
+      })
+    })
+  } else {
+    $$('input.payment').each(function(item) {
+      $(item).observe('change', function() { 
+        $('cancel_card_link').appear({ duration: 0.5 });
       })
     })
   }
   
-  $$('input.unpayment').each(function(item) {
-    if ($(item).checked == true) {
-      hideCardForm()
-    }
-  })
-
 }
 
 
