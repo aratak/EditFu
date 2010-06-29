@@ -39,6 +39,7 @@ PAYMENT_GATEWAY_OPTS = {
   :login => '6wXU53eCCJbd', :password => '6Cx4w83E5xrBC3sd', :test => false
 }
 
+ExceptionNotification::Notifier.view_paths = ActionView::Base.process_view_paths(ExceptionNotification::Notifier.view_paths)
 ExceptionNotification::Notifier.exception_recipients = %w(aratak@anahoret.com)
 ExceptionNotification::Notifier.sender_address = %("EditFu Error" <errors@editfu.com>)
 ExceptionNotification::Notifier.email_prefix = "[EDITFU] "
