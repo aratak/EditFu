@@ -173,13 +173,13 @@ function showCardForm() {
     $("billing_view").blindUp({ duration: cardPreferencesDuration });
   }
 
-  $("billing_inputs").blindDown({ duration: cardPreferencesDuration });
+  if (!$("billing_inputs").visible()) { $("billing_inputs").blindDown({ duration: cardPreferencesDuration }); } 
   $$("#billing_inputs input").each(function(item) { $(item).enable(); })
 }
 
 function hideCardForm() {
   if( $('billing_view') != null ) {
-    $("billing_view").blindDown({ duration: cardPreferencesDuration });
+    if (!$('billing_view').visible()) { $("billing_view").blindDown({ duration: cardPreferencesDuration }); }
     $('cancel_card_link').fade({ duration: cardPreferencesButtonDuration });
   }
 
