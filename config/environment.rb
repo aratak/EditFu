@@ -8,6 +8,7 @@ require File.join(File.dirname(__FILE__), 'boot')
 require File.join(File.dirname(__FILE__), 'gem_support_for_new_rails')
 
 Rails::Initializer.run do |config|
+  config.gem 'exception_notification', :version => '2.3.3.0'
   config.gem 'hpricot', :version => "0.8.2" 
   config.gem 'haml', :version => "2.2.13" 
   config.gem 'action_mailer_tls', :lib => false
