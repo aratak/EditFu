@@ -1,16 +1,21 @@
-function showMessage(kind, text) {
-  clearMessage();
+function createMessage(kind, text) {
+  var message = null;
   if(text && !text.blank()) {
-    var message = $(document.createElement('span'));
+    message = $(document.createElement('span'));
     message.className = 'flash_' + kind;
     message.setStyle({ display: 'none' })
     message.innerHTML = text + "<a onclick='hideFlash($(this).up()); return false;' id='close_flash_" + kind + "' href='#' class='close'></a>"
-  
+
     $('messages').insert({ top: message });
-    $('messages').show();
-    
-    appearMessage(message)
   }
+  
+  return message;
+}
+
+function showMessage(kind, text) {
+  clearMessage();
+  var message = createMessage(kind, text);
+  appearMessage(message);
 }
 
 function showMessagesIcon() {
@@ -28,6 +33,7 @@ function hideMessagesIcon() {
 
 
 function hideFlash(item) {
+  $(item).setStyle({height: 'auto'}).show()
   $(item).down('.close').fade({ duration: 0.1 })
   $(item).slideUp('slow')
   
@@ -50,6 +56,7 @@ function showAllMessages() {
 
 function appearMessage(idMessage) {
   var tmp = idMessage;
+  $(idMessage).setStyle({ height: "auto" }).  hide();
   $(idMessage).slideDown('slow');
   $(idMessage).select('.close').invoke('appear', { duration: 0.3 })
   window.setTimeout(function() { 
@@ -268,7 +275,7 @@ function bindPlanAndCardForm() {
 
 Ajax.Responders.register({
   onCreate: showProcessing,
-
+  
   onComplete: function(request, transport) {
     hideProcessing(request);
     bindPlanAndCardForm();
@@ -278,7 +285,12 @@ Ajax.Responders.register({
       if(loc) {
         window.location = loc;
       }
-    }
+    } 
+    if(transport.status == 500) {
+      createMessage('error', "Sorry, something went wrong. Please refresh your browser and try again. If this problem occurs again contact <a href='mailto:support@editfu.com'>support</a>.")
+    } 
+    
+    
   }
 });
 
