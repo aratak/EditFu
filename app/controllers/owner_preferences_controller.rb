@@ -13,6 +13,7 @@ class OwnerPreferencesController < ApplicationController
       flash[:notice] = 'Preferences were updated successfully.' 
     else
       render :update do |page|
+        flash[:error] = @owner.errors.full_messages.first
         page[:account_preferences].replace :partial => 'owner_preferences/account_preferences/index'
         page[:account_preferences].show
         xhr_flash(page)
@@ -29,7 +30,7 @@ class OwnerPreferencesController < ApplicationController
       flash[:notice] = 'Preferences were updated successfully.' 
     else
       render :update do |page|
-        flash[:error] = @owner.errors.full_messages.first # @owner.errors.first[1]
+        flash[:error] = (@owner.errors.full_messages + @owner.card.errors.full_messages).uniq.first
         page[:plan_and_billing].replace :partial => 'owner_preferences/plan_and_billing/index'
         page[:plan_and_billing].show
         xhr_flash(page)
@@ -49,7 +50,6 @@ class OwnerPreferencesController < ApplicationController
 
   def set_preferences
     @owner = current_user
-    # @card = ExtCreditCard.new
   end
 end
 
