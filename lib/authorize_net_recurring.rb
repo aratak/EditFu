@@ -14,13 +14,16 @@ class AuthorizeNetRecurring
   end
 
   def self.update(gateway, card)
-    response = gateway.update_recurring(
-      :subscription_id => card.subscription_id,
-      :credit_card => card.credit_card,
-      :billing_address => { 
-        :first_name => card.first_name, :last_name => card.last_name, :zip => card.zip
-      }
-    )
+    options =  { :subscription_id => card.subscription_id,
+                 :credit_card => card.credit_card,
+                 :billing_address => { 
+                   :first_name => card.first_name, 
+                   :last_name => card.last_name, 
+                   :zip => card.zip 
+                   }
+               }
+    
+    response = gateway.update_recurring(options)
 
     raise PaymentSystemError, build_message(response) unless response.success?
   end
