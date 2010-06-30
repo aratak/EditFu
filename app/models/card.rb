@@ -1,29 +1,24 @@
 class Card < ActiveRecord::Base
-
+  FIELDS = [:first_name, :last_name, :expiration, :number, :verification_value, :zip]
 
   @first_name = ""
-  attr_accessor :first_name, :last_name, :expiration, 
-                :number, :verification_value, :zip, 
-                :credit_card
+  attr_accessor *(FIELDS + [:credit_card])
 
   belongs_to :owner
 
-  validates_presence_of :first_name, :on => :create
-  validates_presence_of :last_name, :on => :create
-  validates_presence_of :expiration, :on => :create
-  validates_presence_of :number, :on => :create
-  validates_presence_of :verification_value, :on => :create
-  validates_presence_of :zip, :on => :create
+  validates_presence_of :first_name
+  validates_presence_of :last_name
+  validates_presence_of :expiration
+  validates_presence_of :number
+  validates_presence_of :verification_value
+  validates_presence_of :zip
   
-  # after_validation :set_credit_card
-  # after_validation_on_create :recurring
-  # after_validation_on_update :update_recurring
-  # after_validation :subscription_validation
-
+  validates_format_of :expiration, :with => /^\d{2}\/\d{4}$/
+  
   before_save :set_credit_card
   before_create :recurring
   before_update :update_recurring
-  before_save :subscription_validation
+  before_create :subscription_validation
   
   before_save :set_display_card_fields
   after_save :deliver_credit_card_changes
@@ -40,16 +35,19 @@ class Card < ActiveRecord::Base
   private
 
   def set_display_card_fields
-    return false if first_name.nil? || first_name.empty?
+    return true if !changed?
     self.display_number = self.credit_card.display_number
-    self.display_expiration_date = Date.new(credit_card.year, credit_card.month, 1)
+    
+    begin
+      self.display_expiration_date = Date.new(credit_card.year, credit_card.month, 1)
+    rescue ArgumentError
+      errors.add :expiration, "is invalid"
+    end
   end
 
   def set_credit_card
     self.credit_card = ExtCreditCard.new(attributes_for_credit_card)
-    # credit_card_validation
-    # send(new_record? ? :recurring : :update_recurring)
-    # set_display_card_fields
+    credit_card_validation
   end
   
   def credit_card_validation
@@ -59,7 +57,6 @@ class Card < ActiveRecord::Base
   def recurring
     begin
       PaymentSystem.recurring(self)
-      # subscription_validation
       true
     rescue PaymentSystemError
       errors.add :credit_card, "is invalid"
@@ -69,8 +66,8 @@ class Card < ActiveRecord::Base
   
   def update_recurring
     begin
-      PaymentSystem.update_recurring(self)
-      # subscription_validation
+      PaymentSystem.cancel_recurring(self)
+      PaymentSystem.recurring(self)
       true
     rescue PaymentSystemError
       errors.add :credit_card, "is invalid"
@@ -84,19 +81,18 @@ class Card < ActiveRecord::Base
   end
 
   def subscription_validation
-    errors.add(:subscription_id, "Required.") if self.subscription_id.nil? || self.subscription_id.empty?
+    errors.add(:credit_card, "is invalid.") if self.subscription_id.nil? || self.subscription_id.empty?
   end
 
 
   def attributes_for_credit_card
     result = {}
-    [:first_name, :last_name, :expiration, 
-    :number, :verification_value, :zip].map do |attr_name|
+    FIELDS.map do |attr_name|
       result[attr_name] = self.send(attr_name)
     end
     result
   end
-
+  
 end
 
 # == Schema Information

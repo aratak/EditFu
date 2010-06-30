@@ -3,7 +3,7 @@ class Site < ActiveRecord::Base
   MCE_FOLDER = File.join(IMAGES_FOLDER, 'content')
   SWAP_FOLDER = File.join(IMAGES_FOLDER, 'only')
 
-  belongs_to :owner, :autosave => true, :validate => true
+  belongs_to :owner #, :autosave => true, :validate => true
   has_many :pages, :dependent => :delete_all
 
   validates_presence_of :name, :server, :site_root, :site_url, :login, :password

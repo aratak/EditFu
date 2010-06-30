@@ -5,7 +5,7 @@ class Owner < User
   has_many :editors, :dependent => :destroy
   belongs_to :plan
   has_many :subscriptions
-  has_one :card, :dependent => :destroy, :autosave => true, :inverse_of => :owner
+  has_one :card, :dependent => :destroy, :inverse_of => :owner
 
   alias_attribute :subdomain, :domain_name
   accepts_nested_attributes_for :card, :reject_if => :card_shouldnt_be_changed
@@ -19,7 +19,6 @@ class Owner < User
   validates_format_of :domain_name, :with => /^\w+$/
   validates_exclusion_of :domain_name, :in => %w(www admin dev staging)
   validates_acceptance_of :terms_of_service, :on => :create, :allow_nil => false, :message => 'Read and accept it!'
-  # validates_presence_of :card_number, :if => :plan_is_professional?
 
   concerned_with :associations, :delivers, :plan_migrations, :plan_relation
 
@@ -38,9 +37,7 @@ class Owner < User
   def card_shouldnt_be_changed
     !card_should_be_changed
   end
-
-
-
+  
   def trial_period_end
     ActiveSupport::Deprecation.warn("the method 'trial_period_end' will be deplicated")
     30.days.since(confirmed_at).to_date
