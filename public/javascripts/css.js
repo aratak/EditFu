@@ -12,18 +12,18 @@ function hideFlash(item) {
   action()
 }
 
-// function toggleInputClass(input, value) {
-//   if(!value) {
-//     value = input.getValue();
-//   }
-//   value = value || '';
-//   
-//   if(value.blank()) {
-//     input.removeClassName('with-text');
-//   } else {
-//     input.addClassName('with-text');
-//   }
-// }
+function toggleInputClass(input, value) {
+  if(!value) {
+    value = input.getValue();
+  }
+  value = value || '';
+  
+  if(value.blank()) {
+    input.removeClassName('with-text');
+  } else {
+    input.addClassName('with-text');
+  }
+}
 
 var Behaviours = function() {
   return {
