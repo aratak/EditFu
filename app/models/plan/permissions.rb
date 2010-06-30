@@ -49,7 +49,7 @@ class Plan
   end
   
   def _can_add_site? user
-    !([FREE].include?(self)) || (user.sites.count < 1)
+    !([FREE, SINGLE].include?(self)) || (user.sites.count < 1)
   end
   
 end
