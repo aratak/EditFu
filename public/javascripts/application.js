@@ -21,7 +21,7 @@ function showMessage(kind, text) {
 function showMessagesIcon() {
   if( $$('#messages span').length > 0 ) { 
     $('system-link-alert').show() 
-    $('system-link-alert').pulsate({ pulses: 3, duration: 2 }).setOpacity('auto');
+    $('system-link-alert').pulsate({ pulses: 3, duration: 2 }).setOpacity('');
   }
 }
 
