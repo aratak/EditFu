@@ -56,19 +56,49 @@
 
 #system-bar .system-link {
   float: right;
-  margin-right: 10px;
-  margin-left: 15px;
   line-height: 50px;
   color: #f3a39d;
   font-family: helvetica;
   font-weight: bold;
   font-size: 14px;
   text-decoration: none;
+  
+  background-repeat: no-repeat;
+  background-position: center 0;
+  height: 50px;
+  width: 32px;
+  padding-right: 5px;
+  padding-left: 5px;
+  
+  opacity: 0.8;
 }
 
-#system-bar #logout.system-link {
-  margin-left: 35px;
+#system-bar .system-link:hover {
+  text-shadow: 1px 1px 5px #000000;
+  background-position: center -50px;
 }
+
+#system-bar .system-link:active {
+  opacity: 1;
+}
+
+#system-bar .system-link#system-link-preferences {
+  background-image: url(/images/preferences.png);
+}
+
+#system-bar .system-link#system-link-help {
+  background-image: url(/images/help.png);
+}
+
+#system-bar .system-link#system-link-alert {
+  background-image: url(/images/alert.png);
+}
+
+#system-bar .system-link#logout {
+  width: auto;
+  padding-right: 10px;
+}
+
 
 #system-bar .system-link img {
   padding-top: 11px;

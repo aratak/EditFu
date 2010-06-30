@@ -1,1 +1,1 @@
-= content_tag :span, flash[:info] + link_to_function("", "hideFlash(this)", :class => :close), :class => "flash_info"
+= content_tag :span, flash[:info] + link_to_function("", "hideFlash($(this).up())", :class => :close), :class => "flash_info"

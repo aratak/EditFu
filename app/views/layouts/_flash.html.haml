@@ -1,15 +1,14 @@
-#messages.messages.flash{:style => 'display: none; '}
+#messages.messages.flash
   - unless controller.send(:flash).nil?
     - controller.send(:flash).each do |key, msg|
       = render "layouts/flash/one", :key => key, :msg => msg
 :javascript
   Event.observe(window, 'load', function() {
-    if(!$('messages').empty()) { $('messages').slideDown('slow'); }
+    showAllMessages()
   })
 
   Ajax.Responders.register({
-    onComplete: function() {
-      if(!$('messages').empty()) { $('messages').slideDown('slow'); }
-    }
+    onCreate: removeAllMessages,
+    onComplete: showAllMessages
   });
   

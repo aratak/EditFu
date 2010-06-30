@@ -3,15 +3,6 @@ function setInputValue(input, value) {
   input.value = value;
 }
 
-function hideFlash(item) {
-  // $(item).up().hide()
-  var action = function() {
-    $(item).up().morph('height: 0; display: none;')
-  }
-  
-  action()
-}
-
 function toggleInputClass(input, value) {
   if(!value) {
     value = input.getValue();

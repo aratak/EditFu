@@ -21,12 +21,10 @@
 
         = render 'shared/logout'
         - unless current_user.admin?
-          - link_to help_path, :class => 'system-link', :alt => 'Help', :target => '_blank' do
-            %img(src='/images/help.png')
+          = link_to "", help_path, :class => 'system-link', :id => "system-link-help", :alt => 'Help', :target => '_blank'
         - if user_signed_in?
-          = link_to_remote image_tag("preferences.png", :alt => 'Preferences'), | 
-            :url => pref_path, | 
-            :method => :get, :html => { :class => 'system-link' } |
+          = link_to_remote '', :url => pref_path, :method => :get, :html => { :class => 'system-link', :id => "system-link-preferences" }
+        = render 'shared/messages_icon'
 
       #source-bar
         = yield :sourceBar

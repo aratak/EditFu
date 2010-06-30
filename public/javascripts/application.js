@@ -2,26 +2,74 @@ function showMessage(kind, text) {
   clearMessage();
   if(text && !text.blank()) {
     var message = $(document.createElement('span'));
-    message.className = 'flash_ ' + kind;
-    message.innerHTML = text + "<a onclick='hideFlash(this); return false;' id='close_flash_" + kind + "' href='#' class='close'></a>"
+    message.className = 'flash_' + kind;
+    message.setStyle({ display: 'none' })
+    message.innerHTML = text + "<a onclick='hideFlash($(this).up()); return false;' id='close_flash_" + kind + "' href='#' class='close'></a>"
   
-    $('messages').insert({top: message });
-    message.effect = new Effect.Fade(message, {delay: 10, duration: 5});
+    $('messages').insert({ top: message });
+    $('messages').show();
+    
+    appearMessage(message)
   }
 }
 
-function showBodyMessage(kind, text) {
-  $('action-bar').select('.message').invoke('remove');
-  if(text && !text.blank()) {
-    var message = $(document.createElement('table'));
-    message.className = 'message ' + kind;
-    message.innerHTML = '<tr><td>' + text + '</tr></td>'
-  
-    $('action-bar').insert({top: message });
-    message.effect = new Effect.Fade(message, {delay: 10, duration: 5});
+function showMessagesIcon() {
+  if( $$('#messages span').length > 0 ) { 
+    $('system-link-alert').show() 
+    $('system-link-alert').pulsate({ pulses: 3, duration: 2 }).setOpacity('auto');
   }
+}
+
+function hideMessagesIcon() {
+  if( $$('#messages span').length == 0 ) { 
+    $('system-link-alert').fade() 
+  }
+}
+
+
+function hideFlash(item) {
+  $(item).down('.close').fade({ duration: 0.1 })
+  $(item).slideUp('slow')
+  
+  showMessagesIcon();
+}
+
+function hideAllMessages() {
+  $$('#messages span').each(function(item) {
+    hideFlash(item);
+  })
   
 }
+
+
+function showAllMessages() {
+  $$('#messages span').each(function(item) {
+    appearMessage(item);
+  })
+}
+
+function appearMessage(idMessage) {
+  var tmp = idMessage;
+  $(idMessage).slideDown('slow');
+  $(idMessage).select('.close').invoke('appear', { duration: 0.3 })
+  window.setTimeout(function() { 
+    if( $(idMessage).visible() ) {
+      hideFlash(tmp);
+    }
+  }, 5000);
+  
+}
+
+function removeAllMessages() {
+  $$('#messages span').invoke("remove");
+  hideMessagesIcon()
+}
+
+function showBodyMessage(kind, text) {
+  showMessage(kind, text);
+}
+
+
 
 function setTitle(newValue) {
   document.title = newValue;
@@ -97,6 +145,8 @@ function hidePopup() {
   }
   
   window.scrollTo(left, top);
+  hideAllMessages();
+  removeAllMessages();
 }
 
 function getActionBar() {
