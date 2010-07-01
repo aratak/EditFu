@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Card do
   
   should_belong_to :owner
-  should_validate_presence_of :first_name, :last_name, :expiration, :number, :verification_value, :zip, :subscription_id
+  should_validate_presence_of :first_name, :last_name, :expiration, :number, :verification_value, :zip #, :subscription_id
 
   before :each do
     owner = Factory.build :owner
@@ -43,7 +43,8 @@ describe Card do
       @card.save
       @card.first_name = "Another name"
 
-      PaymentSystem.should_receive(:update_recurring)
+      PaymentSystem.should_receive(:cancel_recurring)
+      PaymentSystem.should_receive(:recurring)
       @card.save
     end
 
@@ -57,29 +58,19 @@ describe Card do
   end
   
   describe "should has error" do
-    
-    context ":credit_card is invalid " do
-      
-      before :each do
-        @card.number = ""
-      end
-      
-      it "when credit_card.invalid?" do 
-        @card.should_not be_valid
-        @card.should have(1).error_on(:credit_card)
-      end
 
+    context ":credit_card is invalid " do
+             
+      before :each do         
+        @card.expiration = "10/2000"
+      end    
+                              
       it "when recurring and got PaymentSystemError" do
+        p @card.valid?
         @card.should_receive(:recurring).and_return(false)
         @card.save
       end
       
-    end
-    
-    it ":subscription_id required" do
-      @card.stub!(:subscription_id).and_return("")
-      @card.save
-      @card.should have(1).error_on(:subscription_id)
     end
     
   end
