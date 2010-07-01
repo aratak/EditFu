@@ -15,6 +15,7 @@ function createMessage(kind, text) {
 function showMessage(kind, text) {
   clearMessage();
   var message = createMessage(kind, text);
+  if (message == null) { return null }
   appearMessage(message);
 }
 
@@ -56,7 +57,7 @@ function showAllMessages() {
 
 function appearMessage(idMessage) {
   var tmp = idMessage;
-  $(idMessage).setStyle({ height: "auto" }).  hide();
+  $(idMessage).setStyle({ height: "auto" }).hide();
   $(idMessage).slideDown('slow');
   $(idMessage).select('.close').invoke('appear', { duration: 0.3 })
   window.setTimeout(function() { 
