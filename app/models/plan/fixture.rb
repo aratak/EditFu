@@ -18,6 +18,14 @@ class Plan
     payment? ? :payment : :unpayment
   end
   
+  def current_style_class(owner)
+    is_current?(owner) ? :current : :not_current
+  end
+  
+  def is_current?(owner)
+    self == owner.plan_was
+  end
+  
   def description
     av = ActionView::Base.new(Rails::Configuration.new.view_path)
     av.render :partial => "plans/description/#{self.identificator}"

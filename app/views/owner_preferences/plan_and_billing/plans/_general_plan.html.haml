@@ -1,4 +1,4 @@
-= form.radio_button 'plan_id', plan.id, :class => "radio #{plan.payment_style_class}"
+= form.radio_button 'plan_id', plan.id, :class => "radio #{plan.payment_style_class} #{plan.current_style_class(@owner)}"
 .plan-label
   %label{ :for => plan.label_tag_name }
   %dl
