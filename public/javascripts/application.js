@@ -247,7 +247,7 @@ function hideCardForm() {
 
 function bindPlanAndCardForm() {
   
-  $$('input.unpayment').each(function(item) {
+  $$('input.unpayment', 'input.current').each(function(item) {
     $(item).observe('change', function() { 
       hideCardForm() 
     })
@@ -264,9 +264,10 @@ function bindPlanAndCardForm() {
       })
     })
   } else {
-    $$('input.payment').each(function(item) {
+    $$('input.not_current.payment').each(function(item) {
       $(item).observe('change', function() { 
-        $('cancel_card_link').appear({ duration: cardPreferencesButtonDuration });
+        // $('cancel_card_link').appear({ duration: cardPreferencesButtonDuration });
+        showCardForm();
       })
     })
   }
