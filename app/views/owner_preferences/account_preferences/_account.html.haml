@@ -18,10 +18,12 @@
         = owner.password_field 'current_password', :placeholder => 'Current password'
     .title-input.password
       .label-input
+        .title New password
         = owner.error_for :password
         = owner.password_field 'password', :placeholder => 'New password'
     .title-input.password-confirmation
       .label-input
+        .title Confirm password
         = owner.error_for :password_confirmation
         = owner.password_field 'password_confirmation', :placeholder => 'Confirm password'
   .inputs-row
