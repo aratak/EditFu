@@ -1,5 +1,6 @@
 class Admin::OwnersController < ApplicationController
   before_filter :authenticate_admin!
+  before_filter :find_owner, :only => [:update, :destroy, :show]
   layout 'member'
 
   def index
@@ -11,21 +12,19 @@ class Admin::OwnersController < ApplicationController
 
   def show
     @owners = Owner.all(:order => 'user_name')
-    find_owner
   end
 
   def destroy
-    find_owner.destroy
+    @owner.destroy
 
     flash[:success] = I18n.t('admin.owner.canceled', :email => @owner.email)
     redirect_to admin_owners_path
   end
 
   def update
-    find_owner.enabled = params[:owner][:enabled]
-    find_owner.hold = params[:owner][:hold]
-    # find_owner.unlimited_trial = params[:owner][:unlimited_trial]
-    @owner.save!
+    @owner.enabled = params[:owner][:enabled]
+    @owner.hold = params[:owner][:hold]
+    @owner.send(:update_without_callbacks)
 
     flash[:success] = I18n.t('admin.owner.updated')
     redirect_to admin_owner_path(@owner)
