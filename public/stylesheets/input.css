@@ -55,6 +55,14 @@
   color: #7e7e7e;
 }
 
+.inputs div input[type=submit] {
+  color: #ffffff;
+}
+
+.inputs div input[type=submit]:focus {
+  color: #000000;
+}
+
 .label-input label {
   position: absolute;
   bottom: 0;            
