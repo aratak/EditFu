@@ -49,14 +49,14 @@ function inputPlaceholder (input, color) {
 
 Ajax.Responders.register({
   onComplete: function(request, transport) {
-    $$('input[placeholder]').each(function(item) {
+    $$('input[type=text][placeholder]').each(function(item) {
       inputPlaceholder(item);
     })
   }
 });
 
 Event.observe(window, 'load', function() {
-  $$('input[placeholder]').each(function(item) {
+  $$('input[type=text][placeholder]').each(function(item) {
     inputPlaceholder(item);
   })
 });
