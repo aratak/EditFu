@@ -4,5 +4,5 @@ show_popup page, :partial => 'form',
     :description => 'Get the FTP information from your hosting providor and enter it above. View a sample form here.',
     :submit => 'Add'
   }
-page << "Indent.includeJavascript('tree');"
+# page << "Indent.includeJavascript('tree');"
 page << "Indent.includeStylesheet('tree', 'popups/site-new-popup');"
