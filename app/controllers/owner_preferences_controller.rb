@@ -30,7 +30,8 @@ class OwnerPreferencesController < ApplicationController
       flash[:notice] = 'Preferences were updated successfully.' 
     else
       render :update do |page|
-        flash[:error] = (@owner.errors.full_messages + @owner.card.errors.full_messages).uniq.first
+        card_errors = @owner.card.nil? ? [] : @owner.card.errors.full_messages 
+        flash[:error] = (@owner.errors.full_messages + card_errors).uniq.first
         page[:plan_and_billing].replace :partial => 'owner_preferences/plan_and_billing/index'
         page[:plan_and_billing].show
         xhr_flash(page)
