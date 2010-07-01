@@ -26,6 +26,11 @@ en:
   free_plan:
     sites_error: "There are too many remaining sites for free plan. Please delete all but one."
     pages_error: "There are too many remaining pages for free plan."
+    editors_error: "There are too many remaining editors for free plan. Please delete all."
+
+  single_plan:
+    sites_error: "There are too many remaining sites for single plan. Please delete all but one."
+  
 
   site:
     created: "The site <strong>{{name}}</strong> has been added to EditFu. 
