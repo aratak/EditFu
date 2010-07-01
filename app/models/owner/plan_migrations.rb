@@ -2,6 +2,10 @@ class Owner
   
   validate :plan_change_validation, :if => :plan_changed?
   
+  @editors_should_be_clear = false
+  @card_should_be_destroyed = false
+  before_save :editors_should_be_clear, :card_should_be_destroyed
+  
   def self.permissions
     Plan::ALLOWS.keys
   end
@@ -59,9 +63,19 @@ class Owner
       (self.pages - pages).each { |page| page.destroy }
     end
     
-    self.editors.clear
-    self.card.destroy if self.card
+    @editors_should_be_clear = true
+    @card_should_be_destroyed = true
     true
+  end
+  
+  
+  
+  def editors_should_be_clear
+    self.editors.clear if @editors_should_be_clear
+  end
+  
+  def card_should_be_destroyed
+    self.card.destroy if @card_should_be_destroyed && self.card
   end
   
 end
