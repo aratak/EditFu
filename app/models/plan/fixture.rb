@@ -4,8 +4,8 @@ class Plan
   create :id => 1, :name => "Trial",          :price => 0,     :display_name => "Trial"
   create :id => 2, :name => "Free",           :price => 0,     :display_name => "Free"
   create :id => 3, :name => "UnlimitedTrial", :price => 0,     :display_name => "Buddy"
-  create :id => 4, :name => "Single",         :price => 300,   :display_name => "Single"
-  create :id => 5, :name => "Professional",   :price => 1500, :display_name => "Pro"
+  create :id => 4, :name => "Single",         :price => 100,   :display_name => "Single"
+  create :id => 5, :name => "Professional",   :price => 200,   :display_name => "Pro"
   
   PAYMENTS = [SINGLE, PROFESSIONAL]
   UNPAYMENTS = Plan.all - PAYMENTS
