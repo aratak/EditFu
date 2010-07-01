@@ -7,6 +7,8 @@ class Owner < User
   has_many :subscriptions
   has_one :card, :dependent => :destroy, :inverse_of => :owner
 
+  attr_accessor_with_default :card_must_be_present, false
+
   alias_attribute :subdomain, :domain_name
   accepts_nested_attributes_for :card, :reject_if => :card_shouldnt_be_changed
   attr_accessible :domain_name, :company_name, :terms_of_service, :card_attributes
@@ -31,7 +33,7 @@ class Owner < User
   end
   
   def card_should_be_changed
-    has_payment_plan?
+    has_payment_plan? && card_must_be_present
   end
 
   def card_shouldnt_be_changed

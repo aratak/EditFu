@@ -23,6 +23,7 @@ class OwnerPreferencesController < ApplicationController
   end
   
   def billing_update
+    @owner.card_must_be_present = true
     @owner.set_plan(params[:owner][:plan_id])
     @owner.attributes = params[:owner]
 
