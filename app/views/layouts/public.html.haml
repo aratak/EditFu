@@ -6,7 +6,7 @@
     = render 'layouts/favicon'
 
     = stylesheet_link_tag 'reset', 'public', 'input', 'action_bar', 'messages', 'flash'
-    = javascript_include_tag :defaults, 'css', 'public'
+    = javascript_include_tag :defaults, 'css', 'public', 'placeholder'
   %body.public{:class => (@company_logo.blank? ? 'general' : 'company')}
     #all
       - if @company_logo.present?
