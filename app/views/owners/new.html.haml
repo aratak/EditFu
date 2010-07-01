@@ -5,14 +5,10 @@
     .inputs
       .inputs-row
         .label-input
-          %span.hint Company name
-          = f.error_for :company_name
-          = f.text_field :company_name, :placeholder => 'mygreatcompany'
-          %span.description Company or other unique name.
-        .label-input.subdomain
-          = f.text_field :domain_name
-          #fake_domain_name
-          = ".#{BASE_DOMAIN}"
+          %span.hint Domain name
+          = f.error_for :domain_name
+          = f.text_field :domain_name, :placeholder => 'mygreatcompany'
+          %span.description Please, use letters only.
         .label-input
           %span.hint Your name
           = f.error_for :user_name
