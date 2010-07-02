@@ -20,7 +20,7 @@ Event.observe(window, 'load', function() {
   
   function createDomainName(val) {
     var q = new String(val);
-    return q.replace(/\W/g, "")
+    return q.replace(/\W/g, "").toLowerCase()
   }
   
   function appear() {
