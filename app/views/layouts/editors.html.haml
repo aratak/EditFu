@@ -7,8 +7,9 @@
 
 = content_for :tabs do
   = render "layouts/tabs", :tab => "editors"    
+
+= content_for :action_bar do
+  = render "layouts/action_bars/add_editor"
   
 - inside_layout 'member' do
-  = render "layouts/add_action_bar", :url => new_editor_path
-  
   = yield

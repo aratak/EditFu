@@ -31,3 +31,57 @@ form input.update-button {
   color: #787878;
   cursor: pointer;
 }
+
+
+.action-bar-button {
+  height: 50px;
+  width: 50px;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+  vertical-align: middle;
+}
+
+.actions .action-bar-button {
+  height: 15px;
+  width: 15px;
+  position: relative;
+  top: -4px;
+}
+
+#inside-action-bar {
+  position: absolute;
+}
+
+#inside-action-bar .action-bar-button {
+  float: right;
+}
+
+.action-bar-button.plus-action {
+  background-image: url(/images/plus.png);
+}
+
+.actions .action-bar-button.plus-action {
+  background-image: url(/images/plus-small.png);
+}
+
+.action-bar-button.delete-action {
+  background-image: url(/images/delete.png);
+}
+
+.actions .action-bar-button.delete-action {
+  background-image: url(/images/delete-small.png);
+}
+
+.action-bar-button.preferences-action {
+  background-image: url(/images/preferences-editor.png);
+}
+
+.actions .action-bar-button.preferences-action {
+  background-image: url(/images/preferences-editor-small.png);
+}
+
+

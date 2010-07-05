@@ -41,6 +41,8 @@
           .clear
 
       #action-bar
+        #inside-action-bar
+          = yield :action_bar
       
       #popup-system{:style => (@content_for_popup ? nil : 'display: none;')}
         .popup#popup
