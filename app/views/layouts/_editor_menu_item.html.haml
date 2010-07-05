@@ -1,9 +1,5 @@
 - selected = editor == selected
 %li{:id => id, :class => ('selected' if selected)}
   - link_to editor_path(editor), :class => 'label', :title => editor.user_name do
-    - if selected
-      %img(src="/images/editor-icon.png")
-    - else
-      %img(src="/images/blank.png" width='14' height='13')
     %span.text= editor.user_name
   = render "layouts/action_bars/preferences_editor", :editor => editor

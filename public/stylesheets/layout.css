@@ -60,7 +60,7 @@ form input.update-button {
   top: -4px;
 }
 
-#editor-menu .action-bar-button {
+.menu .action-bar-button {
   display: none;
   height: 25px;
   width: 25px;
@@ -75,7 +75,7 @@ form input.update-button {
   background-color: -webkit-gradient(radial, 430 50, 0, 430 50, 120, from(#7c7c7c), to(#000))
 }
 
-ul#editor-menu li:hover .action-bar-button {
+.menu li:hover .action-bar-button {
   display: block;
 }
 
@@ -92,7 +92,7 @@ ul#editor-menu li:hover .action-bar-button {
   background-image: url(/images/plus.png);
 }
 
-.actions .action-bar-button.plus-action, #editor-menu .action-bar-button.plus-action {
+.actions .action-bar-button.plus-action, .menu .action-bar-button.plus-action {
   background-image: url(/images/plus-small.png);
 }
 
@@ -100,7 +100,7 @@ ul#editor-menu li:hover .action-bar-button {
   background-image: url(/images/delete.png);
 }
 
-.actions .action-bar-button.delete-action, #editor-menu .action-bar-button.delete-action {
+.actions .action-bar-button.delete-action, .menu .action-bar-button.delete-action {
   background-image: url(/images/delete-small.png);
 }
 
@@ -108,8 +108,16 @@ ul#editor-menu li:hover .action-bar-button {
   background-image: url(/images/preferences-editor.png);
 }
 
-.actions .action-bar-button.preferences-action, #editor-menu .action-bar-button.preferences-action {
+.actions .action-bar-button.preferences-action, .menu .action-bar-button.preferences-action {
   background-image: url(/images/preferences-editor-small.png);
+}
+
+.action-bar-button.view-page-action {
+  background-image: url(/images/view-actual.png);
+}
+
+.actions .action-bar-button.view-page-action, .menu .action-bar-button.view-page-action {
+  background-image: url(/images/view-actual-small.png);
 }
 
 

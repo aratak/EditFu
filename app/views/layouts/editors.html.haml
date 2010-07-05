@@ -1,7 +1,7 @@
 = content_for :sourceBar do
   %ul#top-menu
     %li
-      %ul.menu#editor-menu
+      %ul.menu#editor-menu.editor-menu
         - sort_users(current_user.editors).each do |editor|
           = render 'layouts/editor_menu_item', :editor => editor, :selected => @editor
 

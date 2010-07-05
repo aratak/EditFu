@@ -1,1 +1,8 @@
-= menu_item page, :text => truncate(page.path, :length => 25), :href => site_page_path(page.site, page), :selected => selected
+-# = menu_item page, :text => truncate(page.path, :length => 25), :href => site_page_path(page.site, page), :selected => selected
+
+
+- selected = page == selected
+%li{:id => id, :class => ('selected' if selected)}
+  - link_to site_page_path(page.site, page), :class => 'label', :title => page.path do
+    %span.text= truncate(page.path, :length => 25)
+    = render "layouts/action_bars/view_page", :page => page

@@ -45,16 +45,36 @@
 
 #source-bar #top-menu .label {
   display: block;
-  padding: 2px 2px 2px 6px;
+  padding: 4px 2px 0px 6px;
   text-decoration: none;
+}
+
+#source-bar #top-menu a.label {
+  padding-left: 22px;
 }
 
 #source-bar #top-menu .selected .label {
   border-bottom: solid 2px #c2c2c2;
   border-right: solid 2px #c2c2c2;
-  background: white url(/images/selected-page-bg.png) repeat-x bottom;
+  background: #f6f6f6;
+  background -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#eeeeee))
   border: 1px solid #aaaaaa;
 }
+
+
+#source-bar #top-menu li.selected .label {
+  background-repeat: no-repeat;
+  background-position: 5px center;
+}
+
+#source-bar #top-menu .site-menu li.selected .label {
+  background-image: url(/images/page-icon.png);
+}
+
+#source-bar #top-menu .editor-menu li.selected .label {
+  background-image: url(/images/editor-icon.png);
+}
+
 
 #source-bar #site-2-menu > div > .label a {
 
