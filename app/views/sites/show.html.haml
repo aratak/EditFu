@@ -13,8 +13,13 @@
   = render "layouts/action_bars/remove_site", :site => @site
 
 
-%h2 Pages
 - form_remote_tag :url => enable_site_pages_path(@site), :html => { :id => 'pages_form' } do
-  - sort_pages(@site.pages).each do |page|
-    = render 'page', :page => page
+  %table
+    %caption= "Pages"
+    %tbody
+      - sort_pages(@site.pages).each do |page|
+        %tr.page
+          %td{:style => "width: 20px;  vertical-align: middle;"}= check_box_tag "page[#{page.id}]", '1', page.enabled
+          %td{:style => "width: 150px; vertical-align: bottom;"}= label_tag "page_#{page.id}", page.path
+          %td{:style => "width: 50px;  vertical-align: bottom;"}= render "layouts/action_bars/remove_page", :page => page, :site => @site
   = submit_tag "Update", :class => "update-button"

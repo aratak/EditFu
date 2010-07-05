@@ -65,7 +65,7 @@ form input.update-button {
   vertical-align: middle;
 }
 
-.actions .action-bar-button {
+.actions .action-bar-button, .page .action-bar-button  {
   height: 17px;
   width: 17px;
   position: relative;
@@ -84,6 +84,7 @@ form input.update-button {
   top: 0;
   right: 0;
 }
+
 
 .action-bar-button:hover {
   border: 1px solid #f2f2f2;
@@ -113,7 +114,10 @@ form input.update-button {
   background-image: url(/images/plus.png);
 }
 
-.actions .action-bar-button.plus-action, .menu .action-bar-button.plus-action, .site-menu .action-bar-button.plus-action {
+.actions .action-bar-button.plus-action, 
+.menu .action-bar-button.plus-action, 
+.site-menu .action-bar-button.plus-action,
+.page .action-bar-button.plus-action {
   background-image: url(/images/plus-small.png);
 }
 
@@ -121,7 +125,10 @@ form input.update-button {
   background-image: url(/images/delete.png);
 }
 
-.actions .action-bar-button.delete-action, .menu .action-bar-button.delete-action, .site-menu .action-bar-button.delete-action {
+.actions .action-bar-button.delete-action, 
+.menu .action-bar-button.delete-action, 
+.site-menu .action-bar-button.delete-action,
+.page .action-bar-button.delete-action {
   background-image: url(/images/delete-small.png);
 }
 
@@ -129,7 +136,10 @@ form input.update-button {
   background-image: url(/images/preferences-editor.png);
 }
 
-.actions .action-bar-button.preferences-action, .menu .action-bar-button.preferences-action, .site-menu .action-bar-button.preferences-action {
+.actions .action-bar-button.preferences-action, 
+.menu .action-bar-button.preferences-action, 
+.site-menu .action-bar-button.preferences-action,
+.page .action-bar-button.preferences-action {
   background-image: url(/images/preferences-editor-small.png);
 }
 
@@ -137,7 +147,10 @@ form input.update-button {
   background-image: url(/images/view-actual.png);
 }
 
-.actions .action-bar-button.view-page-action, .menu .action-bar-button.view-page-action, .site-menu .action-bar-button.view-page-action {
+.actions .action-bar-button.view-page-action, 
+.menu .action-bar-button.view-page-action, 
+.site-menu .action-bar-button.view-page-action,
+.page .action-bar-button.view-page-action {
   background-image: url(/images/view-actual-small.png);
 }
 
@@ -145,7 +158,10 @@ form input.update-button {
   background-image: url(/images/page-plus.png);
 }
 
-.actions .action-bar-button.page-plus-action, .menu .action-bar-button.page-plus-action, .site-menu .action-bar-button.page-plus-action {
+.actions .action-bar-button.page-plus-action, 
+.menu .action-bar-button.page-plus-action, 
+.site-menu .action-bar-button.page-plus-action,
+.page .action-bar-button.page-plus-action {
   background-image: url(/images/page-plus-small.png);
 }
 
@@ -167,11 +183,17 @@ form input.update-button {
   background-position: top center;
 }
 
-.actions .action-bar-button.hold-action, .menu .action-bar-button.hold-action, .site-menu .action-bar-button.hold-action {
+.actions .action-bar-button.hold-action, 
+.menu .action-bar-button.hold-action, 
+.site-menu .action-bar-button.hold-action,
+.page .action-bar-button.hold-action {
   background-image: url(/images/hold-small.png);
 }
 
-.actions .action-bar-button.unhold-action, .menu .action-bar-button.unhold-action, .site-menu .action-bar-button.unhold-action {
+.actions .action-bar-button.unhold-action, 
+.menu .action-bar-button.unhold-action, 
+.site-menu .action-bar-button.unhold-action,
+.page .action-bar-button.unhold-action {
   background-image: url(/images/hold-small.png);
 }
 
@@ -195,11 +217,17 @@ form input.update-button {
 }
 
 
-.actions .action-bar-button.enable-action, .menu .action-bar-button.enable-action, .site-menu .action-bar-button.enable-action {
+.actions .action-bar-button.enable-action, 
+.menu .action-bar-button.enable-action, 
+.site-menu .action-bar-button.enable-action,
+.page .action-bar-button.enable-action {
   background-image: url(/images/enable-small.png);
 }
 
-.actions .action-bar-button.disable-action, .menu .action-bar-button.disable-action, .site-menu .action-bar-button.disable-action {
+.actions .action-bar-button.disable-action, 
+.menu .action-bar-button.disable-action, 
+.site-menu .action-bar-button.disable-action,
+.page .action-bar-button.disable-action {
   background-image: url(/images/disable-small.png);
 }
 
