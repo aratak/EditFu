@@ -49,6 +49,10 @@
   text-decoration: none;
 }
 
+#source-bar #top-menu a.label:hover {
+  text-shadow: 1px 1px 2px #ffffff;
+}
+
 #source-bar #top-menu a.label {
   padding-left: 22px;
 }
