@@ -81,6 +81,11 @@ form input.update-button {
   right: 0;
 }
 
+.action-bar-button:hover {
+  border: 1px solid #f2f2f2;
+  background-color: #e2e2e2;
+}
+
 .action-bar-button:active {
   border: 1px solid #ffffff;
   background-color: #7c7c7c;
