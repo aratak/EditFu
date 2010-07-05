@@ -3,14 +3,11 @@
 
 - @title = @editor.user_name
 - @hint = 'Choose the level of access you wish to give this editor access to by checking the box next to that page or site then click update.'
+- @hint << "<br /><strong class='red'>Account didn't confirmed yet.</strong>" unless @editor.confirmed?
 
 = content_for :actions do
   = render "layouts/action_bars/preferences_editor", :editor => @editor
   = render "layouts/action_bars/delete_editor", :editor => @editor
-
-
-  -# = link_to_remote 'Editor Preferences', :url => edit_editor_path(@editor), :method => :get
-  -# = link_to_remove editor_path(@editor), 'Delete Editor', "re you sure you want to delete the editor <strong>#{@editor.user_name}</strong>?"
 
 = content_for :action_bar do
   = render "layouts/action_bars/delete_editor", :editor => @editor

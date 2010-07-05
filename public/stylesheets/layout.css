@@ -1,3 +1,10 @@
+.didnt_confirmed {
+  position: relative; 
+  top: -20px; 
+  padding: 0 10px;
+  float: right;
+}
+
 #add-action-bar {
   position: absolute;
   left: 0;

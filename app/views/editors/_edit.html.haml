@@ -1,5 +1,7 @@
 #editor-settings-popup.one-column-popup
   %h1 Editor Settings
+  - unless @editor.confirmed?
+    %small.red.didnt_confirmed= "Account didn't confirmed yet." 
   - remote_form_for @editor do |form|
     = render 'form', :form => form
     .popup-action-bar

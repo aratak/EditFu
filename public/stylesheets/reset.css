@@ -165,3 +165,8 @@ blockquote {
     border: 1px solid #d2d2d5;
     padding: 10px;
 }
+
+
+.red {
+  color: #ca2d2d;
+}
