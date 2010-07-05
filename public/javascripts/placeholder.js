@@ -47,18 +47,18 @@ function inputPlaceholder (input, color) {
   return input;
 }
 
-Ajax.Responders.register({
-  onComplete: function(request, transport) {
-    $$('input[type=text][placeholder]').each(function(item) {
-      inputPlaceholder(item);
-    })
-  }
-});
-
-Event.observe(window, 'load', function() {
-  $$('input[type=text][placeholder]').each(function(item) {
-    inputPlaceholder(item);
-  })
-});
+// Ajax.Responders.register({
+//   onComplete: function(request, transport) {
+//     $$('input[type=text][placeholder]').each(function(item) {
+//       inputPlaceholder(item);
+//     })
+//   }
+// });
+// 
+// Event.observe(window, 'load', function() {
+//   $$('input[type=text][placeholder]').each(function(item) {
+//     inputPlaceholder(item);
+//   })
+// });
 
 
