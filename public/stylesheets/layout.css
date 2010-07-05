@@ -53,6 +53,18 @@ form input.update-button {
   vertical-align: middle;
 }
 
+.action-bar-delimiter {
+  border-left: 1px solid #d2d2d2;
+  margin-top: 4px;
+  height: 40px;
+  width: 1px;
+
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+  vertical-align: middle;
+}
+
 .actions .action-bar-button {
   height: 17px;
   width: 17px;
@@ -60,7 +72,7 @@ form input.update-button {
   top: -4px;
 }
 
-.menu .action-bar-button {
+.menu .action-bar-button, .menu .action-bar-delimiter {
   display: none;
   height: 25px;
   width: 25px;
@@ -84,7 +96,7 @@ form input.update-button {
   position: absolute;
 }
 
-#inside-action-bar .action-bar-button {
+#inside-action-bar .action-bar-button, #inside-action-bar .action-bar-delimiter {
   float: right;
 }
 
@@ -120,4 +132,11 @@ form input.update-button {
   background-image: url(/images/view-actual-small.png);
 }
 
+.action-bar-button.page-plus-action {
+  background-image: url(/images/page-plus.png);
+}
+
+.actions .action-bar-button.page-plus-action, .menu .action-bar-button.page-plus-action {
+  background-image: url(/images/page-plus-small.png);
+}
 
