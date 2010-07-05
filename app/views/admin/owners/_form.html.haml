@@ -1,0 +1,31 @@
+- form_for [:admin, @owner], :html => { :id => 'owner-card' } do |f|
+  .status-row
+    %span.enabled
+      = f.check_box :enabled
+      = f.label :enabled, 'Active User'
+
+    %span.hold
+      = f.check_box :hold
+      = f.label :hold
+
+    / %span.hold
+    /   = # f.check_box :unlimited_trial?
+    /   = # f.label :unlimited_trial?
+  = submit_tag "Update", :class => "update-button"
+
+  .row
+    .label Email Address
+    .value= @owner.email
+  .row
+    .label Registration Date
+    .value= @owner.created_at
+  .row
+    .label Last Logged In
+    .value= @owner.last_sign_in_at
+  - if @owner.confirmed?
+    .row
+      .label Billing Date
+      .value #{@owner.billing_day}th of Month
+  .row
+    .label Package
+    .value= @owner.plan.name

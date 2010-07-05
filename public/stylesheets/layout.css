@@ -149,3 +149,37 @@ form input.update-button {
   background-image: url(/images/page-plus-small.png);
 }
 
+.action-bar-button.hold-action {
+  background-image: url(/images/hold.png);
+}
+
+.action-bar-button.unhold-action {
+  background-image: url(/images/unhold.png);
+}
+
+.actions .action-bar-button.hold-action, .menu .action-bar-button.hold-action, .site-menu .action-bar-button.hold-action {
+  background-image: url(/images/hold-small.png);
+}
+
+.actions .action-bar-button.unhold-action, .menu .action-bar-button.unhold-action, .site-menu .action-bar-button.unhold-action {
+  background-image: url(/images/unhold-small.png);
+}
+
+
+.action-bar-button.enable-action {
+  background-image: url(/images/enable.png);
+}
+
+.action-bar-button.disable-action {
+  background-image: url(/images/disable.png);
+}
+
+.actions .action-bar-button.enable-action, .menu .action-bar-button.enable-action, .site-menu .action-bar-button.enable-action {
+  background-image: url(/images/enable-small.png);
+}
+
+.actions .action-bar-button.disable-action, .menu .action-bar-button.disable-action, .site-menu .action-bar-button.disable-action {
+  background-image: url(/images/disable-small.png);
+}
+
+

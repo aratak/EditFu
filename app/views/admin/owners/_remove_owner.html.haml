@@ -1,0 +1,4 @@
+- if current_user.admin?
+  = link_to_function "", "showConfirmPopup('#{admin_owner_path(owner)}', 'Are you sure you want to remove \"#{owner.full_name}\"?')", |
+      :class => 'action-bar-button delete-action', |
+      :title => "Remove Page" |

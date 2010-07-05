@@ -1,0 +1,7 @@
+- if current_user.admin?
+  = link_to_remote "", |
+      :url => admin_owner_path(owner, :owner => { :enabled => (owner.enabled? ? 0 : 1) }), :method => :put, |
+      :html => { |
+        :class => "action-bar-button #{owner.enabled? ? "enable" : "disable"}-action", |
+        :title => owner.enabled? ? "Disable user" : "Enable user" |
+      } |

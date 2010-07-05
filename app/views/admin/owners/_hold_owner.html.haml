@@ -1,0 +1,7 @@
+- if current_user.admin?
+  = link_to_remote "", |
+      :url => admin_owner_path(owner, :owner => { :hold => (owner.hold? ? 0 : 1) }), :method => :put, |
+      :html => { |
+        :class => "action-bar-button #{owner.hold? ? "unhold" : "hold"}-action", |
+        :title => owner.hold? ? "Unhold user" : "Hold user" |
+      } |

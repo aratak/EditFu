@@ -22,12 +22,17 @@ class Admin::OwnersController < ApplicationController
   end
 
   def update
-    @owner.enabled = params[:owner][:enabled]
-    @owner.hold = params[:owner][:hold]
+    @owner.enabled = params[:owner][:enabled] unless params[:owner][:enabled].nil?
+    @owner.hold = params[:owner][:hold] unless params[:owner][:hold].nil?
     @owner.send(:update_without_callbacks)
 
     flash[:success] = I18n.t('admin.owner.updated')
-    redirect_to admin_owner_path(@owner)
+    
+    respond_to do |format|
+      format.html { redirect_to admin_owner_path(@owner) }
+      format.js
+    end
+    
   end
 
   private
