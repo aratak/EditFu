@@ -72,7 +72,11 @@ form input.update-button {
   top: -4px;
 }
 
-.menu .action-bar-button, .menu .action-bar-delimiter {
+.site-menu div.label {
+  position: relative;
+}
+
+.menu .action-bar-button, .menu .action-bar-delimiter, .site-menu .action-bar-button {
   display: none;
   height: 25px;
   width: 25px;
@@ -92,7 +96,7 @@ form input.update-button {
   background-color: -webkit-gradient(radial, 430 50, 0, 430 50, 120, from(#7c7c7c), to(#000))
 }
 
-.menu li:hover .action-bar-button {
+.menu li:hover .action-bar-button, .site-menu div.label:hover .action-bar-button {
   display: block;
 }
 
@@ -109,7 +113,7 @@ form input.update-button {
   background-image: url(/images/plus.png);
 }
 
-.actions .action-bar-button.plus-action, .menu .action-bar-button.plus-action {
+.actions .action-bar-button.plus-action, .menu .action-bar-button.plus-action, .site-menu .action-bar-button.plus-action {
   background-image: url(/images/plus-small.png);
 }
 
@@ -117,7 +121,7 @@ form input.update-button {
   background-image: url(/images/delete.png);
 }
 
-.actions .action-bar-button.delete-action, .menu .action-bar-button.delete-action {
+.actions .action-bar-button.delete-action, .menu .action-bar-button.delete-action, .site-menu .action-bar-button.delete-action {
   background-image: url(/images/delete-small.png);
 }
 
@@ -125,7 +129,7 @@ form input.update-button {
   background-image: url(/images/preferences-editor.png);
 }
 
-.actions .action-bar-button.preferences-action, .menu .action-bar-button.preferences-action {
+.actions .action-bar-button.preferences-action, .menu .action-bar-button.preferences-action, .site-menu .action-bar-button.preferences-action {
   background-image: url(/images/preferences-editor-small.png);
 }
 
@@ -133,7 +137,7 @@ form input.update-button {
   background-image: url(/images/view-actual.png);
 }
 
-.actions .action-bar-button.view-page-action, .menu .action-bar-button.view-page-action {
+.actions .action-bar-button.view-page-action, .menu .action-bar-button.view-page-action, .site-menu .action-bar-button.view-page-action {
   background-image: url(/images/view-actual-small.png);
 }
 
@@ -141,7 +145,7 @@ form input.update-button {
   background-image: url(/images/page-plus.png);
 }
 
-.actions .action-bar-button.page-plus-action, .menu .action-bar-button.page-plus-action {
+.actions .action-bar-button.page-plus-action, .menu .action-bar-button.page-plus-action, .site-menu .action-bar-button.page-plus-action {
   background-image: url(/images/page-plus-small.png);
 }
 
