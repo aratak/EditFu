@@ -4,8 +4,8 @@
   %ul#top-menu
     %li
       %ul.menu#owner-menu
-        - sort_users(@owners).each do |owner|
-          = menu_item(owner, :text => owner.user_name, :href => admin_owner_path(owner), :selected => @owner)
+        = render "menu_items"
+          
 
 - @title = @owner.user_name
 - @hint = ''

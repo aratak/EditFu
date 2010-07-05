@@ -1,3 +1,4 @@
 page.replace_html "owner-card", :partial => "form"
 page.replace_html "inside-action-bar", :partial => "action_bar_buttons"
+page.replace_html "owner-menu", :partial => "menu_items"
 xhr_flash(page)

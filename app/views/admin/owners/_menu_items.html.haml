@@ -1,0 +1,6 @@
+- sort_users(@owners).each do |owner|
+  - selected = (owner == @owner)
+  %li{:id => dom_id(owner), :class => selected ? "selected" : ""}
+    - link_to admin_owner_path(owner), :class => 'label', :title => owner.user_name do
+      %span.text= owner.user_name
+    = render "hold_owner", :owner => owner

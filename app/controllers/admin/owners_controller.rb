@@ -1,6 +1,7 @@
 class Admin::OwnersController < ApplicationController
   before_filter :authenticate_admin!
   before_filter :find_owner, :only => [:update, :destroy, :show]
+  before_filter :find_all, :only => [:show]
   layout 'member'
 
   def index
@@ -27,7 +28,8 @@ class Admin::OwnersController < ApplicationController
     @owner.send(:update_without_callbacks)
 
     flash[:success] = I18n.t('admin.owner.updated')
-    
+
+    find_all
     respond_to do |format|
       format.html { redirect_to admin_owner_path(@owner) }
       format.js
@@ -40,4 +42,9 @@ class Admin::OwnersController < ApplicationController
   def find_owner
     @owner = Owner.find(params[:id])
   end
+  
+  def find_all
+    @owners = Owner.all(:order => 'user_name')
+  end
+  
 end
