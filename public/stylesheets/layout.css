@@ -151,10 +151,20 @@ form input.update-button {
 
 .action-bar-button.hold-action {
   background-image: url(/images/hold.png);
+  background-position: top center;
+}
+
+.action-bar-button.hold-action:hover {
+  background-position: bottom center;
 }
 
 .action-bar-button.unhold-action {
-  background-image: url(/images/unhold.png);
+  background-image: url(/images/hold.png);
+  background-position: bottom center;
+}
+
+.action-bar-button.unhold-action:hover {
+  background-position: top center;
 }
 
 .actions .action-bar-button.hold-action, .menu .action-bar-button.hold-action, .site-menu .action-bar-button.hold-action {
@@ -162,17 +172,28 @@ form input.update-button {
 }
 
 .actions .action-bar-button.unhold-action, .menu .action-bar-button.unhold-action, .site-menu .action-bar-button.unhold-action {
-  background-image: url(/images/unhold-small.png);
+  background-image: url(/images/hold-small.png);
 }
 
 
 .action-bar-button.enable-action {
-  background-image: url(/images/enable.png);
+  background-image: url(/images/disable.png);
+  background-position: top center;
+}
+
+.action-bar-button.enable-action:hover {
+  background-position: bottom center;
 }
 
 .action-bar-button.disable-action {
   background-image: url(/images/disable.png);
+  background-position: bottom center;
 }
+
+.action-bar-button.disable-action:hover {
+  background-position: top center;
+}
+
 
 .actions .action-bar-button.enable-action, .menu .action-bar-button.enable-action, .site-menu .action-bar-button.enable-action {
   background-image: url(/images/enable-small.png);

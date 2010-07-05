@@ -6,8 +6,9 @@
     = render "layouts/tabs", :tab => "pages"    
 
   = content_for :action_bar do
-    = render "layouts/action_bars/preferences_site", :site => @site
-    = render "layouts/action_bars/add_page", :site => @site
+    - if @site
+      = render "layouts/action_bars/preferences_site", :site => @site
+      = render "layouts/action_bars/add_page", :site => @site
     = render "layouts/action_bars/add_site"
     
   = yield
