@@ -5,6 +5,7 @@
         - sort_users(current_user.editors).each do |editor|
           = render 'layouts/editor_menu_item', :editor => editor, :selected => @editor
 
+
 = content_for :tabs do
   = render "layouts/tabs", :tab => "editors"    
 

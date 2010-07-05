@@ -41,8 +41,9 @@ form input.update-button {
 
 
 .action-bar-button {
-  height: 50px;
-  width: 50px;
+  border: 1px solid transparent;
+  height: 48px;
+  width: 48px;
   background-position: center center;
   background-repeat: no-repeat;
 
@@ -53,11 +54,31 @@ form input.update-button {
 }
 
 .actions .action-bar-button {
-  height: 15px;
-  width: 15px;
+  height: 17px;
+  width: 17px;
   position: relative;
   top: -4px;
 }
+
+#editor-menu .action-bar-button {
+  display: none;
+  height: 25px;
+  width: 25px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.action-bar-button:active {
+  border: 1px solid #ffffff;
+  background-color: #7c7c7c;
+  background-color: -webkit-gradient(radial, 430 50, 0, 430 50, 120, from(#7c7c7c), to(#000))
+}
+
+ul#editor-menu li:hover .action-bar-button {
+  display: block;
+}
+
 
 #inside-action-bar {
   position: absolute;
@@ -71,7 +92,7 @@ form input.update-button {
   background-image: url(/images/plus.png);
 }
 
-.actions .action-bar-button.plus-action {
+.actions .action-bar-button.plus-action, #editor-menu .action-bar-button.plus-action {
   background-image: url(/images/plus-small.png);
 }
 
@@ -79,7 +100,7 @@ form input.update-button {
   background-image: url(/images/delete.png);
 }
 
-.actions .action-bar-button.delete-action {
+.actions .action-bar-button.delete-action, #editor-menu .action-bar-button.delete-action {
   background-image: url(/images/delete-small.png);
 }
 
@@ -87,7 +108,7 @@ form input.update-button {
   background-image: url(/images/preferences-editor.png);
 }
 
-.actions .action-bar-button.preferences-action {
+.actions .action-bar-button.preferences-action, #editor-menu .action-bar-button.preferences-action {
   background-image: url(/images/preferences-editor-small.png);
 }
 

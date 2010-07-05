@@ -36,6 +36,7 @@
   color: #6a6a6a;
   margin: 0px;
   margin-left: -5px;
+  position: relative;
 }
 
 #source-bar #top-menu li a {
