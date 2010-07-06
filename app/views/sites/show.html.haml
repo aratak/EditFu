@@ -9,8 +9,6 @@
   = render "layouts/action_bars/add_page", :site => @site
   = render "layouts/action_bars/remove_site", :site => @site
 
-= content_for :action_bar do
-  = render "layouts/action_bars/remove_site", :site => @site
 
 
 - form_remote_tag :url => enable_site_pages_path(@site), :html => { :id => 'pages_form' } do
