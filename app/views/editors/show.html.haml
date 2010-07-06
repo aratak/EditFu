@@ -3,7 +3,7 @@
 
 - @title = @editor.user_name
 - @hint = 'Choose the level of access you wish to give this editor access to by checking the box next to that page or site then click update.'
-- @hint << "<br /><strong class='red'>Account didn't confirmed yet.</strong>" unless @editor.confirmed?
+- @hint << "<br /><strong class='red'>Account hasn't been confirmed yet.</strong>" unless @editor.confirmed?
 
 = content_for :actions do
   = render "layouts/action_bars/preferences_editor", :editor => @editor
