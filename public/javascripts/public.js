@@ -2,7 +2,7 @@
 Event.observe(window, 'load', function() {
 
   var elements = $$('.hint:not(#comments)', 'label:not([for~=owner_terms_of_service])', 'div.label', '.description');
-  elements.invoke('setStyle', { opacity: '0' });
+  // elements.invoke('setStyle', { opacity: '0' });
   var move_count = 0;
   var visible = false;
 
@@ -35,8 +35,8 @@ Event.observe(window, 'load', function() {
   }
   
   
-  $(document).observe('mousemove', appear)
-  $(document).observe('click', appear)
+  // $(document).observe('mousemove', appear)
+  // $(document).observe('click', appear)
 
 
 
