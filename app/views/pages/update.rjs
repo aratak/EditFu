@@ -1,1 +1,2 @@
+page << "$('page-form').down('input[type=submit]').removeClassName('changed');"
 show_success(page, 'page.updated')

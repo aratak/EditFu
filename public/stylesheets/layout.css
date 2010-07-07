@@ -23,14 +23,14 @@
 }
 
 form input.update-button {
-  background: #f2ffbf url(/images/up.png) 11px center no-repeat;
+  background: url(/images/up.png) 11px center no-repeat;
   position: fixed;
   right: 0;
   bottom: 0;
   z-index: 2;
   border: 0;
   height: 40px;
-  padding: 0 14px 0 45px;
+  padding: 0 14px 0 39px;
   line-height: 50px;
   font-family: helvetica;
   font-weight: bold;
@@ -46,20 +46,19 @@ form input.update-button {
   -webkit-border-radius: 10px;
 }
 
+form input.update-button.changed {
+  background-color: #feca2f;
+}
+
 form input.update-button:hover {
-  background-color: #ecff9f;
+  background-color: #febe00;
   border: 1px solid #a2a2a2;
 }
 
 form input.update-button:active {
-  background-color: #e3ff6f;
+  background-color: #f59000;
   border: 1px solid transparent;
   color: #000000;
-
-  border-radius: 15px;
-  -moz-border-radius: 15px;
-  -webkit-border-radius: 15px;
-
 }
 
 form input.update-button:focus {

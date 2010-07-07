@@ -275,12 +275,36 @@ function bindPlanAndCardForm() {
 }
 
 
+
+var observeAllForm = function() {
+  
+  $$('form').each(function(item) {
+    new Form.Observer(item, 0.3, function(form, value){
+      $(form).down('input[type=submit]').addClassName('changed');
+    })
+  })
+    
+  $$('form').each(function(form) {
+    $(form).observe('submit', function(item, form) {
+      $(this).down('input[type=submit]').removeClassName('changed');
+    })
+  })
+
+}
+
+var TinyMCEareaChanged = function(inst) {
+  inst.formElement.down('input[type=submit]').addClassName('changed');
+}
+
+
+
 Ajax.Responders.register({
   onCreate: showProcessing,
   
   onComplete: function(request, transport) {
     hideProcessing(request);
     bindPlanAndCardForm();
+    observeAllForm();
 
     if(transport.status == 200) {
       var loc = transport.getHeader('X-Location');
@@ -297,6 +321,7 @@ Ajax.Responders.register({
 });
 
 Event.observe(window, 'load', function() {
+  observeAllForm();
   var sourceBar = $('source-bar');
   if(sourceBar) {
     var selected = sourceBar.down('li.selected');

@@ -82,7 +82,8 @@ function initTinyMCE(settings) {
     theme_advanced_blockformats : "h1,h2,h3,h4,h5,h6",
     setup: initMceEditor,
     plugins: 'fullscreen',
-    height: '400px'
+    height: '400px',
+    onchange_callback : "TinyMCEareaChanged"
   }).toObject());
 }
 
