@@ -6,11 +6,11 @@
   background: #fff200;
   color: #373d43;
   font-size: 14px;
-  text-align: center;
+  text-align: left;
+  padding: 2em 1ex;
 }
 
 .confirm-popup .text {
-  padding: 0.5em 1ex;
 }
 
 .alert-popup .popup-action-bar {
