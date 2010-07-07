@@ -122,11 +122,11 @@
 }
 
 .popup .popup-action-bar a.action:hover, .popup .popup-action-bar input:hover {
-  text-shadow: 1px 1px 3px #747373;
+  text-shadow: 1px 1px 3px #bbbbbb;
 }
 
 .popup .popup-action-bar a.action:active, .popup .popup-action-bar input:active {
-  text-shadow: 1px 1px 0 #747373;
+  text-shadow: 1px 1px 0 #bbbbbb;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
