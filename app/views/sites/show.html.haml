@@ -6,18 +6,20 @@
 
 = content_for :actions do
   = render "layouts/action_bars/preferences_site", :site => @site
-  = render "layouts/action_bars/add_page", :site => @site
+  -# = render "layouts/action_bars/add_page", :site => @site
   = render "layouts/action_bars/remove_site", :site => @site
 
 
 
 - form_remote_tag :url => enable_site_pages_path(@site), :html => { :id => 'pages_form' } do
-  %table
-    %caption= "Pages"
+  %table.pages
+    %caption
+      = "Pages"
+      = render "layouts/action_bars/add_page", :site => @site
     %tbody
       - sort_pages(@site.pages).each do |page|
         %tr.page
-          %td{:style => "width: 20px;  vertical-align: middle;"}= check_box_tag "page[#{page.id}]", '1', page.enabled
-          %td{:style => "width: 150px; vertical-align: bottom;"}= label_tag "page_#{page.id}", page.path
-          %td{:style => "width: 50px;  vertical-align: bottom;"}= render "layouts/action_bars/remove_page", :page => page, :site => @site
+          %td.checkbox= check_box_tag "page[#{page.id}]", '1', page.enabled
+          %td.label= label_tag "page_#{page.id}", page.path
+          %td.table_actions= render "layouts/action_bars/remove_page", :page => page, :site => @site
   = submit_tag "Update", :class => "update-button"

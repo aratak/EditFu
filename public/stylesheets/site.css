@@ -9,3 +9,43 @@
   font-size: 18px;
   font-family: helvetica;
 }
+
+table.pages {
+  width: 100%;
+}
+
+table.pages caption {
+  background: #d2d2d2;
+  line-height: 47px;
+  font-size: 20px;
+  text-align: left;
+  padding: 0 10px;
+}
+
+table.pages caption .action-bar-button {
+  float: right;
+}
+
+table.pages tr td {
+  border-bottom: 1px solid #f9f9f9;
+}
+
+table.pages tr:hover td {
+  background: #f9f9f9;
+}
+
+table.pages td.checkbox {
+  width: 20px;
+  vertical-align: middle;
+  padding: 0 10px;
+}
+
+table.pages td.label {
+
+}
+
+table.pages td.table_actions {
+  width: 100px;
+  vertical-align: bottom;
+  text-align: right;
+}
