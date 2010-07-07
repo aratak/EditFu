@@ -76,13 +76,18 @@ form input.update-button {
   position: relative;
 }
 
-.menu .action-bar-button, .menu .action-bar-delimiter, .site-menu .action-bar-button {
+.menu .menu-actions, .site-menu .menu-actions {
   display: none;
   height: 25px;
-  width: 25px;
+  min-width: 25px;
   position: absolute;
   top: 0;
   right: 0;
+}
+
+.menu-actions .action-bar-button {
+  height: 25px;
+  width: 25px;
 }
 
 
@@ -97,7 +102,8 @@ form input.update-button {
   background-color: -webkit-gradient(radial, 430 50, 0, 430 50, 120, from(#7c7c7c), to(#000))
 }
 
-.menu li:hover .action-bar-button, .site-menu div.label:hover .action-bar-button {
+.menu li:hover .menu-actions, .site-menu div.label:hover .menu-actions,
+.menu li.selected .menu-actions, .site-menu .selected div.label .menu-actions {
   display: block;
 }
 

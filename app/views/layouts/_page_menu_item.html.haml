@@ -5,4 +5,5 @@
 %li{:id => id, :class => ('selected' if selected)}
   - link_to site_page_path(page.site, page), :class => 'label', :title => page.path do
     %span.text= truncate(page.path, :length => 25)
+  .menu-actions
     = render "layouts/action_bars/view_page", :page => page

@@ -2,4 +2,5 @@
 %li{:id => id, :class => ('selected' if selected)}
   - link_to editor_path(editor), :class => 'label', :title => editor.user_name do
     %span.text= editor.user_name
-  = render "layouts/action_bars/preferences_editor", :editor => editor
+  .menu-actions
+    = render "layouts/action_bars/preferences_editor", :editor => editor

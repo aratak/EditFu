@@ -2,7 +2,9 @@
   %div{:class => (site == @selected_site ? 'selected' : nil)}
     .label
       = link_to_if current_user.owner?, site.name, site_path(site)
-      = render "layouts/action_bars/preferences_site", :site => site
+      .menu-actions
+        = render "layouts/action_bars/preferences_site", :site => site
+        = render 'layouts/action_bars/add_page', :site => site
 
   %ul.menu(id="site-#{site.id}-menu-ul")
     - sort_pages(current_user.site_pages(site)).each do |page|
