@@ -5,11 +5,6 @@
     .inputs
       .inputs-row
         .label-input
-          %span.hint Domain name
-          = f.error_for :domain_name
-          = f.text_field :domain_name, :placeholder => 'mygreatcompany'
-          %span.description Company or other unique name. Use letters and numbers only.
-        .label-input
           %span.hint Your name
           = f.error_for :user_name
           = f.text_field :user_name, :placeholder => 'John Doe'
@@ -24,12 +19,21 @@
           = f.error_for :password
           = f.password_field :password, :placeholder => "Password"
           %span.description
-        .clear
 
-      .label-input.password-confirmation
-        = f.error_for :password_confirmation
-        = f.password_field :password_confirmation, :placeholder => "Password confirmation"
+        .label-input.password-confirmation
+          %span.hint Password confirmation
+          = f.error_for :password_confirmation
+          = f.password_field :password_confirmation, :placeholder => "Password confirmation"
       .clear
+      .label-input.domain_name
+        %span.hint Domain name
+        = f.error_for :domain_name
+        = f.text_field :domain_name, :placeholder => 'mygreatcompany'
+        %span.domain.domain_prefix= "http://"
+        %span.domain= ".#{BASE_DOMAIN}"
+        %span.description Company or other unique name. Use letters and numbers only.
+      
+      
       .label-input.terms_of_service
         = f.check_box :terms_of_service
         = f.label :terms_of_service, "I accept" 
@@ -37,34 +41,34 @@
         = link_to image_tag("popup.png", :alt => 'Open in popup'), terms_of_service_owners_path, :target => "_blank"
         %span#terms
       .clear
+      .submit_section
+        = submit_tag 'Sign Up', :class => 'submit'
+        #login.hint
+          = link_to 'Already a Member', new_user_session_path
+        .clear
 
-      = submit_tag 'Sign Up', :class => 'submit'
-      #login.hint
-        = link_to 'Already a Member', new_user_session_path
-      .clear
+        = link_to_function "What am I signing up for?", :class => 'hint' do |page|
+          - page << "$('comments').show();"
+          - page << "new Effect.Opacity('comments',  { from: 0, to: 1, duration: 0.5 });"
+        #comments.hint{ :style => 'opacity: 0; display: none;' }
+          %p 
+            After signing up you will receive an email for verification.
+            %br
+            Click it and log in.
 
-      = link_to_function "What am I signing up for?", :class => 'hint' do |page|
-        - page << "$('comments').show();"
-        - page << "new Effect.Opacity('comments',  { from: 0, to: 1, duration: 0.5 });"
-      #comments.hint{ :style => 'opacity: 0; display: none;' }
-        %p 
-          After signing up you will receive an email for verification.
-          %br
-          Click it and log in.
+          %p 
+            Your signing up for a free 30 day trail and after the
+            %br
+            30 days you can choose which plan you want to keep.
 
-        %p 
-          Your signing up for a free 30 day trail and after the
-          %br
-          30 days you can choose which plan you want to keep.
+          %p
+            No credit card is required till after the trial and 
+            %br
+            only if you decide to continue using EditFu
 
-        %p
-          No credit card is required till after the trial and 
-          %br
-          only if you decide to continue using EditFu
-
-        %p
-          = link_to 'Learn more', 'http://www.takeastep.me/editfu/', :target => "_blank"
-          about the
-          = link_to 'features', 'http://www.takeastep.me/editfu-features-benefits/', :target => "_blank"
-          and
-          = link_to 'pricing', 'http://www.takeastep.me/editfu-pricing/', :target => "_blank"
+          %p
+            = link_to 'Learn more', 'http://www.takeastep.me/editfu/', :target => "_blank"
+            about the
+            = link_to 'features', 'http://www.takeastep.me/editfu-features-benefits/', :target => "_blank"
+            and
+            = link_to 'pricing', 'http://www.takeastep.me/editfu-pricing/', :target => "_blank"

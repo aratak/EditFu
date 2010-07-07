@@ -100,7 +100,7 @@
 }
 
 .public .label-input {
-  width: 230px;
+  width: 225px;
 }
 
 .label-input label.filled {
@@ -135,10 +135,6 @@
 
 #new_owner .password-confirmation label, #new_owner .password label {
   margin: 0;
-}
-
-.public #main .password-confirmation {
-  margin-top: -19px;
 }
 
 .public #main .subdomain {

@@ -1,5 +1,4 @@
-.label-input.password-confirmation, 
-.label-input.password  {
+.label-input.password-confirmation {
   margin-right: 0;
 }
 
@@ -42,4 +41,35 @@
   text-shadow: none;
 
   z-index: 2;
+}
+
+.submit_section {
+  float: right;
+  margin-top: -50px;
+}
+
+.public .label-input.domain_name {
+  width: 410px;
+}
+
+.public .label-input.domain_name .hint {
+  display: block;
+  text-align: left;
+}
+
+
+.public .label-input.domain_name .domain {
+  font-size: 20px;
+}
+
+
+.public .label-input.domain_name .domain_prefix {
+  position: relative;
+  left: -228px;
+}
+
+
+.public .label-input.domain_name #owner_domain_name {
+  position: relative;
+  left: 57px;
 }
