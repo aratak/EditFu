@@ -169,6 +169,7 @@
 
 .file-inputs img {
   vertical-align: middle;
+  cursor: pointer;
 }
 
 .file-inputs .path {
