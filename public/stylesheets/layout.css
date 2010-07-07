@@ -23,20 +23,51 @@
 }
 
 form input.update-button {
-  background: url(/images/up.png) left center no-repeat;
+  background: #f2ffbf url(/images/up.png) 11px center no-repeat;
   position: fixed;
   right: 0;
   bottom: 0;
   z-index: 2;
   border: 0;
-  height: 50px;
-  padding: 0 13px 0 35px;
+  height: 40px;
+  padding: 0 14px 0 45px;
   line-height: 50px;
   font-family: helvetica;
   font-weight: bold;
-  font-size: 24px;
-  color: #787878;
+  font-size: 20px;
+  color: #333333;
   cursor: pointer;
+  
+  margin: 5px;
+  border: 1px solid #d2d2d2;
+  
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+}
+
+form input.update-button:hover {
+  background-color: #ecff9f;
+  border: 1px solid #a2a2a2;
+}
+
+form input.update-button:active {
+  background-color: #e3ff6f;
+  border: 1px solid transparent;
+  color: #000000;
+
+  border-radius: 15px;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+
+}
+
+form input.update-button:focus {
+  outline: none; 
+}
+
+form input.update-button::-moz-focus-inner { 
+  border: 1px solid transparent;
 }
 
 
