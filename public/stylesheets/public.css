@@ -42,10 +42,6 @@ html > body {
   background: url(/images/bg-gradient.png) bottom repeat-x;
 }
 
-html > body.company {
-  background: #dfdfdf;
-}
-
 #art-bg {
   position: absolute;
   right: 165px;
@@ -66,7 +62,8 @@ html > body.company {
   font-weight: bold;
   font-size: 30px;
   line-height: 30px;
-  color: #000000;
+  color: #ffffff;
+  text-shadow: 1px 1px 4px #000000;
 }
 
 #main {
