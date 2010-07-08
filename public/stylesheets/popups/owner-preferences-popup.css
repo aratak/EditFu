@@ -216,10 +216,16 @@
   display: block;
 }
 
+#owner-preferences-popup h1 {
+  border-bottom: 1px solid #cccccc;
+}
+
 #owner-preferences-popup h1 a {
   font-size: 22px;
   font-weight: normal;
   padding: 0 10px;
+  position: relative;
+  bottom: -1px;
   
   display: inline-block;
   zoom: 1;
@@ -229,11 +235,36 @@
 #owner-preferences-popup h1 #plan_and_billing_link, #owner-preferences-popup h1 #account_preferences_link {
   color: #B7B7B7;
   text-decoration: underline;
+  padding: 5px 160px;
+  border: 1px solid #cccccc;
+  background-color: #f0f0f0;
+  
+/*
+  border-top-right-radius: 10px;
+  moz-border-radius-topright: 10px;
+  -webkit-border-top-right-radius: 10px;
+  
+  border-top-left-radius: 10px;
+  -moz-border-radius-topleft: 10px;
+  -webkit-border-top-left-radius: 10px;
+*/  
+  
+  border-radius: 10px 10px 0 0;
+  -moz-border-radius: 10px 10px 0 0;
+  -webkit-border-radius: 10px 10px 0 0;
+  
+  
+}
+
+#owner-preferences-popup h1 #plan_and_billing_link:hover, #owner-preferences-popup h1 #account_preferences_link:hover {
+  text-decoration: none;
 }
 
 #owner-preferences-popup h1 #plan_and_billing_link.active, #owner-preferences-popup h1 #account_preferences_link.active {
   color: #FE0000;
   text-decoration: none;
+  background-color: transparent;
+  border-bottom: 1px solid #ffffff;
 }
 
 #owner-preferences-popup h5 {
