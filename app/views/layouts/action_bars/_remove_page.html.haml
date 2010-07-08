@@ -1,4 +1,4 @@
 - if current_user.owner?
-  = link_to_function "Remove Page", "showConfirmPopup('#{site_page_path(site, page)}', 'Are you sure you want to remove \"#{page.path}\"')", |
+  = link_to_function "<span>Remove Page</span>", "showConfirmPopup('#{site_page_path(site, page)}', 'Are you sure you want to remove \"#{page.path}\"')", |
       :class => 'action-bar-button delete-action', |
       :title => "Remove Page" |
