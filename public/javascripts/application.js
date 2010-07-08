@@ -64,7 +64,7 @@ function appearMessage(idMessage) {
     if( $(idMessage).visible() ) {
       hideFlash(tmp);
     }
-  }, 5000);
+  }, 7000);
   
 }
 
