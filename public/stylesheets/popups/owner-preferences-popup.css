@@ -241,9 +241,9 @@
   color: #B7B7B7;
   font-weight: normal;
   
-  box-shadow: 0px 1px 2px #cccccc;
-  -moz-box-shadow: 0px 1px 2px #cccccc;
-  -webkit-box-shadow: 0px 1px 2px #cccccc;
+  box-shadow: 0 -2px 1px #cccccc;
+  -moz-box-shadow: 0 -2px 1px #cccccc;
+  -webkit-box-shadow: 0 -2px 1px #cccccc;
 }
 
 
@@ -268,6 +268,10 @@
 
 #owner-preferences-popup .billing {
   position: relative;
+}
+
+#owner-preferences-popup .billing, #owner-preferences-popup .plan {
+  margin-top: 1em;
 }
 
 .change_card {
