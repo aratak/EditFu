@@ -9,7 +9,7 @@
       = password_field_tag 'user[password]', nil, :placeholder => 'password'
       /# = label_tag 'user_password', 'password'
     .submit-input
-      = submit_tag 'Login', :class => 'submit'
+      = submit_tag 'Login', :class => 'submit', :onclick => "showProcessing();"
   #hint
     #signup.hint
       - if @company_logo.present?
