@@ -24,6 +24,7 @@ table.pages caption {
 
 table.pages caption .action-bar-button {
   float: right;
+  margin: 5px;
 }
 
 table.pages tr td {
@@ -45,7 +46,7 @@ table.pages td.label {
 }
 
 table.pages td.table_actions {
-  width: 100px;
+  width: 500px;
   vertical-align: bottom;
   text-align: right;
 }
