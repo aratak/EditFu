@@ -6,11 +6,8 @@ en:
       disabled: 'Account is temporarily disabled by administrator.'
       invalid: 'Username or password was incorrect, please try again.'
       timeout: 'Session has expired. Please login again to continue working.'
-      wrong_subdomain: 'Attempting to login to the wrong companies system. 
-        Based on the email address your using were showing that the 
-        correct company address is {{company}}.  You can also visit {{editfu}} to login.'
-      permissions: 'You have no permissions to view requested page.
-        Please login with appropriate credentials.'
+      wrong_subdomain: 'Attempting to login to the wrong companies system. Based on the email address your using were showing that the correct company address is {{company}}.  You can also visit {{editfu}} to login.'
+      permissions: 'You have no permissions to view requested page. Please login with appropriate credentials.'
 
   activerecord:
     errors:
@@ -20,7 +17,7 @@ en:
         taken: "has already been used"
 
   credit_card:
-    authorize: "Can't authorize credit card. Please check your balance."
+    authorize: "Can\'t authorize credit card. Please check your balance."
     updated: "Your credit card has successfully been updated."
 
   free_plan:
@@ -33,44 +30,32 @@ en:
   
 
   site:
-    created: "The site <strong>{{name}}</strong> has been added to EditFu. 
-      You can now add pages to this site."
+    created: "The site <strong>{{name}}</strong> has been added to EditFu. You can now add pages to this site."
     updated: "Site changes were made successfully."
     connection_problem:
-      owner: "We cannot make a connection with the website due to incorrect settings or a
-        server error. Check that all the FTP settings for this site are correct and up-to-date."
-      editor: "We cannot make a connection with the website due to incorrect settings or a
-        server error. Please contact {{owner}} to resolve this issue."
+      owner: "We cannot make a connection with the website due to incorrect settings or a server error. Check that all the FTP settings for this site are correct and up-to-date."
+      editor: "We cannot make a connection with the website due to incorrect settings or a server error. Please contact {{owner}} to resolve this issue."
     destroyed: "Site was successfully deleted."
 
   page:
-    created: "<strong>{{page}}</strong> was added to the 
-      site <strong>{{site}}</strong> in the sidebar."
+    created: "<strong>{{page}}</strong> was added to the site <strong>{{site}}</strong> in the sidebar."
     multicreated: "Multiple pages were added to the site {{site}}."
     already_exist: "<strong>{{page}}</strong> already added."
     updated: "All changes were published successfully."
     enabled: "Page status was updated successfully."
     destroyed: "Page was successfully removed."
-    suspicious: 'Some or all of the selected pages are using the editfu class incorrectly. 
-      This may cause some issues.'
-    no_content: "This page does not contain any editable sections.  Please refer to the 
-      {{faq}} for details on how to include content." 
+    suspicious: "Some or all of the selected pages are using the editfu class incorrectly. This may cause some issues."
+    no_content: "This page does not contain any editable sections.  Please refer to the {{faq}} for details on how to include content." 
     update_error: 
-      owner: 'There was an error while trying to publish your updates. Please try again.
-        If the problem continues double check all the FTP settings and review the {{faq}}
-        Contact {{support}} if you need further assistance.'
-      editor: 'There was an error while trying to publish your updates. Please try again.
-        If this problem continues please contact {{owner}} to resolve this issue.'
+      owner: 'There was an error while trying to publish your updates. Please try again. If the problem continues double check all the FTP settings and review the {{faq}} Contact {{support}} if you need further assistance.'
+      editor: 'There was an error while trying to publish your updates. Please try again. If this problem continues please contact {{owner}} to resolve this issue.'
     not_found:
-      owner: 'This page is missing from the server. Double check that it wasnʼt deleted. 
-        If you meant to remove this page you may want to remove it from EditFu as well.'
-      editor: 'This page is missing from the server. 
-        Please contact {{owner}}  to resolve this issue.'
+      owner: 'This page is missing from the server. Double check that it wasnʼt deleted. If you meant to remove this page you may want to remove it from EditFu as well.'
+      editor: 'This page is missing from the server. Please contact {{owner}}  to resolve this issue.'
   
   editor:
     permissions_updated: "Editor settings were updated successfully."
-    created: "Editor <strong>{{name}}</strong> was created and will be sent an invite. 
-      Click editor preferences for this user if you need to resend an invite."
+    created: "Editor <strong>{{name}}</strong> was created and will be sent an invite. Click editor preferences for this user if you need to resend an invite."
     wrong: "Some editors fields is wrong. Check it, please."
     updated: "Editor settings were updated."
     destroyed: "Editor was successfully deleted."
@@ -80,20 +65,16 @@ en:
 
   plan:
     downgraded: "You have successfully downgraded to the free plan."
-    upgraded: "You have successfully upgraded from the 
-      <strong>{{plan_was}} Plan</strong> to the <strong>Pro Plan</strong>."
-    payment_error: "Were sorry, but the transaction did not go through due to 
-      an authorization issue. Please try again in a few minutes or {{contact_us}} at {{support}}."
+    upgraded: "You have successfully upgraded from the <strong>{{plan_was}} Plan</strong> to the <strong>Pro Plan</strong>."
+    payment_error: "Were sorry, but the transaction did not go through due to an authorization issue. Please try again in a few minutes or {{contact_us}} at {{support}}."
     trial_set_error: "You can't set Trial plan again."
 
   passwords:
-    dont_match: "The new password and confirm password field do not match. 
-      Please reenter and try again."
+    dont_match: "The new password and confirm password field do not match. Please reenter and try again."
     current:
       invalid: "Current password is incorrect."
     blank: 
-      change: "To change a password you must fill in the current, 
-        new, and confirm password fields."
+      change: "To change a password you must fill in the current, new, and confirm password fields."
       new: "You must fill in the new and confirm password fields."
     
   identity:
