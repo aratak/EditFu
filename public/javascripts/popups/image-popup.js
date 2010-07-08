@@ -17,6 +17,7 @@ function initThumbnail(img) {
   img.onclick = selectImage.curry(img, false);
 }
 
+warning_message = true
 function selectImage(img, skipWarn) {
   $$('#thumbnails .thumbnail.selected').each(function(selected) {
     selected.removeClassName('selected');
@@ -29,11 +30,12 @@ function selectImage(img, skipWarn) {
   if(!skipWarn && window.isSwapOut) {
     var edited = window.editedImg;
     clearMessage();
-    if(edited.originalHeight != img.originalHeight ||
-       edited.originalWidth != img.originalWidth) {
+    if((edited.originalHeight != img.originalHeight ||
+       edited.originalWidth != img.originalWidth) && (warning_message)) {
       showMessage('warning', 
-          'The chosen image is of different dimensions than the image your replacing. <br />' +
+          'The chosen image is of different dimensions than the image your replacing. ' +
           'Be aware this can sometimes lead to design inconsistencies.');
+      warning_message = false
     }
   }
 }

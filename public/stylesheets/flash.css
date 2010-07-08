@@ -39,8 +39,13 @@ div.flash a.close {
     background: url(/images/flash/close.png) center center no-repeat;
 }
 
-.flash_error {
+.flash_error, .flash_failure {
     background-position: 0 -50px;
+}
+
+div.flash .flash_error, div.flash .flash_failure {
+  color: #ffffff;
+  text-shadow: 1px 1px 4px #000000;
 }
 
 .flash_alert {
@@ -48,7 +53,7 @@ div.flash a.close {
     text-shadow: 1px 1px 0 #aaaaaa;
 }
 
-.flash_notice {
+.flash_notice, .flash_success {
     background-position: 0 -100px;
     text-shadow: 1px 1px 0 #aaaaaa;
 }
