@@ -16,14 +16,14 @@ div.flash span {
     color: #333333;
     white-space: nowrap;
     overflow: hidden;
-    max-height: 33px;
+    max-height: 50px;
     
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -ms-box-sizing: border-box;
     box-sizing: border-box;
 
-    line-height: 2.5em;
+    line-height: 50px;
     display: block;
     padding: 0 1em;
     position: relative;
@@ -33,14 +33,14 @@ div.flash a.close {
     position: absolute;
     right: 0;
     top: 0;
-    height: 2.7em;
+    height: 50px;
     width: 2em;
     
     background: url(/images/flash/close.png) center center no-repeat;
 }
 
 .flash_error {
-    background-position: 0 -33px;
+    background-position: 0 -50px;
 }
 
 .flash_alert {
@@ -49,6 +49,6 @@ div.flash a.close {
 }
 
 .flash_notice {
-    background-position: 0 -66px;
+    background-position: 0 -100px;
     text-shadow: 1px 1px 0 #aaaaaa;
 }
