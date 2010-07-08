@@ -17,7 +17,7 @@ class Owner < User
   validates_associated :plan 
   validates_associated :card, :if => :card_should_be_changed
   validates_length_of :company_name, :within => 3..255, :allow_blank => true
-  validates_uniqueness_of :domain_name
+  validates_uniqueness_of :domain_name, :message => "This domain already taken"
   validates_format_of :domain_name, :with => /^\w+$/
   validates_exclusion_of :domain_name, :in => %w(www admin dev staging)
   validates_acceptance_of :terms_of_service, :on => :create, :allow_nil => false, :message => 'Read and accept it!'
