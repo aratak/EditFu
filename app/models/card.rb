@@ -2,7 +2,7 @@ class Card < ActiveRecord::Base
   FIELDS = [:first_name, :last_name, :expiration, :number, :verification_value, :zip]
 
   @first_name = ""
-  attr_accessor *(FIELDS + [:credit_card])
+  attr_accessor *(FIELDS + [:credit_card, :display_expiration_date])
 
   belongs_to :owner
 
@@ -30,6 +30,11 @@ class Card < ActiveRecord::Base
 
   def price
     self.owner.plan.price unless owner.nil?
+  end
+  
+  def display_expiration_date= val
+    @display_expiration_date = val
+    self.expiration = display_expiration_date.strftime("%m/%Y")
   end
 
   private

@@ -10,7 +10,7 @@
       .title Expiration date
       .label-input
         = owner.error_for :'card.expiration'
-        = card_fields.text_field 'expiration', :placeholder => '02/2020'
+        = card_fields.date_select 'display_expiration_date', :use_month_numbers => true, :add_month_number => true, :start_year => Time.now.year, :end_year => Time.now.year+20, :discard_day => true, :order => [:month, :year] #, :placeholder => '02/2020'
     .title-input.verification-value
       .title Security code
       .label-input

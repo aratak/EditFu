@@ -66,7 +66,6 @@ describe Card do
       end    
                               
       it "when recurring and got PaymentSystemError" do
-        p @card.valid?
         @card.should_receive(:recurring).and_return(false)
         @card.save
       end
