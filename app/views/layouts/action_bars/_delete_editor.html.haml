@@ -1,1 +1,2 @@
-= link_to_function "<span>Delete editor</span>", "showConfirmPopup('#{editor_path(editor)}', 'Are you sure you want to delete the editor <strong>#{editor.user_name}</strong>?')", :class => 'action-bar-button delete-action', :title => "Delete editor"
+- if current_user.owner?
+  = link_to_function "<span>Delete editor</span>", "showConfirmPopup('#{editor_path(editor)}', 'Are you sure you want to delete the editor <strong>#{editor.user_name}</strong>?')", :class => 'action-bar-button delete-action', :title => "Delete editor"

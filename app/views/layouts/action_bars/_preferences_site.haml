@@ -1,1 +1,2 @@
-= link_to_remote '<span>Site settings</span>', :url => edit_site_path(site), :method => :get, :html => { :title => 'Site settings', :class => "action-bar-button preferences-action" }
+- if current_user.owner?
+  = link_to_remote '<span>Site settings</span>', :url => edit_site_path(site), :method => :get, :html => { :title => 'Site settings', :class => "action-bar-button preferences-action" }
