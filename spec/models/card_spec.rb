@@ -76,3 +76,15 @@ describe Card do
   end
 
 end
+
+# == Schema Information
+#
+# Table name: cards
+#
+#  id                      :integer(4)      not null, primary key
+#  owner_id                :integer(4)
+#  display_number          :string(255)
+#  display_expiration_date :date
+#  subscription_id         :string(255)
+#
+
