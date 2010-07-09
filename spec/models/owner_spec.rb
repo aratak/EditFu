@@ -85,7 +85,7 @@ shared_examples_for "general owners tests" do
       # owner.set_card(card)
 
       card2_attrs = Factory.attributes_for(:card) #Factory.create :card, :owner => owner
-      PaymentSystem.should_receive(:update_recurring).with(card)
+      PaymentSystem.should_receive(:recurring).with(card)
       owner.card.update_attributes(card2_attrs)
       # owner.save
       owner.card.id.should be(cardid)
@@ -289,12 +289,6 @@ describe Owner, "" do
         @owner.card.should == @card
       end
       
-      it "shouldnt has been set without card" do
-        @owner.set_plan(Plan::PROFESSIONAL)
-        @owner.card.destroy
-        @owner.valid?.should be_false
-      end
-      
     end
     
   end
@@ -303,8 +297,7 @@ describe Owner, "" do
     Factory.create :editor, :owner => @owner
 
     @owner.set_plan Plan::FREE
-    @owner.save
-    @owner.editors.should be_empty
+    @owner.valid?.should be_false
   end
   
   describe "#destroy" do
