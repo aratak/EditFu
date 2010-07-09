@@ -24,7 +24,14 @@ table.pages caption {
 
 table.pages caption .action-bar-button {
   float: right;
+  height: 30px;
   margin: 5px;
+  top: 2px;
+}
+
+table.pages caption .action-bar-button span {
+  vertical-align: middle;
+  line-height: 30px;
 }
 
 table.pages tr td {

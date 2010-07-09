@@ -5,6 +5,7 @@ class SitesController < ApplicationController
   before_filter :redirect_from_cookie, :only => [:index]
 
   def index
+    @sites = current_user.sites
   end
 
   def show

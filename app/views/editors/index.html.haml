@@ -1,29 +1,16 @@
 = stylesheet_link_tag 'nocontent'
-.blackbox
 
-%ol
-  %li 
-    Invite a new editor.
-    %p 
-      Click the + button in the lower left corner to add a new editor. 
-      Enter their name and email address in the window. 
+.nosites
+  - if @editors.empty?
+    .inside
+      Currently there are no editors.
       %br
-      The editor will receive an email confirmation that they will need to click. 
-      For more info visit the FAQ .
-  %li 
-    Give the editor permission.
-    %p
-      You will want to give the editor permission to edit certain pages or entire sites. 
-      Click the editors name in the sidebar
+      Invite others so they can update content as well.
       %br
-      then choose the specific sites or pages you would like to give this editor permission 
-      to then click update. Editors
-      %br
-      should now be able to edit the pages you provided them permission to. 
-  %li 
-    Updating and removing editors.
-    %p
-      You can change permissions, remove an editor, or update their user preferences 
-      at anytime by clicking the persons
-      %br
-      name in the sidebar. Whenever your done just click update.
+  
+      = render "layouts/action_bars/add_editor"
+
+  - else
+    .inside
+      Select an editor in the sidebar.
+  .helper

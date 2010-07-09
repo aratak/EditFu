@@ -1,19 +1,56 @@
-#main .blackbox {
-  width: 415px;
+.nosites {
+  padding: 30px;
+  background-color: #dadada;
+  font-size: 20px;
+  width: 500px;
   height: 200px;
-  background: #4c4b4b;
+  margin: 0 auto;
+  text-align: center;
+  
+  border: 1px solid #acacac;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+} 
+
+.nosites .inside {
+  display: inline-block;
+  width: 460px;
+  vertical-align: middle;
 }
 
-#main ol {
-  margin-top: 20px;
-  color: #e21303;
-  font-family: helvetica;
-  font-weight: normal;
-  font-size: 14px;
-  list-style-position: inside;
+.nosites .helper {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  width: 0;  
 }
 
-#main ol p {
-  font-size: 12px;
-  color: #000000;
+.nosites .action-bar-button {
+  font-family: Helvetica, sans-serif;
+  background-color: #f3f3f3;
+  background-image: none;
+  margin: 10px 0 0 0;
+  padding: 5px 20px;
+
+  border: 1px solid #8f8f8f;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+.nosites .action-bar-button:hover {
+  background-color: #f8f8f8;
+
+  border-color: #acacac;
+  
+}
+
+.nosites .action-bar-button:active {
+  border-color: #000;
+  padding: 6px 20px 4px 20px;
+}
+
+.nosites .action-bar-button:focus {
+  color: #000;
 }

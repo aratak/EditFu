@@ -1,4 +1,5 @@
 = stylesheet_link_tag 'site'
+= stylesheet_link_tag 'nocontent'
 
 - @title = @site.name
 - @hint = 'Choose the pages you wish to deactivate by clicking the box next to that page. You can also remove the page completely. Click update when your done.'
@@ -10,16 +11,29 @@
   = render "layouts/action_bars/remove_site", :site => @site
 
 
-
 - form_remote_tag :url => enable_site_pages_path(@site), :html => { :id => 'pages_form' } do
   %table.pages
     %caption
       = "Pages"
       = render "layouts/action_bars/add_page", :site => @site
     %tbody
-      - sort_pages(@site.pages).each do |page|
-        %tr.page
-          %td.checkbox= check_box_tag "page[#{page.id}]", '1', page.enabled
-          %td.label= label_tag "page_#{page.id}", page.path
-          %td.table_actions= render "layouts/action_bars/remove_page", :page => page, :site => @site
-  = submit_tag "Update", :class => "update-button"
+      - if @site.pages.any?
+        - sort_pages(@site.pages).each do |page|
+          %tr.page
+            %td.checkbox= check_box_tag "page[#{page.id}]", '1', page.enabled
+            %td.label= label_tag "page_#{page.id}", page.path
+            %td.table_actions= render "layouts/action_bars/remove_page", :page => page, :site => @site
+  - if @site.pages.any?          
+    = submit_tag "Update", :class => "update-button"
+
+
+- if @site.pages.empty?
+  %br
+  .nosites
+    .inside
+      Currently there are no pages for this site in EditFu.
+      %br
+      EditFu needs to know which pages you want to edit.
+      %br
+      = render "layouts/action_bars/add_page", :site => @site
+    .helper

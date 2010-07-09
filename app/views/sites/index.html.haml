@@ -1,25 +1,18 @@
 = stylesheet_link_tag 'nocontent'
-.blackbox
 
-%ol
-  %li
-    Insert the html element.
-    %p
-      Go through the html for the site you want to edit and 
-      add the class <strong>editfu</strong> to a div, span, or img element that 
-      contains the content you would like to make available 
-      to EditFu for editing.
-  %li
-    Add the site and pages.
-    %p
-      Click the plus in the lower left hand corner and enter the hosting 
-      FTP information to add the site to EditFu. Next, choose the site 
-      in the side bar and in this window click the link labeled 
-      <strong>Add a Page</strong>. In the list of pages your presented 
-      choose each of the pages you would like to add to EditFu.
-  %li
-    Edit content.
-    %p
-      That’s it! Now click the page you want to edit in the sidebar and update 
-      the content right in this window. When your done click the publish button 
-      in the lower right hand corner.
+.nosites
+  - if @sites.empty?
+    .inside
+      Currently there are no sites.
+      %br
+      You need to add a site before you can edit.
+      %br
+      To add a site you will need the sites FTP info.
+      %br
+  
+      = render "layouts/action_bars/add_site"
+
+  - else
+    .inside
+      Select a site or page in the sidebar.
+  .helper

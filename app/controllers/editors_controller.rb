@@ -4,6 +4,7 @@ class EditorsController < ApplicationController
   before_filter :find_editor, :only => [:show, :edit, :update, :update_permissions, :destroy]
 
   def index
+    @editors = current_user.editors
   end
 
   def new
