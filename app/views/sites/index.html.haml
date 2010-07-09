@@ -1,7 +1,7 @@
 = stylesheet_link_tag 'nocontent'
 
 .nosites
-  - if @sites.empty?
+  - if @sites.empty? && current_user.owner?
     .inside
       Currently there are no sites.
       %br
