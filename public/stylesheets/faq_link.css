@@ -1,0 +1,16 @@
+.nosites {
+  position: relative;
+}
+
+.help_link {
+  display: block;
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  
+  background-image: url(/images/help_link.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+}

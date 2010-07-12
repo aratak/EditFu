@@ -9,8 +9,9 @@
       %br
   
       = render "layouts/action_bars/add_editor"
-
+    = help_link_for :add_editors
   - else
     .inside
       Select an editor in the sidebar.
+    = help_link_for :choose_editors
   .helper

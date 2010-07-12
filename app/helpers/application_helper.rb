@@ -20,6 +20,13 @@ module ApplicationHelper
     end
   end
 
+  def help_link_for key
+    add_stylesheet 'faq_link'
+    faq_link = FAQS.key?(key.to_sym) ? FAQS[key.to_sym] : FAQS[:default]
+    link_to "", faq_link, :class => "help_link link_#{key}", :target => "_blank"
+  end
+
+
   def image_path(name)
     File.join(@type_dir, name)
   end

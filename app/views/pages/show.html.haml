@@ -1,6 +1,7 @@
 - inside_layout 'sites' do
   = javascript_include_tag 'tiny_mce/tiny_mce', 'page', 'popups/image-popup'
   = stylesheet_link_tag 'page', 'popups/image-popup', 'popups/code-popup'
+  = stylesheet_link_tag 'nocontent'
 
   - @title = @page.path
   - @hint = 'Edit sections below and then click publish to implement the changes to this page on the website.'
@@ -15,6 +16,16 @@
 
 
   - remote_form_for [@site, @page], :html => { :id => 'page-form' } do |f|
+    - if @page.empty?
+      .nosites
+        .inside
+          There is no content to edit... Yet!
+          %br
+          - unless @page.owner.owner?
+            = "Contact <strong>#{@page.owner.full_name}</strong> (#{mail_to(@page.owner.email)}) for more info."
+        .helper
+        = help_link_for :no_content
+          
     - unless @sections.blank?
       - @sections.each do |section|
         .mce-editor

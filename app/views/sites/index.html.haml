@@ -11,8 +11,10 @@
       %br
   
       = render "layouts/action_bars/add_site"
-
+    = help_link_for :add_sites
   - else
     .inside
       Select a site or page in the sidebar.
+    = help_link_for :choose_sites
   .helper
+  = help_link_for :add_sites

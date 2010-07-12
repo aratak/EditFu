@@ -12,9 +12,9 @@ class PagesController < ApplicationController
       @sections = @page.sections
       @images = @page.images
 
-      if @sections.blank? && @images.blank?
-        flash.now[:warning] = I18n.t('page.no_content', :faq => MessageKeywords.faq)
-      end
+      # if @sections.blank? && @images.blank?
+      #   flash.now[:warning] = I18n.t('page.no_content', :faq => MessageKeywords.faq)
+      # end
       @page.save
     rescue FtpClientError => e
       flash.now[:error] = I18n.t(*ftp_message(e))

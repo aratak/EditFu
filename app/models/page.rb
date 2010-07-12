@@ -9,6 +9,10 @@ class Page < ActiveRecord::Base
 
   named_scope :enabled, :conditions => { :enabled => true }
 
+  def owner
+    site.owner
+  end
+
   def url
     File.join(site.http_url, path)
   end
