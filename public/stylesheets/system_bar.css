@@ -114,16 +114,42 @@
   float: left;
   width: 120px;
   height: 50px;
+  padding-top: 5px;
+  text-align: center;
+  text-decoration: none;
+  color: #ffffff;
+  
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;  
 }
 
-#system-bar #tabs img {
-  margin-left: 45px;
-  margin-top: 12px;
+#system-bar #tabs a small {
+  display: block;
 }
 
-#system-bar #tabs .selected {
+#system-bar #tabs a:hover {
+  text-shadow: 1px 1px 0 #7a7a7a;
+}
+
+#system-bar #tabs a.selected:hover {
+  text-shadow: 1px 1px 0 #ffffff;
+}
+
+#system-bar #tabs a:active {
+  text-shadow: 0px 0px 2px #7a7a7a;
+}
+
+#system-bar #tabs a.selected:active {
+  text-shadow: 0px 0px 2px #ffffff;
+}
+
+
+#system-bar #tabs a.selected {
   background: #ddd url(/images/source-bar-bg.jpg);
   position: relative;
+  color: #787878;
 }
 
 #system-bar #tabs .shadow {
