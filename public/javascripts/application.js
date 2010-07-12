@@ -223,14 +223,11 @@ function toggleEditor(id) {
   }
 }
 
-var cardPreferencesDuration = 0.2;
-var cardPreferencesButtonDuration = 0.5
+var cardPreferencesDuration = 0.1;
+var cardPreferencesButtonDuration = 0.3
 
 function showCardForm() {
-  if( $('billing_view') != null ) {
-    $("billing_view").blindUp({ duration: cardPreferencesDuration });
-  }
-
+  if( $('billing_view') != null ) { $("billing_view").blindUp({ duration: cardPreferencesDuration }); }
   if (!$("billing_inputs").visible()) { $("billing_inputs").blindDown({ duration: cardPreferencesDuration }); } 
   $$("#billing_inputs input").each(function(item) { $(item).enable(); })
 }
@@ -238,22 +235,64 @@ function showCardForm() {
 function hideCardForm() {
   if( $('billing_view') != null ) {
     if (!$('billing_view').visible()) { $("billing_view").blindDown({ duration: cardPreferencesDuration }); }
-    $('cancel_card_link').fade({ duration: cardPreferencesButtonDuration });
   }
 
   $$("#billing_inputs input").each(function(item) { $(item).disable(); })
   $("billing_inputs").blindUp({ duration: cardPreferencesDuration });
 }
 
+function cancelCardLinkState() {
+  // $('cancel_card_link').appear({ duration: cardPreferencesButtonDuration });
+}
+
 function bindPlanAndCardForm() {
   
-  $$('input.unpayment', 'input.current').each(function(item) {
+  $$('.plan input.payment:not(.current)').each(function(item) {
+    $(item).observe('change', function(item) {
+      $('change_card_link').fade({ duration: cardPreferencesButtonDuration });
+    })
+  })
+  
+  
+  $$('.plan input:not(input.payment:not(.current))').each(function(item) {
+    $(item).observe('change', function(item) {
+      $('change_card_link').appear({ duration: cardPreferencesButtonDuration });
+    })
+  })
+  
+  $$('.plan input.unpayment').each(function(item) {
+    $(item).observe('change', function(item) {
+      $('cancel_card_link').fade({ duration: cardPreferencesButtonDuration });
+    })
+  })
+  
+  $$('.plan input:not(.unpayment)').each(function(item) {
+    $(item).observe('change', function(item) {
+      $('cancel_card_link').appear({ duration: cardPreferencesButtonDuration });
+    })
+  })
+  
+  
+  $$('.plan input.current').each(function(item) {
     $(item).observe('change', function() { 
       hideCardForm() 
     })
 
     if ($(item).checked == true) {
       hideCardForm();
+    }
+  })
+  
+  
+  $$('.plan input.unpayment').each(function(item) {
+    $(item).observe('change', function() { 
+      hideCardForm() 
+      if( $('billing_view') != null ) { $("billing_view").blindUp({ duration: cardPreferencesDuration }); }
+    })
+  
+    if ($(item).checked == true) {
+      hideCardForm();
+      if( $('billing_view') != null ) { $("billing_view").blindUp({ duration: cardPreferencesDuration }); }
     }
   })
   
@@ -264,9 +303,8 @@ function bindPlanAndCardForm() {
       })
     })
   } else {
-    $$('input.not_current.payment').each(function(item) {
+    $$('.plan input.not_current.payment').each(function(item) {
       $(item).observe('change', function() { 
-        // $('cancel_card_link').appear({ duration: cardPreferencesButtonDuration });
         showCardForm();
       })
     })
