@@ -3,7 +3,7 @@ class Plan
   ALLOWS = {
     :page   => [FREE, TRIAL, UNLIMITEDTRIAL, SINGLE, PROFESSIONAL],
     :site   => [FREE, TRIAL, UNLIMITEDTRIAL, SINGLE, PROFESSIONAL],
-    :editor => [      TRIAL, UNLIMITEDTRIAL,         PROFESSIONAL]
+    :editor => [      TRIAL, UNLIMITEDTRIAL, SINGLE, PROFESSIONAL]
   }
   
   # the general method for each can_add_#{permission}?
