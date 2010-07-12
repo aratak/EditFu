@@ -28,7 +28,13 @@ class PagesController < ApplicationController
     @pages = []
     @has_errors = false
     @message = []
-
+    
+    unless params[:path]
+      flash[:error] = "Choose any page"
+      render :partial => "choose"
+      return true
+    end
+      
     params[:path].each do |path|
       page = @site.pages.create(:path => path)
       if page.errors.empty?
@@ -45,7 +51,7 @@ class PagesController < ApplicationController
         @page_with_error = page
       end
     end
-    
+
 
     if @message.empty?
       if @has_errors
@@ -58,7 +64,7 @@ class PagesController < ApplicationController
         end
       end
     end
-    
+      
   end
 
   def destroy
