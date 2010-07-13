@@ -1,5 +1,7 @@
 class Subscription < ActiveRecord::Base
   
+  default_scope :order => "end_at"
+  
   belongs_to :owner
   
   validates_presence_of :start_at

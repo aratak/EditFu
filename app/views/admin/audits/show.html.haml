@@ -1,0 +1,14 @@
+= content_for :sourceBar do
+  = link_to "<< Back to user", admin_owner_path(@owner), :class => :back
+  %ul#top-menu
+    %li
+      %ul.menu#owner-menu
+        = render "menu_items"
+
+= content_for :action_bar do
+  = render "admin/owners/remove_owner", :owner => @owner
+  = render "admin/owners/hold_owner", :owner => @owner
+  = render "admin/owners/activate_owner", :owner => @owner
+
+
+= render "form"

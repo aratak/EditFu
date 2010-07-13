@@ -27,5 +27,10 @@
       .label Billing Date
       .value #{@owner.billing_day}th of Month
   .row
+    .label 
+      Next billing date after
+      %strong= distance_of_time_in_words_to_now(@owner.next_billing_date) if @owner.next_billing_date
+    .value= @owner.next_billing_date
+  .row
     .label Package
     .value= @owner.plan.name

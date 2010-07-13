@@ -12,6 +12,7 @@
 
 = content_for :action_bar do
   = render "remove_owner", :owner => @owner
+  = render "audit_owner", :owner => @owner
   = render "hold_owner", :owner => @owner
   = render "activate_owner", :owner => @owner
 

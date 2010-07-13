@@ -25,6 +25,7 @@ class OwnerPreferencesController < ApplicationController
   def billing_update
     @owner.card_must_be_present = true
     @owner.set_plan(params[:owner][:plan_id])
+    params[:owner].delete(:subscriptions_attributes) # deny for current_user
     @owner.attributes = params[:owner]
 
     if @owner.save

@@ -204,6 +204,11 @@ table.pages td.table_actions .action-bar-button {
   background-image: url(/images/delete.png);
 }
 
+.action-bar-button.audit-action {
+  background-image: url(/images/audit.png);
+}
+
+
 .actions .action-bar-button.delete-action, 
 .menu .action-bar-button.delete-action, 
 .site-menu .action-bar-button.delete-action,
@@ -246,20 +251,20 @@ table.pages td.table_actions .action-bar-button {
 
 .action-bar-button.hold-action {
   background-image: url(/images/hold.png);
-  background-position: top center;
+  background-position: top left;
 }
 
 .action-bar-button.hold-action:hover {
-  background-position: bottom center;
+  background-position: bottom left;
 }
 
 .action-bar-button.unhold-action {
   background-image: url(/images/hold.png);
-  background-position: bottom center;
+  background-position: bottom left;
 }
 
 .action-bar-button.unhold-action:hover {
-  background-position: top center;
+  background-position: top left;
 }
 
 .actions .action-bar-button.hold-action, 
@@ -279,20 +284,20 @@ table.pages td.table_actions .action-bar-button {
 
 .action-bar-button.enable-action {
   background-image: url(/images/disable.png);
-  background-position: top center;
+  background-position: top left;
 }
 
 .action-bar-button.enable-action:hover {
-  background-position: bottom center;
+  background-position: bottom left;
 }
 
 .action-bar-button.disable-action {
   background-image: url(/images/disable.png);
-  background-position: bottom center;
+  background-position: bottom left;
 }
 
 .action-bar-button.disable-action:hover {
-  background-position: top center;
+  background-position: top left;
 }
 
 

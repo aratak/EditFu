@@ -11,7 +11,9 @@ class Owner < User
 
   alias_attribute :subdomain, :domain_name
   accepts_nested_attributes_for :card, :reject_if => :card_shouldnt_be_changed
-  attr_accessible :domain_name, :company_name, :terms_of_service, :card_attributes
+  accepts_nested_attributes_for :subscriptions, :allow_destroy => true
+  
+  attr_accessible :domain_name, :company_name, :terms_of_service, :card_attributes, :subscriptions_attributes
 
   validates_presence_of  :domain_name
   validates_associated :plan 
@@ -58,25 +60,28 @@ class Owner < User
   end
 
   def prev_billing_date
-    ActiveSupport::Deprecation.warn("the method 'trial_period_end' will be deplicated")
-    d = next_billing_date << 1
-    d <= confirmed_at.to_date ? nil : d
+    # ActiveSupport::Deprecation.warn("the method 'trial_period_end' will be deplicated")
+    # d = next_billing_date << 1
+    # d <= confirmed_at.to_date ? nil : d
+    subscriptions[-2].end_at
   end
 
   def next_billing_date(date = Date.today)
-    ActiveSupport::Deprecation.warn("the method 'trial_period_end' will be deplicated")
-    this_bd = Date.new(date.year, date.month, billing_day)
-    this_bd.past? ? this_bd.next_month : this_bd
+    # ActiveSupport::Deprecation.warn("the method 'trial_period_end' will be deplicated")
+    # this_bd = Date.new(date.year, date.month, billing_day)
+    # this_bd.past? ? this_bd.next_month : this_bd
+
+    subscriptions.find(:last).try(:end_at)
   end
 
-  def prof_plan_begins_at
-    ActiveSupport::Deprecation.warn("the method 'trial_period_end' will be deplicated")
-    if !plan.professional?
-      next_billing_date
-    else
-      next_billing_date(confirmed_at)
-    end
-  end
+  # def prof_plan_begins_at
+  #   ActiveSupport::Deprecation.warn("the method 'trial_period_end' will be deplicated")
+  #   if !plan.professional?
+  #     next_billing_date
+  #   else
+  #     next_billing_date(confirmed_at)
+  #   end
+  # end
 
 end
 
