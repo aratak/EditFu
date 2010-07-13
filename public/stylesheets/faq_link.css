@@ -2,6 +2,15 @@
   position: relative;
 }
 
+.popup-action-bar {
+  position: relative;
+}
+
+.popup-action-bar .help_link {
+  top: -30px;
+  background-image: url(/images/help_link_dark.png);
+}
+
 .help_link {
   display: block;
   width: 25px;

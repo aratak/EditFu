@@ -11,3 +11,7 @@
         will have to create a new account.'                                               |
       = owner.submit "Update"
       = link_to_function "Cancel", "hidePopup();", :class => 'action cancel'
+
+      = help_link_for :preferences
+    :javascript
+      Indent.includeStylesheet('faq_link');
