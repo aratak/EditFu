@@ -42,32 +42,34 @@ class Owner < User
     !card_should_be_changed
   end
   
-  def trial_period_end
-    ActiveSupport::Deprecation.warn("the method 'trial_period_end' will be deplicated")
-    30.days.since(confirmed_at).to_date
-  end
+  # def trial_period_end
+  #   ActiveSupport::Deprecation.warn("the method 'trial_period_end' will be deplicated")
+  #   30.days.since(confirmed_at).to_date
+  # end
 
   def trial_period_expired?
-    ActiveSupport::Deprecation.warn("the method 'trial_period_end' will be deplicated")
-    plan.trial? && trial_period_end.past?
+    # ActiveSupport::Deprecation.warn("the method 'trial_period_expired?' will be deplicated")
+    # plan.trial? && trial_period_end.past?
+
+    plan.trial? && hold?
   end  
 
-  def billing_day
-    ActiveSupport::Deprecation.warn("the method 'trial_period_end' will be deplicated")
-    if confirmed_at
-      confirmed_at.mday > 28 ? 1 : confirmed_at.mday 
-    end
-  end
+  # def billing_day
+  #   ActiveSupport::Deprecation.warn("the method 'billing_day' will be deplicated")
+  #   if confirmed_at
+  #     confirmed_at.mday > 28 ? 1 : confirmed_at.mday 
+  #   end
+  # end
 
   def prev_billing_date
-    # ActiveSupport::Deprecation.warn("the method 'trial_period_end' will be deplicated")
+    # ActiveSupport::Deprecation.warn("the method 'prev_billing_date' will be deplicated")
     # d = next_billing_date << 1
     # d <= confirmed_at.to_date ? nil : d
     subscriptions[-2].end_at
   end
 
   def next_billing_date(date = Date.today)
-    # ActiveSupport::Deprecation.warn("the method 'trial_period_end' will be deplicated")
+    # ActiveSupport::Deprecation.warn("the method 'next_billing_date' will be deplicated")
     # this_bd = Date.new(date.year, date.month, billing_day)
     # this_bd.past? ? this_bd.next_month : this_bd
 
@@ -75,7 +77,7 @@ class Owner < User
   end
 
   # def prof_plan_begins_at
-  #   ActiveSupport::Deprecation.warn("the method 'trial_period_end' will be deplicated")
+  #   ActiveSupport::Deprecation.warn("the method 'prof_plan_begins_at' will be deplicated")
   #   if !plan.professional?
   #     next_billing_date
   #   else

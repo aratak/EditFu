@@ -22,15 +22,17 @@
   .row
     .label Last Logged In
     .value= @owner.last_sign_in_at
-  - if @owner.confirmed?
-    .row
-      .label Billing Date
-      .value #{@owner.billing_day}th of Month
   .row
     .label 
-      Next billing date after
-      %strong= distance_of_time_in_words_to_now(@owner.next_billing_date) if @owner.next_billing_date
-    .value= @owner.next_billing_date
+      Next billing date 
+      - if @owner.next_billing_date
+        after
+        %strong= distance_of_time_in_words_to_now(@owner.next_billing_date) 
+    - if @owner.next_billing_date
+      .value= @owner.next_billing_date
+    - else
+      .value No next billing date, because user has unpayment plan (free perhaps)
+    
   .row
     .label Package
     .value= @owner.plan.name
