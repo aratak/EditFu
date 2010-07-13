@@ -122,7 +122,7 @@ describe Plan do
         end
       end
 
-      [Plan::FREE, Plan::SINGLE].each do |plan|
+      [Plan::FREE].each do |plan|
 
         it "denied plans '#{plan.name}'" do
           @owner.stub(:plan).and_return(plan)
@@ -137,12 +137,12 @@ describe Plan do
 
       end
       
-      # [Plan::FREE].each do |plan|
-      #   it "denied plans '#{plan.name}'" do
-      #     @owner.stub(:plan).and_return(plan)
-      #     plan.can_add_site?(@owner).should be_false
-      #   end
-      # end
+      [Plan::SINGLE].each do |plan|
+        it "allowed plans '#{plan.name}'" do
+          @owner.stub(:plan).and_return(plan)
+          plan.can_add_editor?(@owner).should be_true
+        end
+      end
 
     end
     
