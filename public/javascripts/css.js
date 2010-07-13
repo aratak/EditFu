@@ -50,8 +50,9 @@ var Behaviours = function() {
       
       $$('.fieldWithErrors').each(function(item) {
         // var h = $(item).getHeight()
-        $(item).up('.inputs-row').select('.title-input > .label-input > input').invoke('setStyle', {position: 'relative', top: '30px'})
-        
+        if ($(item).up('.inputs-row')) {
+          $(item).up('.inputs-row').select('.title-input > .label-input > input').invoke('setStyle', {position: 'relative', top: '30px'})
+        }
         // .each(function(item) {
         //   console.log( $(item) )
         // })
