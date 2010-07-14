@@ -54,6 +54,7 @@ Factory.define :subscription do |s|
   s.start_at Date.today
   s.end_at 1.month.from_now.to_date
   s.price 300
+  s.plan Plan::FREE
   
   s.association :owner
 end

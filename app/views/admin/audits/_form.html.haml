@@ -1,39 +1,42 @@
 - add_stylesheets "subscriptions"
 
 - @title = "Subscriptions"
-- @hint = '<span class="red">Current user has unpayment account</span>' unless @owner.plan.payment?
+- @hint = '<span class="red">You can\'t set subsciprion, because user has unpayment account</span>' unless @owner.subscription_is_possible?
 
 
-- form_for [:admin, @owner], @owner, :url => {:action => :update}, :html => { :method => :put, :id => 'subscription' } do |f|
-  - error_messages_for :owner
+- if @owner.subscription_is_possible?
+  - form_for [:admin, @owner], @owner, :url => {:action => :update}, :html => { :method => :put, :id => 'subscription' } do |f|
+    - error_messages_for :owner
   
-  %table.subscriptions
-    %thead
-      %tr
-        %th= "Price"
-        %th= "Start date"
-        %th= "End date"
-        %th= "Created"
-        %th= "Destroy?"
-    %tbody
-      - f.fields_for :subscriptions do |sbscr|
-        %tr{:style => ("display: none;" if sbscr.object.new_record?), :id => dom_id(sbscr.object)}
-          %td
-            $
-            = sbscr.text_field  :price, :class => :price, :disabled => sbscr.object.new_record?, :value => (@owner.plan.price if sbscr.object.new_record?)
-          %td= sbscr.date_select :start_at, :disabled => sbscr.object.new_record?, :default => (Date.today if sbscr.object.new_record?)
-          %td= sbscr.date_select :end_at, :disabled => sbscr.object.new_record?, :default => (1.month.since if sbscr.object.new_record?)
-          - unless sbscr.object.new_record?
-            %td{:title => sbscr.object.created_at }= sbscr.object.created_at.strftime("%Y-%m-%d") 
-          - else
-            %td= "none"
-          - unless sbscr.object.new_record?
-            %td= sbscr.check_box(:_destroy) 
-          - else
-            %td= link_to_function "Cancel", "$('new_subscription').hide(); $$('#new_subscription input', '#new_subscription select').invoke('disable'); $('add_new_subscription').show()"
-      %tr
-        %td{:colspan => 4, :style => "text-align: right;"}
-          = link_to_function "Add new subscription" + (" and unhold user" if @owner.hold?).to_s, "$('new_subscription').show(); $$('#new_subscription input', '#new_subscription select').invoke('enable'); $(this).hide()", :id => :add_new_subscription
+    %table.subscriptions
+      %thead
+        %tr
+          %th= "Plan"
+          %th= "Price"
+          %th= "Start date"
+          %th= "End date"
+          %th= "Created"
+          %th= "Destroy?"
+      %tbody
+        - f.fields_for :subscriptions do |sbscr|
+          %tr{:style => ("display: none;" if sbscr.object.new_record?), :id => dom_id(sbscr.object)}
+            %td= "#{sbscr.object.plan.name}" unless sbscr.object.new_record?
+            %td
+              $
+              = sbscr.text_field  :price, :class => :price, :disabled => sbscr.object.new_record?, :value => (@owner.plan.price if sbscr.object.new_record?)
+            %td= sbscr.date_select :starts_at, :disabled => sbscr.object.new_record?, :default => (Date.today if sbscr.object.new_record?)
+            %td= sbscr.date_select :ends_at, :disabled => sbscr.object.new_record?, :default => (1.month.since if sbscr.object.new_record?)
+            - unless sbscr.object.new_record?
+              %td{:title => sbscr.object.created_at }= sbscr.object.created_at.strftime("%Y-%m-%d") 
+            - else
+              %td= "none"
+            - unless sbscr.object.new_record?
+              %td= sbscr.check_box(:_destroy) 
+            - else
+              %td= link_to_function "Cancel", "$('new_subscription').hide(); $$('#new_subscription input', '#new_subscription select').invoke('disable'); $('add_new_subscription').show()"
+        %tr
+          %td{:colspan => 4, :style => "text-align: right;"}
+            = link_to_function "Add new subscription" + (" and unhold user" if @owner.hold?).to_s, "$('new_subscription').show(); $$('#new_subscription input', '#new_subscription select').invoke('enable'); $(this).hide()", :id => :add_new_subscription
   
-  = submit_tag "Update", :class => "update-button"
+    = submit_tag "Update", :class => "update-button"
 

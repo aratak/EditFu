@@ -465,6 +465,52 @@ describe Owner, "and plan relation" do
 end
 
 
+describe Owner, "and subscirptions" do
+  
+  context "#subscription" do
+    
+    before :each do
+      @owner = Factory.create :owner
+    end
+    
+    it "should be first" do 
+      @owner.subscriptions.count.should == 1
+    end
+
+    
+    it "should be second" do 
+      @owner.set_plan Plan::PROFESSIONAL
+      @owner.save
+      @owner.subscriptions.count.should == 2
+    end
+    
+    it "first subscription should has todays end date" do
+      @owner.set_plan Plan::PROFESSIONAL
+      @owner.save
+      @owner.subscriptions.first.ends_at.should be_today
+    end
+    
+    Plan.all.each do |plan|
+      context "should has correct period with #{plan.name}" do
+
+        before :each do
+          @plan = plan
+          @owner.set_plan @plan
+          @owner.save
+        end
+
+        it "should be correct" do 
+          (@owner.subscriptions.last.starts_at.to_date + @owner.plan.period.month).should == @owner.subscriptions.last.ends_at.to_date
+        end
+
+      end
+    end
+    
+  end
+  
+end
+
+
 
 # == Schema Information
 #

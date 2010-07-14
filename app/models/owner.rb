@@ -4,14 +4,12 @@ class Owner < User
   has_many :pages, :through => :sites
   has_many :editors, :dependent => :destroy
   belongs_to :plan
-  has_many :subscriptions
   has_one :card, :dependent => :destroy, :inverse_of => :owner
 
   attr_accessor_with_default :card_must_be_present, false
 
   alias_attribute :subdomain, :domain_name
   accepts_nested_attributes_for :card, :reject_if => :card_shouldnt_be_changed
-  accepts_nested_attributes_for :subscriptions, :allow_destroy => true
   
   attr_accessible :domain_name, :company_name, :terms_of_service, :card_attributes, :subscriptions_attributes
 
@@ -24,7 +22,7 @@ class Owner < User
   validates_exclusion_of :domain_name, :in => %w(www admin dev staging)
   validates_acceptance_of :terms_of_service, :on => :create, :allow_nil => false, :message => 'Read and accept it!'
 
-  concerned_with :associations, :delivers, :plan_migrations, :plan_relation
+  concerned_with :associations, :delivers, :plan_migrations, :plan_relation, :subscriptions
 
   def holded?
     hold && hold_changed?
@@ -65,7 +63,7 @@ class Owner < User
     # ActiveSupport::Deprecation.warn("the method 'prev_billing_date' will be deplicated")
     # d = next_billing_date << 1
     # d <= confirmed_at.to_date ? nil : d
-    subscriptions[-2].end_at
+    subscriptions[-2].ends_at
   end
 
   def next_billing_date(date = Date.today)
@@ -73,7 +71,7 @@ class Owner < User
     # this_bd = Date.new(date.year, date.month, billing_day)
     # this_bd.past? ? this_bd.next_month : this_bd
 
-    subscriptions.find(:last).try(:end_at)
+    subscriptions.find(:last).try(:ends_at)
   end
 
   # def prof_plan_begins_at

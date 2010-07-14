@@ -3,10 +3,10 @@ require 'spec_helper'
 describe Subscription do
 
   should_belong_to :owner
-  
-  
+  should_validate_presence_of :start_at, :end_at, :price
 
 end
+
 
 # == Schema Information
 #
@@ -19,5 +19,6 @@ end
 #  price      :integer(4)
 #  created_at :datetime
 #  updated_at :datetime
+#  plan_id    :integer(4)
 #
 

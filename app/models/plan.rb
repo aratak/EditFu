@@ -1,6 +1,6 @@
 class Plan < ActiveHash::Base
   include ActiveHash::Enum
-  fields :name, :price, :display_name
+  fields :name, :price, :display_name, :period
   enum_accessor :name
   CURRENCY = "$"
   

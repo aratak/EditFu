@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100624123811) do
+ActiveRecord::Schema.define(:version => 20100714081102) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -58,11 +58,12 @@ ActiveRecord::Schema.define(:version => 20100624123811) do
 
   create_table "subscriptions", :force => true do |t|
     t.integer  "owner_id"
-    t.date     "start_at"
-    t.date     "end_at"
+    t.datetime "starts_at"
+    t.datetime "ends_at"
     t.integer  "price"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "plan_id"
   end
 
   create_table "users", :force => true do |t|

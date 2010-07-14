@@ -2,8 +2,8 @@ class CreateSubscriptions < ActiveRecord::Migration
   def self.up
     create_table :subscriptions do |t|
       t.integer       :owner_id
-      t.date          :start_at
-      t.date          :end_at
+      t.datetime      :starts_at
+      t.datetime      :ends_at
       t.integer       :price
       
       t.timestamps
