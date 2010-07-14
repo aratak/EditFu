@@ -227,18 +227,18 @@ var cardPreferencesDuration = 0.1;
 var cardPreferencesButtonDuration = 0.3
 
 function showCardForm() {
-  if( $('billing_view') != null ) { $("billing_view").blindUp({ duration: cardPreferencesDuration }); }
-  if (!$("billing_inputs").visible()) { $("billing_inputs").blindDown({ duration: cardPreferencesDuration }); } 
+  if( $('billing_view') != null ) { $("billing_view").hide({ duration: cardPreferencesDuration }); }
+  if (!$("billing_inputs").visible()) { $("billing_inputs").show({ duration: cardPreferencesDuration }); } 
   $$("#billing_inputs input").each(function(item) { $(item).enable(); })
 }
 
 function hideCardForm() {
   if( $('billing_view') != null ) {
-    if (!$('billing_view').visible()) { $("billing_view").blindDown({ duration: cardPreferencesDuration }); }
+    if (!$('billing_view').visible()) { $("billing_view").show({ duration: cardPreferencesDuration }); }
   }
 
   $$("#billing_inputs input").each(function(item) { $(item).disable(); })
-  $("billing_inputs").blindUp({ duration: cardPreferencesDuration });
+  $("billing_inputs").hide({ duration: cardPreferencesDuration });
 }
 
 function cancelCardLinkState() {
@@ -287,12 +287,12 @@ function bindPlanAndCardForm() {
   $$('.plan input.unpayment').each(function(item) {
     $(item).observe('change', function() { 
       hideCardForm() 
-      if( $('billing_view') != null ) { $("billing_view").blindUp({ duration: cardPreferencesDuration }); }
+      if( $('billing_view') != null ) { $("billing_view").hide({ duration: cardPreferencesDuration }); }
     })
   
     if ($(item).checked == true) {
       hideCardForm();
-      if( $('billing_view') != null ) { $("billing_view").blindUp({ duration: cardPreferencesDuration }); }
+      if( $('billing_view') != null ) { $("billing_view").hide({ duration: cardPreferencesDuration }); }
     }
   })
   

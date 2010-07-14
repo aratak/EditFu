@@ -1,19 +1,19 @@
 #owner-preferences-popup.two-column-popup
   %h1 
     = link_to_function "Account", nil, :id => :account_preferences_link, :class => :active do |page|
-      - page[:account_preferences].slide_down :duration => 0.2
+      - page[:account_preferences].show :duration => 0.2
       - page[:account_preferences].add_class_name('active');
       - page[:account_preferences_link].add_class_name('active');
       
-      - page[:plan_and_billing].slide_up :duration => 0.2
+      - page[:plan_and_billing].hide :duration => 0.2
       - page[:plan_and_billing].remove_class_name('active');
       - page[:plan_and_billing_link].remove_class_name('active');
     = link_to_function "Plan & Billing", nil, :id => :plan_and_billing_link do |page|
-      - page[:plan_and_billing].slide_down :duration => 0.2
+      - page[:plan_and_billing].show :duration => 0.2
       - page[:plan_and_billing].add_class_name('active');
       - page[:plan_and_billing_link].add_class_name('active');
 
-      - page[:account_preferences].slide_up :duration => 0.2
+      - page[:account_preferences].hide :duration => 0.2
       - page[:account_preferences].remove_class_name('active');
       - page[:account_preferences_link].remove_class_name('active');
 
