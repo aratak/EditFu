@@ -1,7 +1,7 @@
 class AddDefaultSubscription < ActiveRecord::Migration
   def self.up
     Owner.all.each do |owner|
-      if owner.subscriptions.empty?
+      if owner.subscriptions.empty? && !owner.confirmed_at.nil?
         owner.subscriptions.create :starts_at => owner.confirmed_at,
                              :ends_at => owner.confirmed_at + owner.plan.period.month,
                              :price => owner.plan.price,
