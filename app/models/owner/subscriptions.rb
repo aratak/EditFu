@@ -14,10 +14,12 @@ class Owner
   def create_next_subscription
     return false unless subscription_is_possible?
     close_latest_subscription
-    subscriptions.create :starts_at => Date.today,
+    subscriptions.create(:starts_at => Time.now,
                          :ends_at => self.plan.period.month.since,
                          :price => self.plan.price,
-                         :plan => self.plan
+                         :plan => self.plan)
+    self.hold = false
+    self.send(:update_without_callbacks)
 
     return true                     
   end

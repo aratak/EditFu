@@ -51,8 +51,8 @@ Factory.define :card do |c|
 end
 
 Factory.define :subscription do |s|
-  s.start_at Date.today
-  s.end_at 1.month.from_now.to_date
+  s.starts_at Time.now
+  s.ends_at 1.month.from_now.to_date
   s.price 300
   s.plan Plan::FREE
   

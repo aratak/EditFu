@@ -506,6 +506,16 @@ describe Owner, "and subscirptions" do
       end
     end
     
+    it "should unhold user" do
+      @owner.hold = true
+      @owner.close_latest_subscription
+      @owner.send(:update_without_callbacks)
+      
+      @owner.create_next_subscription
+      @owner.hold.should be_false
+      
+    end
+    
   end
   
 end
