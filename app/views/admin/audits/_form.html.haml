@@ -22,10 +22,10 @@
           - unless sbscr.object.new_record?
             %td= "#{sbscr.object.plan.name}" 
           - else
-            %td= sbscr.collection_select :plan_id, Plan.all, :id, :name, {}, { :disabled => sbscr.object.new_record? }
+            %td= sbscr.collection_select :plan_id, Plan.all, :id, :name, { :selected => sbscr.object.owner.plan.id}, { :disabled => sbscr.object.new_record? }
           %td
             $
-            = sbscr.text_field  :price_in_dollars, :class => :price, :disabled => sbscr.object.new_record?, :value => (@owner.plan.price if sbscr.object.new_record?)
+            = sbscr.text_field  :price_in_dollars, :class => :price, :disabled => sbscr.object.new_record?, :value => (@owner.plan.price_in_dollars if sbscr.object.new_record?)
           %td= sbscr.date_select :starts_at, :disabled => sbscr.object.new_record?, :default => (Date.today if sbscr.object.new_record?)
           %td= sbscr.date_select :ends_at, :disabled => sbscr.object.new_record?, :default => (1.month.since if sbscr.object.new_record?)
           - unless sbscr.object.new_record?
