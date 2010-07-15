@@ -19,7 +19,10 @@
     %tbody
       - f.fields_for :subscriptions do |sbscr|
         %tr{:style => ("display: none;" if sbscr.object.new_record?), :id => dom_id(sbscr.object)}
-          %td= "#{sbscr.object.plan.name}" unless sbscr.object.new_record?
+          - unless sbscr.object.new_record?
+            %td= "#{sbscr.object.plan.name}" 
+          - else
+            %td= sbscr.collection_select :plan_id, Plan.all, :id, :name, {}, { :disabled => sbscr.object.new_record? }
           %td
             $
             = sbscr.text_field  :price_in_dollars, :class => :price, :disabled => sbscr.object.new_record?, :value => (@owner.plan.price if sbscr.object.new_record?)
@@ -32,7 +35,7 @@
             %td= "none"
             %td= link_to_function "Cancel", "$('new_subscription').hide(); $$('#new_subscription input', '#new_subscription select').invoke('disable'); $('add_new_subscription').show()"
       %tr
-        %td{:colspan => 4, :style => "text-align: right;"}
+        %td{:colspan => 5, :style => "text-align: right;"}
           = link_to_function "Add new subscription" + (" and unhold user" if @owner.hold?).to_s, "$('new_subscription').show(); $$('#new_subscription input', '#new_subscription select').invoke('enable'); $(this).hide()", :id => :add_new_subscription
 
   = submit_tag "Update", :class => "update-button"
