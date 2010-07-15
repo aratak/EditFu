@@ -1,0 +1,18 @@
+- add_stylesheet "subscriptions"
+%table.subscriptions
+  %caption= link_to "Subscriptions", admin_audit_path(@owner.id)
+  %thead
+    %tr
+      %th Created
+      %th Plan
+      %th Price
+      %th Started at
+      %th Ended at
+  %tbody
+    - @owner.subscriptions.each do |sbscr|
+      %tr
+        %td.created_at{:title => sbscr.created_at}= sbscr.created_at.to_date
+        %td.plan= sbscr.plan.name
+        %td.price= "$#{sbscr.price_in_dollars}"
+        %td.starts_at= sbscr.starts_at.to_date
+        %td.ends_at= sbscr.ends_at.to_date

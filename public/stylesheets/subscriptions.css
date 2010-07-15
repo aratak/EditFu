@@ -1,5 +1,18 @@
 table.subscriptions tr td {
   padding: 5px 10px;
+  border-left: 1px solid #dadada;
+}
+
+table.subscriptions tr:hover td {
+  background: #e3e3e3;
+}
+
+table.subscriptions tr th {
+  background: #bcdeeb;
+}
+
+table.subscriptions caption {
+  background: #dadada;
 }
 
 table.subscriptions tr th {
@@ -17,3 +30,19 @@ table.subscriptions input.price {
   background: red;
 }
 
+table.subscriptions td.price {
+  text-align: right;
+  width: 50px;
+}
+
+table.subscriptions td.plan {
+  
+}
+
+table.subscriptions td.starts_at {
+  
+}
+
+table.subscriptions td.ends_at {
+  
+}
