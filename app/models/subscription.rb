@@ -19,11 +19,10 @@ class Subscription < ActiveRecord::Base
   end
   
   def price_in_dollars
-    self.price / 100
+    self.price.to_i / 100
   end
 
   def price_in_dollars= val
-    p "="*50
     self.price = (val.to_i * 100).to_i
   end
 
