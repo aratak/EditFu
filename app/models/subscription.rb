@@ -3,8 +3,10 @@ class Subscription < ActiveRecord::Base
   default_scope :order => "ends_at"
 
   attr_reader :price_in_dollars
+  
+  before_create :set_owner_plan
 
-  belongs_to :owner
+  belongs_to :owner, :autosave => true
   belongs_to :plan
   
   validates_presence_of :starts_at
@@ -26,16 +28,12 @@ class Subscription < ActiveRecord::Base
     self.price = (val.to_i * 100).to_i
   end
 
-  
-  # def set_plan
-  #   self.plan = self.owner.plan if self.plan.nil?
-  # end
-  #   
-  # return true if plan is payment, 
-  # so subscription can be created
-  # def possible?
-  #   self.owner.subscription_is_possible?
-  # end
+  def set_owner_plan
+    unless self.owner.plan == self.plan
+      self.owner.set_plan(self.plan)
+      self.owner.send(:update_without_callbacks)
+    end
+  end
   
 end
 
