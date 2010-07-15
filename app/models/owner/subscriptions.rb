@@ -32,13 +32,13 @@ class Owner
     plan_changed?
   end
   
-  def holded?
-    hold && hold_changed?
-  end
-  
-  def unholded?
-    !holded?
-  end
+  # def holded?
+  #   hold? && plan_changed?
+  # end
+  # 
+  # def unholded?
+  #   !holded?
+  # end
   
   def hold
     return true if self.subscriptions.empty?

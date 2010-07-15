@@ -4,6 +4,7 @@ describe AuthorizeNetRecurring do
   describe ".create" do
     before :each do
       @owner = Factory.build :owner
+      @owner.stub!(:next_billing_date).and_return(1.month.since)
       @card = Factory.build :card, :owner => @owner
       @owner.confirmed_at = Date.today
       @gateway = mock('gateway')

@@ -11,7 +11,7 @@ class Subscription < ActiveRecord::Base
   
   validates_presence_of :starts_at
   validates_presence_of :ends_at
-  validates_presence_of :price_in_dollars
+  validates_presence_of :price
   validates_presence_of :owner_id
   
   before_create :close_previous_subscirption

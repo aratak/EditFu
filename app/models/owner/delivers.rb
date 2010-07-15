@@ -24,7 +24,7 @@ class Owner
   
   def deliver_changes
     deliver_subdomain_changes     if domain_name_changed?
-    deliver_hold                  if holded?
+    # deliver_hold                  if holded?
     deliver_owner_email_changes   if email_changed?
     deliver_plan_changed          if plan_changed?
   end

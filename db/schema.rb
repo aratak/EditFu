@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100714141122) do
+ActiveRecord::Schema.define(:version => 20100715124410) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -86,12 +86,9 @@ ActiveRecord::Schema.define(:version => 20100714141122) do
     t.string   "domain_name"
     t.integer  "owner_id"
     t.string   "type",                 :limit => 10,                    :null => false
-    t.string   "card_number",          :limit => 20
     t.boolean  "enabled",                             :default => true, :null => false
     t.string   "user_name"
-    t.date     "card_exp_date"
     t.string   "company_name"
-    t.boolean  "hold"
     t.integer  "plan_id",                             :default => 1
   end
 
