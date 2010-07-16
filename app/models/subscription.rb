@@ -1,6 +1,8 @@
 class Subscription < ActiveRecord::Base
   
   default_scope :order => "ends_at"
+  
+  named_scope :past, :conditions => ["ends_at < ?", Time.now]
 
   attr_reader :price_in_dollars
   
@@ -15,6 +17,14 @@ class Subscription < ActiveRecord::Base
   validates_presence_of :owner_id
   
   before_create :close_previous_subscirption
+  
+  def self.previous
+    past.first
+  end
+  
+  def self.last
+    self.find :last
+  end
   
   def close_previous_subscirption
     self.owner.close_latest_subscription
