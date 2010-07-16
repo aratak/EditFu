@@ -76,7 +76,7 @@ class Owner
     # this_bd = Date.new(date.year, date.month, billing_day)
     # this_bd.past? ? this_bd.next_month : this_bd
 
-    subscriptions.find(:last).try(:ends_at)
+    subscriptions.last.try(:ends_at).try(:to_date)
   end
 
   # def prof_plan_begins_at
