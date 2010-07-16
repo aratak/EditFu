@@ -36,14 +36,4 @@
       .label-input
         = owner.error_for :'card.zip'
         = card_fields.text_field 'zip', :placeholder => '10005'
-    - if @owner.plan.payment?
-      - if @owner.prev_billing_date
-        .title-input.prev-billing-date
-          .label-input
-            .inner-title Last billing date
-            %span= @owner.prev_billing_date
-      .title-input.next-billing-date
-        .label-input
-          .inner-title Next billing date
-          %span= @owner.next_billing_date
   .clear

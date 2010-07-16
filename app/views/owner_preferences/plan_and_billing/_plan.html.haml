@@ -6,4 +6,10 @@
     = render 'owner_preferences/plan_and_billing/plans/free', :form => owner
     = render 'owner_preferences/plan_and_billing/plans/trial', :form => owner
     = render 'owner_preferences/plan_and_billing/plans/unlimited_trial', :form => owner
+
+    .next-billing-date
+      .label-input
+        .inner-title Next billing date
+        %span= @owner.next_billing_date
+
   .clear
