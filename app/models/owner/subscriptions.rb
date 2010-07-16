@@ -66,7 +66,9 @@ class Owner
     # ActiveSupport::Deprecation.warn("the method 'prev_billing_date' will be deplicated")
     # d = next_billing_date << 1
     # d <= confirmed_at.to_date ? nil : d
-    subscriptions[-2].ends_at
+    # subscriptions[-2].ends_at
+    
+    subscriptions.last.try(:starts_at).try(:to_date)
   end
 
   def next_billing_date(date = Date.today)
