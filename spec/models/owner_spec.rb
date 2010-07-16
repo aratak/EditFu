@@ -487,7 +487,8 @@ describe Owner, "and subscirptions" do
     it "first subscription should has todays end date" do
       @owner.set_plan Plan::PROFESSIONAL
       @owner.save
-      @owner.subscriptions.first.ends_at.to_date.should be_today
+      
+      @owner.subscriptions.previous.ends_at.to_date.should == Date.today
     end
     
     Plan.all.each do |plan|

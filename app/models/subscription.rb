@@ -6,6 +6,7 @@ class Subscription < ActiveRecord::Base
 
   attr_reader :price_in_dollars
   
+  before_create :close_previous_subscirption
   before_create :set_owner_plan
 
   belongs_to :owner, :autosave => true
@@ -16,7 +17,6 @@ class Subscription < ActiveRecord::Base
   validates_presence_of :price
   validates_presence_of :owner_id
   
-  before_create :close_previous_subscirption
   
   def self.previous
     past.first
