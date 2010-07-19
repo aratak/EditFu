@@ -9,7 +9,12 @@
 
     .next-billing-date
       .label-input
-        .inner-title Next billing date
+        - if @owner.plan.payment?
+          .inner-title Next billing date
+        - elsif @owner.plan.trial?
+          .inner-title Trial ends date
+        - else
+          .inner-title Should be extend
         %span= @owner.next_billing_date
 
   .clear
