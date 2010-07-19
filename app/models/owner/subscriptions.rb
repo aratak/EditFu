@@ -38,8 +38,8 @@ class Owner
 
   def hold
     return true if self.subscriptions.empty?
-    return true if self.subscriptions.last.ends_at.nil?
-    self.subscriptions.last.ends_at < Time.now
+    return true if self.subscriptions.latest.ends_at.nil?
+    self.subscriptions.latest.ends_at < Time.now
   end
   alias_method :hold?, :hold
   

@@ -22,7 +22,7 @@ class Subscription < ActiveRecord::Base
     past.first
   end
   
-  def self.last
+  def self.latest
     self.find :last
   end
   
