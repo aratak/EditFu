@@ -35,7 +35,7 @@
   color: #b7b7b7;
 }
 
-.inputs .label-input input {
+.inputs .label-input input, .inputs .label-input select {
   width: 100%;
   line-height: 20px;
   font-size: 20px;
@@ -48,6 +48,11 @@
   -webkit-box-sizing: border-box;
   -ms-box-sizing: border-box;
   box-sizing: border-box;
+}
+
+.inputs .label-input select {
+  width: auto;
+  padding: 0;
 }
 
 .inputs div input:focus,

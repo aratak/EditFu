@@ -256,19 +256,25 @@ function bindPlanAndCardForm() {
   
   $$('.plan input:not(input.payment:not(.current))').each(function(item) {
     $(item).observe('change', function(item) {
-      $('change_card_link').appear({ duration: cardPreferencesButtonDuration });
+      if($('cancel_card_link')) {
+        $('change_card_link').appear({ duration: cardPreferencesButtonDuration });
+      }
     })
   })
   
   $$('.plan input.unpayment').each(function(item) {
     $(item).observe('change', function(item) {
-      $('cancel_card_link').fade({ duration: cardPreferencesButtonDuration });
+      if($('cancel_card_link')) {
+        $('cancel_card_link').fade({ duration: cardPreferencesButtonDuration });
+      }
     })
   })
   
   $$('.plan input:not(.unpayment)').each(function(item) {
     $(item).observe('change', function(item) {
-      $('cancel_card_link').appear({ duration: cardPreferencesButtonDuration });
+      if($('cancel_card_link')) {
+        $('cancel_card_link').appear({ duration: cardPreferencesButtonDuration });
+      }
     })
   })
   
