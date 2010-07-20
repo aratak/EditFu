@@ -2,16 +2,21 @@ class Plan
   
   # there are list of all plans
   create :id => 1, :name => "Trial",          :price => 0,     :display_name => "Trial"   , :period => 1
-  create :id => 2, :name => "Free",           :price => 0,     :display_name => "Free"    , :period => 12
-  create :id => 3, :name => "UnlimitedTrial", :price => 0,     :display_name => "Buddy"   , :period => 12
+  create :id => 2, :name => "Free",           :price => 0,     :display_name => "Free"    , :period => 144
+  create :id => 3, :name => "UnlimitedTrial", :price => 0,     :display_name => "Buddy"   , :period => 144
   create :id => 4, :name => "Single",         :price => 100,   :display_name => "Single"  , :period => 1
   create :id => 5, :name => "Professional",   :price => 200,   :display_name => "Pro"     , :period => 1
   
   PAYMENTS = [SINGLE, PROFESSIONAL]
   UNPAYMENTS = Plan.all - PAYMENTS
+  PERIODED = [SINGLE, PROFESSIONAL, TRIAL]
 
   def payment?
     PAYMENTS.include? self
+  end
+  
+  def perioded?
+    PERIODED.include? self
   end
   
   def payment_style_class

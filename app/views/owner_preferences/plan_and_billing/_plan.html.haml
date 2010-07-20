@@ -7,14 +7,13 @@
     = render 'owner_preferences/plan_and_billing/plans/trial', :form => owner
     = render 'owner_preferences/plan_and_billing/plans/unlimited_trial', :form => owner
 
-    .next-billing-date
-      .label-input
-        - if @owner.plan.payment?
-          .inner-title Next billing date
-        - elsif @owner.plan.trial?
-          .inner-title Trial ends date
-        - else
-          .inner-title Should be extend
-        %span= @owner.next_billing_date
+    - if @owner.plan.perioded?
+      .next-billing-date
+        .label-input
+          - if @owner.plan.trial?
+            .inner-title Trial ends date
+          - else
+            .inner-title Next billing date
+          %span= @owner.next_billing_date
 
   .clear
