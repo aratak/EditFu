@@ -87,9 +87,11 @@ class Mailer < ActionMailer::Base
   end
   
   def hold_report owners_hash
-    setup Admin.first
-    subject 'Owners report'
-    body owners_hash.merge(:user => Admin.first)
+    from          "edit.fu.cms@gmail.com"
+    recipients    "billing@editfu.com"
+    content_type  'text/html'
+    subject       'Owners report'
+    body          owners_hash
   end
 
   private
