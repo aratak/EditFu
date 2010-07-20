@@ -514,7 +514,6 @@ describe Owner, "and subscirptions" do
       
       @owner.create_next_subscription
       @owner.hold.should be_false
-      
     end
     
   end

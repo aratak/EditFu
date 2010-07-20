@@ -61,6 +61,7 @@ end
 
 
 
+
 # == Schema Information
 #
 # Table name: users
@@ -85,12 +86,9 @@ end
 #  domain_name          :string(255)
 #  owner_id             :integer(4)
 #  type                 :string(10)      not null
-#  card_number          :string(20)
 #  enabled              :boolean(1)      default(TRUE), not null
 #  user_name            :string(255)
-#  card_exp_date        :date
 #  company_name         :string(255)
-#  hold                 :boolean(1)
 #  plan_id              :integer(4)      default(1)
 #
 
