@@ -80,6 +80,11 @@ class Mailer < ActionMailer::Base
     setup   user
     subject 'EditFu account hold'
   end
+  
+  def tomorrow_holded_status
+    setup   user
+    subject 'EditFu account hold'
+  end
 
   private
 
