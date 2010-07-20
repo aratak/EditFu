@@ -48,16 +48,13 @@ class Owner
   end
   
   def self.deliver_card_expirations
-    Card.find_all_by_display_expiration_date(15.days.from_now.to_date).map(&:owner)
-    
-    
-    Owner.find_all_by_card_exp_date(15.days.from_now.to_date).each do |owner|
+    Card.find_all_by_display_expiration_date(15.days.from_now.to_date).map(&:owner).each do |owner|
       Mailer.deliver_card_expiration(owner)
     end
   end
 
   def self.deliver_cards_have_expired
-    Owner.find_all_by_card_exp_date(Date.today).each do |owner|
+    Card.find_all_by_display_expiration_date(Date.today).map(&:owner).each do |owner|
       Mailer.deliver_card_has_expired(owner)
     end
   end
