@@ -8,7 +8,7 @@ class Owner
   def close_latest_subscription
     return true if subscriptions.empty?
     
-    subscriptions.last.update_attribute(:ends_at, Time.now) unless subscriptions.last.ends_at.past?
+    subscriptions.last.update_attributes(:ends_at => Time.now) unless subscriptions.last.ends_at.past?
     true
   end
   
@@ -26,7 +26,6 @@ class Owner
     # self.plan.payment? || self.plan.trial?
     true
   end
-  
   
   def next_subscription?
     plan_changed?
