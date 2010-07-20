@@ -6,11 +6,16 @@ class Page < ActiveRecord::Base
   belongs_to :site, :autosave => true, :validate => true
   validates_presence_of :path
   validates_uniqueness_of :path, :scope => :site_id
+  validate :permission
 
   named_scope :enabled, :conditions => { :enabled => true }
 
   def owner
     site.owner
+  end
+  
+  def permission
+    errors.add_to_base "can't add anymore" unless owner.can_add_page?
   end
 
   def url
