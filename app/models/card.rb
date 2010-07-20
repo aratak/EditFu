@@ -1,8 +1,7 @@
 class Card < ActiveRecord::Base
   FIELDS = [:first_name, :last_name, :expiration, :number, :verification_value, :zip]
 
-  @first_name = ""
-  attr_accessor *(FIELDS + [:credit_card, :display_expiration_date])
+  attr_accessor *(FIELDS + [:credit_card, :display_expiration_date] - [:expiration])
 
   belongs_to :owner
 
@@ -20,7 +19,7 @@ class Card < ActiveRecord::Base
   before_update :update_recurring
   before_create :subscription_validation
   
-  before_save :set_display_card_fields
+  # before_save :set_display_card_fields
   after_save :deliver_credit_card_changes
   before_destroy :cancel_recurring
 
@@ -32,23 +31,31 @@ class Card < ActiveRecord::Base
     self.owner.plan.price unless owner.nil?
   end
   
-  def display_expiration_date= val
-    @display_expiration_date = val
-    self.expiration = display_expiration_date.strftime("%m/%Y")
+  # def display_expiration_date= val
+  #   write_attribute :display_expiration_date, val
+  #   self.expiration = display_expiration_date.strftime("%m/%Y")
+  # end
+  
+  def expiration
+    display_expiration_date.strftime("%m/%Y")
   end
+  
+  # def expiration= val
+  #   display_expiration_date = 
+  # end
 
   private
 
-  def set_display_card_fields
-    return true if !changed?
-    self.display_number = self.credit_card.display_number
-    
-    begin
-      self.display_expiration_date = Date.new(credit_card.year, credit_card.month, 1)
-    rescue ArgumentError
-      errors.add :expiration, "is invalid"
-    end
-  end
+  # def set_display_card_fields
+  #   return true if !changed?
+  #   self.display_number = self.credit_card.display_number
+  #   
+  #   begin
+  #     self.display_expiration_date = Date.new(credit_card.year, credit_card.month, 1)
+  #   rescue ArgumentError
+  #     errors.add :expiration, "is invalid"
+  #   end
+  # end
 
   def set_credit_card
     self.credit_card = ExtCreditCard.new(attributes_for_credit_card)

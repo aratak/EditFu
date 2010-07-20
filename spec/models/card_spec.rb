@@ -13,7 +13,7 @@ describe Card do
   describe "should set display fields" do
     before do
       @card.number = "1234567891234567"
-      @card.expiration = '01/2030'
+      @card.display_expiration_date = '01/01/2030'.to_date
       @card.save
     end
     
@@ -62,7 +62,7 @@ describe Card do
     context ":credit_card is invalid " do
              
       before :each do         
-        @card.expiration = "10/2000"
+        @card.display_expiration_date = "01/10/2000".to_date
       end    
                               
       it "when recurring and got PaymentSystemError" do

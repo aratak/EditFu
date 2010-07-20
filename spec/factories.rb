@@ -46,7 +46,7 @@ Factory.define :card do |c|
   c.number '1'
   c.zip '12345'
   c.verification_value '1'
-  c.expiration '01/2030'
+  c.display_expiration_date '01-01-2030'.to_date
   c.association :owner
 end
 
