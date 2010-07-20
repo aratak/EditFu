@@ -58,7 +58,7 @@ function showAllMessages() {
 function appearMessage(idMessage) {
   var tmp = idMessage;
   $(idMessage).setStyle({ height: "auto" }).hide();
-  $(idMessage).slideDown('slow');
+  $(idMessage).show('slow');
   $(idMessage).select('.close').invoke('appear', { duration: 0.3 })
   window.setTimeout(function() { 
     if( $(idMessage).visible() ) {
