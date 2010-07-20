@@ -1,4 +1,4 @@
 page.replace_html 'system-logo', :partial => 'layouts/logo'
 page["owner_company_name"].value = ""
 page.visual_effect :highlight, "owner_company_name"
-page << "showMessage('success', 'Company name has been reseted')"
+page << "showMessage('success', 'Company name has been reset.')"
