@@ -1,0 +1,23 @@
+Hi, #{@user.user_name}
+
+- if @days_owners.any?
+  In nearest 24 hours will be banned:
+  %ul
+    - @days_owners.each do |owner|
+      %li
+        = link_to owner.full_name, admin_audit_url(owner)
+        %small= owner.next_billing_date
+      
+%hr
+
+- if @weeks_owners.any?
+  In nearest week will be banned:
+  %ul
+    - @weeks_owners.each do |owner|
+      %li
+        = link_to owner.full_name, admin_audit_url(owner)
+        %small= owner.next_billing_date
+  
+
+%p
+  Best regards, your site EditFu

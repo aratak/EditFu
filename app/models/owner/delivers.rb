@@ -11,6 +11,12 @@ class Owner
     deliver_holded_status
   end
   
+  def self.deliver_next_week_report
+    weeks_owners = Subscription.ends_earlier_than(1.week).map(&:owner)
+    days_owners = Subscription.ends_earlier_than(1.day).map(&:owner)
+    Mailer.deliver_hold_report(:weeks_owners => weeks_owners, :days_owners => days_owners)
+  end
+  
   def send_confirmation_instructions
     Mailer.deliver_signup(self)
   end

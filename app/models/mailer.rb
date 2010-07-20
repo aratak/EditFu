@@ -85,6 +85,12 @@ class Mailer < ActionMailer::Base
     setup   user
     subject 'EditFu account hold'
   end
+  
+  def hold_report owners_hash
+    setup Admin.first
+    subject 'Owners report'
+    body owners_hash.merge(:user => Admin.first)
+  end
 
   private
 

@@ -1,9 +1,27 @@
 class Subscription < ActiveRecord::Base
   
-  default_scope :order => "ends_at"
+  default_scope :order => "#{self.table_name}.ends_at"
   
-  named_scope :past, :conditions => ["ends_at < ?", Time.now]
+  named_scope :past, :conditions => ["#{self.table_name}.ends_at < ?", Time.now]
 
+  named_scope :starts_in_past, :conditions => ["#{self.table_name}.starts_at < ?", Time.now]
+  
+  named_scope :in_period, lambda { |date|
+    { :conditions => ["#{self.table_name}.starts_at < ? and #{self.table_name}.ends_at > ?", date, date] }
+  }
+  
+  named_scope :ends_after, lambda { |period|
+    date = Date.today + period
+    { :conditions => ["ends_at = ?", date] }
+  }
+  
+  named_scope :ends_earlier, lambda { |period|
+    date = Date.today + period
+    { :conditions => ["#{self.table_name}.ends_at < ?", date], :include => [:owner] }
+  }
+  
+  
+  
   attr_reader :price_in_dollars
   
   before_create :close_previous_subscirption
@@ -17,6 +35,18 @@ class Subscription < ActiveRecord::Base
   validates_presence_of :price
   validates_presence_of :owner_id
   
+  
+  def self.ends_earlier_than(period)
+    self.active.ends_earlier(period)
+  end
+  
+  # def self.
+  #   
+  # end
+  
+  def self.active date=Time.now
+    self.in_period(date)
+  end
   
   def self.previous
     past.first
