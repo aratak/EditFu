@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Card do
   
   should_belong_to :owner
-  should_validate_presence_of :first_name, :last_name, :expiration, :number, :verification_value, :zip #, :subscription_id
+  should_validate_presence_of :first_name, :last_name, :display_expiration_date, :number, :verification_value, :zip #, :subscription_id
 
   before :each do
     owner = Factory.build :owner

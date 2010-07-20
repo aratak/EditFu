@@ -7,7 +7,7 @@ class Card < ActiveRecord::Base
 
   validates_presence_of :first_name
   validates_presence_of :last_name
-  validates_presence_of :expiration
+  validates_presence_of :display_expiration_date
   validates_presence_of :number
   validates_presence_of :verification_value
   validates_presence_of :zip
@@ -19,7 +19,7 @@ class Card < ActiveRecord::Base
   before_update :update_recurring
   before_create :subscription_validation
   
-  # before_save :set_display_card_fields
+  before_save :set_display_card_fields
   after_save :deliver_credit_card_changes
   before_destroy :cancel_recurring
 
@@ -46,16 +46,16 @@ class Card < ActiveRecord::Base
 
   private
 
-  # def set_display_card_fields
-  #   return true if !changed?
-  #   self.display_number = self.credit_card.display_number
-  #   
-  #   begin
-  #     self.display_expiration_date = Date.new(credit_card.year, credit_card.month, 1)
-  #   rescue ArgumentError
-  #     errors.add :expiration, "is invalid"
-  #   end
-  # end
+  def set_display_card_fields
+    return true if !changed?
+    self.display_number = self.credit_card.display_number
+    
+    # begin
+    #   self.display_expiration_date = Date.new(credit_card.year, credit_card.month, 1)
+    # rescue ArgumentError
+    #   errors.add :expiration, "is invalid"
+    # end
+  end
 
   def set_credit_card
     self.credit_card = ExtCreditCard.new(attributes_for_credit_card)
