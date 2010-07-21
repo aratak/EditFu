@@ -53,6 +53,7 @@
 .inputs .label-input select {
   width: auto;
   padding: 0;
+  font-size: 18px;
 }
 
 .inputs div input:focus,

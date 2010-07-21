@@ -167,6 +167,10 @@
   width: 16%;
 }
 
+#owner-preferences-popup .billing .exp-date .label-input {
+  white-space: nowrap;
+}
+
 #owner-preferences-popup .billing .verification-value {
   width: 15%;
 }
