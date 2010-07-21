@@ -6,6 +6,9 @@ class AuthorizeNetRecurring
       :duration => { :start_date => owner.next_billing_date.strftime('%Y-%m-%d'), :occurrences => 9999 },
       :billing_address => { 
         :first_name => card.first_name, :last_name => card.last_name, :zip => card.zip
+      },
+      :customer => {
+        :email => card.owner.email
       }
     )
 
