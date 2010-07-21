@@ -1,8 +1,8 @@
-%a{selected_class(tab == name, 'tab'), :title => name.capitalize, :href => href}
+%a{selected_class(tab == name, 'tab'), :title => label.capitalize, :href => href}
   - if tab == name
     .shadow.left
     %img(src="/images/selected-#{name}-tab.png")
     .shadow.right
   - else
     %img(src="/images/#{name}-tab.png")
-  %small= name.capitalize
+  %small= label.capitalize
