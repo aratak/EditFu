@@ -164,6 +164,31 @@ describe Page do
         'index.html'
     end
   end
+  
+  
+  describe "multicreate" do
+    
+    it "#deny" do
+        owner = mock_model(Owner, :can_add_page? => false)
+        site = Factory(:site, :owner => owner)
+        page = Page.new(:path => "index.html", :site => site)
+        
+        page.valid?.should be_false
+        page.errors.should_not be_empty
+    end
+    
+    it "#allow" do
+        owner = mock_model(Owner, :can_add_page? => true)
+        site = Factory(:site, :owner => owner)
+        page = Page.new(:path => "index.html", :site => site)
+        
+        page.valid?.should be_true
+    end
+    
+    
+    
+  end
+  
 end
 
 # == Schema Information
