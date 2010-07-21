@@ -72,6 +72,14 @@ html > body {
   top: 23px;
 }
 
+#main .edit_editor {
+  margin-top: 80px;
+}
+
+#editfu-logo + #main .edit_editor {
+  margin-top: 0;
+}
+
 input.submit {
   background: url(/images/submit.png) no-repeat;
   border: none;

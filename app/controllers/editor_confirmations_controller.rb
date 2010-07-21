@@ -1,5 +1,6 @@
 class EditorConfirmationsController < ApplicationController
   before_filter :find_editor
+  before_filter :load_logo
   layout 'public'
 
   def edit
@@ -28,4 +29,11 @@ class EditorConfirmationsController < ApplicationController
       redirect_to new_user_session_path
     end
   end
+  
+  def load_logo
+    @company_owner = @editor.owner
+    @company_logo = @company_owner.identity if @company_owner
+  end
+  
+  
 end
