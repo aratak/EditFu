@@ -17,7 +17,7 @@ class EditorsController < ApplicationController
     if @editor.errors.empty?
       flash[:notice] = I18n.t('editor.created', :name => @editor.email)
     else
-      flash[:notice] = I18n.t('editor.wrong')
+      flash[:notice] = @editor.errors.full_messages.uniq.first # I18n.t('editor.wrong')
       render :action => :new
     end
   end
