@@ -20,11 +20,11 @@
   - else
     .nosites
       .inside
-        HTML into '#{@page.path}' is invalid. 
+        The page '#{@page.path}' contains one or more incorrectly used editfu class. 
         %br
-        EDITFU style class should be present only in 
+        The editfu class should only be used on 
         %br
-        <strong>DIV</strong> and <strong>IMG</strong>.
+        <strong>DIV</strong> and <strong>IMG</strong> elements
         %br
 
         = help_link_for :invalid_page
