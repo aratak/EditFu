@@ -15,48 +15,18 @@
     = render "layouts/action_bars/delimiter"
 
 
-  - remote_form_for [@site, @page], :html => { :id => 'page-form' } do |f|
-    - if @page.empty?
-      .nosites
-        .inside
-          There is no content to edit... Yet!
-          %br
-          - unless @page.owner.owner?
-            = "Contact <strong>#{@page.owner.full_name}</strong> (#{mail_to(@page.owner.email)}) for more info."
-        .helper
-        = help_link_for :no_content
-          
-    - unless @sections.blank?
-      - @sections.each do |section|
-        .mce-editor
-          = text_area_tag 'sections[]', section, :id => nil, :class => 'mce_area'
+  - if @page.html_valid?
+    = render "form"
+  - else
+    .nosites
+      .inside
+        HTML into '#{@page.path}' is invalid. 
+        %br
+        EDITFU style class should be present only in 
+        %br
+        <strong>DIV</strong> and <strong>IMG</strong>.
+        %br
 
-    - unless @images.blank? 
-      .hint Click any of the images below to swap it out with a different image.
-      - @images.each do |attributes|
-        .image
-          .bar 100 X 100
-          .thumbnail
-            %img{:src => File.join(@site.http_url, attributes['src']), |
-              :alt => attributes['alt'], :onload => 'initImage(this);' } |
-          - attributes.each do |k,v|
-            = hidden_field_tag "images[][#{k}]", v, :id => nil
-    - unless @page.empty?
-      = f.submit "Publish", :class => "update-button"
-  
-  #code-popup-template(style='display: none;')
-    .code-popup.two-column-popup.html_code
-      %h1 HTML Code
-      - form_tag '#', :onsubmit => 'updateHtmlCode(); return false;', :class => "withtextarea"  do
-        = text_area_tag :code
-        .popup-action-bar
-          = submit_tag 'Update'
-          = link_to_function "Cancel", "hidePopup();", :class => 'action cancel'
+        = help_link_for :invalid_page
+      .helper
     
-  :javascript
-    initTinyMCE({
-      site_url: '#{@site.http_url}',
-      code: '#{current_user.owner? ? ',code' : ''}',
-      new_image_path: '#{new_site_image_path(@site)}',
-      document_base_url: '#{@site.http_url}/'
-    });

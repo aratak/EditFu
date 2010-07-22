@@ -54,6 +54,11 @@ class Page < ActiveRecord::Base
     elements(false).any? { |e| !['div', 'span'].include?(e.pathname) }
   end
 
+  def html_valid?
+    ((document / '.editfu') - nodes).empty?
+  end
+
+
   protected
 
   def before_save
@@ -66,18 +71,21 @@ class Page < ActiveRecord::Base
     @document ||= Hpricot(content) 
   end
 
+  def nodes
+    (document / 'div.editfu, img.editfu')
+  end
+
   def elements(img)
-    nodes = (document / '.editfu')
     nodes.select do |e| 
       !nested_node?(e, nodes) && (e.pathname == 'img') == img
     end
   end
 
   def nested_node?(node, nodes)
-    p = node.parent
-    while p do
-      return true if nodes.include?(p)
-      p = p.parent
+    par = node.parent
+    while par do
+      return true if nodes.include?(par)
+      par = par.parent
     end
   end
 

@@ -36,8 +36,8 @@ class PagesController < ApplicationController
     end
       
     params[:path].each do |path|
-      page = @site.pages.create(:path => path)
-      if page.errors.empty?
+      page = @site.pages.build(:path => path)
+      if page.save
         begin
           FtpClient.get_page(page)
           flash[:success] = I18n.t('page.suspicious') if page.has_suspicious_sections?
