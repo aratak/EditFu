@@ -8,5 +8,6 @@ FAQS = {
   :add_editors      => "http://www.takeastep.me/editfu-faq/editors/how-do-i-invite-an-editor.html",
   :preferences      => "http://www.takeastep.me/editfu-faq/accounts-billing/",
   :choose_editors   => "http://www.takeastep.me/editfu-faq/editors/",
-  :no_content       => "http://www.takeastep.me/editfu-faq/basics/getting-started.html"
+  :no_content       => "http://www.takeastep.me/editfu-faq/basics/getting-started.html",
+  :invalid_page     => "http://www.takeastep.me/editfu-faq/basics/getting-started.html"
 }
