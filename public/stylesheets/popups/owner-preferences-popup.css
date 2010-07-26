@@ -122,6 +122,12 @@
   height: 100%;
   width: 100%;
   cursor: pointer;
+  background: white;
+  
+  filter: progid:DXImageTransform.Microsoft.Alpha(opacity = 0);
+  -moz-opacity: 0;
+  -khtml-opacity: 0;
+  opacity: 0;
 }
 
 #owner-preferences-popup .plan .plan-label dl {

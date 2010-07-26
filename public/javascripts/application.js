@@ -249,14 +249,14 @@ function cancelCardLinkState() {
 function bindPlanAndCardForm() {
   
   $$('.plan input.payment:not(.current)').each(function(item) {
-    $(item).observe('change', function(item) {
+    $(item).observe('click', function(item) {
       $('change_card_link').fade({ duration: cardPreferencesButtonDuration });
     })
   })
   
   
   $$('.plan input:not(input.payment:not(.current))').each(function(item) {
-    $(item).observe('change', function(item) {
+    $(item).observe('click', function(item) {
       if($('cancel_card_link')) {
         $('change_card_link').appear({ duration: cardPreferencesButtonDuration });
       }
@@ -264,7 +264,7 @@ function bindPlanAndCardForm() {
   })
   
   $$('.plan input.unpayment').each(function(item) {
-    $(item).observe('change', function(item) {
+    $(item).observe('click', function(item) {
       if($('cancel_card_link')) {
         $('cancel_card_link').fade({ duration: cardPreferencesButtonDuration });
       }
@@ -272,7 +272,7 @@ function bindPlanAndCardForm() {
   })
   
   $$('.plan input:not(.unpayment)').each(function(item) {
-    $(item).observe('change', function(item) {
+    $(item).observe('click', function(item) {
       if($('cancel_card_link')) {
         $('cancel_card_link').appear({ duration: cardPreferencesButtonDuration });
       }
@@ -281,7 +281,7 @@ function bindPlanAndCardForm() {
   
   
   $$('.plan input.current').each(function(item) {
-    $(item).observe('change', function() { 
+    $(item).observe('click', function() { 
       hideCardForm() 
     })
 
@@ -292,7 +292,7 @@ function bindPlanAndCardForm() {
   
   
   $$('.plan input.unpayment').each(function(item) {
-    $(item).observe('change', function() { 
+    $(item).observe('click', function() { 
       hideCardForm() 
       if( $('billing_view') != null ) { $("billing_view").hide({ duration: cardPreferencesDuration }); }
     })
@@ -305,13 +305,13 @@ function bindPlanAndCardForm() {
   
   if( $('billing_view') == null ) {
     $$('input.payment').each(function(item) {
-      $(item).observe('change', function() { 
+      $(item).observe('click', function() { 
         showCardForm();
       })
     })
   } else {
     $$('.plan input.not_current.payment').each(function(item) {
-      $(item).observe('change', function() { 
+      $(item).observe('click', function() { 
         showCardForm();
       })
     })
