@@ -95,7 +95,7 @@ function swapOutImage() {
 }
 
 function initImage(img) {
-  var image = img.up('.image');
+  var image = $(img).up('.image');
   if(image == undefined) { return true }
 
   img.originalHeight = img.height;
@@ -124,11 +124,11 @@ function loadImagePopup(parameters) {
 }
 
 Event.observe(window, 'load', function() {
-  var onsubmit = $('page-form').onsubmit;
-  $('page-form').onsubmit = function() {
+  var onsubmit = $('page-form').onSubmit;
+  $('page-form').observe('onsubmit', function() {
     tinyMCE.triggerSave();
     return onsubmit.apply(this);
-  }
+  });
 
   $$('.image').each(function(image) {
     Event.observe(image, 'click', swapOutImage);
