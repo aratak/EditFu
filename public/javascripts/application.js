@@ -250,7 +250,9 @@ function bindPlanAndCardForm() {
   
   $$('.plan input.payment:not(.current)').each(function(item) {
     $(item).observe('click', function(item) {
-      $('change_card_link').fade({ duration: cardPreferencesButtonDuration });
+      if($('cancel_card_link')) {
+        $('change_card_link').fade({ duration: cardPreferencesButtonDuration });
+      }
     })
   })
   
