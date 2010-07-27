@@ -43,6 +43,7 @@ class EditorsController < ApplicationController
 
   def update_permissions
     @editor.set_page_ids(params[:pages] || [])
+    flash[:success] = I18n.t('editor.permissions_updated')
   end
 
   def destroy
