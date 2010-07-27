@@ -138,7 +138,7 @@ function showPopup() {
 }
 
 function hidePopup() {
-  // document.documentElement.style.overflow = null;
+  document.documentElement.style.overflow = 'auto';
   $$('body').invoke('setStyle', {overflow: ''});
   // $$('body').first().setStyle({ minHeight: "auto" });
   $('all').style.overflow = 'visible';
