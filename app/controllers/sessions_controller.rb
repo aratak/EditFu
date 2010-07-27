@@ -14,6 +14,7 @@ class SessionsController < ApplicationController
       end
     end
     @user = User.new
+    @title = 'EditFu - Content Management System'
   end
 
   def create
