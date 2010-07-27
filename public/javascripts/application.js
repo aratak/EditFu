@@ -338,6 +338,7 @@ var observeAllForm = function() {
 }
 
 var TinyMCEareaChanged = function(inst) {
+  tinyMCE.triggerSave();
   if($(this).down && $(this).down('input[type=submit]')) { inst.formElement.down('input[type=submit]').addClassName('changed'); }
 }
 
