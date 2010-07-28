@@ -344,8 +344,6 @@ var TinyMCEareaChanged = function(inst) {
   if($(this).down && $(this).down('input[type=submit]')) { inst.formElement.down('input[type=submit]').addClassName('changed'); }
 }
 
-
-
 Ajax.Responders.register({
   onCreate: showProcessing,
   
