@@ -12,7 +12,7 @@ class Card < ActiveRecord::Base
   validates_presence_of :verification_value
   validates_presence_of :zip
   
-  validates_format_of :expiration, :with => /^\d{2}\/\d{4}$/
+  # validates_format_of :expiration, :with => /^\d{2}\/\d{4}$/
   
   before_save :set_credit_card
   before_create :recurring
