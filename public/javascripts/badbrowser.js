@@ -57,7 +57,8 @@ function badBrowser(){
 Event.observe(window, 'load', function() {
   if(badBrowser()) {
     $('popup-system').show();
-    $$('.cancel')[0].observe('click', function() {
+    $$('.cancel')[0].observe('click', function(e) {
+      e.stop();
       $('popup-system').hide();
       return false;
     }); 
