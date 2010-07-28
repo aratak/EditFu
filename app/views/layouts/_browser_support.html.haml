@@ -1,0 +1,32 @@
+.popup#broswer-support
+  %h1 
+    The browser you are currently using is not supported. 
+    %br 
+    Portions of our website may not display or function properly 
+    when used with your current browser.
+  %h4 
+    We recommend using a most recent version of one of these supported browsers:
+    %ul
+      %li
+        %a{ :href => "http://www.microsoft.com/windows/internet-explorer/" } 
+          %img{ :src => "images/browsers/ie8.png" }
+          %strong Internet Explorer 8
+      %li
+        %a{ :href => "http://www.google.com/chrome/" } 
+          %img{ :src => "images/browsers/chrome.png" }
+          %strong Google Chrome
+      %li
+        %a{ :href => "http://www.opera.com/" } 
+          %img{ :src => "images/browsers/opera.png" }
+          %strong Opera 10
+      %li
+        %a{ :href => "http://www.mozilla.com/" } 
+          %img{ :src => "images/browsers/firefox.png" }
+          %strong FireFox 3.6
+      %li
+        %a{ :href => "http://www.apple.com/safari/" } 
+          %img{ :src => "images/browsers/safari.png" }
+          %strong Safari
+  .popup-action-bar
+    %a{ :class => 'action cancel', :href => '#' }
+      Continue using your current browser

@@ -15,3 +15,22 @@
   padding: 0 !important;
   min-width: 23px !important;
 }
+
+* html #all {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+* html #popup-system {
+  position: absolute;
+}
+
+* html #broswer-support .popup-action-bar {
+  width: 980px;
+}
+
+#broswer-support ul li a:hover {
+  position: static;
+}
+
