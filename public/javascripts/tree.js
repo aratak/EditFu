@@ -143,7 +143,7 @@ var FtpTree = Class.create({
       if(selected) {
         tree.selectItem(selected, true);
       } else {
-        showMessage('error', "Site root isn't exist on the server.");
+        showMessage('error', "Site root doesn't exist on the server.");
       }
     });
   },
