@@ -1,4 +1,4 @@
-page.call 'setTitle', @site.name
+# page.call 'setTitle', @site.name
 page["site-#{@site.id}-menu"].down('a').innerHTML = @site.name
 page.call 'hidePopup'
 xhr_flash page

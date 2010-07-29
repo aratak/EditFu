@@ -81,7 +81,7 @@ function showBodyMessage(kind, text) {
 
 function setTitle(newValue) {
   document.title = newValue;
-  $$('#main .header .title')[0].innerHTML = newValue;
+  // $$('#main .header .title')[0].innerHTML = newValue;
 }
 
 function clearMessage() {
