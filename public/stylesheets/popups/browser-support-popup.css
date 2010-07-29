@@ -1,0 +1,38 @@
+#broswer-support {
+  padding: 30px 30px 60px 30px;
+}
+
+#broswer-support ul {
+  margin-top: 30px;
+}
+
+#broswer-support ul li {
+  list-style: none;
+  text-align: center;
+  float: left;
+  margin: 10px 25px;
+  height: 150px;
+}
+
+#broswer-support ul li img {
+  display: block;
+  margin-bottom: 20px;
+}
+
+#broswer-support ul li a {
+  text-decoration: none;
+  color: #1F5CA1;
+}
+
+#broswer-support {
+  position: relative;
+  width: 920px;
+}
+
+#broswer-support .popup-action-bar {
+  position: absolute;
+  width: auto;
+  left: 0;
+  bottom: 0;
+  width: 960px;
+}

@@ -79,6 +79,8 @@ class PagesController < ApplicationController
     @page.save
     begin
       FtpClient.put_page(@page)
+      flash[:success] = I18n.t('page.updated')
+      redirect_to site_page_path(@page.site, @page)
     rescue FtpClientError => e
       render_message ftp_update_message
       Mailer.deliver_content_update_error(current_user, e.message) if current_user.editor?
