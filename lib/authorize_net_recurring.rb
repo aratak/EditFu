@@ -3,7 +3,7 @@ class AuthorizeNetRecurring
     owner = card.owner
     response = gateway.recurring(amount, card.credit_card, 
       :interval => { :unit => :months, :length => 1 },
-      :duration => { :start_date => owner.next_billing_date.strftime('%Y-%m-%d'), :occurrences => 9999 },
+      :duration => { :start_date => owner.prev_billing_date.strftime('%Y-%m-%d'), :occurrences => 9999 },
       :billing_address => { 
         :first_name => card.first_name, :last_name => card.last_name, :zip => card.zip
       },
