@@ -2,7 +2,7 @@ require 'hpricot'
 
 class Page < ActiveRecord::Base
   IMAGE_ATTRIBUTES = ['src', 'alt']
-  ALLOWED_TAGS = [:div, :img, :p, :h1, :h2, :h3, :h4, :h5, :h6]
+  ALLOWED_TAGS = ["div", "img", "h1", "h2", "h3", "h4", "h5", "h6"]
 
   belongs_to :site, :autosave => true, :validate => true
   validates_presence_of :path
@@ -40,7 +40,7 @@ class Page < ActiveRecord::Base
       result
     end
   end
-  
+
   def empty?
     sections.empty? && images.empty?
   end
@@ -52,7 +52,7 @@ class Page < ActiveRecord::Base
   end
 
   def has_suspicious_sections?
-    elements(false).any? { |e| !['div', 'span'].include?(e.pathname) }
+    elements(false).any? { |e| !ALLOWED_TAGS.include?(e.pathname) }
   end
 
   def html_valid?
