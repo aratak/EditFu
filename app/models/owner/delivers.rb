@@ -15,6 +15,10 @@ class Owner
     weeks_owners = Subscription.ends_earlier_than(1.week).map(&:owner)
     days_owners = Subscription.ends_earlier_than(1.day).map(&:owner)
     Mailer.deliver_hold_report(:weeks_owners => weeks_owners, :days_owners => days_owners)
+    
+    Subscription.ends_todays.each do |owner|
+      owner.create_next_subscription
+    end
   end
   
   def send_confirmation_instructions

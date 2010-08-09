@@ -10,9 +10,11 @@ class Subscription < ActiveRecord::Base
     { :conditions => ["#{self.table_name}.starts_at < ? and #{self.table_name}.ends_at > ?", date, date] }
   }
   
+  named_scope :ends_todays, :conditions => ["date(#{self.table_name}.ends_at) = date(?)", Time.now]
+  
   named_scope :ends_after, lambda { |period|
     date = Date.today + period
-    { :conditions => ["ends_at = ?", date] }
+    { :conditions => ["date(#{self.table_name}.ends_at) = date(?)", date] }
   }
   
   named_scope :ends_earlier, lambda { |period|
@@ -39,10 +41,6 @@ class Subscription < ActiveRecord::Base
   def self.ends_earlier_than(period)
     self.active.ends_earlier(period)
   end
-  
-  # def self.
-  #   
-  # end
   
   def self.active date=Time.now
     self.in_period(date)

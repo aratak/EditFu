@@ -59,9 +59,6 @@ Factory.define :subscription do |s|
   s.association :owner
 end
 
-
-
-
 # Factory.define :card , :class => ExtCreditCard do |c|
 #   c.first_name 'John'
 #   c.last_name 'Doe'

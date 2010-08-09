@@ -398,6 +398,13 @@ describe Owner, "and subscirptions" do
   
 end
 
+describe Owner, 'and delivers' do
+  it "named_scope should work" do
+    @owner = Factory(:owner)
+    5.times { @owner.create_next_subscription }
+    Subscription.ends_todays.count.should == 5
+  end
+end
 
 
 # == Schema Information
