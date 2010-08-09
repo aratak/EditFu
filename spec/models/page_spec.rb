@@ -35,7 +35,7 @@ describe Page do
       @page.content = <<-EOS
         <html>
           <body>
-            <p class='editfu'><b class='editfu'>Hello</b></p>
+            <div class='editfu'><b class='editfu'>Hello</b></div>
           </body>
         </html>
       EOS
@@ -107,7 +107,7 @@ describe Page do
   end
 
   describe "has_suspicious_sections?" do
-    it "should be true if page contains 'p' section" do
+    it "should be false if page contains 'p' section" do
       @page.content = <<-EOS
         <html>
           <body>
@@ -116,7 +116,7 @@ describe Page do
         </html>
       EOS
 
-      @page.has_suspicious_sections?.should be_true
+      @page.has_suspicious_sections?.should be_false
     end
 
     it "should be false if page contains only 'div' and 'span' sections" do
