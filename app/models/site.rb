@@ -1,7 +1,7 @@
 class Site < ActiveRecord::Base
   IMAGES_FOLDER = 'editfu'
   MCE_FOLDER = File.join(IMAGES_FOLDER, 'content')
-  SWAP_FOLDER = File.join(IMAGES_FOLDER, 'only')
+  SWAP_FOLDER = File.join(IMAGES_FOLDER, 'swap')
 
   belongs_to :owner #, :autosave => true, :validate => true
   has_many :pages, :dependent => :delete_all
