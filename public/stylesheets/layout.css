@@ -27,7 +27,7 @@ form input.update-button {
   position: fixed;
   right: 0;
   bottom: 0;
-  z-index: 2;
+  z-index: 200002;
   border: 0;
   height: 40px;
   padding: 0 14px 0 39px;
