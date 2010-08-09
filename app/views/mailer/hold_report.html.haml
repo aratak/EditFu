@@ -8,16 +8,28 @@ Hi, Admin
         = link_to owner.full_name, admin_audit_url(owner)
         %small= owner.next_billing_date
       
-%hr
 
 - if @weeks_owners.any?
+  %hr
+  
   In nearest week will be banned:
   %ul
     - @weeks_owners.each do |owner|
       %li
         = link_to owner.full_name, admin_audit_url(owner)
         %small= owner.next_billing_date
+
+
+- if @todays_owners.any?
+  %hr
   
+  I've created new subscription for a next month for:
+  %ul
+    - @todays_owners.each do |owner|
+      %li
+        = link_to owner.full_name, admin_audit_url(owner)
+        %small= owner.next_billing_date
+
 
 %p
-  Best regards, your site EditFu
+  Best regards, your website EditFu
