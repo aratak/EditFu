@@ -2,6 +2,7 @@ require 'hpricot'
 
 class Page < ActiveRecord::Base
   IMAGE_ATTRIBUTES = ['src', 'alt']
+  ALLOWED_TAGS = [:div, :img, :p, :h1, :h2, :h3, :h4, :h5, :h6]
 
   belongs_to :site, :autosave => true, :validate => true
   validates_presence_of :path
@@ -58,6 +59,9 @@ class Page < ActiveRecord::Base
     ((document / '.editfu') - nodes).empty?
   end
 
+  def allowed_tags_with_styleclass
+    ALLOWED_TAGS.map{ |t| "#{t}.editfu" }
+  end
 
   protected
 
@@ -72,7 +76,7 @@ class Page < ActiveRecord::Base
   end
 
   def nodes
-    (document / 'div.editfu, img.editfu')
+    (document / allowed_tags_with_styleclass.join(", "))
   end
 
   def elements(img)

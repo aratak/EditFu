@@ -22,9 +22,9 @@
       .inside
         The page '#{@page.path}' contains one or more incorrectly used editfu classes. 
         %br
-        The editfu class should only be used on 
+        The editfu class should only be used on elements:
         %br
-        <strong>DIV</strong> and <strong>IMG</strong> elements
+        #{Page::ALLOWED_TAGS.map{|t| content_tag(:strong, t.to_s.upcase)}.to_sentence}
         %br
 
         = help_link_for :invalid_page
