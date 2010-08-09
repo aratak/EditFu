@@ -19,7 +19,7 @@ class Owner < User
   validates_length_of :company_name, :within => 3..255, :allow_blank => true
   validates_uniqueness_of :domain_name, :message => "This domain already taken"
   validates_format_of :domain_name, :with => /^\w+$/
-  validates_exclusion_of :domain_name, :in => %w(www admin dev staging)
+  validates_exclusion_of :domain_name, :in => %w(www admin dev staging peter)
   validates_acceptance_of :terms_of_service, :on => :create, :allow_nil => false, :message => 'Read and accept it!'
 
   concerned_with :associations, :delivers, :plan_migrations, :plan_relation, :subscriptions
