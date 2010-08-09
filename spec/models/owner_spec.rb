@@ -17,63 +17,6 @@ shared_examples_for "general owners tests" do
 
   end
 
-  # describe "#set_free_plan" do
-  #   it "should work" do
-  #     owner = Factory.create :owner
-  #     site = Factory.create :site, :owner => owner
-  #     4.times do
-  #       Factory.create :page, :site => site
-  #     end
-  #     pages = site.pages
-  # 
-  #     site2 = Factory.create :site, :owner => owner
-  #     Factory.create :page, :site => site2
-  #     
-  #     owner.set_free_plan([site], pages[1..2])
-  # 
-  #     owner.reload
-  #     owner.plan.should == Plan::FREE
-  #     owner.card_number.should be_nil
-  # 
-  #     owner.sites.should == [site]
-  #     owner.pages.should == pages[1..2]
-  #   end
-  # 
-  #   it "should cancel recurring if previous plan was professional" do
-  #     owner = Factory.create :owner, :plan => Plan::PROFESSIONAL
-  #     PaymentSystem.should_receive(:cancel_recurring).with(owner)
-  # 
-  #     owner.set_free_plan([], [])
-  #   end
-  # 
-  #   it "should not cancel recurring if previous plan was trial" do
-  #     PaymentSystem.should_not_receive(:cancel_recurring)
-  #     @owner.set_free_plan([], [])
-  #   end
-  # end
-  # 
-  # describe "#set_professional_plan" do
-  #   it "should work" do
-  #     card = Factory.build :card, :expiration => '01/2020'
-  #     PaymentSystem.should_receive(:recurring).with(@owner, card)
-  #     @owner.set_plan(Plan::PROFESSIONAL, card) # set_professional_plan(card)
-  # 
-  #     @owner.reload
-  #     @owner.plan.should == Plan::PROFESSIONAL
-  #     @owner.card_number.should == card.display_number
-  #     @owner.card_exp_date.should == Date.new(2020, 1, 1);
-  #   end
-  #   
-  #   it "should not work twice" do
-  #     card = Factory.build :card
-  #     @owner.set_plan(Plan::PROFESSIONAL, card) # professional_plan(card)
-  #     @owner.card_number = nil
-  #     @owner.set_plan(Plan::PROFESSIONAL, card) # set_professional_plan(card)
-  #     
-  #     @owner.card_number.should be_nil
-  #   end
-  # end
-
   describe "#set_card" do
     it "should update recurring" do
       owner = Factory.create :owner
@@ -101,70 +44,6 @@ shared_examples_for "general owners tests" do
     end
   end  
 
-
-  # describe "#trial_period_expired?" do
-  #   it "should work" do
-  #     now = DateTime.civil(2009, 12, 1)
-  #     Time.stub(:now).and_return { now.to_time }
-  # 
-  #     trial = Factory.create :owner
-  #     free = Factory.create :owner, :plan => Plan::FREE
-  #     trial.confirm!
-  #     free.confirm!
-  # 
-  #     trial.trial_period_expired?.should be_false
-  #     free.trial_period_expired?.should be_false
-  # 
-  #     now = 1.day.from_now
-  #     trial.trial_period_expired?.should be_false
-  #     free.trial_period_expired?.should be_false
-  # 
-  #     now = 1.month.from_now
-  #     trial.trial_period_expired?.should be_true
-  #     free.trial_period_expired?.should be_false
-  # 
-  #     trial.set_plan Plan::PROFESSIONAL
-  #     trial.save
-  #     trial.trial_period_expired?.should be_false
-  #   end
-  # end
-  #
-  # describe "billing_day" do
-  #   it "should return mday of confirm_date" do
-  #     @owner.confirmed_at = DateTime.new(2010, 2, 25)
-  #     @owner.billing_day.should == 25
-  #   end
-  # 
-  #   it "should round mday to 1 if it's greater then 28" do
-  #     @owner.confirmed_at = DateTime.new(2010, 3, 29)
-  #     @owner.billing_day.should == 1
-  #   end
-  # end
-  # 
-  # describe "billing_date" do
-  #   before :each do 
-  #     today = Date.new(2010, 3, 23)
-  #     Date.stub(:today).and_return(today)
-  #     Date.stub(:current).and_return(today)
-  #   end
-  # 
-  #   it "should return the current month billing day if it is in future" do
-  #     @owner.confirmed_at = DateTime.new(2010, 2, 25)
-  #     @owner.next_billing_date.should == Date.new(2010, 3, 25)
-  #   end
-  # 
-  #   it "should return the next month billing day current month' one is in the past" do
-  #     @owner.confirmed_at = DateTime.new(2010, 2, 20)
-  #     @owner.prev_billing_date.should == Date.new(2010, 3, 20)
-  #     @owner.next_billing_date.should == Date.new(2010, 4, 20)
-  #   end
-  # 
-  #   it "should return nil in prev_billing_date if there aren't bills yet" do
-  #     @owner.confirmed_at = DateTime.new(2010, 3, 1)
-  #     @owner.prev_billing_date.should be_nil
-  #   end
-  # end
-  
   describe "set_default_domain_name" do
 
     should_validate_presence_of(:domain_name)
@@ -463,7 +342,6 @@ describe Owner, "and plan relation" do
 
   
 end
-
 
 describe Owner, "and subscirptions" do
   
