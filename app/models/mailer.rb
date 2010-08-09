@@ -87,7 +87,7 @@ class Mailer < ActionMailer::Base
   end
   
   def hold_report owners_hash
-    from          "edit.fu.cms@gmail.com"
+    from          "billing@editfu.com"
     recipients    "billing@editfu.com"
     content_type  'text/html'
     subject       'Owners report'
