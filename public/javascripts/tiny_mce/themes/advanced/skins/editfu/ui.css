@@ -138,6 +138,8 @@
 .editfuSkin a.mce_code {width: 40px}
 .editfuSkin span.mce_undo {background: url(img/undo.png) no-repeat center}
 .editfuSkin span.mce_redo {background: url(img/redo.png) no-repeat center}
+.editfuSkin span.mce_link   {background: url(img/link.png) no-repeat center}
+.editfuSkin span.mce_unlink {background: url(img/unlink.png) no-repeat center}
 
 /* Theme */
 .editfuSkin span.mce_cleanup {background-position:-40px 0}
@@ -148,8 +150,6 @@
 .editfuSkin span.mce_anchor {background-position:-200px 0}
 .editfuSkin span.mce_indent {background-position:-400px 0}
 .editfuSkin span.mce_outdent {background-position:-540px 0}
-.editfuSkin span.mce_link {background-position:-500px 0}
-.editfuSkin span.mce_unlink {background-position:-640px 0}
 .editfuSkin span.mce_sub {background-position:-600px 0}
 .editfuSkin span.mce_sup {background-position:-620px 0}
 .editfuSkin span.mce_removeformat {background-position:-580px 0}
