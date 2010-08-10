@@ -1,7 +1,7 @@
 show_popup page, :partial => 'form', 
   :locals => { 
     :title => 'New Site', 
-    :description => 'Get the FTP information from your hosting providor and enter it above. View a sample form here.',
+    :description => 'Get the FTP information from your hosting providor and enter it above. ',
     :submit => 'Add'
   }
 # page << "Indent.includeJavascript('tree');"
