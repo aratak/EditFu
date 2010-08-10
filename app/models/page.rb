@@ -2,7 +2,7 @@ require 'hpricot'
 
 class Page < ActiveRecord::Base
   IMAGE_ATTRIBUTES = ['src', 'alt']
-  ALLOWED_TAGS = ["div", "img", "h1", "h2", "h3", "h4", "h5", "h6"]
+  ALLOWED_TAGS = ["div", "img"]
 
   belongs_to :site, :autosave => true, :validate => true
   validates_presence_of :path
