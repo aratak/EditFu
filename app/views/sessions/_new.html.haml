@@ -1,5 +1,5 @@
 - form_tag user_session_path, :method => :post do 
-  .inputs
+  .inputs.clearfix
     .label-input
       %span.hint Login with your email
       = text_field_tag 'user[email]', @user.email, :placeholder => 'john@gmail.com'

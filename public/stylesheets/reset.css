@@ -170,3 +170,7 @@ blockquote {
 .red {
   color: #ca2d2d;
 }
+
+.clearfix {
+  overflow: hidden;
+}
