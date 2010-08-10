@@ -52,6 +52,13 @@
 
 #owner-preferences-popup .plan .plan-wrapper {
   margin: 0 20px;
+  position: relative;
+}
+
+#owner-preferences-popup .plan .plan-wrapper .authorizenet {
+  position: absolute;
+  right: 0;
+  bottom: 0;
 }
 
 #owner-preferences-popup .plan .plan-label {
