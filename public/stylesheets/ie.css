@@ -30,3 +30,7 @@
   position: static;
 }
 
+.inputs .label-input input, .inputs .label-input select {
+  padding: 7px 9px 3px 9px;
+}
+

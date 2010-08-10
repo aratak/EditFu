@@ -50,6 +50,15 @@
   box-sizing: border-box;
 }
 
+.inputs .label-input input[type=checkbox] {
+  background: transparent;
+  padding: 0;
+}
+
+.inputs .label-input input[type=checkbox]:focus {
+  border: 0;
+}
+
 .inputs .label-input select {
   width: auto;
   padding: 0;
