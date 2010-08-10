@@ -345,11 +345,11 @@ end
 
 describe Owner, "and subscirptions" do
   
+  before :each do
+    @owner = Factory.create :owner
+  end
+
   context "#subscription" do
-    
-    before :each do
-      @owner = Factory.create :owner
-    end
     
     it "should be first" do 
       @owner.subscriptions.count.should == 1
@@ -392,6 +392,27 @@ describe Owner, "and subscirptions" do
       
       @owner.create_next_subscription
       @owner.hold.should be_false
+    end
+    
+  end
+  
+  
+  context "should check credit card expiration" do
+    
+    it "should be expired" do
+      @owner.card = Factory(:card, :display_expiration_date  => 1.week.ago)
+      @owner.credit_card_expired?.should be_true
+
+      @owner.card = Factory(:card, :display_expiration_date  => 1.day.ago)
+      @owner.credit_card_expired?.should be_true
+    end
+    
+    it "should not be expired" do
+      @owner.card = Factory(:card, :display_expiration_date  => 1.week.since)
+      @owner.credit_card_expired?.should be_false
+
+      @owner.card = Factory(:card, :display_expiration_date  => 1.day.since)
+      @owner.credit_card_expired?.should be_false
     end
     
   end

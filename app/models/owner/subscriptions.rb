@@ -37,6 +37,10 @@ class Owner
   end
   alias_method :hold?, :hold
   
+  def credit_card_expired?
+    self.card.display_expiration_date.past?
+  end
+  
   def hold= val
     if [true, 1, '1', 't', 'T', 'true', 'TRUE'].include?(val)
       self.close_latest_subscription 

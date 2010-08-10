@@ -4,8 +4,15 @@ module PlanRestrictions
 
   def self.included m
     return unless m < ActionController::Base
-    m.before_filter :check_trial_period, :check_add_page, :check_add_site, :check_add_editor, :check_hold
+    m.before_filter :check_trial_period, :check_add_page, :check_add_site, :check_add_editor, :check_hold, :check_credit_card
   end
+
+  def check_credit_card
+    show_popup "shared/credit_card",
+               :if => :"credit_card_expired?", 
+               :for => ALL_ACTIONS
+  end
+
 
   def check_hold
     show_popup "shared/hold",

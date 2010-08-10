@@ -1,0 +1,14 @@
+= stylesheet_link_tag 'popups/alert-popup'
+
+.alert-popup
+  %h1 Account hold
+  .text
+    %br
+    Your credit card has been expired. Update your credit card information in the preferences window. 
+    If your still having issues 
+    %a{:href => "mailto://billing@editfu.com" }> contact us
+    \.  
+    %br
+
+  .popup-action-bar
+    = link_to_function "Close", "hidePopup();", :class => 'action cancel'
