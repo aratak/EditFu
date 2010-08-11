@@ -38,7 +38,7 @@ class Owner
   alias_method :hold?, :hold
   
   def credit_card_expired?
-    self.card.display_expiration_date.past?
+    self.plan.payment? && self.card.display_expiration_date.past?
   end
   
   def hold= val

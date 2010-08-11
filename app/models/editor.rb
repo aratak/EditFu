@@ -50,6 +50,10 @@ class Editor < User
   def hold?
     owner.hold?
   end
+  
+  def credit_card_expired?
+    owner.credit_card_expired?
+  end
 
   protected
 
