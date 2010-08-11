@@ -13,7 +13,6 @@ module PlanRestrictions
                :for => ALL_ACTIONS
   end
 
-
   def check_hold
     show_popup "shared/hold",
                :if => :"hold?", 
