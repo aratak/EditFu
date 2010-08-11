@@ -106,22 +106,22 @@ function insertOrEditImage(edited) {
   var ed = window.editor;
 
   var src = $('image-form')['src'].value;
-  var alt = $('image-form')['alt'].value;
+  // var alt = $('image-form')['alt'].value;
   if (edited) {
     ed.dom.setAttrib(edited, 'src', src);
-    ed.dom.setAttrib(edited, 'alt', alt);
+    // ed.dom.setAttrib(edited, 'alt', alt);
   } else {
     ed.execCommand('mceInsertContent', false, 
         '<img id="__mce_tmp" />', { skip_undo: 1 });
     ed.dom.setAttrib('__mce_tmp', 'src', src);
-    ed.dom.setAttrib('__mce_tmp', 'alt', alt);
+    // ed.dom.setAttrib('__mce_tmp', 'alt', alt);
     ed.dom.setAttrib('__mce_tmp', 'id', '');
     ed.undoManager.add();
   }
 }
 
 function swapImage(edited, selected) {
-  edited.alt = $('image-form')['alt'].value;
+  // edited.alt = $('image-form')['alt'].value;
   if(!selected) {
     return;
   }
@@ -154,7 +154,7 @@ function imagesPopupLoaded() {
       selectImage(editedImg, true);
     }
     setImageInput('src', editedPath);
-    setImageInput('alt', window.editedImg.alt);
+    // setImageInput('alt', window.editedImg.alt);
   }
 }
 
