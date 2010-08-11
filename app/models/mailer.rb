@@ -96,7 +96,7 @@ class Mailer < ActionMailer::Base
 
   private
 
-  def setup(user, email="edit.fu.cms@gmail.com")
+  def setup(user, email="billing@editfu.com")
     from         email
     recipients   user.email
     content_type 'text/html'
