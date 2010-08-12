@@ -62,8 +62,8 @@ function editfuMceLayout(s, tb, o) {
     DOM.setHTML(td, to.renderHTML());
   }
   createToolbar('undo,redo', 'Left');
-  createToolbar('formatselect,|,link,unlink,|,bold,italic,underline,bullist,numlist', 'Center');
-  createToolbar('fullscreen,image' + s.code, 'Right');
+  createToolbar('formatselect,|,link,unlink,|,bold,italic,underline,bullist,numlist,|,image', 'Center');
+  createToolbar('fullscreen' + s.code, 'Right');
   o.deltaHeight -= s.theme_advanced_row_height;
 
   tr = DOM.add(tb, 'tr');
