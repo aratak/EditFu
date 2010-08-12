@@ -28,7 +28,7 @@ config.time_zone = 'Eastern Time (US & Canada)'
 # Enable threaded mode
 # config.threadsafe!
 
-BASE_DOMAIN = 'editfu.com'
+BASE_DOMAIN = 'dev.editfu.com'
 
 ActionMailer::Base.delivery_method = :smtp
 config.action_mailer.default_url_options = { :host => BASE_DOMAIN }

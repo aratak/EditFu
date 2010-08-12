@@ -28,11 +28,22 @@ staging:
   password: edit-fu
   socket: <%= ['/var/lib/mysql/mysql.sock', '/var/run/mysqld/mysqld.sock', '/tmp/mysql.sock'].detect{ |socket| File.exist?(socket) } %>
 
-production:
+dev:
   adapter: mysql
   encoding: utf8
   reconnect: false
   database: edit-fu_production
+  pool: 5
+  username: edit-fu
+  password: edit-fu
+  socket: <%= ['/var/lib/mysql/mysql.sock', '/var/run/mysqld/mysqld.sock', '/tmp/mysql.sock'].detect{ |socket| File.exist?(socket) } %>
+
+
+production:
+  adapter: mysql
+  encoding: utf8
+  reconnect: false
+  database: edit-fu
   pool: 5
   username: edit-fu
   password: edit-fu
