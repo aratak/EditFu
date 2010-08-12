@@ -136,8 +136,8 @@
 /*.editfuSkin span.mce_code {background-position:-260px 0}*/
 .editfuSkin span.mce_code {background: url(img/code.png) no-repeat center; width: 40px}
 .editfuSkin a.mce_code {width: 40px}
-.editfuSkin span.mce_undo {background: url(img/undo.png) no-repeat center}
-.editfuSkin span.mce_redo {background: url(img/redo.png) no-repeat center}
+.editfuSkin span.mce_undo {background: url(img/undo.png) no-repeat center; position: relative; top: -2px;}
+.editfuSkin span.mce_redo {background: url(img/redo.png) no-repeat center; position: relative; top: -2px;}
 .editfuSkin span.mce_link   {background: url(img/link.png) no-repeat center}
 .editfuSkin span.mce_unlink {background: url(img/unlink.png) no-repeat center}
 
