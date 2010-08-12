@@ -139,7 +139,11 @@ module ApplicationHelper
       page.insert_html :bottom, 'messages', :partial => 'layouts/flash/one', :locals => { :key => key, :msg => msg }
     end
     flash.clear
-  end  
+  end
+  
+  def analitycs
+    render 'layouts/analitycs/analitycs'
+  end
   
   private
 
