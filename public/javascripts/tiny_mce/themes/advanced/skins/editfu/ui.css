@@ -249,6 +249,10 @@
   border: none;
 }
 
+td.mceToolbarEnd {
+  width: 8px;
+}
+
 .editfuSkin table.mceToolbar, .editfuSkin tr.mceFirst .mceToolbar tr td, .editfuSkin tr.mceLast .mceToolbar tr td {
   border: none;
 }
