@@ -1,10 +1,12 @@
 ActionController::Routing::Routes.draw do |map|
-  map.devise_for :users
+  # map.devise_for :users
+  map.devise_for :users, :path_names => { :sign_in => 'login', :sign_out => 'logout', :registration => 'register', :sign_up => 'signup' }
 
   map.resource :editor_confirmation, :as => 'editors/confirmation'
   map.resource :owner_confirmation, :as => 'owners/confirmation'
 
-  map.resources :owners, :only => [:new, :create], :collection => { "terms_of_service" => :get }
+  map.new_owner "/signup", :controller => :owners, :action => :new, :method => :get 
+  map.resources :owners, :only => [:new, :create], :collection => { "terms_of_service" => :get }, :path_names => { :new => 'sign_up' }
   map.resource :owner, :only => [:destroy]
 
   map.resources :editors, :member => { :update_permissions => :post }
