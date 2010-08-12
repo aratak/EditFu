@@ -10,25 +10,25 @@ describe Page do
       @page.content = <<-EOS
         <html>
           <body>
-            <h1 class='editfu'>Hello, <b>World</b>!</h1>
+            <div class='editfu'><h1>Hello, <b>World</b>!</h1></div>
           </body>
         </html>
       EOS
 
-      @page.sections.should == ['Hello, <b>World</b>!']
+      @page.sections.should == ['<h1>Hello, <b>World</b>!</h1>']
     end
 
     it "should skip tagged image elements" do
       @page.content = <<-EOS
         <html>
           <body>
-            <h1 class='editfu'>Hello</h1>
+            <div class='editfu'><h1>Hello</h1></div>
             <img class='editfu' src='banner.png'>
           </body>
         </html>
       EOS
 
-      @page.sections.should == ['Hello']
+      @page.sections.should == ['<h1>Hello</h1>']
     end
 
     it "should skip nested sections" do
@@ -49,16 +49,16 @@ describe Page do
       @page.content = <<-EOS
         <html>
           <body>
-            <h1 class="editfu">Hello, World!</h1>
+            <div class="editfu"><h1>Hello, World!</h1></div>
           </body>
         </html>
       EOS
 
-      @page.sections = ['Good-by, blue sky...']
+      @page.sections = ['<h1>Good-by, blue sky...</h1>']
       @page.content.should == <<-EOS
         <html>
           <body>
-            <h1 class="editfu">Good-by, blue sky...</h1>
+            <div class="editfu"><h1>Good-by, blue sky...</h1></div>
           </body>
         </html>
       EOS

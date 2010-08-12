@@ -399,6 +399,10 @@ describe Owner, "and subscirptions" do
   
   context "should check credit card expiration" do
     
+    before :each do
+      @owner.set_plan Plan::PROFESSIONAL
+    end
+    
     it "should be expired" do
       @owner.card = Factory(:card, :display_expiration_date  => 1.week.ago)
       @owner.credit_card_expired?.should be_true
