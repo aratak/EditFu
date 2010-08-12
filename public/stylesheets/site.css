@@ -25,7 +25,7 @@ table.pages caption {
 table.pages caption .action-bar-button {
   float: right;
   height: 30px;
-  margin: 5px;
+  margin: 8px -1px 5px 0;
   top: 2px;
 }
 
