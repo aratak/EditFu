@@ -30,7 +30,7 @@ form input.update-button {
   z-index: 200002;
   border: 0;
   height: 40px;
-  padding: 0 14px 0 39px;
+  padding: 2px 14px 0 39px;
   line-height: 40px;
   font-family: helvetica;
   font-weight: bold;
