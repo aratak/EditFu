@@ -20,6 +20,7 @@ role :web, "#{deploy_host}"
 role :db,  "#{deploy_host}", :primary => true
 
 after "deploy:symlink", "deploy:update_crontab"
+after "deploy:symlink", "deploy:destroy_cache"
 
 namespace :deploy do
   task :install_gems do
@@ -30,8 +31,13 @@ namespace :deploy do
     run "touch #{current_path}/tmp/restart.txt"
   end
 
+  task :destroy_cache do
+    run "rm #{current_path}/public/stylesheets/*-cached.* && rm #{current_path}/public/javascripts/*-cached.*"
+  end
+
   task :update_crontab, :roles => :db do
     run "cd #{release_path} && whenever --update-crontab #{application}"
   end
+  
 end
 
