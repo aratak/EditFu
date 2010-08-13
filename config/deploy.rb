@@ -32,7 +32,7 @@ namespace :deploy do
   end
 
   task :destroy_cache do
-    run "rm #{current_path}/public/stylesheets/*-cached.* && rm #{current_path}/public/javascripts/*-cached.*"
+    run "rm -f #{current_path}/public/stylesheets/*-cached.* && rm -f #{current_path}/public/javascripts/*-cached.*"
   end
 
   task :update_crontab, :roles => :db do
