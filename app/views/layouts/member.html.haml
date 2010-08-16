@@ -1,7 +1,7 @@
 !!! transitional
 %html
   %head
-    %title= @title || 'Edit-Fu'
+    %title= @title ? "#{@title} - EditFu" : 'EditFu - Content Management System'
     %meta{ 'http-equiv' => 'Content-Type', :content => 'text/html; charset=UTF-8' }
     %meta{ 'http-equiv' => "X-UA-Compatible", :content => "chrome=1" } 
     = render 'layouts/favicon'
