@@ -1,5 +1,5 @@
 - selected = editor == selected
-%li{:id => id, :class => ('selected' if selected)}
+%li{:id => dom_id(editor), :class => ('selected' if selected)}
   - link_to editor_path(editor), :class => 'label', :title => editor.user_name do
     %span.text= editor.user_name
   .menu-actions

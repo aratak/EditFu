@@ -1,4 +1,4 @@
 page.call 'setTitle', @editor.user_name
-page[:"editor-#{@editor.id}-menu"].down('.text').innerHTML = @editor.user_name
+page[dom_id(@editor)].down('.text').innerHTML = @editor.user_name
 page.call 'hidePopup'
 xhr_flash(page)
