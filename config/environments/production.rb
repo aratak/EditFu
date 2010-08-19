@@ -20,7 +20,7 @@ config.time_zone = 'Eastern Time (US & Canada)'
 # config.cache_store = :mem_cache_store
 
 # Enable serving of images, stylesheets, and javascripts from an asset server
-config.action_controller.asset_host = "http://assets.editfu.com"
+# config.action_controller.asset_host = "http://assets.editfu.com"
 
 # Disable delivery errors, bad email addresses will be ignored
 # config.action_mailer.raise_delivery_errors = false
