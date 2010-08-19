@@ -6,7 +6,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  z-index: 200001;
+  z-index: 10000;
   
   -moz-box-shadow: 0 5px 20px #444444;
   -webkit-box-shadow: 0 5px 20px #444444;
