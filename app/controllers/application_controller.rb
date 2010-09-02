@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   layout nil
   
-  filter_parameter_logging 'password' #, 'card'
+  filter_parameter_logging 'password', 'card'
 
   include PlanRestrictions
   include StoreTabUri
