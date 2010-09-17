@@ -1,7 +1,7 @@
 Hi, Admin
 
 - if @days_owners.any?
-  In nearest 24 hours will be banned:
+  In nearest 24 hours probably, should be banned:
   %ul
     - @days_owners.each do |owner|
       %li
@@ -12,7 +12,7 @@ Hi, Admin
 - if @weeks_owners.any?
   %hr
   
-  In nearest week will be banned:
+  In nearest week should be banned:
   %ul
     - @weeks_owners.each do |owner|
       %li
