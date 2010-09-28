@@ -1,0 +1,55 @@
+/* Styles for public.html.haml */
+
+#main form {
+  width: 41.5em;
+}
+
+#main .inputs .label-input input {
+  width: 205px;
+}
+
+.inputs {
+  margin-bottom: 0.5em;
+}
+
+.submit-input {
+  margin-top: 21px;
+}
+
+/* Styles for sites.html.haml */
+
+#system-bar {
+  position: static;
+}
+
+#tabs small {
+  line-height: 1em;
+}
+
+.right.shadow, .left.shadow {
+  top: 0;
+}
+
+#action-window {
+  top: 0;
+  padding-top: 0;
+}
+
+.wrapper {
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+}
+
+.nosites .inside {
+  display: block;
+  position: relative;
+  left: -50%;
+  top: -50%;
+}
+
+
+  /* footer's (action-bar) part */
+#inside-action-bar .action-bar-button {
+  float: left;
+}
