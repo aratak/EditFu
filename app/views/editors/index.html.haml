@@ -2,16 +2,18 @@
 
 .nosites
   - if @editors.empty?
-    .inside
-      Currently there are no editors.
-      %br
-      Invite others so they can update content as well.
-      %br
-  
-      = render "layouts/action_bars/add_editor"
+    .wrapper
+      .inside
+        Currently there are no editors.
+        %br
+        Invite others so they can update content as well.
+        %br
+    
+        = render "layouts/action_bars/add_editor"
     = help_link_for :add_editors
   - else
-    .inside
-      Select an editor in the sidebar.
+    .wrapper
+      .inside
+        Select an editor in the sidebar.
     = help_link_for :choose_editors
   .helper
