@@ -14,7 +14,10 @@
     
     /[if lt IE 9]
       = stylesheet_link_tag "ie.css"
-
+    
+    /[if lt IE 8]
+      = stylesheet_link_tag "ie7.css"
+      
   %body
     #all
       #system-bar
