@@ -54,3 +54,7 @@
 .nosites .action-bar-button:focus {
   color: #000;
 }
+
+.wrapper {
+  display: inline-block;
+ }
