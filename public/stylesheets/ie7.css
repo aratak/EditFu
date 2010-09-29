@@ -1,5 +1,9 @@
 /* Styles for public.html.haml */
 
+#action-window #main {
+  padding-bottom: 20px;
+}
+
 #main form {
   width: 41.5em;
 }
@@ -19,7 +23,10 @@
 /* Styles for sites.html.haml */
 
 #system-bar {
-  position: static;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
 #tabs small {
@@ -32,9 +39,22 @@
 
 #action-window {
   top: 0;
-  padding-top: 0;
+  /* padding-top: 0; */
 }
 
+/* #action-window #main  .header{
+  padding-top: 40px;
+} */
+
+#main form#page-form {
+  width: 100%;
+}
+
+.thumbnail img {
+  width: auto !important;
+}
+
+/* 2 divs added to HTML */
 .wrapper {
   display: inline-block;
   position: absolute;
@@ -52,4 +72,18 @@
   /* footer's (action-bar) part */
 #inside-action-bar .action-bar-button {
   float: left;
+}
+
+
+
+/* Section "Editors" */
+
+
+.inputs .label-input input, .inputs .label-input select  {
+  width: 310px;
+  line-height: 20px;
+  font-size: 20px;
+  background: #f1f1f1;
+  padding: 5px 9px;
+  border: 1px solid transparent;
 }
