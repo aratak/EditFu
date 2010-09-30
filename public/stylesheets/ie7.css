@@ -56,7 +56,7 @@
 
 /* 2 divs added to HTML */
 .wrapper {
-  display: inline-block;
+  /* display: inline-block; */
   position: absolute;
   top: 50%;
 }
@@ -74,10 +74,10 @@
   float: left;
 }
 
-
-
 /* Section "Editors" */
 
+
+/* Popup form modified */
 
 .inputs .label-input input, .inputs .label-input select  {
   width: 310px;
@@ -86,4 +86,18 @@
   background: #f1f1f1;
   padding: 5px 9px;
   border: 1px solid transparent;
+}
+
+
+
+form.edit_site .title-input .title {
+  left: 0;
+}
+
+form.edit_site .inputs .label-input {
+  margin: 0;
+}
+
+.two-column-popup#owner-preferences-popup #account_preferences .inputs-row input {
+  width: 93%;
 }
