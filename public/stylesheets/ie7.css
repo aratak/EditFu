@@ -101,3 +101,8 @@ form.edit_site .inputs .label-input {
 .two-column-popup#owner-preferences-popup #account_preferences .inputs-row input {
   width: 93%;
 }
+
+
+.two-column-popup#owner-preferences-popup .title {
+  left: 0;
+}
