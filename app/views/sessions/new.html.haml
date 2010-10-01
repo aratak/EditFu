@@ -1,5 +1,7 @@
 = stylesheet_link_tag 'public/login'
-
+- @title = "EditFu. It's a Content Editing System."
+- @description = "Small business clients want the ability to edit their content. Give it to them!"
+ 
 - if user_signed_in?
   = render 'sessions/current'
 - else
