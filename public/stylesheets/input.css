@@ -120,7 +120,7 @@
 }
 
 .public .label-input {
-  width: 225px;
+  width: 224px;
 }
 
 .label-input label.filled {
@@ -142,6 +142,11 @@
   color: #ffffff;
   text-shadow: 1px 1px 1px #333333;
   display: block;
+}
+
+.general.public #main .label-input span.description {
+  color: #818181;
+  text-shadow: none;
 }
 
 #new_owner .label-input label {
@@ -199,12 +204,15 @@
 
 .public #main .terms_of_service {
   float: right;
-  padding: 0px 5px;
+  margin-top: 27px;
+  width: 170px;
+  margin-right: -20px;
   position: relative;
 }
 
 .public #main .terms_of_service input {
   width: 20px;
+  vertical-align: sub;
 }
 
 .public #main .terms_of_service a {
@@ -213,8 +221,9 @@
 
 
 .public #main .terms_of_service label {
-  color: #666666;
-  font-size: 15px;
+  color: #1e1e1e;
+  text-shadow: 1px 1px 2px #92acb8;
+  font-size: 12px;
   margin: 0;
   z-index: 1 ! important;
   position: static;

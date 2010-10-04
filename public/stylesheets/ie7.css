@@ -8,8 +8,18 @@
   width: 41.5em;
 }
 
+#main form#new_owner {
+  width: 930px;
+  padding-bottom: 95px;
+}
+
 #main .inputs .label-input input {
   width: 205px;
+}
+
+#main .inputs #owner_terms_of_service {
+  width: 25px;
+  vertical-align: baseline;
 }
 
 .inputs {
@@ -39,12 +49,8 @@
 
 #action-window {
   top: 0;
-  /* padding-top: 0; */
 }
 
-/* #action-window #main  .header{
-  padding-top: 40px;
-} */
 
 #main form#page-form {
   width: 100%;
@@ -56,7 +62,6 @@
 
 /* 2 divs added to HTML */
 .wrapper {
-  /* display: inline-block; */
   position: absolute;
   top: 50%;
 }

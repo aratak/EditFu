@@ -72,6 +72,28 @@ html > body {
   top: 23px;
 }
 
+.new_owner {
+  background-color: #b9dbea;
+  padding: 12px 12px 190px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -khtml-border-radius: 4px;
+  -opera-border-radius: 4px;
+  border-radius: 4px;
+}
+
+.general #main .about_editfu {
+  position: absolute;
+  top: 6.4em;
+  right: 12px;
+  font-family: Frabklin Gothic Medium, sans-serif;
+  font-size: 33px;
+  line-height: 33px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #ffffff;
+}
+
 #main .edit_editor {
   margin-top: 80px;
 }
@@ -103,8 +125,10 @@ input.submit {
 
 #main a.hint {
   position: absolute;
-  margin-top: 2em;
+  margin-top: 8em;
   right: 0;
+  text-shadow: 1px 2px 3px #24353f;
+  font-size: 14px;
   z-index: 1;
 }
 

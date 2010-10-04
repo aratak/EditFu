@@ -2,18 +2,26 @@
   margin-right: 0;
 }
 
+.general .inputs .inputs-row .label-input.password-confirmation {
+  padding-top: 19.6px;
+}
+
 .label-input.password-confirmation, 
 .hint, .submit {
   float: right;
 }
 
+.general.public  #all #main  #new_owner .submit, #login {
+  float: none;
+}
+
 #login.hint a {
-  margin-right: 10px;
   line-height: 35px;
 }
  
 .hint {
   text-align: right;
+  color: #ffffff !important;
 }
 
 #main #comments {
@@ -43,13 +51,18 @@
   z-index: 2;
 }
 
+#main #comments.hint {
+  color:#000000 !important;
+}
+
 .submit_section {
   float: right;
-  margin-top: -50px;
+  text-align: right;
+  margin-top: 20px;
 }
 
 .public .label-input.domain_name {
-  width: 650px;
+  width: 390px;
 }
 
 .public .label-input.domain_name .hint {
@@ -60,6 +73,7 @@
 
 .public .label-input.domain_name .domain {
   font-size: 20px;
+  color: #1e1e1e;
 }
 
 
@@ -71,5 +85,5 @@
 
 .public .label-input.domain_name #owner_domain_name {
   position: relative;
-  left: 57px;
+  /* left: 57px; */
 }

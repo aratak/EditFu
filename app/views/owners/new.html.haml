@@ -21,31 +21,20 @@
           %span.description
 
         .label-input.password-confirmation
-          %span.hint Password confirmation
           = f.error_for :password_confirmation
-          = f.password_field :password_confirmation, :placeholder => "Password confirmation"
+          = f.password_field :password_confirmation, :placeholder => "Confirm Password"
       .clear
       .label-input.domain_name
-        %span.hint Domain name
+        %span.hint Site Address
         = f.error_for :domain_name
         = f.text_field :domain_name, :placeholder => 'mygreatcompany'
-        %span.domain.domain_prefix= "http://"
         %span.domain= ".#{BASE_DOMAIN}"
-        %span.description Company or other unique name. Use letters and numbers only.
+        %span.description Company or other unique name. Letters & numbers only.
       
-      
-      .label-input.terms_of_service
-        = f.check_box :terms_of_service
-        = f.label :terms_of_service, "I accept" 
-        = link_to_remote "terms of service", :url => terms_of_service_owners_path, :method => :get, :html => { :href => terms_of_service_owners_path }
-        = link_to image_tag("popup.png", :alt => 'Open in popup'), terms_of_service_owners_path, :target => "_blank"
-        %span#terms
-      .clear
       .submit_section
         = submit_tag 'Sign Up', :class => 'submit'
         #login.hint
           = link_to 'Already a Member', root_path
-        .clear
 
         = link_to_function "What am I signing up for?", :class => 'hint' do |page|
           - page << "$('comments').show();"
@@ -72,3 +61,10 @@
             = link_to 'features', 'http://www.takeastep.me/editfu-features-benefits/', :target => "_blank"
             and
             = link_to 'pricing', 'http://www.takeastep.me/editfu-pricing/', :target => "_blank"
+      = link_to 'What is EditFu?', 'http://www.takeastep.me/editfu/', :target => "_blank", :class => 'about_editfu'
+
+      .label-input.terms_of_service
+        = f.check_box :terms_of_service
+        = f.label :terms_of_service, "I accept" 
+        = link_to_remote "terms of service", :url => terms_of_service_owners_path, :method => :get, :html => { :href => terms_of_service_owners_path }
+        %span#terms
