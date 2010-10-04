@@ -221,6 +221,11 @@
   padding: 0;
 }
 
+.public #main .terms_of_service .error {
+  margin-top: -2.8em;
+  margin-bottom: 0.6em;
+}
+
 .submit-input {
   margin-top: 20px;
   float: left;
