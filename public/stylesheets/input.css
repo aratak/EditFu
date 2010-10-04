@@ -206,8 +206,8 @@
   float: right;
   margin-top: 27px;
   width: 170px;
-  margin-right: -20px;
-  position: relative;
+  right: 95px;
+  position: absolute;
 }
 
 .public #main .terms_of_service input {
