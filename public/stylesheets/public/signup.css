@@ -2,9 +2,9 @@
   margin-right: 0;
 }
 
-.general .inputs .inputs-row .label-input.password-confirmation {
+/* .general .inputs .inputs-row .label-input.password-confirmation {
   padding-top: 19.6px;
-}
+} */
 
 .label-input.password-confirmation, 
 .hint, .submit {

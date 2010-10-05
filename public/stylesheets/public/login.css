@@ -36,7 +36,11 @@
   color: #ffffff;
   font-size: 12px;
   text-align: right;
-  padding-top: 10px;
+  /* padding-top: 10px; */
+}
+
+.public #main .description {
+  text-align: left;
 }
 
 #main .description a {

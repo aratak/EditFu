@@ -73,7 +73,8 @@ html > body {
 }
 
 .new_owner {
-  background-color: #b9dbea;
+  /* background-color: #b9dbea; */
+  background: url(/images/opacity_94.png) repeat;
   padding: 12px 12px 190px;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;

@@ -1,5 +1,8 @@
+- @description = "Small business clients want the ability to edit their content. Give it to them!"
+
 - inside_layout 'public' do
-  = stylesheet_link_tag 'public/signup'
+  - content_for :additional do
+    = stylesheet_link_tag 'public/signup'
 
   - remote_form_for @owner do |f|
     .inputs
@@ -21,6 +24,7 @@
           %span.description
 
         .label-input.password-confirmation
+          %span.hint Confirm Password
           = f.error_for :password_confirmation
           = f.password_field :password_confirmation, :placeholder => "Confirm Password"
       .clear
