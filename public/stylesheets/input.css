@@ -25,6 +25,14 @@
   margin-left: 20px;
 }
 
+#new-editor-popup .title-input .title {
+  margin-left: 13px;
+}
+
+#new-editor-popup #editor_user_name, #editor_email {
+  padding: 5px 13px;
+}
+
 .inputs-row .title-input + .title-input .title {
   margin-left: 0;
 }
