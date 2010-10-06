@@ -12,9 +12,9 @@ en:
   activerecord:
     errors:
       messages:
-        too_short: 'is too short (min length is %{count})'
+        too_short: 'Is too short (min length is %{count})'
         blank: 'Required.'
-        taken: "has already been used"
+        taken: "Has already been used"
 
   credit_card:
     authorize: "Can\'t authorize credit card. Please check your balance."
