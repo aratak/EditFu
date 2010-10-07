@@ -22,7 +22,7 @@
   position: absolute;
   top: -15px;
   line-height: 15px;
-  margin-left: 20px;
+  margin-left: 9px;
 }
 
 #new-editor-popup .title-input .title {
@@ -33,9 +33,9 @@
   padding: 5px 13px;
 }
 
-.inputs-row .title-input + .title-input .title {
-  margin-left: 0;
-}
+/* .inputs-row .title-input + .title-input .title {
+  margin-left: 13px;
+} */
 
 .label-input .inner-title,
 .title-input .title {

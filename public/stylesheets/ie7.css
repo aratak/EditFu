@@ -8,6 +8,10 @@
   width: 41.5em;
 }
 
+form#pages_form {
+  width: 100%;
+}
+
 #main form#new_owner {
   width: 930px;
   padding-bottom: 95px;
@@ -81,6 +85,9 @@
 
 /* Section "Editors" */
 
+#new_editor .title {
+  left: 0;
+}
 
 /* Popup form modified */
 
@@ -99,6 +106,10 @@ form.edit_site .title-input .title {
   left: 0;
 }
 
+form.new_site .title-input .title {
+left: 0;
+}
+
 form.edit_site .inputs .label-input {
   margin: 0;
 }
@@ -110,4 +121,22 @@ form.edit_site .inputs .label-input {
 
 .two-column-popup#owner-preferences-popup .title {
   left: 0;
+}
+
+table.pages {
+position: relative;
+}
+
+table.pages caption .action-bar-button {
+  float: none !important;
+  position: absolute;
+  right: 10px;
+}
+
+.email {
+position: relative;;
+}
+
+.email .title {
+  position: absolute;
 }
