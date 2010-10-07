@@ -97,7 +97,9 @@ function doImageAction() {
       var selected = $('thumbnails').down('.thumbnail.selected img');
       swapImage(edited, selected);
     }
+    hidePopup();
     showBodyMessage('success','Image was inserted successfully. Be sure to click publish to make the changes live.');
+    return true;
   }
   hidePopup();
 }
