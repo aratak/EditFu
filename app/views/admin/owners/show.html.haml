@@ -10,6 +10,9 @@
 - @title = @owner.user_name
 - @hint = ''
 
+%small.user_company_url
+  = user_company_url
+
 = content_for :action_bar do
   = render "remove_owner", :owner => @owner
   = render "audit_owner", :owner => @owner
