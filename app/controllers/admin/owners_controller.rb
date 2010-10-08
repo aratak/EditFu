@@ -2,6 +2,7 @@ class Admin::OwnersController < ApplicationController
   before_filter :authenticate_admin!
   before_filter :find_owner, :only => [:update, :destroy, :show]
   before_filter :find_all, :only => [:show]
+  helper_method :user_company_url
   layout 'member'
 
   def index
@@ -35,6 +36,10 @@ class Admin::OwnersController < ApplicationController
       format.js
     end
     
+  end
+  
+  def user_company_url
+    request.protocol + @owner.company_domain
   end
 
   private
