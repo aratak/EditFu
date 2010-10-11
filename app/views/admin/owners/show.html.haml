@@ -11,7 +11,7 @@
 - @hint = ''
 
 %small.user_company_url
-  = user_company_url
+  = link_to user_company_url
 
 = content_for :action_bar do
   = render "remove_owner", :owner => @owner
@@ -22,3 +22,4 @@
 
 = render "form"
 = render "subscriptions"
+= render "editors_details"

@@ -15,7 +15,7 @@
 
   .row
     .label Email Address
-    .value= @owner.email
+    .value= mail_to(@owner.email)
   .row
     .label Registration Date
     .value= @owner.created_at

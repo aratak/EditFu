@@ -1,3 +1,7 @@
+table.subscriptions {
+  margin-bottom: 3ex;
+}
+
 table.subscriptions tr td {
   padding: 5px 10px;
   border-left: 1px solid #dadada;
