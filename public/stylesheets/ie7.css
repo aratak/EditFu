@@ -34,7 +34,8 @@ form#pages_form {
   margin-top: 21px;
 }
 
-/* Styles for sites.html.haml */
+
+/* Styles for sites.html.haml */
 
 #system-bar {
   position: fixed;
@@ -83,10 +84,19 @@ form#pages_form {
   float: left;
 }
 
-/* Section "Editors" */
+
+/* Section "Editors" */
 
 #new_editor .title {
   left: 0;
+}
+
+form.edit_editor .title {
+  left: 0;
+}
+
+form.edit_editor #editor_email {
+  padding-left: 9px;
 }
 
 /* Popup form modified */
@@ -139,4 +149,64 @@ position: relative;;
 
 .email .title {
   position: absolute;
+}
+
+
+/* Two column popup (Plan and Billing section) */
+
+#owner-preferences-popup .edit_owner .billing .card-number,
+#owner-preferences-popup .edit_owner .billing .verification-value,
+#owner-preferences-popup .billing .first-name,
+#owner-preferences-popup .billing .last-name {
+  margin-right: 0.5em;
+}
+
+#owner-preferences-popup .edit_owner .billing .exp-date {
+  margin-right: 2.3em;
+}
+
+#owner-preferences-popup .edit_owner .billing .exp-date,
+#owner-preferences-popup .edit_owner .billing .verification-value,
+#owner-preferences-popup .edit_owner .billing .zip {
+  width: 138px;
+}
+
+#owner-preferences-popup .edit_owner .billing .verification-value .label-input,
+#owner-preferences-popup .billing .first-name .label-input,
+#owner-preferences-popup .billing .last-name .label-input {
+  margin-right: 0;
+}
+
+#owner-preferences-popup .edit_owner .billing .verification-value input,
+#owner-preferences-popup .edit_owner .billing .zip input {
+  width: 118px;
+}
+
+#owner-preferences-popup .edit_owner .billing .card-number,
+#owner-preferences-popup .edit_owner .billing .card-number .label-input {
+  width: 256px;
+}
+
+#owner-preferences-popup .edit_owner .billing .card-number .label-input input {
+  width: 236px;
+}
+
+#owner-preferences-popup .edit_owner .billing .exp-date .label-input select {
+  font-size: 18px;
+  width:66px;
+}
+
+#owner-preferences-popup .edit_owner .billing .exp-date .label-input {
+  margin-top: 1px;
+  padding-top: 5px;
+  height: 30px;
+  background: #f1f1f1;
+}
+
+#owner-preferences-popup .billing .first-name, #owner-preferences-popup .billing .last-name {
+  width: 210px;
+}
+
+#owner-preferences-popup .billing .first-name input, #owner-preferences-popup .billing .last-name input {
+  width: 190px;
 }
