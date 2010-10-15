@@ -13,7 +13,7 @@ function badBrowser(){
   // Is this a version of IE?
   if(Prototype.Browser.IE){
     version = parseInt(userAgent.substring(userAgent.indexOf("msie")+5))
-    if(version < 8) { return true; }
+    if(version < 7) { return true; }
   }
 
   // Is this a version of Chrome?
