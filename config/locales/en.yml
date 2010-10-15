@@ -6,7 +6,7 @@ en:
       disabled: 'Account is temporarily disabled by administrator.'
       invalid: 'Username or password was incorrect, please try again.'
       timeout: 'Session has expired. Please login again to continue working.'
-      wrong_subdomain: 'Attempting to login to the wrong companies system. Based on the email address your using were showing that the correct company address is %{company}.  You can also visit %{editfu} to login.'
+      wrong_subdomain: 'The email address entered corresponds to another company account, please use this link to login %{company} or go to %{editfu}.'
       permissions: 'You have no permissions to view requested page. Please login with appropriate credentials.'
 
   activerecord:
