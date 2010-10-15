@@ -16,8 +16,8 @@
     %caption
       = "Pages"
       = render "layouts/action_bars/add_page", :site => @site
-    %tbody
-      - if @site.pages.any?
+    - if @site.pages.any?
+      %tbody
         - sort_pages(@site.pages).each do |page|
           %tr.page
             %td.checkbox= check_box_tag "page[#{page.id}]", '1', page.enabled
@@ -29,14 +29,16 @@
 
 - if @site.pages.empty?
   %br
-  .nosites
-    .inside
-      Currently there are no pages for this site in EditFu.
-      %br
-      EditFu needs to know which pages 
-      %br
-      you want to edit.
-      %br
-      = render "layouts/action_bars/add_page", :site => @site
-    .helper
+  .all_wrapper
+    .nosites
+      .wrapper
+        .inside
+          Currently there are no pages for this site in EditFu.
+          %br
+          EditFu needs to know which pages 
+          %br
+          you want to edit.
+          %br
+          = render "layouts/action_bars/add_page", :site => @site
+      .helper
     = help_link_for :add_pages

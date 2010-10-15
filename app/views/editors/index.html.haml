@@ -1,19 +1,19 @@
 = stylesheet_link_tag 'nocontent'
 
-.nosites
+.all_wrapper
+  .nosites
+    .wrapper
+      .inside
+        - if @editors.empty?
+          Currently there are no editors.
+          %br
+          Invite others so they can update content as well.
+          %br
+          = render "layouts/action_bars/add_editor"
+        - else
+          Select an editor in the sidebar.
+    .helper
   - if @editors.empty?
-    .wrapper
-      .inside
-        Currently there are no editors.
-        %br
-        Invite others so they can update content as well.
-        %br
-    
-        = render "layouts/action_bars/add_editor"
     = help_link_for :add_editors
-  - else
-    .wrapper
-      .inside
-        Select an editor in the sidebar.
+  -else
     = help_link_for :choose_editors
-  .helper

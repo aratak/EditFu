@@ -56,5 +56,24 @@
 }
 
 .wrapper {
-  display: inline-block;
- }
+  display: inline;
+}
+
+.all_wrapper {
+  position: relative;
+  margin: 0 auto;
+  text-align: center;
+  width: 561px;
+}
+
+.nosites {
+  vertical-align: middle;
+}
+
+.nosites .inside {
+  vertical-align: middle;
+}
+
+.link_choose_sites {
+  
+}

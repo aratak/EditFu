@@ -69,6 +69,7 @@ form#pages_form {
 .wrapper {
   position: absolute;
   top: 50%;
+  left: 50%;
 }
 
 .nosites .inside {
@@ -167,7 +168,7 @@ position: relative;;
 
 #owner-preferences-popup .edit_owner .billing .exp-date,
 #owner-preferences-popup .edit_owner .billing .verification-value,
-#owner-preferences-popup .edit_owner .billing .zip {
+#owner-preferences-popup .billing .zip {
   width: 138px;
 }
 
