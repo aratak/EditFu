@@ -220,7 +220,9 @@
 
 .public #main .terms_of_service input {
   width: 20px;
-  vertical-align: sub;
+  /*vertical-align: sub;*/
+  position: relative;
+  top: 2px;
 }
 
 .public #main .terms_of_service a {
