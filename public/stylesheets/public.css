@@ -117,7 +117,7 @@ input.submit {
   width: 225px;
 }
 
-#main .hint {
+#main .hint, #main .privacy_policy {
   font-family: helvetica;
   font-size: 13px;
   color: white;
@@ -130,6 +130,16 @@ input.submit {
   right: 0;
   text-shadow: 1px 2px 3px #24353f;
   font-size: 14px;
+  z-index: 1;
+}
+
+#main a.privacy_policy {
+  position: absolute;
+  margin-top: 8em;
+  left: 0;
+  text-shadow: 1px 2px 3px #24353f;
+  font-size: 14px;
+  text-decoration: none;
   z-index: 1;
 }
 

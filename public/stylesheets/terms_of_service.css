@@ -1,3 +1,14 @@
-#text_of_terms_of_service {
+#text_of_terms_of_service, #text_of_terms_of_service {
   display: block ! important;
+}
+
+.created_by {
+  text-align: center;
+  font-size: 10px;
+  color: gray;
+  font-family: arial, sans-serif;
+}
+
+.created_by a {
+  text-decoration: none;
 }
