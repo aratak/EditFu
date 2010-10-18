@@ -34,7 +34,9 @@ class OwnersController < ApplicationController
         end
       }
     end
-    
-    
   end
+  
+  def privacy_policy
+  end
+
 end
