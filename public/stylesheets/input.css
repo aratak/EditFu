@@ -79,6 +79,9 @@
   color: #7e7e7e;
   outline: none;
   border: none;
+  height: 36px;
+  padding-top: 6px;
+  line-height: 35px;
 }
 
 .inputs .label-input select:first-child {
