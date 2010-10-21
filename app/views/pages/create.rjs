@@ -4,9 +4,10 @@
     :locals => { 
       :page => p, :selected => nil
     }
+  page << "if($('pages_form')) {"
   page.insert_html :bottom, 'pages_form', :partial => 'sites/page', :locals => { :page => p }
+  page << "}"
 end
 
 page.call 'hidePopup' unless @has_errors
 xhr_flash page
-
