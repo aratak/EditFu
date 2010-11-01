@@ -1,7 +1,7 @@
 Hi, Admin
 
 - if @days_owners.any?
-  In nearest 24 hours probably, should be banned:
+  List of users, whose subscritions expires in nearest 24 hours:
   %ul
     - @days_owners.each do |owner|
       %li
@@ -12,7 +12,7 @@ Hi, Admin
 - if @weeks_owners.any?
   %hr
   
-  In nearest week should be banned:
+  list of users, whose subscritions expires next week:
   %ul
     - @weeks_owners.each do |owner|
       %li
