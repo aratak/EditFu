@@ -31,5 +31,9 @@ Hi, Admin
         %small= owner.next_billing_date
 
 
+- unless (@days_owners + @weeks_owners + @todays_owners).any?
+  %em no exprires subscription in nearest future
+
+
 %p
   Best regards, your website EditFu
