@@ -17,7 +17,7 @@ class Owner
     todays_owners = Subscription.ends_todays.map(&:owner)
 
     todays_owners.each do |owner|
-      owner.create_next_subscription
+      owner.create_automatic_next_subscription
     end
 
     Mailer.deliver_hold_report(:weeks_owners => weeks_owners, :days_owners => days_owners, :todays_owners => todays_owners)

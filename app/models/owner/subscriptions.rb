@@ -13,7 +13,6 @@ class Owner
   end
   
   def create_next_subscription
-    return false unless subscription_is_possible?
     close_latest_subscription
     subscriptions.create(:starts_at => Time.now,
                          :ends_at => self.plan.period.month.since,
@@ -22,9 +21,13 @@ class Owner
     return true                     
   end
   
+  
+  def create_automatic_next_subscription
+    create_next_subscription unless subscription_is_possible?
+  end
+  
   def subscription_is_possible?
-    # self.plan.payment? || self.plan.trial?
-    true
+    !self.plan.trial?
   end
   
   def next_subscription?
