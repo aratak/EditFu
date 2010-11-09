@@ -1,6 +1,6 @@
 #owner-preferences-popup.two-column-popup
   %h1 
-    = link_to_function "Account", nil, :id => :account_preferences_link, :class => :active do |page|
+    = link_to_function "Account", nil, :id => :account_preferences_link, :class => @show_account do |page|
       - page[:account_preferences].show :duration => 0.2
       - page[:account_preferences].add_class_name('active');
       - page[:account_preferences_link].add_class_name('active');
@@ -8,7 +8,7 @@
       - page[:plan_and_billing].hide :duration => 0.2
       - page[:plan_and_billing].remove_class_name('active');
       - page[:plan_and_billing_link].remove_class_name('active');
-    = link_to_function "Plan & Billing", nil, :id => :plan_and_billing_link do |page|
+    = link_to_function "Plan & Billing", nil, :id => :plan_and_billing_link, :class => @show_billing do |page|
       - page[:plan_and_billing].show :duration => 0.2
       - page[:plan_and_billing].add_class_name('active');
       - page[:plan_and_billing_link].add_class_name('active');
@@ -17,5 +17,5 @@
       - page[:account_preferences].remove_class_name('active');
       - page[:account_preferences_link].remove_class_name('active');
 
-  = render 'owner_preferences/account_preferences/index'
-  = render 'owner_preferences/plan_and_billing/index'
+  = render 'owner_preferences/account_preferences/index', :css_class => @show_account
+  = render 'owner_preferences/plan_and_billing/index', :css_class => @show_billing

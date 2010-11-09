@@ -14,9 +14,9 @@ module ApplicationHelper
   
   def pref_path
     if current_user.owner?
-      owner_preferences_url
+      ssl_owner_preferences_url
     else
-      simple_preferences_url
+      ssl_simple_preferences_url
     end
   end
 
