@@ -1,4 +1,4 @@
 - if current_user.identity.present?
-  = link_to current_user.identity, root_path, :class => 'company'
+  = link_to current_user.identity, plain_root_url, :class => 'company'
 - else
-  = link_to "", root_path, :class => 'editfu'
+  = link_to "", plain_root_url, :class => 'editfu'
