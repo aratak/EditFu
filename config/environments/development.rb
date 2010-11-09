@@ -24,7 +24,7 @@ config.gem "inaction_mailer", :lib => 'inaction_mailer/force_load', :source => '
 config.action_mailer.raise_delivery_errors = false
 
 ActionMailer::Base.delivery_method = :smtp
-config.action_mailer.default_url_options = { :host => "#{BASE_DOMAIN}:3005" }
+config.action_mailer.default_url_options = { :host => "#{BASE_DOMAIN}:3000" }
 
 ActiveMerchant::Billing::Base.mode = :test
 PAYMENT_GATEWAY_NAME = 'authorize_net'
