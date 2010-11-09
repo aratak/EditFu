@@ -1,6 +1,7 @@
 - css_class = css_class.nil? ? '' : css_class
-#account_preferences.active{:class => css_class}
-  - remote_form_for :owner, :url => owner_preferences_path, :html => { :method => :put } do |owner|
+
+#account_preferences{:class => css_class}
+  - form_for :owner, :url => ssl_owner_preferences_url, :html => { :method => :put } do |owner|
     =render 'owner_preferences/account_preferences/account', :owner => owner
     .popup-action-bar
       = link_to_remove owner_path, 'Cancel My Account',                                                   |
@@ -10,7 +11,6 @@
         you simply downgrade to the free account. <br /><br/ > To use EditFu again in the future you      |
         will have to create a new account.'                                                               |
       = owner.submit "Update"
-      = link_to_function "Cancel", "hidePopup();", :class => 'action cancel'
 
       = help_link_for :preferences
     :javascript

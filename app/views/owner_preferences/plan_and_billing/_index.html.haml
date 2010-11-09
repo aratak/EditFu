@@ -1,11 +1,11 @@
 - css_class = css_class.nil? ? '' : css_class
-#plan_and_billing{:class => css_class, :style => "display: none;"}
-  - remote_form_for @owner, :url => billing_update_owner_preferences_path, :html => { :method => :put } do |owner|
+
+#plan_and_billing{:class => css_class}
+  - form_for @owner, :url => ssl_billing_update_owner_preferences_url, :html => { :method => :put } do |owner|
     = render 'owner_preferences/plan_and_billing/plan', :owner => owner
     = render 'owner_preferences/plan_and_billing/card', :owner => owner
     .popup-action-bar
       = owner.submit "Update"
-      = link_to_function "Cancel", "hidePopup();", :class => 'action cancel'
 
       = help_link_for :preferences
   :javascript

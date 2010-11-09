@@ -1,0 +1,80 @@
+#owner-preferences-popup {
+  margin-top: -40px;
+}
+
+#owner-preferences-popup > div {
+  display: none;
+}
+
+#owner-preferences-popup > div.active {
+  display: block;
+}
+
+#owner-preferences-popup h1 #plan_and_billing_link, 
+#owner-preferences-popup h1 #account_preferences_link {
+  padding: 5px 125px;
+}
+
+#owner-preferences-popup h1 {
+  border: none;
+}
+
+#owner-preferences-popup h1 #plan_and_billing_link.active, 
+#owner-preferences-popup h1 #account_preferences_link.active {
+  border: none;
+  color: #ffffff;
+  background-color: #e21403;
+}
+
+#owner-preferences-popup h1 #plan_and_billing_link, 
+#owner-preferences-popup h1 #account_preferences_link {
+  border: none;
+
+  border-radius: 0 0 10px 10px;
+  -moz-border-radius: 0 0 10px 10px;
+  -webkit-border-radius: 0 0 10px 10px;
+}
+
+#owner-preferences-popup h1 a {
+  bottom: 0;
+}
+
+#owner-preferences-popup .inputs .label-input input, 
+#owner-preferences-popup .inputs .label-input select {
+  background-color: #d9d9d9;
+}
+
+#owner-preferences-popup h1 #plan_and_billing_link, 
+#owner-preferences-popup h1 #account_preferences_link {
+  background-color: #d9d9d9;
+  color: #ffffff;
+}
+
+
+/* Input */
+#owner-preferences-popup .popup-action-bar input {
+  position: relative;
+  z-index: 2;
+  float: right;
+  border: 0;
+  margin: 0;
+  vertical-align: baseline;
+  
+  background: transparent;
+  text-decoration: none;
+  font-size: 20px;
+  height: 48px;
+  line-height: 50px;
+}
+
+#owner-preferences-popup .popup-action-bar input {
+  padding: 0 12px 0 0;
+}
+
+#owner-preferences-popup .popup-action-bar input:hover {
+  text-shadow: 1px 1px 3px #bbbbbb;
+}
+
+#owner-preferences-popup .popup-action-bar input:active {
+  text-shadow: 1px 1px 0 #bbbbbb;
+}
