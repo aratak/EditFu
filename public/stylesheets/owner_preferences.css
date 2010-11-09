@@ -12,7 +12,7 @@
 
 #owner-preferences-popup h1 #plan_and_billing_link, 
 #owner-preferences-popup h1 #account_preferences_link {
-  padding: 5px 125px;
+  padding: 5px 120px;
 }
 
 #owner-preferences-popup h1 {
@@ -77,4 +77,9 @@
 
 #owner-preferences-popup .popup-action-bar input:active {
   text-shadow: 1px 1px 0 #bbbbbb;
+}
+
+#owner-preferences-popup .popup-action-bar a.important {
+  top: 20px;
+  padding-left: 0;
 }
