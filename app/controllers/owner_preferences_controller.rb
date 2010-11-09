@@ -13,7 +13,7 @@ class OwnerPreferencesController < ApplicationController
     
     if @owner.save
       flash[:notice] = 'Preferences were updated successfully.' 
-      redirect_to sites_path
+      redirect_to plain_sites_url
     else
       flash[:error] = @owner.errors.full_messages.first
       @show_account = 'active'
@@ -30,7 +30,7 @@ class OwnerPreferencesController < ApplicationController
 
     if @owner.save
       flash[:notice] = 'Preferences were updated successfully.' 
-      redirect_to sites_path
+      redirect_to plain_sites_url
     else
       @show_billing = 'active'
       card_errors = @owner.card.nil? ? [] : @owner.card.errors.full_messages 
