@@ -294,8 +294,8 @@ function bindPlanAndCardForm() {
   
   
   $$('.plan input.unpayment').each(function(item) {
-    $(item).observe('click', function() { 
-      hideCardForm() 
+    $(item).observe('click', function() {
+      hideCardForm();
       if( $('billing_view') != null ) { $("billing_view").hide({ duration: cardPreferencesDuration }); }
     })
   
@@ -349,7 +349,6 @@ Ajax.Responders.register({
   
   onComplete: function(request, transport) {
     hideProcessing(request);
-    bindPlanAndCardForm();
     observeAllForm();
 
     if(transport.status == 200) {
@@ -367,6 +366,7 @@ Ajax.Responders.register({
 });
 
 Event.observe(window, 'load', function() {
+  bindPlanAndCardForm();
   observeAllForm();
   var sourceBar = $('source-bar');
   if(sourceBar) {
