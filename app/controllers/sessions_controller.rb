@@ -23,7 +23,7 @@ class SessionsController < ApplicationController
 
     if authenticate(:user)
       flash[:success] = I18n.t("devise.sessions.signed_in", :user_name => current_user.user_name)
-      redirect_to plain_user_root_url
+      redirect_to user_root_path
     else
       message = warden.message || :invalid
       flash.now[:failure] = I18n.t("devise.sessions.#{message}")
