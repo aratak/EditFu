@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   layout 'public'
   before_filter :load_company_logo
   before_filter :redirect_from_error, :only => [:new]
-  before_filter :ssl_required, :only => [:new]
+  #before_filter :ssl_required, :only => [:new]
 
   def new
     Devise::FLASH_MESSAGES.each do |message|

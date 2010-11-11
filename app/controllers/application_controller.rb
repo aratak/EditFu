@@ -16,9 +16,9 @@ class ApplicationController < ActionController::Base
 
   def user_root_path
     if current_user.admin?
-      path = plain_admin_owners_url
+      path = admin_owners_path
     else
-      path = plain_sites_url
+      path = sites_path
     end
     RAILS_ENV == 'test' ? path: company_url(path)
   end
