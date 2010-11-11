@@ -1,8 +1,8 @@
 class SessionsController < ApplicationController
   layout 'public'
-  require_ssl :new
   before_filter :load_company_logo
   before_filter :redirect_from_error, :only => [:new]
+  before_filter :ssl_required, :only => [:new]
 
   def new
     Devise::FLASH_MESSAGES.each do |message|
@@ -44,11 +44,16 @@ class SessionsController < ApplicationController
     # return true if params[:redirect] == ""
     
     if current_user.kind_of?(Admin) 
-      redirect_to(owners_parh) and return(false)
+      redirect_to(owners_path) and return(false)
     else
       redirect_to(sites_path) and return(false)
     end
     
   end
-  
+
+  def ssl_required
+    return if Rails.env.development? || request.ssl?
+    redirect_to('https://' + request.host + request.request_uri)
+  end
+
 end
