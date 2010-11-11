@@ -11,6 +11,7 @@
         you simply downgrade to the free account. <br /><br/ > To use EditFu again in the future you      |
         will have to create a new account.'                                                               |
       = owner.submit "Update"
+      = link_to "Cancel", plain_sites_url, :class => 'action cancel'
 
       = help_link_for :preferences
     :javascript

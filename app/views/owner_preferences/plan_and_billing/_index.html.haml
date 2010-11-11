@@ -5,7 +5,9 @@
     = render 'owner_preferences/plan_and_billing/plan', :owner => owner
     = render 'owner_preferences/plan_and_billing/card', :owner => owner
     .popup-action-bar
+
       = owner.submit "Update"
+      = link_to "Cancel", plain_sites_url, :class => 'action cancel'
 
       = help_link_for :preferences
   :javascript
