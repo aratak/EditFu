@@ -7,6 +7,14 @@
 }
 
 #owner-preferences-popup > div.active {
+  display: none;
+}
+
+#owner-preferences-popup.billing #plan_and_billing {
+  display: block;
+}
+
+#owner-preferences-popup.account #account_preferences {
   display: block;
 }
 
@@ -20,7 +28,9 @@
 }
 
 #owner-preferences-popup h1 #plan_and_billing_link.active, 
-#owner-preferences-popup h1 #account_preferences_link.active {
+#owner-preferences-popup h1 #account_preferences_link.active,
+#owner-preferences-popup.account h1 #account_preferences_link,
+#owner-preferences-popup.billing h1 #plan_and_billing_link {
   border: none;
   color: #ffffff;
   background-color: #e21403;

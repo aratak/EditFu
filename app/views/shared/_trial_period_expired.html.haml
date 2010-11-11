@@ -12,6 +12,5 @@
 
   .popup-action-bar
     - if current_user.owner?
-      = link_to_remote "Choose", :url => owner_preferences_path, :method => :get, |
-        :html => {:class => 'action'} |
+      = link_to "Choose", ssl_owner_preferences_url(:show => 'billing'), :class => 'action'
     = link_to_function "Close", "hidePopup();", :class => 'action cancel'

@@ -4,7 +4,7 @@ class OwnerPreferencesController < ApplicationController
   before_filter :set_preferences
 
   def show
-    @show_account = 'active'
+    @show = 'account'
   end
 
   def update
@@ -16,7 +16,7 @@ class OwnerPreferencesController < ApplicationController
       redirect_to plain_sites_url
     else
       flash[:error] = @owner.errors.full_messages.first
-      @show_account = 'active'
+      @show = 'account'
       render :show
     end
 
@@ -32,7 +32,7 @@ class OwnerPreferencesController < ApplicationController
       flash[:notice] = 'Preferences were updated successfully.' 
       redirect_to plain_sites_url
     else
-      @show_billing = 'active'
+      @show = 'billing'
       card_errors = @owner.card.nil? ? [] : @owner.card.errors.full_messages 
       flash[:error] = (@owner.errors.full_messages + card_errors).uniq.first
       render :show
