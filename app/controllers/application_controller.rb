@@ -92,7 +92,7 @@ class ApplicationController < ActionController::Base
   end
   
   def company_url(path)
-    request.protocol + current_user.company_domain + request.port_string + path
+    'http://' + current_user.company_domain + request.port_string + path
   end
 
   def correct_subdomain!
