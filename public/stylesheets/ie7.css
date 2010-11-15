@@ -45,7 +45,7 @@ form#pages_form {
 }
 
 #system-bar .system-link#owner-preferences:hover {
-  background: url(/images/selected-preferences-tab.png) center 10px no-repeat);
+  background: url(/images/selected-preferences-tab.png) 5px 8px no-repeat);
 }
 
 #tabs small {

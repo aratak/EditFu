@@ -102,7 +102,7 @@
 }
 
 #system-bar .system-link#owner-preferences:hover {
-  background: url(/images/selected-preferences-tab.png) center center no-repeat;
+  background: url(/images/selected-preferences-tab.png) 6px 12px no-repeat;
 }
 
 #system-bar .system-link img {
