@@ -44,6 +44,10 @@ form#pages_form {
   width: 100%;
 }
 
+#system-bar .system-link#owner-preferences:hover {
+  background: url(/images/selected-preferences-tab.png) center 10px no-repeat);
+}
+
 #tabs small {
   line-height: 1em;
 }

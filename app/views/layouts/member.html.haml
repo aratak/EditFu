@@ -29,7 +29,8 @@
         - unless current_user.admin?
           = link_to "", help_path, :class => 'system-link', :id => "system-link-help", :alt => 'Help', :target => '_blank'
         - if user_signed_in?
-          = link_to '', pref_path, :class => 'system-link', :id => "system-link-preferences"
+          = render 'layouts/owner_preferences'
+
         = render 'shared/messages_icon'
 
       #source-bar

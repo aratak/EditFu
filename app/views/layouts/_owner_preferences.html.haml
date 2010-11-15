@@ -1,0 +1,9 @@
+%a{:title => '', :href => owner_preferences_path, :id => 'owner-preferences', :class => 'system-link'}
+  - if controller_name == 'owner_preferences'
+    .shadow.left
+    %img(src="/images/selected-preferences-tab.png")
+    .shadow.right
+  - else
+    %img(src="/images/preferences-tab.png")
+  %small
+  

@@ -101,6 +101,9 @@
   padding-right: 10px;
 }
 
+#system-bar .system-link#owner-preferences:hover {
+  background: url(/images/selected-preferences-tab.png) center center no-repeat;
+}
 
 #system-bar .system-link img {
   padding-top: 11px;
