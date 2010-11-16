@@ -82,6 +82,13 @@
   height: 36px;
   padding-top: 6px;
   line-height: 35px;
+  width: 50%;
+  text-align: center;
+  margin-right: 3%;
+}
+
+#owner-preferences-popup .edit_owner .billing .exp-date .label-input {
+  width: 91%;
 }
 
 .inputs .label-input select:first-child {
@@ -258,4 +265,12 @@
 .submit-input {
   margin-top: 20px;
   float: left;
+}
+
+#owner-preferences-popup .edit_owner .billing .exp-date .label-input select#owner_card_attributes_display_expiration_date_2i {
+  width: 40%;
+}
+
+#owner-preferences-popup .edit_owner .billing .exp-date .label-input select#owner_card_attributes_display_expiration_date_1i {
+  width: 60%;
 }
