@@ -44,10 +44,6 @@ form#pages_form {
   width: 100%;
 }
 
-#system-bar .system-link#owner-preferences:hover {
-  background: url(/images/selected-preferences-tab.png) 5px 8px no-repeat);
-}
-
 #tabs small {
   line-height: 1em;
 }
@@ -214,4 +210,18 @@ position: relative;;
 
 #owner-preferences-popup .billing .first-name input, #owner-preferences-popup .billing .last-name input {
   width: 190px;
+}
+
+.popup-action-bar {
+  z-index: 10001;
+}
+
+#account_preferences form, #plan_and_billing form  {
+  width: 100%;
+  min-width: 800px;
+}
+
+.plan-wrapper .next-billing-date {
+  position: absolute;
+  right: 0;
 }
