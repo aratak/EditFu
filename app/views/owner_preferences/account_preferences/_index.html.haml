@@ -4,15 +4,17 @@
   - form_for :owner, :url => ssl_owner_preferences_url, :html => { :method => :put } do |owner|
     =render 'owner_preferences/account_preferences/account', :owner => owner
     .popup-action-bar
-      = link_to_remove owner_path, 'Cancel My Account',                                                   |
-        'Are you sure you want to cancel this EditFu account? This cannot be undone.<br/ ><br/ >          |
-        The sites connected to EdtiFu will not be affected. All editors, ftp data, and                    | 
-        other account information related to EditFu databases will be deleted. <br /><br/ > We suggest    |
-        you simply downgrade to the free account. <br /><br/ > To use EditFu again in the future you      |
-        will have to create a new account.'                                                               |
-      = link_to "Cancel", plain_sites_url, :class => 'action cancel'
-      = owner.submit "Update"
+      .popup-action-bar-controls
+        = link_to_remove owner_path, 'Cancel My Account',                                                   |
+          'Are you sure you want to cancel this EditFu account? This cannot be undone.<br/ ><br/ >          |
+          The sites connected to EdtiFu will not be affected. All editors, ftp data, and                    | 
+          other account information related to EditFu databases will be deleted. <br /><br/ > We suggest    |
+          you simply downgrade to the free account. <br /><br/ > To use EditFu again in the future you      |
+          will have to create a new account.'                                                               |
 
-      = help_link_for :preferences
+        = owner.submit "Update"
+        = link_to "Cancel", plain_sites_url, :class => 'action cancel'
+
+        = help_link_for :preferences
     :javascript
       Indent.includeStylesheet('faq_link');

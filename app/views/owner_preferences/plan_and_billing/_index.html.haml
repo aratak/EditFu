@@ -5,11 +5,11 @@
     = render 'owner_preferences/plan_and_billing/plan', :owner => owner
     = render 'owner_preferences/plan_and_billing/card', :owner => owner
     .popup-action-bar
+      .popup-action-bar-controls
+        = owner.submit "Update"
+        = link_to "Cancel", plain_sites_url, :class => 'action cancel'
 
-      = link_to "Cancel", plain_sites_url, :class => 'action cancel'
-      = owner.submit "Update"
-
-      = help_link_for :preferences
+        = help_link_for :preferences
   :javascript
     Indent.includeStylesheet('faq_link');
   
