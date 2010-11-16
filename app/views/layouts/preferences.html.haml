@@ -1,0 +1,6 @@
+- inside_layout 'member' do
+
+  = content_for :tabs do
+    = render "layouts/tabs", :tab => "preferences"
+    
+  = yield
