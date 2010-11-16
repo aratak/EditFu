@@ -9,5 +9,4 @@
 
   .popup-action-bar
     = link_to_function "No", "hidePopup();", :class => 'action cancel'
-    = link_to_remote "Yes", :url => owner_preferences_path, :method => :get, |
-      :html => {:class => 'action'} |
+    = link_to "Yes", owner_preferences_path, :class => 'action'
