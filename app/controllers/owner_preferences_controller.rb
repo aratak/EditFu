@@ -1,5 +1,5 @@
 class OwnerPreferencesController < ApplicationController
-  layout 'member'
+  layout 'preferences'
   before_filter :authenticate_owner!
   before_filter :set_preferences
 
