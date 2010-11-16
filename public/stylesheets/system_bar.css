@@ -14,12 +14,12 @@
   bottom: 0;
   left: 240px;
   right: 240px;
-  z-index: 2;
   text-align: center;
 }
 
 #system-bar #system-logo {
   position: relative;
+  left: 95px;
   display: inline-block;
   zoom: 1;
   *display: inline;
@@ -101,10 +101,6 @@
   padding-right: 10px;
 }
 
-#system-bar .system-link#owner-preferences:hover {
-  background: url(/images/selected-preferences-tab.png) 6px 12px no-repeat;
-}
-
 #system-bar .system-link img {
   padding-top: 11px;
 }
@@ -155,7 +151,7 @@
   color: #787878;
 }
 
-#system-bar #tabs .shadow {
+#system-bar #tabs .shadow, #system-bar .shadow {
   position: absolute;
   height: 50px;
   width: 16px;
@@ -163,13 +159,27 @@
   background: #e21303;
 }
 
-#system-bar #tabs .shadow.right {
+#system-bar #tabs .shadow.right, #system-bar .shadow.right {
   background: url(/images/tab-shadow-right.png) left repeat-y;
   right: -16px;
 }
 
-#system-bar #tabs .shadow.left {
+#system-bar #tabs .shadow.left, #system-bar .shadow.left  {
   background: url(/images/tab-shadow-left.png) right repeat-y;
   left: -16px;
 }
 
+#system-bar #owner-preferences {
+  width: 40px;
+  text-align: center;
+  position: relative;
+  background: url(/images/preferences.png) no-repeat center 0;
+}
+#system-bar #owner-preferences:hover {
+  background: url(/images/preferences.png) no-repeat center -50px;
+}
+
+#system-bar #owner-preferences.selected, #system-bar #owner-preferences.selected:hover {
+  background: #e3e3e3 url(/images/preferences.png) no-repeat center -50px;
+  opacity: 1;
+}
