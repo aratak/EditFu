@@ -21,9 +21,8 @@ class Owner
     return true                     
   end
   
-  
   def create_automatic_next_subscription
-    create_next_subscription unless subscription_is_possible?
+    create_next_subscription if subscription_is_possible?
   end
   
   def subscription_is_possible?
