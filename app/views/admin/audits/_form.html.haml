@@ -1,7 +1,7 @@
 - add_stylesheets "subscriptions"
 
 - @title = "Subscriptions"
-- @hint = '<span class="red">You can\'t set subsciprion, because user has unpayment account</span>' unless @owner.subscription_is_possible?
+-# @hint = '<span class="red">You can\'t set subsciprion, because user has unpayment account</span>' unless @owner.subscription_is_possible?
 
 
 - form_for [:admin, @owner], @owner, :url => {:action => :update}, :html => { :method => :put, :id => 'subscription' } do |f|
