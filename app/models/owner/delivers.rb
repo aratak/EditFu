@@ -72,26 +72,26 @@ class Owner
   end
 
   def self.deliver_trial_expirations
-    conditions = ["plan_id = '?' AND DATE(confirmed_at) = ?", Plan::TRIAL.id, 30.days.ago.to_date]
-    Owner.all(:conditions => conditions).each do |owner|
+    owners = Subscription.ends_todays.scoped(:conditions => ["plan_id = ?", Plan::TRIAL.id]).map(&:owner)
+    owners.each do |owner|
       Mailer.deliver_trial_expiration(owner)
     end
   end
   
   def self.deliver_trial_expiration_reminder
-    conditions = ["plan_id = '?' AND DATE(confirmed_at) = ?", Plan::TRIAL.id, 27.days.ago.to_date]
-    Owner.all(:conditions => conditions).each do |owner|
+    owners = Subscription.ends_earlier_than(3.days).scoped(:conditions => ["plan_id = ?", Plan::TRIAL.id]).map(&:owner)
+    owners.each do |owner|
       Mailer.deliver_trial_expiration_reminder(owner)
     end
   end
   
   def self.deliver_holded_status
-    owners = Owner.find(:all, :include => [:subscriptions]).map do |o|
+    owners = Owner.find(:all, :include => [:subscriptions]).select do |o|
       o.subscriptions.last.ends_at.to_date == Date.tomorrow
     end
     
     owners.each do |o|
-      Mailer.deliver_tomorrow_holded_status(self)
+      Mailer.deliver_tomorrow_holded_status(o)
     end
   end
   

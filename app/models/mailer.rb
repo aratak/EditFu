@@ -81,7 +81,7 @@ class Mailer < ActionMailer::Base
     subject 'EditFu account hold'
   end
   
-  def tomorrow_holded_status
+  def tomorrow_holded_status(user)
     setup   user, "billing@editfu.com"
     subject 'EditFu account hold'
   end
