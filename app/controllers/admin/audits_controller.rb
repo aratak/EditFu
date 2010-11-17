@@ -10,7 +10,7 @@ class Admin::AuditsController < ApplicationController
 
   def show
     # @subscriptions = @owner.subscriptions
-    @owner.subscriptions.build # if @owner.subscription_is_possible?
+    @owner.subscriptions.build
   end
 
   def update
