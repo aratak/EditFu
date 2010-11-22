@@ -5,7 +5,12 @@
   .text
     - if current_user.owner?
       %br
-      The trial has ended. Please choose a plan. 
+      Your trial period has expired. 
+      If you wish to continue using Editfu, please select new subscription plan in the Preferences section.
+      %br
+      %br 
+      Should you have any questions, feel free&nbsp;
+      %a{:href => "mailto:billing@editfu.com" }> contact us.
     - else
       %br
       Please inform your site owner about trial period expiration.

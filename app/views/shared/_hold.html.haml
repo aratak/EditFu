@@ -2,16 +2,22 @@
 
 .alert-popup
   %h1 Account hold
-  .text
-    %br
-    Your account is on hold due to a credit card issue. 
-    Update your credit card information in the preferences window.
-    %br
-    %br 
-    If your still having issues&nbsp;
-    %a{:href => "mailto:billing@editfu.com" }> contact us
-    \.  
-    %br
+  - if current_user.plan.payment?
+    .text
+      %br
+      Your account was put on hold because your subscription has expired and no payment was executed due to a credit card issue. 
+      Please update your credit card information in the Preferences section.
+      %br
+      %br 
+      If you are still having problems feel free&nbsp;
+      %a{:href => "mailto:billing@editfu.com" } contact us.
+      %br
+  - else
+    .text
+      %br
+      Your account was put on hold, please&nbsp;
+      %a{:href => "mailto:billing@editfu.com" } contact&nbsp;us
+      for further details.
 
-  .popup-action-bar
-    = link_to_function "Close", "hidePopup();", :class => 'action cancel'
+.popup-action-bar
+  = link_to_function "Close", "hidePopup();", :class => 'action cancel'
