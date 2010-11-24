@@ -18,7 +18,7 @@ module PlanRestrictions
 
   def check_credit_card
     show_popup "shared/credit_card",
-               :if => :"credit_card_expired?", 
+               :if => :"credit_card_expired?",
                :for => ALL_ACTIONS
   end
 
@@ -30,7 +30,7 @@ module PlanRestrictions
 
   def check_trial_period
     show_popup "shared/trial_period_expired",
-               :if => :"trial_period_expired?", 
+               :if => :"trial_period_expired?",
                :for => ALL_ACTIONS
   end
   
