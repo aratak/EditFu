@@ -45,7 +45,7 @@ class Plan
   end
 
   def _can_add_page? user
-    !(self == FREE) || (user.pages.count < 3)
+    !(self == FREE) || (user.pages.count < 1)
   end
   
   def _can_add_site? user
