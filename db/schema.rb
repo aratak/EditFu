@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100715124410) do
+ActiveRecord::Schema.define(:version => 20110215125304) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -89,7 +89,7 @@ ActiveRecord::Schema.define(:version => 20100715124410) do
     t.boolean  "enabled",                             :default => true, :null => false
     t.string   "user_name"
     t.string   "company_name"
-    t.integer  "plan_id",                             :default => 1
+    t.integer  "plan_id",                             :default => 3
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
