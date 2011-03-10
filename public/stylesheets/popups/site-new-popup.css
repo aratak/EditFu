@@ -3,8 +3,12 @@
   float: left;
 }
 
-#new-site-popup .inputs .label-input input {
+#new-site-popup .inputs .label-input input[type=text] {
   width: 435px;
+}
+
+#new-site-popup .inputs .label-input input[type=checkbox] {
+  width: auto;
 }
 
 #new-site-popup #ftp-tree {

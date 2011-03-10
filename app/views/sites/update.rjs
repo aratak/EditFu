@@ -1,4 +1,5 @@
 # page.call 'setTitle', @site.name
-page["site-#{@site.id}-menu"].down('a').innerHTML = @site.name
+# page["site-#{@site.id}-menu"].down('a').innerHTML = @site.name
+page["site-#{@site.id}-menu"].replace :partial => 'layouts/site_menu_item', :locals => { :site => @site }
 page.call 'hidePopup'
 xhr_flash page

@@ -6,6 +6,9 @@
         = form.hidden_field :site_root
         %small.description Choose the site root. This is the folder that contains the website.
         #ftp-tree
+      .add_pages
+        = form.check_box :should_add_pages
+        = form.label :should_add_pages, "Also add pages recursively"
     .inputs
       .title-input.first
         .title FTP server address
