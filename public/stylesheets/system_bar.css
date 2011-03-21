@@ -19,7 +19,6 @@
 
 #system-bar #system-logo {
   position: relative;
-  left: 95px;
   display: inline-block;
   zoom: 1;
   *display: inline;
