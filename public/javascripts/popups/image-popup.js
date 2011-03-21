@@ -69,7 +69,7 @@ function uploadImage() {
           'Please try again or review the ' + 
           '<a href="http://www.editfuapp.com/faq/" target="_blank">FAQ</a> ' +
           'for directions. <br> If this problem continues contact ' +
-          '<a href="http://www.takeastep.me/editfu-contact-us/" target="_blank">support</a>');
+          '<a href="http://www.editfuapp.com/" target="_blank">support</a>');
       } else {
         showMessage('success', 'Image was added to EditFu successfully.');
         

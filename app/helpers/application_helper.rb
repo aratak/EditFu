@@ -127,9 +127,9 @@ module ApplicationHelper
 
   def help_path
     if current_user.editor?
-      'http://www.takeastep.me/editfu-faq/editing/'
+      'http://www.editfuapp.com/'
     elsif current_user.owner?
-      'http://www.takeastep.me/editfu-faq/'
+      'http://www.editfuapp.com/'
     end
   end
   

@@ -1,10 +1,10 @@
 module MessageKeywords
   def self.faq
-    link_to_blank 'FAQ', 'http://www.takeastep.me/editfu-faq/basics/'
+    link_to_blank 'FAQ', 'http://www.editfuapp.com/faq/'
   end
 
   def self.contact_us(text)
-    link_to_blank text, 'http://www.takeastep.me/editfu-contact-us/'
+    link_to_blank text, 'http://www.editfuapp.com/'
   end
 
   def self.support
