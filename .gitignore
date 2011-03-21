@@ -1,6 +1,7 @@
 pkg
 Icon?
 .DS_Store
+.rvmrc
 Thumbs.db
 TAGS
 REVISION
