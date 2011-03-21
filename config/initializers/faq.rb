@@ -1,13 +1,13 @@
 FAQS = {
-  :default     => "http://www.takeastep.me/editfu-faq/",
+  :default     => "http://www.editfuapp.com/faq/",
   
-  :add_pages        => "http://www.takeastep.me/editfu-faq/basics/how-do-i-add-a-page.html",
-  :add_sites        => "http://www.takeastep.me/editfu-faq/basics/how-do-i-add-a-site.html",
-  :choose_sites     => "http://www.takeastep.me/editfu-faq/editing/",
+  :add_pages        => "http://www.editfuapp.com/faq/",
+  :add_sites        => "http://www.editfuapp.com/faq/",
+  :choose_sites     => "http://www.editfuapp.com/faq/",
   
-  :add_editors      => "http://www.takeastep.me/editfu-faq/editors/how-do-i-invite-an-editor.html",
-  :preferences      => "http://www.takeastep.me/editfu-faq/accounts-billing/",
-  :choose_editors   => "http://www.takeastep.me/editfu-faq/editors/",
-  :no_content       => "http://www.takeastep.me/editfu-faq/basics/getting-started.html",
-  :invalid_page     => "http://www.takeastep.me/editfu-faq/basics/getting-started.html"
+  :add_editors      => "http://www.editfuapp.com/faq/",
+  :preferences      => "http://www.editfuapp.com/faq/",
+  :choose_editors   => "http://www.editfuapp.com/faq/",
+  :no_content       => "http://www.editfuapp.com/faq/",
+  :invalid_page     => "http://www.editfuapp.com/faq/"
 }
