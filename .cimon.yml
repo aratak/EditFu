@@ -27,6 +27,7 @@ server:
     - gem install -v=0.6.2 devise
     - gem install -v=1.1.0 acts_as_audited
     - gem install -v=0.8.2 active_hash
+    - gem install -v=1.2.3 test-unit
     - rake db:create db:migrate
   service: rails
   folder: /app
