@@ -23,7 +23,7 @@ server:
     - gem install -v=3.2 rdoc
     - gem install -v=0.2.7 mysql2
     - gem install -v=2.3.8 rails
-    - gem install -v=2.4.1 rspec-rails
+    - gem install -v=1.2.9 rspec-rails
     - gem install -v=2.3.3.0 exception_notification
     - gem install -v=0.8.2 hpricot
     - gem install -v=2.2.13 haml
