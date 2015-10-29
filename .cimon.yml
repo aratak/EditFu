@@ -20,6 +20,7 @@ services:
 server:
   prepare:
     - gem install --force -v=0.8.1 rake
+    - gem install -v=3.2 rdoc
     - gem install -v=0.2.7 mysql2
     - gem install -v=2.3.8 rails
     - gem install -v=2.4.1 rspec-rails
