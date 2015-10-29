@@ -18,6 +18,7 @@ services:
 
 server:
   prepare:
+    - gem install --force -v=0.8.7 rake
     - gem install -v=2.3.8 rails
     - gem install -v=2.3.3.0 exception_notification
     - gem install -v=0.8.2 hpricot
