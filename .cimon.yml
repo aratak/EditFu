@@ -1,0 +1,43 @@
+services:
+  mysql:
+    from: mysql
+    env:
+      - MYSQL_DATABASE=edit-fu_staging
+      - MYSQL_USER=edit-fu
+      - MYSQL_PASSWORD=edit-fu
+  rails:
+    from: ruby:1.9.3
+    cache:
+      - /bundle
+    env:
+      - GEM_HOME=/bindle
+      - GEM_PATH=/bindle
+    build:
+      - apt-get update
+      - apt-get install -y libqt4-dev pkg-config
+      - apt-get install -y curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev libxml2-dev libxslt-dev
+
+server:
+  prepare:
+    - gem install --force -v=0.8.1 rake
+    - gem install -v=3.2 rdoc
+    - gem install -v=0.2.7 mysql2
+    - gem install -v=2.3.8 rails
+    - gem install -v=1.2.9 rspec-rails
+    - gem install -v=2.3.3.0 exception_notification
+    - gem install -v=0.8.2 hpricot
+    - gem install -v=2.2.13 haml
+    - gem install -v=1.1.3 action_mailer_tls
+    - gem install -v=1.4.2 activemerchant
+    - gem install -v=0.6.2 devise
+    - gem install -v=1.1.0 acts_as_audited
+    - gem install -v=0.8.2 active_hash
+    - gem install -v=1.2.3 test-unit
+    - rake db:create db:migrate
+  service: rails
+  folder: /app
+  cmd: script/rails server -p 80
+  port: 80
+  env:
+    - RAILS_ENV=production
+    - RACK_ENV=production
